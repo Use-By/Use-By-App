@@ -8,10 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		1EF4A85D51FF02744F33AC11 /* Pods_UseBy_UseByUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */; };
+		332A57D525326D850078E65B /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57C925326D3E0078E65B /* Lato-Black.ttf */; };
+		332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CA25326D3E0078E65B /* Lato-Bold.ttf */; };
+		332A57DD25326D8A0078E65B /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57C825326D3E0078E65B /* Lato-Light.ttf */; };
+		332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CB25326D3E0078E65B /* Lato-Regular.ttf */; };
+		332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CC25326D3F0078E65B /* Lato-Thin.ttf */; };
+		332A57EA25326E450078E65B /* AppName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A57E925326E450078E65B /* AppName.swift */; };
+		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
+		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
+		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
+		336BC6AC2532252900B7346C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AA2532252900B7346C /* .gitignore */; };
+		336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AB2532252900B7346C /* .swiftlint.yml */; };
 		336D6742252A4A600098259E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6741252A4A600098259E /* AppDelegate.swift */; };
 		336D6744252A4A600098259E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6743252A4A600098259E /* SceneDelegate.swift */; };
-		336D6746252A4A600098259E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6745252A4A600098259E /* ViewController.swift */; };
-		336D6749252A4A600098259E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 336D6747252A4A600098259E /* Main.storyboard */; };
 		336D674B252A4A610098259E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 336D674A252A4A610098259E /* Assets.xcassets */; };
 		336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 336D674C252A4A610098259E /* LaunchScreen.storyboard */; };
 		336D6759252A4A610098259E /* UseByTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6758252A4A610098259E /* UseByTests.swift */; };
@@ -41,11 +50,20 @@
 /* Begin PBXFileReference section */
 		0C2B47453E3E59076C317166 /* Pods-UseBy-UseByUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.debug.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B5666705EE521C4CC45F236 /* Pods-UseByTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.debug.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.debug.xcconfig"; sourceTree = "<group>"; };
+		332A57C825326D3E0078E65B /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		332A57C925326D3E0078E65B /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		332A57CA25326D3E0078E65B /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		332A57CB25326D3E0078E65B /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		332A57CC25326D3F0078E65B /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		332A57E925326E450078E65B /* AppName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppName.swift; sourceTree = "<group>"; };
+		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
+		336BC6AA2532252900B7346C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		336BC6AB2532252900B7346C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		336D673E252A4A600098259E /* UseBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		336D6741252A4A600098259E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		336D6743252A4A600098259E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		336D6745252A4A600098259E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		336D6748252A4A600098259E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		336D674A252A4A610098259E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		336D674D252A4A610098259E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		336D674F252A4A610098259E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,9 +121,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		332A57C725326D390078E65B /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				332A57C925326D3E0078E65B /* Lato-Black.ttf */,
+				332A57CA25326D3E0078E65B /* Lato-Bold.ttf */,
+				332A57C825326D3E0078E65B /* Lato-Light.ttf */,
+				332A57CB25326D3E0078E65B /* Lato-Regular.ttf */,
+				332A57CC25326D3F0078E65B /* Lato-Thin.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		3336440825323F6C00D1A5C6 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3336440925323F7500D1A5C6 /* MainAuth */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		3336440925323F7500D1A5C6 /* MainAuth */ = {
+			isa = PBXGroup;
+			children = (
+				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
+			);
+			path = MainAuth;
+			sourceTree = "<group>";
+		};
+		336BC69E253221AE00B7346C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				333643F42532301F00D1A5C6 /* Button.swift */,
+				332A57E925326E450078E65B /* AppName.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		336BC6B12532256700B7346C /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
 		336D6735252A4A600098259E = {
 			isa = PBXGroup;
 			children = (
+				336BC6AA2532252900B7346C /* .gitignore */,
+				336BC6AB2532252900B7346C /* .swiftlint.yml */,
 				336D6777252A4A970098259E /* README.md */,
 				336D6740252A4A600098259E /* UseBy */,
 				336D6757252A4A610098259E /* UseByTests */,
@@ -129,13 +193,16 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				332A57C725326D390078E65B /* fonts */,
+				3336440825323F6C00D1A5C6 /* Screens */,
+				336BC6B12532256700B7346C /* Localizations */,
+				336BC69E253221AE00B7346C /* Components */,
 				336D6741252A4A600098259E /* AppDelegate.swift */,
 				336D6743252A4A600098259E /* SceneDelegate.swift */,
-				336D6745252A4A600098259E /* ViewController.swift */,
-				336D6747252A4A600098259E /* Main.storyboard */,
 				336D674A252A4A610098259E /* Assets.xcassets */,
 				336D674C252A4A610098259E /* LaunchScreen.storyboard */,
 				336D674F252A4A610098259E /* Info.plist */,
+				333643EF25322B2600D1A5C6 /* Palette.swift */,
 			);
 			path = UseBy;
 			sourceTree = "<group>";
@@ -278,10 +345,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */,
+				336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */,
+				336BC6AC2532252900B7346C /* .gitignore in Resources */,
 				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
+				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
 				336D674B252A4A610098259E /* Assets.xcassets in Resources */,
+				332A57D525326D850078E65B /* Lato-Black.ttf in Resources */,
+				332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */,
 				336D6778252A4A970098259E /* README.md in Resources */,
-				336D6749252A4A600098259E /* Main.storyboard in Resources */,
+				332A57DD25326D8A0078E65B /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,9 +465,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				336D6746252A4A600098259E /* ViewController.swift in Sources */,
+				332A57EA25326E450078E65B /* AppName.swift in Sources */,
+				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
+				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				336D6744252A4A600098259E /* SceneDelegate.swift in Sources */,
+				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,14 +506,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		336D6747252A4A600098259E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				336D6748252A4A600098259E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		336D674C252A4A610098259E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -453,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -514,6 +583,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

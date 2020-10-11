@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		332A5802253333590078E65B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 332A5804253333590078E65B /* Localizable.strings */; };
 		332A580D253334900078E65B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A580C253334900078E65B /* String.swift */; };
 		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
+		332A581A25337ED60078E65B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 332A581925337ED60078E65B /* Podfile */; };
+		332A582C25337F950078E65B /* MainAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A582B25337F950078E65B /* MainAuthView.swift */; };
 		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
@@ -64,6 +66,8 @@
 		332A58092533339C0078E65B /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		332A580C253334900078E65B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		332A581425333B360078E65B /* BackgroundCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircle.swift; sourceTree = "<group>"; };
+		332A581925337ED60078E65B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		332A582B25337F950078E65B /* MainAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthView.swift; sourceTree = "<group>"; };
 		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
+				332A582B25337F950078E65B /* MainAuthView.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 		336D6735252A4A600098259E = {
 			isa = PBXGroup;
 			children = (
+				332A581925337ED60078E65B /* Podfile */,
 				336BC6AA2532252900B7346C /* .gitignore */,
 				336BC6AB2532252900B7346C /* .swiftlint.yml */,
 				336D6777252A4A970098259E /* README.md */,
@@ -277,6 +283,7 @@
 				336D673B252A4A600098259E /* Frameworks */,
 				336D673C252A4A600098259E /* Resources */,
 				336D6795252A4C080098259E /* ShellScript */,
+				B130879B71541E8E7349CB3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -314,6 +321,7 @@
 				336D675B252A4A610098259E /* Sources */,
 				336D675C252A4A610098259E /* Frameworks */,
 				336D675D252A4A610098259E /* Resources */,
+				BC18D905FF5ADE4D2BF51372 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -379,6 +387,7 @@
 				336BC6AC2532252900B7346C /* .gitignore in Resources */,
 				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
 				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
+				332A581A25337ED60078E65B /* Podfile in Resources */,
 				336D674B252A4A610098259E /* Assets.xcassets in Resources */,
 				332A57D525326D850078E65B /* Lato-Black.ttf in Resources */,
 				332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */,
@@ -487,6 +496,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B130879B71541E8E7349CB3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UseBy/Pods-UseBy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UseBy/Pods-UseBy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UseBy/Pods-UseBy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC18D905FF5ADE4D2BF51372 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -500,6 +543,7 @@
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
+				332A582C25337F950078E65B /* MainAuthView.swift in Sources */,
 				336D6744252A4A600098259E /* SceneDelegate.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);

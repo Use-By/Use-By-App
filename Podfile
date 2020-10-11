@@ -8,6 +8,10 @@ target 'UseBy' do
   # Pods for UseBy
   # Utilities
   pod 'SwiftLint'
+  
+  # UI
+  pod 'FlexLayout'
+  pod 'PinLayout'
 
   target 'UseByTests' do
     inherit! :search_paths

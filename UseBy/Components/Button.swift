@@ -54,6 +54,7 @@ final class MainButton: UIButton {
             backgroundColor = UIColor.socialBGColor()
         case .clear:
             setTitleColor(UIColor.secondaryTextColor(), for: .normal)
+            titleLabel?.font = UIFont.mainText()
         case .pseudo:
             setTitleColor(UIColor.mainActionColor(), for: .normal)
             layer.borderWidth = 2

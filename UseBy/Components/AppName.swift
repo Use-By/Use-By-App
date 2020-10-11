@@ -31,7 +31,7 @@ final class AppName: UILabel {
             textColor = UIColor.inversedTextColor()
         }
 
-        addCharacterSpacing()
+        addCharacterSpacing(kernValue: 5)
     }
 
     required init?(coder decoder: NSCoder) {

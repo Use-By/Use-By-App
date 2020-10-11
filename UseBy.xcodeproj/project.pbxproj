@@ -19,6 +19,8 @@
 		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
 		332A581A25337ED60078E65B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 332A581925337ED60078E65B /* Podfile */; };
 		332A582C25337F950078E65B /* MainAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A582B25337F950078E65B /* MainAuthView.swift */; };
+		332A586E2533BEDB0078E65B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A586D2533BEDB0078E65B /* Icon.swift */; };
+		332A58802533C9BF0078E65B /* Google.svg in Resources */ = {isa = PBXBuildFile; fileRef = 332A587F2533C9BF0078E65B /* Google.svg */; };
 		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
@@ -68,6 +70,8 @@
 		332A581425333B360078E65B /* BackgroundCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircle.swift; sourceTree = "<group>"; };
 		332A581925337ED60078E65B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		332A582B25337F950078E65B /* MainAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthView.swift; sourceTree = "<group>"; };
+		332A586D2533BEDB0078E65B /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		332A587F2533C9BF0078E65B /* Google.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Google.svg; sourceTree = "<group>"; };
 		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		332A586C2533BE310078E65B /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				332A587F2533C9BF0078E65B /* Google.svg */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		3336440825323F6C00D1A5C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +196,7 @@
 				333643F42532301F00D1A5C6 /* Button.swift */,
 				332A57E925326E450078E65B /* AppName.swift */,
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
+				332A586D2533BEDB0078E65B /* Icon.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -203,6 +216,7 @@
 				336BC6AA2532252900B7346C /* .gitignore */,
 				336BC6AB2532252900B7346C /* .swiftlint.yml */,
 				336D6777252A4A970098259E /* README.md */,
+				336D674A252A4A610098259E /* Assets.xcassets */,
 				336D6740252A4A600098259E /* UseBy */,
 				336D6757252A4A610098259E /* UseByTests */,
 				336D6762252A4A610098259E /* UseByUITests */,
@@ -225,6 +239,7 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				332A586C2533BE310078E65B /* Icons */,
 				332A580A2533346C0078E65B /* Utils */,
 				332A57C725326D390078E65B /* fonts */,
 				3336440825323F6C00D1A5C6 /* Screens */,
@@ -232,7 +247,6 @@
 				336BC69E253221AE00B7346C /* Components */,
 				336D6741252A4A600098259E /* AppDelegate.swift */,
 				336D6743252A4A600098259E /* SceneDelegate.swift */,
-				336D674A252A4A610098259E /* Assets.xcassets */,
 				336D674C252A4A610098259E /* LaunchScreen.storyboard */,
 				336D674F252A4A610098259E /* Info.plist */,
 				333643EF25322B2600D1A5C6 /* Palette.swift */,
@@ -388,6 +402,7 @@
 				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
 				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
 				332A581A25337ED60078E65B /* Podfile in Resources */,
+				332A58802533C9BF0078E65B /* Google.svg in Resources */,
 				336D674B252A4A610098259E /* Assets.xcassets in Resources */,
 				332A57D525326D850078E65B /* Lato-Black.ttf in Resources */,
 				332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */,
@@ -545,6 +560,7 @@
 				332A580D253334900078E65B /* String.swift in Sources */,
 				332A582C25337F950078E65B /* MainAuthView.swift in Sources */,
 				336D6744252A4A600098259E /* SceneDelegate.swift in Sources */,
+				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

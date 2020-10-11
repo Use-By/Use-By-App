@@ -15,13 +15,15 @@ class MainAuthView: UIView {
 
     private let appNameLabel = AppName()
     private let appDescriptionLabel = UILabel()
-    private let googleSignUpButton = MainButton(text: "create-account-google".localized, theme: MainButton.ButtonTheme.social)
+    private let googleSignUpButton: MainButton
     private let signUpButton = MainButton(text: "create-account".localized, theme: MainButton.ButtonTheme.action)
     private let alreadySignUpButton = MainButton(text: "already-have-account".localized, theme: MainButton.ButtonTheme.clear)
     private let backgroundCircle = BackgroundCircle(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(500), height: CGFloat(500)), circleColor: UIColor.mainActionBGColor())
     private let bottomBackgroundCircle = BackgroundCircle(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(600), height: CGFloat(600)), circleColor: UIColor.secondaryActionBGColor())
 
     init() {
+        let googleIcon = Icon.getIcon(name: "Google", size: .small, color: UIColor.inversedTextColor())
+        googleSignUpButton = MainButton(text: "create-account-google".localized, theme: MainButton.ButtonTheme.social, icon: googleIcon)
         super.init(frame: .zero)
 
         backgroundColor = UIColor.mainBGColor()
@@ -49,6 +51,7 @@ class MainAuthView: UIView {
     }
 
     required init?(coder: NSCoder) {
+        googleSignUpButton = MainButton(text: "create-account-google".localized, theme: MainButton.ButtonTheme.social)
         super.init(coder: coder)
     }
 

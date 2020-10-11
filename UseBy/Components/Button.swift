@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PinLayout
 
 extension MainButton {
     public enum ButtonTheme {
@@ -20,6 +21,8 @@ extension MainButton {
 
 final class MainButton: UIButton {
     private let theme: ButtonTheme
+    private var iconView: UIView?
+    private var label = UILabel()
     var gradientLayer: CAGradientLayer?
 
     override var isHighlighted: Bool {
@@ -30,15 +33,24 @@ final class MainButton: UIButton {
         }
     }
 
-    init(text: String, theme: ButtonTheme = ButtonTheme.normal) {
+    init(text: String, theme: ButtonTheme = ButtonTheme.normal, icon: UIView? = nil) {
         self.theme = theme
         super.init(frame: .zero)
-        titleLabel?.text = text
-        titleLabel?.font = UIFont.mainButtonText()
 
-        setTitle(text, for: .normal)
+        label.text = text
+        label.font = UIFont.mainButtonText()
+        label.sizeToFit()
+        label.textAlignment = .center
         layer.cornerRadius = 14
+
         setThemeStyles()
+
+        if let iconView = icon {
+            self.iconView = iconView
+            addSubview(iconView)
+        }
+
+        addSubview(label)
     }
 
     required init?(coder decoder: NSCoder) {
@@ -49,22 +61,22 @@ final class MainButton: UIButton {
     private func setThemeStyles() {
         switch self.theme {
         case .normal:
-            setTitleColor(UIColor.inversedTextColor(), for: .normal)
+            label.textColor = UIColor.inversedTextColor()
             backgroundColor = UIColor.mainActionColor()
         case .action:
-            setTitleColor(UIColor.inversedTextColor(), for: .normal)
+            label.textColor = UIColor.inversedTextColor()
             let gradientLayer = CAGradientLayer.mainBGGradient()
             gradientLayer.cornerRadius = 14
             self.gradientLayer = gradientLayer
             layer.insertSublayer(gradientLayer, at: 0)
         case .social:
-            setTitleColor(UIColor.inversedTextColor(), for: .normal)
+            label.textColor = UIColor.inversedTextColor()
             backgroundColor = UIColor.socialBGColor()
         case .clear:
-            setTitleColor(UIColor.secondaryTextColor(), for: .normal)
-            titleLabel?.font = UIFont.mainText()
+            label.textColor = UIColor.secondaryTextColor()
+            label.font = UIFont.mainText()
         case .pseudo:
-            setTitleColor(UIColor.mainActionColor(), for: .normal)
+            label.textColor = UIColor.mainActionColor()
             layer.borderWidth = 2
             layer.borderColor = UIColor.mainActionColor().cgColor
         }
@@ -72,5 +84,19 @@ final class MainButton: UIButton {
 
     func initActionThemeStyles() {
         self.gradientLayer?.frame = bounds
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if let iconView = self.iconView {
+            let spacing: CGFloat = 25
+            let totalWidth = iconView.frame.width + spacing + label.frame.width
+
+            iconView.pin.left((frame.width - totalWidth) / 2).top(24)
+            label.pin.vCenter().after(of: iconView).marginLeft(spacing)
+        } else {
+            label.pin.vCenter().hCenter()
+        }
     }
 }

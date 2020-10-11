@@ -12,6 +12,8 @@ target 'UseBy' do
   # UI
   pod 'FlexLayout'
   pod 'PinLayout'
+  # SVG Icons
+  pod 'SwiftSVG', '~> 2.0'
 
   target 'UseByTests' do
     inherit! :search_paths

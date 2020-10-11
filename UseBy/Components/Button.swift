@@ -20,6 +20,7 @@ extension MainButton {
 
 final class MainButton: UIButton {
     private let theme: ButtonTheme
+    var gradientLayer: CAGradientLayer?
 
     init(text: String, theme: ButtonTheme = ButtonTheme.normal) {
         self.theme = theme
@@ -45,7 +46,8 @@ final class MainButton: UIButton {
         case .action:
             setTitleColor(UIColor.inversedTextColor(), for: .normal)
             let gradientLayer = CAGradientLayer.mainBGGradient()
-            gradientLayer.bounds = bounds
+            gradientLayer.cornerRadius = 14
+            self.gradientLayer = gradientLayer
             layer.insertSublayer(gradientLayer, at: 0)
         case .social:
             setTitleColor(UIColor.inversedTextColor(), for: .normal)
@@ -57,5 +59,13 @@ final class MainButton: UIButton {
             layer.borderWidth = 2
             layer.borderColor = UIColor.mainActionColor().cgColor
         }
+    }
+
+    func initActionThemeStyles() {
+        guard let gradient = self.gradientLayer else {
+            return
+        }
+
+        gradient.frame = bounds
     }
 }

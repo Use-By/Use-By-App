@@ -10,11 +10,11 @@ import UIKit
 
 extension UIColor {
     class func mainTextColor() -> UIColor {
-        return UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        return .black
     }
 
     class func inversedTextColor() -> UIColor {
-        return UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        return .white
     }
 
     class func secondaryTextColor() -> UIColor {
@@ -22,7 +22,7 @@ extension UIColor {
     }
 
     class func mainBGColor() -> UIColor {
-        return UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        return .white
     }
 
     class func mainActionBGColor() -> UIColor {

@@ -10,6 +10,7 @@ import UIKit
 
 class MainAuthViewController: UIViewController {
     private var contentView = UIScrollView()
+    var signUpButton = MainButton(text: "Create account", theme: MainButton.ButtonTheme.action)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +26,18 @@ class MainAuthViewController: UIViewController {
         appNameLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
         appNameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
-        let signUpButton = MainButton(text: "Create account", theme: MainButton.ButtonTheme.normal)
-        view.addSubview(signUpButton)
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signUpButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        signUpButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        signUpButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        signUpButton.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        view.addSubview(self.signUpButton)
+        self.signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        self.signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.signUpButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        self.signUpButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        self.signUpButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        signUpButton.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.signUpButton.initActionThemeStyles()
     }
 
     private func setContent() {

@@ -27,9 +27,13 @@ final class MainButton: UIButton {
 
     override var isHighlighted: Bool {
         didSet {
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseInOut], animations: {
-                self.alpha = self.isHighlighted ? 0.7 : 1
-            }, completion: nil)
+            UIView.animate(
+                withDuration: 0.2,
+                delay: 0,
+                options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseInOut],
+                animations: {
+                    self.alpha = self.isHighlighted ? 0.7 : 1
+                }, completion: nil)
         }
     }
 

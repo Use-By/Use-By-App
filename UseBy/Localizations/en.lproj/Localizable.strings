@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  UseBy
+
+  Created by Nadezda Svoykina on 10/11/20.
+  
+*/
+
+"app-name" = "Use-by";
+"app-description" = "We help you keep your products fresh";
+"create-account" = "Create account";
+"create-account-google" = "Continue with Google";

@@ -64,3 +64,29 @@ extension CAGradientLayer {
         return gradientLayer
     }
 }
+
+extension UIFont {
+    // Основной текст
+    class func mainText() -> UIFont? {
+        let font = UIFont(name: "Lato-Regular", size: 18)
+        return font
+    }
+
+    // Шрифт для текста кнопок
+    class func mainButtonText() -> UIFont? {
+        let font = UIFont(name: "Lato-Black", size: 18)
+        return font
+    }
+
+    // Шрифт для текста кнопок
+    class func headlineText() -> UIFont? {
+        let font =  UIFont(name: "Lato-Bold", size: 34)
+        return font
+    }
+
+    // Шрифт для имени приложения
+    class func appNameText() -> UIFont? {
+        let font =  UIFont(name: "Lato-Black", size: 32)
+        return font
+    }
+}

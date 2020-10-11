@@ -21,8 +21,8 @@ final class AppName: UILabel {
     init(theme: AppNameTheme = .normal) {
         self.theme = theme
         super.init(frame: .zero)
-        text = "USE-BY"
-        font = UIFont(name: "Lato-Black", size: 32)
+        text = "app-name".localized.uppercased()
+        font = UIFont.appNameText()
 
         switch self.theme {
         case .normal:

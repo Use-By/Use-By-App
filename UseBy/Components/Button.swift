@@ -26,7 +26,7 @@ final class MainButton: UIButton {
         self.theme = theme
         super.init(frame: .zero)
         titleLabel?.text = text
-        titleLabel?.font = UIFont(name: "Lato-Black", size: 18)
+        titleLabel?.font = UIFont.mainButtonText()
 
         setTitle(text, for: .normal)
         layer.cornerRadius = 14
@@ -62,10 +62,6 @@ final class MainButton: UIButton {
     }
 
     func initActionThemeStyles() {
-        guard let gradient = self.gradientLayer else {
-            return
-        }
-
-        gradient.frame = bounds
+        self.gradientLayer?.frame = bounds
     }
 }

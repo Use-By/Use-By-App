@@ -14,6 +14,9 @@
 		332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CB25326D3E0078E65B /* Lato-Regular.ttf */; };
 		332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CC25326D3F0078E65B /* Lato-Thin.ttf */; };
 		332A57EA25326E450078E65B /* AppName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A57E925326E450078E65B /* AppName.swift */; };
+		332A5802253333590078E65B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 332A5804253333590078E65B /* Localizable.strings */; };
+		332A580D253334900078E65B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A580C253334900078E65B /* String.swift */; };
+		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
 		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
@@ -56,6 +59,11 @@
 		332A57CB25326D3E0078E65B /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		332A57CC25326D3F0078E65B /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		332A57E925326E450078E65B /* AppName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppName.swift; sourceTree = "<group>"; };
+		332A5803253333590078E65B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		332A58082533339B0078E65B /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		332A58092533339C0078E65B /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		332A580C253334900078E65B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		332A581425333B360078E65B /* BackgroundCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircle.swift; sourceTree = "<group>"; };
 		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +141,22 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		332A580A2533346C0078E65B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				332A580B253334770078E65B /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		332A580B253334770078E65B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				332A580C253334900078E65B /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		3336440825323F6C00D1A5C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +178,7 @@
 			children = (
 				333643F42532301F00D1A5C6 /* Button.swift */,
 				332A57E925326E450078E65B /* AppName.swift */,
+				332A581425333B360078E65B /* BackgroundCircle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -161,6 +186,7 @@
 		336BC6B12532256700B7346C /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
+				332A5804253333590078E65B /* Localizable.strings */,
 			);
 			path = Localizations;
 			sourceTree = "<group>";
@@ -193,6 +219,7 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				332A580A2533346C0078E65B /* Utils */,
 				332A57C725326D390078E65B /* fonts */,
 				3336440825323F6C00D1A5C6 /* Screens */,
 				336BC6B12532256700B7346C /* Localizations */,
@@ -327,6 +354,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"ru-RU",
 			);
 			mainGroup = 336D6735252A4A600098259E;
 			productRefGroup = 336D673F252A4A600098259E /* Products */;
@@ -347,6 +375,7 @@
 			files = (
 				332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */,
 				336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */,
+				332A5802253333590078E65B /* Localizable.strings in Resources */,
 				336BC6AC2532252900B7346C /* .gitignore in Resources */,
 				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
 				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
@@ -468,7 +497,9 @@
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
+				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
+				332A580D253334900078E65B /* String.swift in Sources */,
 				336D6744252A4A600098259E /* SceneDelegate.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);
@@ -506,10 +537,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		332A5804253333590078E65B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				332A5803253333590078E65B /* en */,
+				332A58092533339C0078E65B /* ru-RU */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		336D674C252A4A610098259E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				336D674D252A4A610098259E /* Base */,
+				332A58082533339B0078E65B /* ru-RU */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

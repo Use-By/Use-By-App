@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  UseBy
+
+  Created by Nadezda Svoykina on 10/11/20.
+  
+*/
+
+"app-name" = "Use-by";
+"app-description" = "Срок годности под контролем!";
+"create-account" = "Создать аккаунт";
+"create-account-google" = "Вход через Google";

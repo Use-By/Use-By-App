@@ -23,7 +23,6 @@ class BackgroundCircle: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        // Get the Graphics Context
         if let context = UIGraphicsGetCurrentContext() {
             context.setFillColor(self.color.cgColor)
 

@@ -22,6 +22,14 @@ final class MainButton: UIButton {
     private let theme: ButtonTheme
     var gradientLayer: CAGradientLayer?
 
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .transitionCrossDissolve, .curveEaseInOut], animations: {
+                self.alpha = self.isHighlighted ? 0.7 : 1
+            }, completion: nil)
+        }
+    }
+
     init(text: String, theme: ButtonTheme = ButtonTheme.normal) {
         self.theme = theme
         super.init(frame: .zero)

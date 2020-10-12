@@ -18,7 +18,6 @@
 		332A580D253334900078E65B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A580C253334900078E65B /* String.swift */; };
 		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
 		332A581A25337ED60078E65B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 332A581925337ED60078E65B /* Podfile */; };
-		332A582C25337F950078E65B /* MainAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A582B25337F950078E65B /* MainAuthView.swift */; };
 		332A586E2533BEDB0078E65B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A586D2533BEDB0078E65B /* Icon.swift */; };
 		332A58802533C9BF0078E65B /* Google.svg in Resources */ = {isa = PBXBuildFile; fileRef = 332A587F2533C9BF0078E65B /* Google.svg */; };
 		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
@@ -69,7 +68,6 @@
 		332A580C253334900078E65B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		332A581425333B360078E65B /* BackgroundCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircle.swift; sourceTree = "<group>"; };
 		332A581925337ED60078E65B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		332A582B25337F950078E65B /* MainAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthView.swift; sourceTree = "<group>"; };
 		332A586D2533BEDB0078E65B /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		332A587F2533C9BF0078E65B /* Google.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Google.svg; sourceTree = "<group>"; };
 		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
-				332A582B25337F950078E65B /* MainAuthView.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -559,7 +556,6 @@
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
-				332A582C25337F950078E65B /* MainAuthView.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);

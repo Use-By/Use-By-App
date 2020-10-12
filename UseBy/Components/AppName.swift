@@ -8,27 +8,25 @@
 import Foundation
 import UIKit
 
-extension AppName {
+final class AppName: UILabel {
+    private let theme: AppNameTheme
+
     public enum AppNameTheme {
         case normal
         case inversed
     }
-}
-
-final class AppName: UILabel {
-    private let theme: AppNameTheme
 
     init(theme: AppNameTheme = .normal) {
         self.theme = theme
         super.init(frame: .zero)
         text = "app-name".localized.uppercased()
-        font = UIFont.appNameText()
+        font = Fonts.appNameText
 
         switch self.theme {
         case .normal:
-            textColor = UIColor.mainActionColor()
+            textColor = Colors.mainActionColor
         case .inversed:
-            textColor = UIColor.inversedTextColor()
+            textColor = Colors.inversedTextColor
         }
 
         addCharacterSpacing(kernValue: 5)

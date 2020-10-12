@@ -42,7 +42,7 @@ final class MainButton: UIButton {
         super.init(frame: .zero)
 
         label.text = text
-        label.font = UIFont.mainButtonText()
+        label.font = Fonts.mainButtonText
         label.sizeToFit()
         label.textAlignment = .center
         layer.cornerRadius = 14
@@ -65,24 +65,24 @@ final class MainButton: UIButton {
     private func setThemeStyles() {
         switch self.theme {
         case .normal:
-            label.textColor = UIColor.inversedTextColor()
-            backgroundColor = UIColor.mainActionColor()
+            label.textColor = Colors.inversedTextColor
+            backgroundColor = Colors.mainActionColor
         case .action:
-            label.textColor = UIColor.inversedTextColor()
-            let gradientLayer = CAGradientLayer.mainBGGradient()
+            label.textColor = Colors.inversedTextColor
+            let gradientLayer = Colors.mainBGGradient()
             gradientLayer.cornerRadius = 14
             self.gradientLayer = gradientLayer
             layer.insertSublayer(gradientLayer, at: 0)
         case .social:
-            label.textColor = UIColor.inversedTextColor()
-            backgroundColor = UIColor.socialBGColor()
+            label.textColor = Colors.inversedTextColor
+            backgroundColor = Colors.socialBGColor
         case .clear:
-            label.textColor = UIColor.secondaryTextColor()
-            label.font = UIFont.mainText()
+            label.textColor = Colors.secondaryTextColor
+            label.font = Fonts.mainText
         case .pseudo:
-            label.textColor = UIColor.mainActionColor()
+            label.textColor = Colors.mainActionColor
             layer.borderWidth = 2
-            layer.borderColor = UIColor.mainActionColor().cgColor
+            layer.borderColor = Colors.mainActionColor.cgColor
         }
     }
 

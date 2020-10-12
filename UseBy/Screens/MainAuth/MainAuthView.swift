@@ -23,15 +23,15 @@ class MainAuthView: UIView {
     )
     private let backgroundCircle = BackgroundCircle(
         frame: CGRect(x: 0, y: 0, width: 500, height: 500),
-        circleColor: UIColor.mainActionBGColor()
+        circleColor: Colors.mainActionBGColor
     )
     private let bottomBackgroundCircle = BackgroundCircle(
         frame: CGRect(x: 0, y: 0, width: 600, height: 600),
-        circleColor: UIColor.secondaryActionBGColor()
+        circleColor: Colors.secondaryActionBGColor
     )
 
     init() {
-        let googleIcon = Icon.getIcon(name: "Google", size: .small, color: UIColor.inversedTextColor())
+        let googleIcon = Icon.getIcon(name: "Google", size: .small, color: Colors.inversedTextColor)
         googleSignUpButton = MainButton(
             text: "create-account-google".localized,
             theme: MainButton.ButtonTheme.social,
@@ -39,7 +39,7 @@ class MainAuthView: UIView {
         )
         super.init(frame: .zero)
 
-        backgroundColor = UIColor.mainBGColor()
+        backgroundColor = Colors.mainBGColor
 
         initAppDescriptionLabel()
 
@@ -70,8 +70,8 @@ class MainAuthView: UIView {
 
     func initAppDescriptionLabel() {
         appDescriptionLabel.text = "app-description".localized
-        appDescriptionLabel.font = UIFont.mainText()
-        appDescriptionLabel.textColor = UIColor.mainTextColor()
+        appDescriptionLabel.font = Fonts.mainText
+        appDescriptionLabel.textColor = Colors.mainTextColor
     }
 
     override func layoutSubviews() {

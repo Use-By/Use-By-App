@@ -12,8 +12,4 @@ class MainAuthViewController: UIViewController {
     override func loadView() {
         view = MainAuthView()
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

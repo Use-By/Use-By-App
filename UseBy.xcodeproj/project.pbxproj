@@ -24,6 +24,7 @@
 		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
+		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
 		336BC6AC2532252900B7346C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AA2532252900B7346C /* .gitignore */; };
 		336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AB2532252900B7346C /* .swiftlint.yml */; };
 		336D6742252A4A600098259E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6741252A4A600098259E /* AppDelegate.swift */; };
@@ -75,6 +76,7 @@
 		333643EF25322B2600D1A5C6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
+		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		336BC6AA2532252900B7346C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		336BC6AB2532252900B7346C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		336D673E252A4A600098259E /* UseBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				332A580C253334900078E65B /* String.swift */,
+				33467E432534F67900184A93 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
+				33467E442534F67900184A93 /* UILabel.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,

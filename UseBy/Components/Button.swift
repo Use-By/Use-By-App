@@ -39,10 +39,20 @@ final class MainButton: UIButton {
         }
     }
 
+    override var isEnabled: Bool {
+        didSet {
+            if !isEnabled {
+                backgroundColor = Colors.disabledBGColor
+            }
+        }
+    }
+
     init(text: String, theme: ButtonTheme = ButtonTheme.normal, icon: Icon? = nil) {
         self.theme = theme
         super.init(frame: .zero)
 
+        adjustsImageWhenHighlighted = false
+        adjustsImageWhenDisabled = false
         titleLabel?.text = text
         setTitle(self.titleLabel?.text, for: .normal)
         titleLabel?.font = Fonts.mainButtonText

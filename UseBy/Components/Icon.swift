@@ -17,8 +17,30 @@ class Icon {
         case medium
     }
 
-    init(name: String, size: IconSize) {
+    public enum IconTheme {
+        case normal
+        case inversed
+        case action
+        case secondary
+        case inactive
+    }
+
+    init(name: String, size: IconSize, theme: IconTheme = IconTheme.normal) {
         icon = UIImage(named: name)
+
+        switch theme {
+        case .normal:
+            icon = icon?.withTintColor(Colors.defaultIconColor)
+        case .inversed:
+            icon = icon?.withTintColor(Colors.inversedIconColor)
+        case .action:
+            icon = icon?.withTintColor(Colors.actionIconColor)
+        case .secondary:
+            icon = icon?.withTintColor(Colors.secondaryIconColor)
+        case .inactive:
+            icon = icon?.withTintColor(Colors.inactiveIconColor)
+        }
+
         self.size = size
     }
 

@@ -27,7 +27,7 @@ class MainAuthViewController: UIViewController {
     private let googleSignUpButton = MainButton(
         text: "create-account-google".localized,
         theme: MainButton.ButtonTheme.social,
-        icon: Icon(name: "Google", size: .small)
+        icon: Icon(name: "Google", size: .small, theme: .inversed)
     )
     private let signUpButton = MainButton(text: "create-account".localized, theme: MainButton.ButtonTheme.action)
     private let alreadySignUpButton = MainButton(

@@ -1,32 +1,20 @@
 PODS:
-  - FlexLayout (1.3.20)
-  - PinLayout (1.9.2)
   - SnapKit (5.0.1)
   - SwiftLint (0.40.3)
-  - SwiftSVG (2.3.2)
 
 DEPENDENCIES:
-  - FlexLayout
-  - PinLayout
   - SnapKit (~> 5.0.0)
   - SwiftLint
-  - SwiftSVG (~> 2.0)
 
 SPEC REPOS:
   trunk:
-    - FlexLayout
-    - PinLayout
     - SnapKit
     - SwiftLint
-    - SwiftSVG
 
 SPEC CHECKSUMS:
-  FlexLayout: 025dd153bd5618dcc9f93ef914106d7dc2a86fdc
-  PinLayout: 0d96022e46e8b80468d819f182a393b97ca038da
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
-  SwiftSVG: ca7f64e403b8ea7ea8eba8c823b83ba4a059834c
 
-PODFILE CHECKSUM: b145388115e9f2373c9970ade1ffb4a8a07f4a19
+PODFILE CHECKSUM: 5bef0d2d547c0e4da53ea819780d5eb207a2649e
 
 COCOAPODS: 1.9.3

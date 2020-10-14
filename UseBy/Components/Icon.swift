@@ -7,25 +7,22 @@
 
 import Foundation
 import UIKit
-import SwiftSVG
 
 class Icon {
+    public var icon: UIImage?
+    private let size: IconSize
+
     public enum IconSize {
         case small
         case medium
     }
 
-    class func getIcon(name: String, size: IconSize, color: UIColor?) -> UIView {
-        let iconSize = self.getSize(size: size)
-        let svgIcon = UIView(SVGNamed: name) { (layer: SVGLayer) in
-            layer.fillColor = color?.cgColor ?? UIColor.mainActionColor().cgColor
-            layer.resizeToFit(CGRect(x: 0, y: 0, width: iconSize, height: iconSize))
-        }
-
-        return svgIcon
+    init(name: String, size: IconSize) {
+        icon = UIImage(named: name)
+        self.size = size
     }
 
-    class func getSize(size: IconSize) -> CGFloat {
+    func getSize() -> CGFloat {
         switch size {
         case .small:
             return 16

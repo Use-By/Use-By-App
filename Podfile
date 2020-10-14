@@ -10,10 +10,7 @@ target 'UseBy' do
   pod 'SwiftLint'
   
   # UI
-  pod 'FlexLayout'
-  pod 'PinLayout'
-  # SVG Icons
-  pod 'SwiftSVG', '~> 2.0'
+  pod 'SnapKit', '~> 5.0.0'
 
   target 'UseByTests' do
     inherit! :search_paths

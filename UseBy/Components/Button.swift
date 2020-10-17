@@ -77,20 +77,25 @@ final class MainButton: UIButton {
         case .normal:
             titleLabel?.textColor = Colors.inversedTextColor
             backgroundColor = Colors.mainActionColor
+            setTitleColor(Colors.inversedTextColor, for: .normal)
         case .action:
             titleLabel?.textColor = Colors.inversedTextColor
+            setTitleColor(Colors.inversedTextColor, for: .normal)
             let gradientLayer = Colors.mainBGGradient()
             gradientLayer.cornerRadius = MainButtonUIConstants.cornerRadius
             self.gradientLayer = gradientLayer
             layer.insertSublayer(gradientLayer, at: 0)
         case .social:
             titleLabel?.textColor = Colors.inversedTextColor
+            setTitleColor(Colors.inversedTextColor, for: .normal)
             backgroundColor = Colors.socialBGColor
         case .clear:
             titleLabel?.textColor = Colors.secondaryTextColor
+            setTitleColor(Colors.secondaryTextColor, for: .normal)
             titleLabel?.font = Fonts.mainText
         case .pseudo:
             titleLabel?.textColor = Colors.mainActionColor
+            setTitleColor(Colors.mainActionColor, for: .normal)
             layer.borderWidth = 2
             layer.borderColor = Colors.mainActionColor.cgColor
         }

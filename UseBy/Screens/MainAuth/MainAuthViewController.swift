@@ -9,17 +9,17 @@ import Foundation
 import UIKit
 import SnapKit
 
-struct MainAuthViewUIConstants {
-    static let backgroundCircleWidth = 500
-    static let bottomCircleWidth = 600
-    static let buttonsSpacing: CGFloat = 15
-    static let signupButtonMargin: CGFloat = 45
-    static let stackViewMargin: CGFloat = -100
-    static let stackViewPadding: CGFloat = 20
-    static let alreadySignUpButtonMargin: CGFloat = -50
-}
-
 class MainAuthViewController: UIViewController {
+    struct MainAuthViewUIConstants {
+        static let backgroundCircleWidth = 500
+        static let bottomCircleWidth = 600
+        static let buttonsSpacing: CGFloat = 15
+        static let signupButtonMargin: CGFloat = 45
+        static let stackViewMargin: CGFloat = -100
+        static let stackViewPadding: CGFloat = 20
+        static let alreadySignUpButtonMargin: CGFloat = -50
+    }
+
     private let appNameLabel = AppName()
     private let appDescriptionLabel = UILabel()
     private let googleSignUpButton = MainButton(
@@ -45,11 +45,12 @@ class MainAuthViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = Colors.mainBGColor
-        view.addSubview(backgroundCircle)
-        view.addSubview(bottomBackgroundCircle)
-        alignBottomCircles()
-        initAppDescriptionLabel()
+        configureBottomCircles()
+        configureAppDescriptionLabel()
+        configureAuthButtons()
+    }
 
+    func configureAuthButtons() {
         let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleSignUpButton]
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
@@ -88,7 +89,9 @@ class MainAuthViewController: UIViewController {
         }
     }
 
-    func alignBottomCircles() {
+    func configureBottomCircles() {
+        view.addSubview(backgroundCircle)
+        view.addSubview(bottomBackgroundCircle)
         backgroundCircle.snp.makeConstraints { (make) -> Void in
             make.center.equalTo(view)
             make.height.equalTo(MainAuthViewUIConstants.backgroundCircleWidth)
@@ -102,7 +105,7 @@ class MainAuthViewController: UIViewController {
         }
     }
 
-    func initAppDescriptionLabel() {
+    func configureAppDescriptionLabel() {
         appDescriptionLabel.text = "app-description".localized
         appDescriptionLabel.font = Fonts.mainText
         appDescriptionLabel.textColor = Colors.mainTextColor

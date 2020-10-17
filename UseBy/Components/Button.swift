@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-struct MainButtonUIConstants {
-    static let iconMargin: CGFloat = 10
-    static let cornerRadius: CGFloat = 14
-}
-
 final class MainButton: UIButton {
+    struct MainButtonUIConstants {
+        static let iconMargin: CGFloat = 10
+        static let cornerRadius: CGFloat = 14
+    }
+
     public enum ButtonTheme {
         case normal
         case pseudo

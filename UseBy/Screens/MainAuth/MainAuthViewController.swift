@@ -20,19 +20,17 @@ struct MainAuthViewUIConstants {
 }
 
 class MainAuthViewController: UIViewController {
-    private let rootFlexContainer = UIView()
-
     private let appNameLabel = AppName()
     private let appDescriptionLabel = UILabel()
     private let googleSignUpButton = MainButton(
         text: "create-account-google".localized,
-        theme: MainButton.ButtonTheme.social,
+        theme: .social,
         icon: Icon(name: "Google", size: .small, theme: .inversed)
     )
-    private let signUpButton = MainButton(text: "create-account".localized, theme: MainButton.ButtonTheme.action)
+    private let signUpButton = MainButton(text: "create-account".localized, theme: .action)
     private let alreadySignUpButton = MainButton(
         text: "already-have-account".localized,
-        theme: MainButton.ButtonTheme.clear
+        theme: .clear
     )
     private let backgroundCircle = BackgroundCircle(
         frame: CGRect(x: 0, y: 0, width: 0, height: 0),

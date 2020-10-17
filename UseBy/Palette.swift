@@ -34,7 +34,9 @@ struct Colors {
         return gradientLayer
     }
 
+    // Главный акцентный цвет приложения (розовый)
     static let mainActionColor = UIColor(red: 255/255, green: 97/255, blue: 128/255, alpha: 1.0)
+    // Второй акцентный цвет приложения (персиковый)
     static let secondaryActionColor = UIColor(red: 254/255, green: 169/255, blue: 155/255, alpha: 1.0)
     static let disabledColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1.0)
 

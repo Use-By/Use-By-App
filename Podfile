@@ -8,6 +8,9 @@ target 'UseBy' do
   # Pods for UseBy
   # Utilities
   pod 'SwiftLint'
+  
+  # UI
+  pod 'SnapKit', '~> 5.0.0'
 
   target 'UseByTests' do
     inherit! :search_paths

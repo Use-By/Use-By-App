@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 import SnapKit
+import GoogleSignIn
+
+// TODO: добавить кнопку гугла
+// изменить стили кнопки
+// настроить роутинг в зависимости от значения залогиненности пользователя
+// решить про модели и прочее
 
 class MainAuthViewController: UIViewController {
     struct MainAuthViewUIConstants {
@@ -20,6 +26,7 @@ class MainAuthViewController: UIViewController {
         static let alreadySignUpButtonMargin: CGFloat = -50
     }
 
+    private let signInGoogle: GIDSignInButton = GIDSignInButton()
     private let appNameLabel = AppName()
     private let appDescriptionLabel = UILabel()
     private let googleSignUpButton = MainButton(
@@ -48,6 +55,8 @@ class MainAuthViewController: UIViewController {
         configureBottomCircles()
         configureAppDescriptionLabel()
         configureAuthButtons()
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
 
     func configureAuthButtons() {
@@ -113,6 +122,8 @@ class MainAuthViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         signUpButton.initActionThemeStyles()
     }
 }

@@ -32,6 +32,8 @@
 		336D6764252A4A610098259E /* UseByUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6763252A4A610098259E /* UseByUITests.swift */; };
 		336D6778252A4A970098259E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 336D6777252A4A970098259E /* README.md */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
+		79CE46042540BC3900EAC17A /* CreateAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46032540BC3900EAC17A /* CreateAccViewController.swift */; };
+		79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46082540BC7F00EAC17A /* MainTextLabel.swift */; };
 		F23139FA3B6B4B4C81D7253D /* Pods_UseByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89AEC9CC8D7D36B92B13EE9 /* Pods_UseByTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +91,8 @@
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
+		79CE46032540BC3900EAC17A /* CreateAccViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccViewController.swift; sourceTree = "<group>"; };
+		79CE46082540BC7F00EAC17A /* MainTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextLabel.swift; sourceTree = "<group>"; };
 		858DCB0FD18838C0CBFB2AE6 /* Pods-UseBy-UseByUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.release.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9DF9957618D766C6425817 /* Pods-UseBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.debug.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
+				79CE46032540BC3900EAC17A /* CreateAccViewController.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				332A57E925326E450078E65B /* AppName.swift */,
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
+				79CE46082540BC7F00EAC17A /* MainTextLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -541,8 +547,10 @@
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
+				79CE46042540BC3900EAC17A /* CreateAccViewController.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
+				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,

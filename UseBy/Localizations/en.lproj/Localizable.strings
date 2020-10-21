@@ -10,4 +10,5 @@
 "app-name" = "Use-by";
 "app-description" = "We help you keep your products fresh";
 "create-account" = "Create account";
+"login" = "Login";
 "create-account-google" = "Continue with Google";

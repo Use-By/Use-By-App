@@ -12,4 +12,7 @@
 "create-account" = "Create account";
 "create-account-google" = "Continue with Google";
 "empty-screen" = "You don't have anything yet";
+"error" = "Error";
+"ok" = "Ok";
+"google-error-description" = "We couldn't connect to Google, please try again later";
 

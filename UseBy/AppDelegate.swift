@@ -13,7 +13,10 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
 
         FirebaseApp.configure()
 
@@ -27,21 +30,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return true
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-      // ...
-      if let error = error {
-        // ...
+        if error != nil {
+            // TODO: правильный хендл действия cancel
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: "google-error-description".localized,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+            window?.rootViewController?.present(alert, animated: true, completion: nil)
+
+            // TODO: залогировать ошибку куда-нибудь
+
         return
       }
+        // TODO: в rootViewController всегда хранить один view
+        window?.rootViewController = MainScreenViewController()
 
       guard let authentication = user.authentication else { return }
-      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                        accessToken: authentication.accessToken)
-        window?.rootViewController = MainScreenViewController()
+        _ = GoogleAuthProvider.credential(
+        withIDToken: authentication.idToken,
+        accessToken: authentication.accessToken
+      )
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

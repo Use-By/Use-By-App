@@ -12,3 +12,6 @@
 "create-account" = "Создать аккаунт";
 "create-account-google" = "Вход через Google";
 "empty-screen" = "Пока что ничего нет";
+"error" = "Ошибка";
+"ok" = "Понятно";
+"google-error-description" = "При входе в Google произошла ошибка, попробуйте позже ";

@@ -24,6 +24,7 @@
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
 		336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336711562540D3AA0042E1C7 /* AppLauncher.swift */; };
+		3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */; };
 		336BC6AC2532252900B7346C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AA2532252900B7346C /* .gitignore */; };
 		336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AB2532252900B7346C /* .swiftlint.yml */; };
 		336D6742252A4A600098259E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6741252A4A600098259E /* AppDelegate.swift */; };
@@ -78,6 +79,7 @@
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		336711562540D3AA0042E1C7 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
+		3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		336BC6AA2532252900B7346C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		336BC6AB2532252900B7346C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		336D673E252A4A600098259E /* UseBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 				332A57E925326E450078E65B /* AppName.swift */,
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
+				3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
+				3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,

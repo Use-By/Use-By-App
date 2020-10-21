@@ -10,11 +10,6 @@ import UIKit
 import SnapKit
 import GoogleSignIn
 
-// TODO: добавить кнопку гугла
-// изменить стили кнопки
-// настроить роутинг в зависимости от значения залогиненности пользователя
-// решить про модели и прочее
-
 class MainAuthViewController: UIViewController {
     struct MainAuthViewUIConstants {
         static let backgroundCircleWidth = 500
@@ -26,14 +21,9 @@ class MainAuthViewController: UIViewController {
         static let alreadySignUpButtonMargin: CGFloat = -50
     }
 
-    private let signInGoogle: GIDSignInButton = GIDSignInButton()
     private let appNameLabel = AppName()
     private let appDescriptionLabel = UILabel()
-    private let googleSignUpButton = MainButton(
-        text: "create-account-google".localized,
-        theme: .social,
-        icon: Icon(name: "Google", size: .small, theme: .inversed)
-    )
+    private let googleSignInButton = GoogleSignInButton()
     private let signUpButton = MainButton(text: "create-account".localized, theme: .action)
     private let alreadySignUpButton = MainButton(
         text: "already-have-account".localized,
@@ -57,12 +47,14 @@ class MainAuthViewController: UIViewController {
         configureBottomCircles()
         configureAppDescriptionLabel()
         configureAuthButtons()
-
-        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
 
     func configureAuthButtons() {
-        let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleSignUpButton, signInGoogle]
+        guard let googleButton = googleSignInButton.view else {
+            return
+        }
+        let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleButton]
+        googleSignInButton.didMove(toParent: self)
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -77,7 +69,7 @@ class MainAuthViewController: UIViewController {
             make.centerX.equalTo(stackView)
             make.centerY.equalTo(stackView.snp.bottom).offset(MainAuthViewUIConstants.signupButtonMargin)
         }
-        googleSignUpButton.snp.makeConstraints { (make) -> Void in
+        googleButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
         }
         stackView.snp.makeConstraints {(make) -> Void in

@@ -51,6 +51,8 @@ class MainAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
         view.backgroundColor = Colors.mainBGColor
         configureBottomCircles()
         configureAppDescriptionLabel()
@@ -60,7 +62,7 @@ class MainAuthViewController: UIViewController {
     }
 
     func configureAuthButtons() {
-        let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleSignUpButton]
+        let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleSignUpButton, signInGoogle]
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
         stackView.distribution = .fill

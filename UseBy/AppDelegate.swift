@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window!.rootViewController = MainAuthViewController()
+        window!.rootViewController = AppLauncher()
         window!.makeKeyAndVisible()
 
         return true
@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
       guard let authentication = user.authentication else { return }
       let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                         accessToken: authentication.accessToken)
-      // ...
-      print("User email: \(user.profile.email ?? "No email")")
+        window?.rootViewController = MainScreenViewController()
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

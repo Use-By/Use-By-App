@@ -11,3 +11,5 @@
 "app-description" = "We help you keep your products fresh";
 "create-account" = "Create account";
 "create-account-google" = "Continue with Google";
+"empty-screen" = "You don't have anything yet";
+

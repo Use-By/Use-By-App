@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
-        
+
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
 
@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         return true
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
     }
-    
+
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
       // ...
       if let error = error {

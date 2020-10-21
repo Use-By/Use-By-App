@@ -10,10 +10,10 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
     private let appNameLabel = AppName()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.addSubview(appNameLabel)
         appNameLabel.textAlignment = .center
         appNameLabel.snp.makeConstraints { (make) -> Void in

@@ -55,7 +55,7 @@ class MainAuthViewController: UIViewController {
         configureBottomCircles()
         configureAppDescriptionLabel()
         configureAuthButtons()
-        
+
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
 
@@ -123,7 +123,7 @@ class MainAuthViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         signUpButton.initActionThemeStyles()
     }
 }

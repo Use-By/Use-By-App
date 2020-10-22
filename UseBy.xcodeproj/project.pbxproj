@@ -19,7 +19,6 @@
 		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
 		332A581A25337ED60078E65B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 332A581925337ED60078E65B /* Podfile */; };
 		332A586E2533BEDB0078E65B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A586D2533BEDB0078E65B /* Icon.swift */; };
-		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
@@ -32,8 +31,12 @@
 		336D6764252A4A610098259E /* UseByUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6763252A4A610098259E /* UseByUITests.swift */; };
 		336D6778252A4A970098259E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 336D6777252A4A970098259E /* README.md */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
+		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
+		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		79CE46042540BC3900EAC17A /* CreateAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46032540BC3900EAC17A /* CreateAccViewController.swift */; };
 		79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46082540BC7F00EAC17A /* MainTextLabel.swift */; };
+		79E020FD2542081F00D5F5E9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E020FC2542081F00D5F5E9 /* Line.swift */; };
+		79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E021012542155C00D5F5E9 /* LoginViewController.swift */; };
 		F23139FA3B6B4B4C81D7253D /* Pods_UseByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89AEC9CC8D7D36B92B13EE9 /* Pods_UseByTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,8 +94,11 @@
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
+		798758562541A81100B9E25A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		79CE46032540BC3900EAC17A /* CreateAccViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccViewController.swift; sourceTree = "<group>"; };
 		79CE46082540BC7F00EAC17A /* MainTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextLabel.swift; sourceTree = "<group>"; };
+		79E020FC2542081F00D5F5E9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		79E021012542155C00D5F5E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		858DCB0FD18838C0CBFB2AE6 /* Pods-UseBy-UseByUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.release.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9DF9957618D766C6425817 /* Pods-UseBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.debug.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
 				79CE46032540BC3900EAC17A /* CreateAccViewController.swift */,
+				79E021012542155C00D5F5E9 /* LoginViewController.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -191,6 +198,8 @@
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
 				79CE46082540BC7F00EAC17A /* MainTextLabel.swift */,
+				798758562541A81100B9E25A /* TextField.swift */,
+				79E020FC2542081F00D5F5E9 /* Line.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -543,17 +552,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
+				798758622541BB3F00B9E25A /* Palette.swift in Sources */,
+				798758572541A81100B9E25A /* TextField.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
 				79CE46042540BC3900EAC17A /* CreateAccViewController.swift in Sources */,
+				79E020FD2542081F00D5F5E9 /* Line.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
-				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

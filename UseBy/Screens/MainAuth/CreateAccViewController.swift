@@ -16,6 +16,8 @@ class CreateAccViewController: UIViewController {
         static let mainTextMargin: CGFloat = 190
         static let createAccButtonMargin: CGFloat = -34
         static let createAccButtonPadding: CGFloat = -40
+        static let textFieldHeight: CGFloat = 60
+        static let textFieldSpacing: CGFloat = 0
     }
     private let createAccountLabel = MainText(textType: .createAccount)
     private let createAccountButton = MainButton(
@@ -26,6 +28,10 @@ class CreateAccViewController: UIViewController {
         text: "already-have-account".localized,
         theme: .clear
     )
+    private let textFieldName = AuthTextField(purpose: .name)
+    private let textFieldEmail = AuthTextField(purpose: .email)
+    private let textFieldPassword = AuthTextField(purpose: .password)
+    private let line = Line(frame: CGRect(x: 0, y: 0, width: 0, height: 0), lineColor: Colors.disabledColor)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +39,7 @@ class CreateAccViewController: UIViewController {
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()
+        configureTextFields()
     }
 
     func configureButtons() {
@@ -43,19 +50,46 @@ class CreateAccViewController: UIViewController {
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
             make.bottom.equalTo(view).offset(CreateAccViewUIConstants.alreadySignUpButtonMargin)
             make.centerX.equalTo(view)
+        }
 // Кнопка "Сreate Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(CreateAccViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             make.bottom.equalTo(alreadySignUpButton.snp.top).offset(CreateAccViewUIConstants.createAccButtonMargin)
-            }
         }
     }
 
-//    func configureTextFields() {
-//        <#function body#>
-//    }
+    func configureTextFields() {
+        let arrangedSubview = [textFieldName, line, textFieldEmail, line, textFieldPassword]
+        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
+        stackviewFields.axis = .vertical
+        //stackviewFields.distribution = .fill
+        //stackviewFields.alignment = .center
+        stackviewFields.spacing = CreateAccViewUIConstants.textFieldSpacing
+
+        view.addSubview(stackviewFields)
+
+        stackviewFields.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(view).offset(CreateAccViewUIConstants.createAccButtonPadding)
+            make.centerX.equalTo(view)
+            make.centerY.equalTo(view)
+        }
+        line.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(view).offset(CreateAccViewUIConstants.createAccButtonMargin)
+        }
+        textFieldName.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
+        }
+
+        textFieldEmail.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
+        }
+
+        textFieldPassword.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
+        }
+    }
 
     func configureMainText() {
         createAccountLabel.textAlignment = .center

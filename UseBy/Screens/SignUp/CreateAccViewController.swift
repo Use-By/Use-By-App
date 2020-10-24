@@ -61,7 +61,13 @@ class CreateAccViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubview = [textFieldName, textFieldEmail, textFieldPassword]
+        let inputDividers = InputLineDivider.getInputDividers(count: 3)
+        let arrangedSubview = [textFieldName,
+                               inputDividers[0],
+                               textFieldEmail,
+                               inputDividers[1],
+                               textFieldPassword,
+                               inputDividers[2]]
         let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = CreateAccViewUIConstants.textFieldSpacing
@@ -83,6 +89,12 @@ class CreateAccViewController: UIViewController {
 
         textFieldPassword.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
+        }
+
+        inputDividers.forEach { inputDivider in
+            inputDivider.snp.makeConstraints { (make) -> Void in
+                make.height.equalTo(InputLineDivider.dividerHeight)
+            }
         }
     }
 

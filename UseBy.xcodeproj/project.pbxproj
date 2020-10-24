@@ -68,7 +68,6 @@
 		332A57CC25326D3F0078E65B /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		332A57E925326E450078E65B /* AppName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppName.swift; sourceTree = "<group>"; };
 		332A5803253333590078E65B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		332A58082533339B0078E65B /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		332A58092533339C0078E65B /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		332A580C253334900078E65B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		332A581425333B360078E65B /* BackgroundCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircle.swift; sourceTree = "<group>"; };
@@ -407,13 +406,13 @@
 			files = (
 				337B9F2A253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */,
 				332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */,
+				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
 				336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */,
 				332A5802253333590078E65B /* Localizable.strings in Resources */,
 				336BC6AC2532252900B7346C /* .gitignore in Resources */,
-				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
-				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
 				332A581A25337ED60078E65B /* Podfile in Resources */,
 				336D674B252A4A610098259E /* Assets.xcassets in Resources */,
+				332A57E125326D8C0078E65B /* Lato-Regular.ttf in Resources */,
 				332A57D525326D850078E65B /* Lato-Black.ttf in Resources */,
 				332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */,
 				336D6778252A4A970098259E /* README.md in Resources */,
@@ -658,7 +657,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				336D674D252A4A610098259E /* Base */,
-				332A58082533339B0078E65B /* ru-RU */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

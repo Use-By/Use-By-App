@@ -20,7 +20,6 @@ final class MainButton: UIButton {
         case action
         case social
         case clear
-        case disactive
     }
 
     public static let buttonHeight = 60
@@ -99,10 +98,6 @@ final class MainButton: UIButton {
             setTitleColor(Colors.mainActionColor, for: .normal)
             layer.borderWidth = 2
             layer.borderColor = Colors.mainActionColor.cgColor
-        case .disactive:
-            titleLabel?.textColor = Colors.inversedTextColor
-            setTitleColor(Colors.inversedTextColor, for: .normal)
-            backgroundColor = Colors.disabledBGColor
         }
     }
 

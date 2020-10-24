@@ -8,21 +8,21 @@
 import Foundation
 import UIKit
 
-final class MainText: UILabel {
-    private let textType: TextType
+final class MainScreenTitle: UILabel {
+    private let screenType: ScreenType
 
-    public enum TextType {
+    public enum ScreenType {
         case createAccount
         case login
     }
 
-    init(textType: TextType = .createAccount) {
-        self.textType = textType
+    init(textType: ScreenType = .createAccount) {
+        self.screenType = textType
         super.init(frame: .zero)
         font = Fonts.headlineText
         textColor = Colors.mainTextColor
 
-        switch self.textType {
+        switch self.screenType {
         case .createAccount:
             text = "create-account".localized
         case .login:
@@ -30,7 +30,7 @@ final class MainText: UILabel {
         }
     }
     required init?(coder decoder: NSCoder) {
-        self.textType = .createAccount
+        self.screenType = .createAccount
         super.init(coder: decoder)
     }
 }

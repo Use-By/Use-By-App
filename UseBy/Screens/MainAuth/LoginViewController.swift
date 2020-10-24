@@ -18,18 +18,16 @@ class LoginViewController: UIViewController {
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
     }
-    private let loginLabel = MainText(textType: .login)
+    private let loginLabel = MainScreenTitle(textType: .login)
     private let signUpButton = MainButton(
         text: "sign-up".localized,
         theme: .action
     )
     private let textFieldEmail = AuthTextField(purpose: .email)
     private let textFieldPassword = AuthTextField(purpose: .password)
-    //private let line = Line(frame: CGRect(x: 0, y: 0, width: 0, height: 0), lineColor: Colors.disabledColor)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()
@@ -39,7 +37,7 @@ class LoginViewController: UIViewController {
     func configureButtons() {
         view.addSubview(loginLabel)
         view.addSubview(signUpButton)
-// Кнопка "Sign Up"
+        // Кнопка "Sign Up"
         signUpButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
@@ -52,8 +50,6 @@ class LoginViewController: UIViewController {
         let arrangedSubview = [textFieldEmail, textFieldPassword]
         let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
         stackviewFields.axis = .vertical
-        //stackviewFields.distribution = .fill
-        //stackviewFields.alignment = .center
         stackviewFields.spacing = LoginViewUIConstants.textFieldSpacing
 
         view.addSubview(stackviewFields)
@@ -63,9 +59,6 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-//        line.snp.makeConstraints { (make) -> Void in
-//            make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonMargin)
-//        }
 
         textFieldEmail.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(LoginViewUIConstants.textFieldHeight)

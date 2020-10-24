@@ -17,6 +17,7 @@
 		336D6759252A4A610098259E /* UseByTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6758252A4A610098259E /* UseByTests.swift */; };
 		336D6764252A4A610098259E /* UseByUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6763252A4A610098259E /* UseByUITests.swift */; };
 		336D6778252A4A970098259E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 336D6777252A4A970098259E /* README.md */; };
+		33E6F14F254444E6008D563A /* Слой 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E6F14E254444E6008D563A /* Слой 1.png */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		F23139FA3B6B4B4C81D7253D /* Pods_UseByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89AEC9CC8D7D36B92B13EE9 /* Pods_UseByTests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		336D6763252A4A610098259E /* UseByUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseByUITests.swift; sourceTree = "<group>"; };
 		336D6765252A4A610098259E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		336D6777252A4A970098259E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		33E6F14E254444E6008D563A /* Слой 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Слой 1.png"; path = "UseBy/Assets.xcassets/GradientCircle.imageset/Слой 1.png"; sourceTree = "<group>"; };
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		336D6735252A4A600098259E = {
 			isa = PBXGroup;
 			children = (
+				33E6F14E254444E6008D563A /* Слой 1.png */,
 				336D6777252A4A970098259E /* README.md */,
 				336D6740252A4A600098259E /* UseBy */,
 				336D6757252A4A610098259E /* UseByTests */,
@@ -278,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33E6F14F254444E6008D563A /* Слой 1.png in Resources */,
 				336D674E252A4A610098259E /* LaunchScreen.storyboard in Resources */,
 				336D674B252A4A610098259E /* Assets.xcassets in Resources */,
 				336D6778252A4A970098259E /* README.md in Resources */,

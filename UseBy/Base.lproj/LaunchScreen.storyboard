@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,28 +13,30 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientCircle" translatesAutoresizingMaskIntoConstraints="NO" id="PG7-gs-bER">
-                                <rect key="frame" x="-20" y="-22" width="808" height="1068"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientCircle" translatesAutoresizingMaskIntoConstraints="NO" id="5lt-x4-GFG">
+                                <rect key="frame" x="-20" y="44" width="454" height="818"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USE-BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdX-ed-Hdd">
-                                <rect key="frame" x="293" y="472" width="182" height="80"/>
-                                <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="57"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USE-BY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcE-B7-oua">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PG7-gs-bER" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="DFv-mr-TGk"/>
-                            <constraint firstAttribute="trailing" secondItem="PG7-gs-bER" secondAttribute="trailing" constant="-20" id="JCI-99-Q0f"/>
-                            <constraint firstItem="CdX-ed-Hdd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Tid-QD-7yx"/>
-                            <constraint firstItem="CdX-ed-Hdd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dWv-Cy-t3r"/>
-                            <constraint firstItem="PG7-gs-bER" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-20" id="qXI-JY-Aim"/>
-                            <constraint firstItem="PG7-gs-bER" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="tPO-h6-kcW"/>
+                            <constraint firstItem="5lt-x4-GFG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-20" id="2X9-OT-jKk"/>
+                            <constraint firstItem="kcE-B7-oua" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ffu-Lp-jYH"/>
+                            <constraint firstItem="kcE-B7-oua" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ozh-tR-2Yn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kcE-B7-oua" secondAttribute="bottom" id="TMN-Ux-v9U"/>
+                            <constraint firstItem="5lt-x4-GFG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vqk-8b-kMU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5lt-x4-GFG" secondAttribute="bottom" id="khY-uH-M9D"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kcE-B7-oua" secondAttribute="trailing" id="lha-Do-Cbk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5lt-x4-GFG" secondAttribute="trailing" constant="-20" id="yDa-vF-Plx"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:CreateAccViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:UseBy.xcodeproj">
    </FileRef>
    <FileRef

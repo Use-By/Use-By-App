@@ -10,8 +10,12 @@
 "app-name" = "Use-by";
 "app-description" = "Срок годности под контролем!";
 "create-account" = "Создать аккаунт";
+"login" = "Войти";
 "create-account-google" = "Вход через Google";
+"error" = "Ошибка";
+"ok" = "Понятно";
 "name" = "Имя";
 "password" = "Пароль";
 "sign-up" = "Зарегистрироваться";
 "email" = "Email";
+"weak-password-error" = "Длина пароля должна быть больше 6 символов";

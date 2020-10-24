@@ -58,6 +58,7 @@ class CreateAccViewController: UIViewController {
             make.centerX.equalTo(view)
             make.bottom.equalTo(alreadySignUpButton.snp.top).offset(CreateAccViewUIConstants.createAccButtonMargin)
         }
+        createAccountButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
     }
 
     func configureTextFields() {
@@ -115,5 +116,23 @@ class CreateAccViewController: UIViewController {
         let loginVC = LoginViewController()
         navigationController?.pushViewController(loginVC, animated: true)
         navigationController?.isNavigationBarHidden = false
+    }
+
+    @objc
+    private func didTapSignUpButton() {
+        let validationErrors = validateTextFields(fields: [textFieldName, textFieldEmail, textFieldPassword])
+
+        if validationErrors.count != 0 {
+            let errorsText = getErrorsTexts(validationErrors: validationErrors)
+
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: errorsText,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+            present(alert, animated: true, completion: nil)
+        }
     }
 }

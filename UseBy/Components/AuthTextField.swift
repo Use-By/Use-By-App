@@ -24,6 +24,7 @@ class AuthTextField: UITextField {
         font = Fonts.mainText
         clearButtonMode =  UITextField.ViewMode.whileEditing
         borderStyle = UITextField.BorderStyle.none
+
         switch self.purpose {
         case .email:
             placeholder = "email".localized
@@ -45,7 +46,9 @@ class AuthTextField: UITextField {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-
     }
 
+    public func validate() -> ValidationError? {
+        return validateTextField(field: self, fieldType: self.purpose)
+    }
 }

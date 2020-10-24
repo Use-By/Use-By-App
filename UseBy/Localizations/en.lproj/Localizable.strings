@@ -12,7 +12,10 @@
 "create-account" = "Create account";
 "login" = "Login";
 "create-account-google" = "Continue with Google";
+"error" = "Error";
+"ok" = "Ok";
 "name" = "Name";
 "sign-up" = "Sign Up";
 "password" = "Password";
 "email" = "Email";
+"weak-password-error" = "Password must be 6 characters or more";

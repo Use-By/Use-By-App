@@ -50,11 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
             window?.rootViewController?.present(alert, animated: true, completion: nil)
 
-            // TODO: залогировать ошибку куда-нибудь
-
         return
       }
-        // TODO: в rootViewController всегда хранить один view
         window?.rootViewController = MainScreenViewController()
 
       guard let authentication = user.authentication else { return }

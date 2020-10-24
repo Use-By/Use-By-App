@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func configureNavigationController()  {
+    func configureNavigationController() {
         navigationController?.isNavigationBarHidden = true
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = Colors.defaultIconColor

@@ -11,3 +11,8 @@
 "app-description" = "We help you keep your products fresh";
 "create-account" = "Create account";
 "create-account-google" = "Continue with Google";
+"name" ="Name";
+"email" = "Email";
+"change-password" = "Change Password";
+"send-feedback" = "Send feedbacks & help us improve";
+"log-out" = "Log out";

@@ -11,3 +11,9 @@
 "app-description" = "Срок годности под контролем!";
 "create-account" = "Создать аккаунт";
 "create-account-google" = "Вход через Google";
+"name" ="Имя";
+"email" = "Почта";
+"change-password" = "Сменить Пароль";
+"send feedback" = "Отправить отзыв & помочь нам улучшиться";
+"log-out" = "Выйти";
+

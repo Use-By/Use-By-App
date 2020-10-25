@@ -39,8 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        if error != nil {
-            // TODO: правильный хендл действия cancel
+        if let error = error {
+            // Обработка нажатия "Cancel"
+            if (error as NSError).code == GIDSignInErrorCode.canceled.rawValue {
+                return
+            }
+
             let alert = UIAlertController(
                 title: "error".localized,
                 message: "google-error-description".localized,

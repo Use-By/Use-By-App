@@ -51,4 +51,8 @@ class AuthTextField: UITextField {
     public func validate() -> ValidationError? {
         return validateTextField(field: self, fieldType: self.purpose)
     }
+
+    public func isEmpty() -> Bool {
+        return text?.count == 0
+    }
 }

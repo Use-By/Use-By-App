@@ -59,6 +59,7 @@ class CreateAccViewController: UIViewController {
             make.bottom.equalTo(alreadySignUpButton.snp.top).offset(CreateAccViewUIConstants.createAccButtonMargin)
         }
         createAccountButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+        createAccountButton.isEnabled = false
     }
 
     func configureTextFields() {
@@ -97,6 +98,10 @@ class CreateAccViewController: UIViewController {
                 make.height.equalTo(InputLineDivider.dividerHeight)
             }
         }
+
+        textFieldName.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldEmail.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldPassword.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
     }
 
     func configureMainText() {
@@ -134,5 +139,14 @@ class CreateAccViewController: UIViewController {
 
             present(alert, animated: true, completion: nil)
         }
+    }
+
+    @objc
+    private func checkForEnablingMainActionButton() {
+        if textFieldName.isEmpty() || textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            return
+        }
+
+        createAccountButton.isEnabled = true
     }
 }

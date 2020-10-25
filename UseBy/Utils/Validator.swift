@@ -28,10 +28,6 @@ func validatePassword(field: AuthTextField) -> ValidationError? {
     return nil
 }
 
-func isEmptyField(field: AuthTextField) -> Bool? {
-    return field.text?.count != 0
-}
-
 func validateTextField(field: AuthTextField, fieldType: AuthTextField.TextFieldPurpose) -> ValidationError? {
     switch fieldType {
     case .password:

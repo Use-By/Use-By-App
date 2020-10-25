@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     }
     private let loginLabel = MainScreenTitle(textType: .login)
     private let signUpButton = MainButton(
-        text: "sign-up".localized,
+        text: "sign-in".localized,
         theme: .action
     )
     private let textFieldEmail = AuthTextField(purpose: .email)
@@ -37,13 +37,15 @@ class LoginViewController: UIViewController {
     func configureButtons() {
         view.addSubview(loginLabel)
         view.addSubview(signUpButton)
-        // Кнопка "Sign Up"
+        // Кнопка "Sign In"
         signUpButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
             make.centerX.equalTo(view)
             make.bottom.equalTo(view).offset(LoginViewUIConstants.signUpButtonMargin)
         }
+
+        signUpButton.isEnabled = false
     }
 
     func configureTextFields() {
@@ -86,5 +88,14 @@ class LoginViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         signUpButton.initActionThemeStyles()
+    }
+
+    @objc
+    private func checkForEnablingMainActionButton() {
+        if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            return
+        }
+
+        signUpButton.isEnabled = true
     }
 }

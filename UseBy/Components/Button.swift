@@ -43,6 +43,11 @@ final class MainButton: UIButton {
         didSet {
             if !isEnabled {
                 backgroundColor = Colors.disabledBGColor
+                if self.gradientLayer != nil {
+                    layer.sublayers?.remove(at: 0)
+                }
+            } else {
+                setThemeStyles()
             }
         }
     }

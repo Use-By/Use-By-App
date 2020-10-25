@@ -15,7 +15,7 @@
 "error" = "Error";
 "ok" = "Ok";
 "name" = "Name";
-"sign-up" = "Sign Up";
+"sign-in" = "Sign In";
 "password" = "Password";
 "email" = "Email";
 "weak-password-error" = "Password must be 6 characters or more";

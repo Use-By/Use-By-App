@@ -13,13 +13,13 @@ class LoginViewController: UIViewController {
     struct LoginViewUIConstants {
         static let backgroundColor = Colors.mainBGColor
         static let mainTextMargin: CGFloat = 190
-        static let signUpButtonMargin: CGFloat = -120
-        static let signUpButtonPadding: CGFloat = -40
+        static let signInButtonMargin: CGFloat = -120
+        static let signInButtonPadding: CGFloat = -40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
     }
     private let loginLabel = MainScreenTitle(textType: .login)
-    private let signUpButton = MainButton(
+    private let signInButton = MainButton(
         text: "sign-in".localized,
         theme: .action
     )
@@ -36,16 +36,16 @@ class LoginViewController: UIViewController {
 
     func configureButtons() {
         view.addSubview(loginLabel)
-        view.addSubview(signUpButton)
+        view.addSubview(signInButton)
         // Кнопка "Sign In"
-        signUpButton.snp.makeConstraints { (make) -> Void in
+        signInButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
+            make.width.equalTo(view).offset(LoginViewUIConstants.signInButtonPadding)
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).offset(LoginViewUIConstants.signUpButtonMargin)
+            make.bottom.equalTo(view).offset(LoginViewUIConstants.signInButtonMargin)
         }
 
-        signUpButton.isEnabled = false
+        signInButton.isEnabled = false
     }
 
     func configureTextFields() {
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
         view.addSubview(stackviewFields)
 
         stackviewFields.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
+            make.width.equalTo(view).offset(LoginViewUIConstants.signInButtonPadding)
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
@@ -76,6 +76,9 @@ class LoginViewController: UIViewController {
                 make.height.equalTo(InputLineDivider.dividerHeight)
             }
         }
+
+        textFieldEmail.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldPassword.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
     }
 
     func configureMainText() {
@@ -87,7 +90,7 @@ class LoginViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        signUpButton.initActionThemeStyles()
+        signInButton.initActionThemeStyles()
     }
 
     @objc
@@ -96,6 +99,6 @@ class LoginViewController: UIViewController {
             return
         }
 
-        signUpButton.isEnabled = true
+        signInButton.isEnabled = true
     }
 }

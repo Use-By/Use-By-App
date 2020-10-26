@@ -52,7 +52,7 @@ class MainAuthViewController: UIViewController {
 
     func configureAuthButtons() {
         let arrangedSubviews = [appNameLabel, appDescriptionLabel, googleSignUpButton]
-        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)//massive of buttons
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.spacing = MainAuthViewUIConstants.buttonsSpacing
@@ -116,3 +116,70 @@ class MainAuthViewController: UIViewController {
         signUpButton.initActionThemeStyles()
     }
 }
+
+/*
+ class MainAuthViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+     var profile = UITableView()
+     let identifire = "MyCell"
+     var array = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
+
+     private let appNameLabel = AppName()
+     private let appDescriptionLabel = UILabel()
+     override func viewDidLoad() {
+         super.viewDidLoad()
+         //configureAuthButtons()
+         createTable()
+     }
+
+     func createTable () {
+
+         self.profile = UITableView(frame: view.bounds, style: .plain)
+         profile.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
+         self.profile.delegate = self
+         self.profile.dataSource = self
+         profile.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+         //profile.top.equelTo
+         view.addSubview(profile)
+
+     }
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return 4
+
+     }
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath) // create cell
+         let number = array[indexPath.row]
+
+         cell.textLabel?.text = number//trans inf
+         cell.accessoryType = .disclosureIndicator
+         return cell
+     }
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return 60.0
+     }
+     private let logOutButtom = MainButton(
+         text: "log-out".localized,
+         theme: .social
+     )
+     /*
+     func configureAuthButtons() {
+         let arrangedSubviews = [logOutButtom]
+         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+         stackView.axis = .vertical
+         stackView.distribution = .fill
+         /*stackView.spacing = MainAuthViewUIConstants.buttonsSpacing*/
+         appNameLabel.textAlignment = .center
+         view.addSubview(logOutButtom)
+
+         logOutButtom.snp.makeConstraints {(make) -> Void in
+             make.height.equalTo(MainButton.buttonHeight)
+             make.width.equalTo(stackView)
+             make.centerX.equalTo(stackView)
+         }
+     }*/
+
+ }
+ */

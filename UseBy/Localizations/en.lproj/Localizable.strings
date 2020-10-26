@@ -13,6 +13,7 @@
 "create-account-google" = "Continue with Google";
 "name" ="Name";
 "email" = "Email";
+"log-out" = "Log out";
 "change-password" = "Change Password";
 "send-feedback" = "Send feedbacks & help us improve";
-"log-out" = "Log out";
+

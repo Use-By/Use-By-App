@@ -13,7 +13,8 @@
 "create-account-google" = "Вход через Google";
 "name" ="Имя";
 "email" = "Почта";
+"log-out" = "Выйти";
 "change-password" = "Сменить Пароль";
 "send feedback" = "Отправить отзыв & помочь нам улучшиться";
-"log-out" = "Выйти";
+
 

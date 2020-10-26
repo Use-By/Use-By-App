@@ -15,3 +15,4 @@
 "error" = "Error";
 "ok" = "Ok";
 "google-error-description" = "We couldn't connect to Google, please try again later";
+"log-out" = "Log out";

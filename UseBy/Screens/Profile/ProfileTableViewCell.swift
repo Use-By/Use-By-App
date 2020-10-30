@@ -15,9 +15,9 @@ class ProfileTableViewCell: UITableViewCell {
         return label
     }()
 
-    func fillCell(titleLabel: String, with model: SomeModel) {
+    func fillCell(titleLabel: String, userLabel: String) {
         self.textLabel?.text = titleLabel
-        self.valueLabel.text = model.name
+        self.valueLabel.text = userLabel
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -16,4 +16,6 @@
 "log-out" = "Log out";
 "change-password" = "Change Password";
 "send-feedback" = "Send feedbacks & help us improve";
-
+"new-name" = "New name";
+"new-email" = "New email";
+"new-password" = "New password";

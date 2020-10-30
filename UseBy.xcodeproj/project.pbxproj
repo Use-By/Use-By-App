@@ -33,6 +33,7 @@
 		336D6778252A4A970098259E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 336D6777252A4A970098259E /* README.md */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */; };
+		843690B8254C122500ABBEE0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690B7254C122500ABBEE0 /* UserData.swift */; };
 		845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DDEBB2544DAD800E1C549 /* ProfileViewController.swift */; };
 		F23139FA3B6B4B4C81D7253D /* Pods_UseByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89AEC9CC8D7D36B92B13EE9 /* Pods_UseByTests.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
 		84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		843690B7254C122500ABBEE0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		845DDEBB2544DAD800E1C549 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		858DCB0FD18838C0CBFB2AE6 /* Pods-UseBy-UseByUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.release.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +233,7 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				843690AE254B52EF00ABBEE0 /* User */,
 				332A580A2533346C0078E65B /* Utils */,
 				332A57C725326D390078E65B /* fonts */,
 				3336440825323F6C00D1A5C6 /* Screens */,
@@ -273,6 +276,14 @@
 				6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		843690AE254B52EF00ABBEE0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				843690B7254C122500ABBEE0 /* UserData.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		845DDECB2545621E00E1C549 /* Profile */ = {
@@ -550,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843690B8254C122500ABBEE0 /* UserData.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,

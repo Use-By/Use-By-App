@@ -18,7 +18,11 @@ class CreateAccViewController: UIViewController {
         static let createAccButtonPadding: CGFloat = -40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
+        static let stackViewOfTextFiels: CGFloat = 145
     }
+    var composeViewBottomConstraint: Constraint?
+    var composeAlreadyButtomConstraint: Constraint?
+    var composeStackOfFieldBottomConstraint: Constraint?
     private let createAccountLabel = MainScreenTitle(textType: .createAccount)
     private let createAccountButton = MainButton(
         text: "create-account".localized,
@@ -34,7 +38,8 @@ class CreateAccViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()
@@ -47,15 +52,25 @@ class CreateAccViewController: UIViewController {
         view.addSubview(createAccountButton)
         // Кнопка ""Already have an account?""
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
-            make.bottom.equalTo(view).offset(CreateAccViewUIConstants.alreadySignUpButtonMargin)
             make.centerX.equalTo(view)
+//            make.bottom.equalTo(view).offset(CreateAccViewUIConstants.alreadySignUpButtonMargin)
+            self.composeAlreadyButtomConstraint = make.bottom.equalTo(view).offset(CreateAccViewUIConstants.alreadySignUpButtonMargin).constraint
         }
         // Кнопка "Сreate Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(CreateAccViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
-            make.bottom.equalTo(alreadySignUpButton.snp.top).offset(CreateAccViewUIConstants.createAccButtonMargin)
+            self.composeViewBottomConstraint = make.bottom.equalTo(alreadySignUpButton).offset(CreateAccViewUIConstants.createAccButtonPadding).constraint
+
+        }
+    }
+
+    func configureMainText() {
+        createAccountLabel.textAlignment = .center
+        createAccountLabel.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalTo(view)
+            make.top.equalTo(view).offset(CreateAccViewUIConstants.mainTextMargin)
         }
     }
 
@@ -70,7 +85,7 @@ class CreateAccViewController: UIViewController {
         stackviewFields.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(view).offset(CreateAccViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
-            make.centerY.equalTo(view)
+            self.composeStackOfFieldBottomConstraint = make.top.equalTo(createAccountLabel).offset(CreateAccViewUIConstants.stackViewOfTextFiels).constraint
         }
         textFieldName.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
@@ -85,15 +100,32 @@ class CreateAccViewController: UIViewController {
         }
     }
 
-    func configureMainText() {
-        createAccountLabel.textAlignment = .center
-        createAccountLabel.snp.makeConstraints { (make) -> Void in
-            make.centerX.equalTo(view)
-            make.top.equalTo(view).offset(CreateAccViewUIConstants.mainTextMargin)
-        }
-    }
-
     override func viewDidLayoutSubviews() {
         createAccountButton.initActionThemeStyles()
     }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardHight = keyboardSize.cgRectValue.height
+        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            self.composeViewBottomConstraint?.update(offset: -(MainButton.buttonHeight - 20))
+            self.composeAlreadyButtomConstraint?.update(offset: -(keyboardHight + 5))
+            self.composeStackOfFieldBottomConstraint?.update(offset: 50)
+            self.view.layoutIfNeeded()
+        }
+       }
+
+    @objc func keyboardWillHide(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        _ = keyboardSize.cgRectValue.height
+        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            self.composeViewBottomConstraint?.update(offset: CreateAccViewUIConstants.createAccButtonPadding)
+            self.composeAlreadyButtomConstraint?.update(offset: CreateAccViewUIConstants.alreadySignUpButtonMargin)
+            self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccViewUIConstants.stackViewOfTextFiels)
+            self.view.layoutIfNeeded()
+        }
+      }
 }

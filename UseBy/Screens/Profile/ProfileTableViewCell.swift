@@ -8,16 +8,17 @@
 import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
-    private var valueLabel: UILabel = {
-        let label = UILabel() // emty label 
-        label.font = Fonts.mainText
-        label.textColor = Colors.secondaryTextColor
-        return label
-    }()
+    struct UIConstants {
+        static let rightMarginValueLabel: CGFloat = 40.0
+    }
+    private var valueLabel = TableLable()
 
-    func fillCell(titleLabel: String, userLabel: String) {
+    func fillCell(titleLabel: String, userLabel: String? = nil) {
         self.textLabel?.text = titleLabel
         self.valueLabel.text = userLabel
+       /* if userLabel != nil {
+            self.valueLabel.text = userLabel
+        }*/
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,7 +28,7 @@ class ProfileTableViewCell: UITableViewCell {
 
         self.addSubview(valueLabel)//итак находимся во вью
         valueLabel.snp.makeConstraints {(make) -> Void in
-            make.right.equalTo(self).offset(-40)
+            make.right.equalTo(self).offset(-UIConstants.rightMarginValueLabel)
             make.centerY.equalTo(self)
         }
     }
@@ -35,16 +36,7 @@ class ProfileTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func awakeFromNib() { //init
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
 }

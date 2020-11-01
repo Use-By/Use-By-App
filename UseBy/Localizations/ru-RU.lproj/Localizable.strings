@@ -14,10 +14,13 @@
 "name" ="Имя";
 "email" = "Почта";
 "log-out" = "Выйти";
-"change-password" = "Сменить Пароль";
+"change-password" = "Сменить пароль";
 "send-feedback" = "Отправить отзыв & помочь нам улучшиться";
 "new-name" = "Новое имя";
 "new-email" = "Новая Почта";
 "new-password" = "Новый пароль";
-
+"put-your-name" = " Введите свое имя";
+"input-your-new-email-here" = "Введите свою новую почту";
+"input-your-new-password-here" = "Введите свой новый пароль";
+"confirm-your-new-password" = "Подтвердите свой новый пароль";
 

@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 import SnapKit
+import MessageUI
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController {
 
     struct UIConstants {
         static let topTableView: CGFloat = 217.0
@@ -18,7 +19,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         static let widthToLogout: CGFloat = 20
     }
 
-    lazy var profileTableView: UITableView = { //less place, no data while use
+    lazy var profileTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,18 +37,60 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     private let array = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
     private let userArray: [String] = {
         let someModel = SomeModel(name: "Siri", email: "apple@mail.ru")
-        return [someModel.name, someModel.email, "", ""]
+        return [someModel.name, someModel.email]
     }()
     private let logOutButton = MainButton(
         text: "log-out".localized,
         theme: .pseudo
     )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.mainBGColor
         configureLogOutButton()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            Alert(title: "new-name".localized, message: nil, placeholder1: "put-your-name".localized, action: .save)
+        } else if indexPath.row == 1 {
+            Alert(title: "new-email".localized, message: nil, placeholder1: "input-your-new-email-here".localized, action: .save)
+        } else if indexPath.row == 2 {
+            Alert(title: "new-password".localized, message: nil, placeholder1: "input-your-new-password-here", placeholder2:"confirm-your-new-password".localized , action: .save)
+        } else if indexPath.row == 3 {
+            showMailComposer()
+        }
+    }
+    
+    func showMailComposer() {
+        guard MFMailComposeViewController.canSendMail() else {
+            Alert(title: "sad", message: nil, placeholder1: "run", placeholder2: nil, action: .save)
+            return
+        }
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients(["use_by@gmail.com"])
+        present(composer, animated: true)
+    }
+
+    func configureLogOutButton() {
+        view.addSubview(logOutButton)
+        logOutButton.snp.makeConstraints {(make) -> Void in
+            make.height.equalTo(MainButton.buttonHeight)
+            make.width.equalTo(view).inset(UIConstants.widthToLogout)
+            make.centerX.equalTo(view)
+            make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.tableToLogout)
+        }
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }
@@ -57,83 +100,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                                                        for: indexPath) as? ProfileTableViewCell else {
             return UITableViewCell()//   верни пустую ячейку
         }
-        cell.fillCell(titleLabel: array[indexPath.row], userLabel: userArray[indexPath.row])
+        if (indexPath.row==0) || (indexPath.row==1) {
+            cell.fillCell(titleLabel: array[indexPath.row], userLabel: userArray[indexPath.row])
+        } else {cell.fillCell(titleLabel: array[indexPath.row])
+        }
         return cell
     }
+}
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
-    /*lazy var alert: UIAlertController = {
-        let alert = UIAlertController()
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        return alert
-    }()*/
-    var alertTitle: String = ""
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            alertTitle = "new-name".localized
-            let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Input your name here"
-            })
-            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-                /*if let name = alert.textFields?.first?.text {
-                    print("Your name: \(name)")
-                    //someModel.name = name;
-                }*/
-            }))
-            self.present(alert, animated: true)
-        } else if indexPath.row == 1 {
-            alertTitle = "new-email".localized
-            let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Input your new email here"
-            })
-            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-                /*if let name = alert.textFields?.first?.text {
-                    print("Your name: \(name)")
-                    //someModel.email = email;
-                }*/
-            }))
-            self.present(alert, animated: true)
-        } else if indexPath.row == 2 {
-            alertTitle = "new-password".localized
-            let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Input your new password here"
-            })
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Confirm your new password"
-            })
-            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-                /*if let name = alert.textFields?.first?.text {
-                    print("Your name: \(name)")
-                    //someModel.password = password;
-                }*/
-            }))
-            self.present(alert, animated: true)
-        } else if indexPath.row == 3 {
-            /*let email = "use-up@mail.com"
-            if let url = URL(string: "mailto:\(email)") {
-              if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url)
-              } else {
-                UIApplication.shared.openURL(url)
-              }
-            }*/
-        }
-    }
-    func configureLogOutButton() {
-        view.addSubview(logOutButton)
-        logOutButton.snp.makeConstraints {(make) -> Void in
-            make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).inset(UIConstants.widthToLogout)
-            make.centerX.equalTo(view)
-            make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.tableToLogout)
-        }
+extension ProfileViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

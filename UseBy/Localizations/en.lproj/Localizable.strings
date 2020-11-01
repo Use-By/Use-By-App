@@ -14,8 +14,12 @@
 "name" ="Name";
 "email" = "Email";
 "log-out" = "Log out";
-"change-password" = "Change Password";
+"change-password" = "Change  password";
 "send-feedback" = "Send feedbacks & help us improve";
 "new-name" = "New name";
 "new-email" = "New email";
 "new-password" = "New password";
+"put-your-name" = "Put your name";
+"input-your-new-email-here" = "Input your new email here";
+"input-your-new-password-here" = "Input your new password here";
+"confirm-your-new-password" = "Confirm your new password";

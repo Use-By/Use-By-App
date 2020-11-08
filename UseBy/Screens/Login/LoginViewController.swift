@@ -80,6 +80,7 @@ class LoginViewController: UIViewController {
     @objc
     private func checkForEnablingMainActionButton() {
         if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            signInButton.isEnabled = false
             return
         }
 

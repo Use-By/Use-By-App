@@ -44,6 +44,7 @@ class CreateAccViewController: UIViewController {
         view.addSubview(createAccountLabel)
         view.addSubview(alreadySignUpButton)
         view.addSubview(createAccountButton)
+
         // Кнопка ""Already have an account?""
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
             make.bottom.equalTo(view).offset(CreateAccViewUIConstants.alreadySignUpButtonMargin)
@@ -123,6 +124,7 @@ class CreateAccViewController: UIViewController {
     @objc
     private func checkForEnablingMainActionButton() {
         if textFieldName.isEmpty() || textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            createAccountButton.isEnabled = false
             return
         }
 

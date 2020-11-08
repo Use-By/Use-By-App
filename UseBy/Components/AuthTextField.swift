@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol TextFieldDelegate: class {
+    func setActiveField(inputField: AuthTextField)
+}
+
 class AuthTextField: UIView {
     public let purpose: TextFieldPurpose
     public let field: UITextField = UITextField()
@@ -15,6 +19,8 @@ class AuthTextField: UIView {
     private let textFieldHeight = 60
     private let dividerHeight = 1
     private let totalHeight = 61
+
+    private weak var fieldDelegate: TextFieldDelegate?
 
     public enum TextFieldPurpose {
         case password
@@ -72,19 +78,6 @@ class AuthTextField: UIView {
     required init?(coder: NSCoder) {
         self.purpose = .name
         super.init(coder: coder)
-    }
-
-    public static func getInputDividers(count: Int) -> [InputLineDivider] {
-        var inputDividers = [InputLineDivider]()
-
-        for _ in 0..<count {
-            inputDividers.append(InputLineDivider(
-                frame: CGRect(x: 0, y: 0, width: 0, height: 0),
-                color: Colors.inputDividerColor
-            ))
-        }
-
-        return inputDividers
     }
 
     public func validate() -> ValidationError? {

@@ -92,6 +92,6 @@ class AuthTextField: UIView {
     }
 
     public func isEmpty() -> Bool {
-        return field.text?.isEmpty != nil
+        return field.text?.isEmpty ?? true
     }
 }

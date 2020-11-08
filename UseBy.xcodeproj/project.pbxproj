@@ -181,7 +181,7 @@
 		3336440825323F6C00D1A5C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				333869B22544D8DD002E76FD /* SignUp */,
+				333869B22544D8DD002E76FD /* CreateAccount */,
 				333869B12544D8D4002E76FD /* Login */,
 				3336440925323F7500D1A5C6 /* MainAuth */,
 			);
@@ -204,12 +204,12 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		333869B22544D8DD002E76FD /* SignUp */ = {
+		333869B22544D8DD002E76FD /* CreateAccount */ = {
 			isa = PBXGroup;
 			children = (
 				331B96D82544E2FC008109A3 /* CreateAccViewController.swift */,
 			);
-			path = SignUp;
+			path = CreateAccount;
 			sourceTree = "<group>";
 		};
 		336BC69E253221AE00B7346C /* Components */ = {

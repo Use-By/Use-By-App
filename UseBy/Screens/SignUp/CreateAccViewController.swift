@@ -63,10 +63,10 @@ class CreateAccViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubview = [textFieldName,
+        let arrangedSubviews = [textFieldName,
                                textFieldEmail,
                                textFieldPassword]
-        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
+        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = CreateAccViewUIConstants.textFieldSpacing
 

@@ -48,8 +48,8 @@ class LoginViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubview = [textFieldEmail, textFieldPassword]
-        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
+        let arrangedSubviews = [textFieldEmail, textFieldPassword]
+        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = LoginViewUIConstants.textFieldSpacing
 

@@ -52,7 +52,5 @@ func validateTextFields(fields: [AuthTextField]) -> [ValidationError] {
 }
 
 func getErrorsTexts(validationErrors: [ValidationError]) -> String {
-    return validationErrors.map { error in
-        return error.text
-    }.joined(separator: "\n")
+    return validationErrors.map { $0.text }.joined(separator: "\n")
 }

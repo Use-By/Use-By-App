@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 class InputLineDivider: UIView {
-    public static let dividerHeight = 1
-
     init(frame: CGRect, color: UIColor) {
         super.init(frame: frame)
         backgroundColor = color

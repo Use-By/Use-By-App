@@ -15,7 +15,6 @@ class LoginViewController: UIViewController {
         static let mainTextMargin: CGFloat = 190
         static let signInButtonMargin: CGFloat = -120
         static let signInButtonPadding: CGFloat = -40
-        static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
     }
     private let loginLabel = MainScreenTitle(textType: .login)
@@ -49,8 +48,7 @@ class LoginViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let inputDividers = InputLineDivider.getInputDividers(count: 2)
-        let arrangedSubview = [textFieldEmail, inputDividers[0], textFieldPassword, inputDividers[1]]
+        let arrangedSubview = [textFieldEmail, textFieldPassword]
         let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = LoginViewUIConstants.textFieldSpacing
@@ -63,22 +61,8 @@ class LoginViewController: UIViewController {
             make.centerY.equalTo(view)
         }
 
-        textFieldEmail.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(LoginViewUIConstants.textFieldHeight)
-        }
-
-        textFieldPassword.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(LoginViewUIConstants.textFieldHeight)
-        }
-
-        inputDividers.forEach { inputDivider in
-            inputDivider.snp.makeConstraints { (make) -> Void in
-                make.height.equalTo(InputLineDivider.dividerHeight)
-            }
-        }
-
-        textFieldEmail.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldPassword.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldEmail.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldPassword.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
     }
 
     func configureMainText() {

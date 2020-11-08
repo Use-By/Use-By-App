@@ -20,17 +20,4 @@ class InputLineDivider: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
-    public static func getInputDividers(count: Int) -> [InputLineDivider] {
-        var inputDividers = [InputLineDivider]()
-
-        for _ in 0..<count {
-            inputDividers.append(InputLineDivider(
-                frame: CGRect(x: 0, y: 0, width: 0, height: 0),
-                color: Colors.inputDividerColor
-            ))
-        }
-
-        return inputDividers
-    }
 }

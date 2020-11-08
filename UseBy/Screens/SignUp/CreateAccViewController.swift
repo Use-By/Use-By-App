@@ -15,7 +15,7 @@ class CreateAccViewController: UIViewController {
         static let mainTextMargin: CGFloat = 190
         static let createAccButtonMargin: CGFloat = -34
         static let createAccButtonPadding: CGFloat = -40
-        static let textFieldHeight: CGFloat = 60
+        static let textFieldHeight: CGFloat = 61
         static let textFieldSpacing: CGFloat = 0
     }
     private let createAccountLabel = MainScreenTitle(textType: .createAccount)
@@ -63,13 +63,9 @@ class CreateAccViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let inputDividers = InputLineDivider.getInputDividers(count: 3)
         let arrangedSubview = [textFieldName,
-                               inputDividers[0],
                                textFieldEmail,
-                               inputDividers[1],
-                               textFieldPassword,
-                               inputDividers[2]]
+                               textFieldPassword]
         let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = CreateAccViewUIConstants.textFieldSpacing
@@ -81,27 +77,10 @@ class CreateAccViewController: UIViewController {
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-        textFieldName.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
-        }
 
-        textFieldEmail.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
-        }
-
-        textFieldPassword.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(CreateAccViewUIConstants.textFieldHeight)
-        }
-
-        inputDividers.forEach { inputDivider in
-            inputDivider.snp.makeConstraints { (make) -> Void in
-                make.height.equalTo(InputLineDivider.dividerHeight)
-            }
-        }
-
-        textFieldName.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldEmail.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldPassword.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldName.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldEmail.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldPassword.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
     }
 
     func configureMainText() {

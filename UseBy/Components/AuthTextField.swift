@@ -1,5 +1,5 @@
 //
-//  TextField.swift
+//  AuthTextField.swift
 //  UseBy
 //
 //  Created by Anastasiia Malaia on 22.10.2020.
@@ -7,10 +7,15 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
-class AuthTextField: UITextField {
-    private let purpose: TextFieldPurpose
+class AuthTextField: UIView {
+    public let purpose: TextFieldPurpose
+    public let field: UITextField = UITextField()
+
+    private let textFieldHeight = 60
+    private let dividerHeight = 1
+    private let totalHeight = 61
+
     public enum TextFieldPurpose {
         case password
         case name
@@ -20,39 +25,73 @@ class AuthTextField: UITextField {
     init(purpose: TextFieldPurpose = .name) {
         self.purpose = purpose
         super.init(frame: .zero)
-        textColor = Colors.mainTextColor
-        font = Fonts.mainText
-        clearButtonMode =  UITextField.ViewMode.whileEditing
-        borderStyle = UITextField.BorderStyle.none
 
-        switch self.purpose {
-        case .email:
-            placeholder = "email".localized
-            self.isSecureTextEntry = false
-        case .name:
-            placeholder = "name".localized
-            self.isSecureTextEntry = false
-        case .password:
-            placeholder = "password".localized
-            self.isSecureTextEntry = true
+        configureTextField()
+
+        let divider: UIView = UIView()
+        divider.backgroundColor = Colors.inputDividerColor
+        divider.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(field)
+        addSubview(divider)
+
+        self.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(totalHeight)
+        }
+
+        field.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(textFieldHeight)
+            make.width.equalTo(self)
+        }
+        divider.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(dividerHeight)
+            make.width.equalTo(self)
+            make.top.equalTo(field.snp.bottom)
         }
     }
 
-    required init?(code decoder: NSCoder) {
-        self.purpose = .name
-        super.init(coder: decoder)
+    private func configureTextField() {
+        field.textColor = Colors.mainTextColor
+        field.font = Fonts.mainText
+        field.clearButtonMode =  UITextField.ViewMode.whileEditing
+        field.borderStyle = UITextField.BorderStyle.none
 
+        switch purpose {
+        case .email:
+            field.placeholder = "email".localized
+            field.isSecureTextEntry = false
+        case .name:
+            field.placeholder = "name".localized
+            field.isSecureTextEntry = false
+        case .password:
+            field.placeholder = "password".localized
+            field.isSecureTextEntry = true
+        }
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.purpose = .name
+        super.init(coder: coder)
+    }
+
+    public static func getInputDividers(count: Int) -> [InputLineDivider] {
+        var inputDividers = [InputLineDivider]()
+
+        for _ in 0..<count {
+            inputDividers.append(InputLineDivider(
+                frame: CGRect(x: 0, y: 0, width: 0, height: 0),
+                color: Colors.inputDividerColor
+            ))
+        }
+
+        return inputDividers
     }
 
     public func validate() -> ValidationError? {
-        return validateTextField(field: self, fieldType: self.purpose)
+        return validateTextField(field: self.field, fieldType: self.purpose)
     }
 
     public func isEmpty() -> Bool {
-        return text?.count == 0
+        return field.text?.isEmpty != nil
     }
 }

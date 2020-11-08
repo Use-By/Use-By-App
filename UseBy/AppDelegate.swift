@@ -17,21 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let window = window {
             let mainViewController = MainAuthViewController()
-            let navigationController = UINavigationController(rootViewController: mainViewController)
-            configureNavigationController(navigationController: navigationController)
-            window.rootViewController = navigationController
+            let router = Router(rootViewController: mainViewController)
+            window.rootViewController = router
             window.makeKeyAndVisible()
         }
 
         return true
-    }
-
-    func configureNavigationController(navigationController: UINavigationController) {
-        navigationController.isNavigationBarHidden = true
-        navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationBar.tintColor = Colors.defaultIconColor
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: Fonts.headlineText]
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Fonts.mainText], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Fonts.mainText], for: .highlighted)
     }
 }

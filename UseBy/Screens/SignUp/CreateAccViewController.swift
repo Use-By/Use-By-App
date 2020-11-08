@@ -97,9 +97,9 @@ class CreateAccViewController: UIViewController {
 
     @objc
     private func didTapLoginButton() {
-        let loginVC = LoginViewController()
-        navigationController?.pushViewController(loginVC, animated: true)
-        navigationController?.isNavigationBarHidden = false
+        if let router = navigationController as? Router {
+            router.goToLoginScreen()
+        }
     }
 
     @objc

@@ -26,6 +26,7 @@
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
 		3361E136255733D000315095 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E135255733D000315095 /* AuthTextField.swift */; };
+		3361E141255890A400315095 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E140255890A400315095 /* Router.swift */; };
 		336BC6AC2532252900B7346C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AA2532252900B7346C /* .gitignore */; };
 		336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AB2532252900B7346C /* .swiftlint.yml */; };
 		336D6742252A4A600098259E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6741252A4A600098259E /* AppDelegate.swift */; };
@@ -82,6 +83,7 @@
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		3361E135255733D000315095 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		3361E140255890A400315095 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		336BC6AA2532252900B7346C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		336BC6AB2532252900B7346C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		336D673E252A4A600098259E /* UseBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 			children = (
 				332A580B253334770078E65B /* Extensions */,
 				331B96E62544F056008109A3 /* Validator.swift */,
+				3361E140255890A400315095 /* Router.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				331B96D92544E2FC008109A3 /* CreateAccViewController.swift in Sources */,
 				331B96E72544F056008109A3 /* Validator.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
+				3361E141255890A400315095 /* Router.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,

@@ -121,15 +121,15 @@ class MainAuthViewController: UIViewController {
 
     @objc
     private func didTapCreateAccount() {
-        let createAccountVC = CreateAccViewController()
-        navigationController?.pushViewController(createAccountVC, animated: true)
-        navigationController?.isNavigationBarHidden = false
+        if let router = navigationController as? Router {
+            router.goToCreateAccountScreen()
+        }
     }
 
     @objc
     private func didTapLoginButton() {
-        let loginVC = LoginViewController()
-        navigationController?.pushViewController(loginVC, animated: true)
-        navigationController?.isNavigationBarHidden = false
+        if let router = navigationController as? Router {
+            router.goToLoginScreen()
+        }
     }
 }

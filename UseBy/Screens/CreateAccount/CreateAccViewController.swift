@@ -15,7 +15,6 @@ class CreateAccViewController: UIViewController {
         static let mainTextMargin: CGFloat = 190
         static let createAccButtonMargin: CGFloat = -34
         static let createAccButtonPadding: CGFloat = -40
-        static let textFieldHeight: CGFloat = 61
         static let textFieldSpacing: CGFloat = 0
     }
     private let createAccountLabel = MainScreenTitle(textType: .createAccount)

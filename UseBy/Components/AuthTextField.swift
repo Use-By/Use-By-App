@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol TextFieldDelegate: class {
-    func setActiveField(inputField: AuthTextField)
-}
-
 class AuthTextField: UIView {
     public let purpose: TextFieldPurpose
     public let field: UITextField = UITextField()
@@ -19,8 +15,6 @@ class AuthTextField: UIView {
     private let textFieldHeight = 60
     private let dividerHeight = 1
     private let totalHeight = 61
-
-    private weak var fieldDelegate: TextFieldDelegate?
 
     public enum TextFieldPurpose {
         case password

@@ -53,8 +53,8 @@ class AuthTextField: UIView {
     private func configureTextField() {
         field.textColor = Colors.mainTextColor
         field.font = Fonts.mainText
-        field.clearButtonMode =  UITextField.ViewMode.whileEditing
-        field.borderStyle = UITextField.BorderStyle.none
+        field.clearButtonMode =  .whileEditing
+        field.borderStyle = .none
 
         switch purpose {
         case .email:

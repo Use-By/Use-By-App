@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1EF4A85D51FF02744F33AC11 /* Pods_UseBy_UseByUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */; };
 		331B96D92544E2FC008109A3 /* CreateAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96D82544E2FC008109A3 /* CreateAccViewController.swift */; };
-		331B96DE2544E52D008109A3 /* InputLineDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96DD2544E52D008109A3 /* InputLineDivider.swift */; };
 		331B96E72544F056008109A3 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96E62544F056008109A3 /* Validator.swift */; };
 		332A57D525326D850078E65B /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57C925326D3E0078E65B /* Lato-Black.ttf */; };
 		332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CA25326D3E0078E65B /* Lato-Bold.ttf */; };
@@ -63,7 +62,6 @@
 		0C2B47453E3E59076C317166 /* Pods-UseBy-UseByUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.debug.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B5666705EE521C4CC45F236 /* Pods-UseByTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.debug.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.debug.xcconfig"; sourceTree = "<group>"; };
 		331B96D82544E2FC008109A3 /* CreateAccViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccViewController.swift; sourceTree = "<group>"; };
-		331B96DD2544E52D008109A3 /* InputLineDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLineDivider.swift; sourceTree = "<group>"; };
 		331B96E62544F056008109A3 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		332A57C825326D3E0078E65B /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		332A57C925326D3E0078E65B /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
 				79CE46082540BC7F00EAC17A /* MainTextLabel.swift */,
-				331B96DD2544E52D008109A3 /* InputLineDivider.swift */,
 				3361E135255733D000315095 /* AuthTextField.swift */,
 			);
 			path = Components;
@@ -587,7 +584,6 @@
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
-				331B96DE2544E52D008109A3 /* InputLineDivider.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				3361E136255733D000315095 /* AuthTextField.swift in Sources */,
 			);

@@ -57,6 +57,9 @@ struct Fonts {
     // Заголовки экранов
     static let headlineText = UIFont(name: "Lato-Bold", size: 34)
 
+    // Крупные надписи на экране
+    static let largeTitleText = UIFont(name: "Lato-Regular", size: 24)
+
     // Шрифт для имени приложения
     static let appNameText = UIFont(name: "Lato-Black", size: 32)
 }

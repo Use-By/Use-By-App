@@ -13,7 +13,6 @@
 "create-account-google" = "Вход через Google";
 "name" ="Имя";
 "email" = "Почта";
-"log-out" = "Выйти";
 "change-password" = "Сменить пароль";
 "send-feedback" = "Отправить отзыв & помочь нам улучшиться";
 "new-name" = "Новое имя";
@@ -28,3 +27,8 @@
 "ok" = "Ок";
 "ops"  = "Упс";
 "you_don't_have_mail_app_on_your_phone" = "на вашем телефоне нет приложения почты";
+"empty-screen" = "Пока что ничего нет";
+"error" = "Ошибка";
+"ok" = "Понятно";
+"google-error-description" = "При входе в Google произошла ошибка, попробуйте позже ";
+"log-out" = "Выйти";

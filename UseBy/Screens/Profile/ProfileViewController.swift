@@ -42,7 +42,6 @@ class ProfileViewController: UIViewController {
     )
 
     private lazy var composer = MFMailComposeViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProfileView()

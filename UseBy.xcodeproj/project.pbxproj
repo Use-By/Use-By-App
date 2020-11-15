@@ -38,6 +38,11 @@
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
+		84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */; };
+		843690B8254C122500ABBEE0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690B7254C122500ABBEE0 /* UserData.swift */; };
+		843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690BF254DFF5400ABBEE0 /* TableLabel.swift */; };
+		843690C5254EC11100ABBEE0 /* ProfileAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690C4254EC11100ABBEE0 /* ProfileAlerts.swift */; };
+		845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DDEBB2544DAD800E1C549 /* ProfileViewController.swift */; };
 		F23139FA3B6B4B4C81D7253D /* Pods_UseByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89AEC9CC8D7D36B92B13EE9 /* Pods_UseByTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +103,11 @@
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
+		84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		843690B7254C122500ABBEE0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		843690BF254DFF5400ABBEE0 /* TableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLabel.swift; sourceTree = "<group>"; };
+		843690C4254EC11100ABBEE0 /* ProfileAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlerts.swift; sourceTree = "<group>"; };
+		845DDEBB2544DAD800E1C549 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		858DCB0FD18838C0CBFB2AE6 /* Pods-UseBy-UseByUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.release.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9DF9957618D766C6425817 /* Pods-UseBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.debug.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +184,7 @@
 		3336440825323F6C00D1A5C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				845DDECB2545621E00E1C549 /* Profile */,
 				337B9F75253B7D86006A5EFB /* MainScreen */,
 				3336440925323F7500D1A5C6 /* MainAuth */,
 			);
@@ -195,6 +206,7 @@
 				332A57E925326E450078E65B /* AppName.swift */,
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
+				843690BF254DFF5400ABBEE0 /* TableLabel.swift */,
 				3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */,
 			);
 			path = Components;
@@ -239,6 +251,7 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				843690AE254B52EF00ABBEE0 /* User */,
 				332A580A2533346C0078E65B /* Utils */,
 				332A57C725326D390078E65B /* fonts */,
 				3336440825323F6C00D1A5C6 /* Screens */,
@@ -290,6 +303,24 @@
 				6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		843690AE254B52EF00ABBEE0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				843690B7254C122500ABBEE0 /* UserData.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		845DDECB2545621E00E1C549 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				845DDEBB2544DAD800E1C549 /* ProfileViewController.swift */,
+				84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */,
+				843690C4254EC11100ABBEE0 /* ProfileAlerts.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,8 +628,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843690C5254EC11100ABBEE0 /* ProfileAlerts.swift in Sources */,
+				843690B8254C122500ABBEE0 /* UserData.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
+				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,
+				84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
 				3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */,
@@ -606,6 +641,7 @@
 				337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
+				843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */,
 				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
@@ -789,7 +825,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S7X5CVG53J;
 				INFOPLIST_FILE = UseBy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -808,7 +846,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S7X5CVG53J;
 				INFOPLIST_FILE = UseBy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

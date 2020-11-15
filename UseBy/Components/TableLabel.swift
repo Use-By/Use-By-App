@@ -20,11 +20,7 @@ final class TableLable: UILabel {
         super.init(frame: .zero)
         text = "app-name".localized.uppercased()
         font = Fonts.mainText
-
-        switch self.theme {
-        case .normal:
-            textColor = Colors.secondaryTextColor
-        }
+        textColor = Colors.secondaryTextColor
     }
 
    required init?(coder decoder: NSCoder) {

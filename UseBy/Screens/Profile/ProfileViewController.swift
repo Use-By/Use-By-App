@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
         static let topTableView: CGFloat = 217.0
         static let heightTableView: CGFloat = 240.0
         static let tableToLogout: CGFloat = 30
-        static let widthOfLogout: CGFloat = 20
+        static let marginLogoutButtom: CGFloat = 20
     }
 
     lazy private var profileTableView: UITableView = {
@@ -24,21 +24,17 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top).offset(UIConstants.topTableView)
-            make.leading.equalTo(self.view.snp.leading)
-            make.trailing.equalTo(self.view.snp.trailing)
-            make.height.equalTo(UIConstants.heightTableView)
-        }
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileSettingsCell")
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return tableView
     }()
+    
     private let array = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
     private let userArray: [String] = {
         let someModel = SomeModel(name: "Siri", email: "apple@mail.ru")
         return [someModel.name, someModel.email]
     }()
+    
     private let logOutButton = MainButton(
         text: "log-out".localized,
         theme: .pseudo
@@ -46,6 +42,12 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.top).offset(UIConstants.topTableView)
+            make.leading.equalTo(self.view.snp.leading)
+            make.trailing.equalTo(self.view.snp.trailing)
+            make.height.equalTo(UIConstants.heightTableView)
+        }
         view.backgroundColor = Colors.mainBGColor
         configureLogOutButton()
     }
@@ -59,7 +61,6 @@ class ProfileViewController: UIViewController {
                   placeholder1: nil, placeholder2: nil, action: .non)
             return
         }
-        //lazy var composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
         composer.setToRecipients(["use_by@gmail.com"])
         present(composer, animated: true)
@@ -69,7 +70,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(logOutButton)
         logOutButton.snp.makeConstraints {(make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).inset(UIConstants.widthOfLogout)
+            make.width.equalTo(view).inset(UIConstants.marginLogoutButtom)
             make.centerX.equalTo(view)
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.tableToLogout)
         }

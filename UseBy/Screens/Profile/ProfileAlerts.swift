@@ -10,34 +10,41 @@ import UIKit
 
 enum AlertActions {
     case save
+    case non
 }
+
 class Alert {
     private var alert: UIAlertController
 
-    init(title: String, message: String? = nil, placeholder1: String? = nil, placeholder2: String? = nil, action: AlertActions) {
+    init(title: String, message: String? = nil, placeholder1: String? = nil,
+         placeholder2: String? = nil, action: AlertActions) {
         self.alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         switch action {
         case .save:
-            let actionSave = UIAlertAction(title: "Save", style: .default, handler: { _ in
-                // TODO: save different data in different place
+            alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
+            let actionSave = UIAlertAction(title: "save".localized, style: .default, handler: { _ in
+                // save different data in different place
                 // saveDataFromAlert(data: Dat
             })
             alert.addAction(actionSave)
+        case .non:
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
         }
 
+        if placeholder1 != nil {
         alert.addTextField(configurationHandler: { textField in
-            if placeholder1 != nil {
                 textField.placeholder = placeholder1
-            }
-        })
+            })
+        }
         if placeholder2 != nil {
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = placeholder2
             })
         }
-        if let app = UIApplication.shared.delegate as? AppDelegate, let rootViewController = app.window?.rootViewController {
+        if let app = UIApplication.shared.delegate as? AppDelegate,
+           let rootViewController = app.window?.rootViewController {
                         rootViewController.present(alert, animated: true, completion: nil)
                     }
     }

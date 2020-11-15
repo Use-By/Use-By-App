@@ -23,4 +23,8 @@
 "input-your-new-email-here" = "Введите свою новую почту";
 "input-your-new-password-here" = "Введите свой новый пароль";
 "confirm-your-new-password" = "Подтвердите свой новый пароль";
-
+"cancel" = "Отменить";
+"save" = "Сохранить";
+"ok" = "Ок";
+"ops"  = "Упс";
+"you_don't_have_mail_app_on_your_phone" = "на вашем телефоне нет приложения почты";

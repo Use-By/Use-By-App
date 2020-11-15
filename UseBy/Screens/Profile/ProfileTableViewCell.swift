@@ -16,9 +16,6 @@ class ProfileTableViewCell: UITableViewCell {
     func fillCell(titleLabel: String, userLabel: String? = nil) {
         self.textLabel?.text = titleLabel
         self.valueLabel.text = userLabel
-       /* if userLabel != nil {
-            self.valueLabel.text = userLabel
-        }*/
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

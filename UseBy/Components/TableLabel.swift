@@ -11,22 +11,20 @@ import UIKit
 final class TableLable: UILabel {
     private let theme: TableLableTheme
 
-    public enum TableLableTheme {
-        case normal
+    enum TableLableTheme {
+            case normal
     }
 
     init(theme: TableLableTheme = .normal) {
         self.theme = theme
         super.init(frame: .zero)
         text = "app-name".localized.uppercased()
-
         font = Fonts.mainText
 
         switch self.theme {
         case .normal:
             textColor = Colors.secondaryTextColor
         }
-        //addCharacterSpacing(kernValue: 5)
     }
 
    required init?(coder decoder: NSCoder) {

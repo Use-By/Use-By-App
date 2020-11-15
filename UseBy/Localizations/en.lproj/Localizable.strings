@@ -23,3 +23,9 @@
 "input-your-new-email-here" = "Input your new email here";
 "input-your-new-password-here" = "Input your new password here";
 "confirm-your-new-password" = "Confirm your new password";
+"cancel" = "Cancel";
+"save" = "Save";
+"ok" = "Ok";
+"ops"  = "Ops";
+"you_don't_have_mail_app_on_your_phone" = "You don't have mail app on your phone";
+

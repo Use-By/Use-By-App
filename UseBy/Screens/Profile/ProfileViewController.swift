@@ -16,10 +16,10 @@ class ProfileViewController: UIViewController {
         static let topTableView: CGFloat = 217.0
         static let heightTableView: CGFloat = 240.0
         static let tableToLogout: CGFloat = 30
-        static let widthToLogout: CGFloat = 20
+        static let widthOfLogout: CGFloat = 20
     }
 
-    lazy var profileTableView: UITableView = {
+    lazy private var profileTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
             make.trailing.equalTo(self.view.snp.trailing)
             make.height.equalTo(UIConstants.heightTableView)
         }
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "My Cell")
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileSettingsCell")
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return tableView
     }()
@@ -43,31 +43,23 @@ class ProfileViewController: UIViewController {
         text: "log-out".localized,
         theme: .pseudo
     )
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.mainBGColor
         configureLogOutButton()
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            Alert(title: "new-name".localized, message: nil, placeholder1: "put-your-name".localized, action: .save)
-        } else if indexPath.row == 1 {
-            Alert(title: "new-email".localized, message: nil, placeholder1: "input-your-new-email-here".localized, action: .save)
-        } else if indexPath.row == 2 {
-            Alert(title: "new-password".localized, message: nil, placeholder1: "input-your-new-password-here", placeholder2:"confirm-your-new-password".localized , action: .save)
-        } else if indexPath.row == 3 {
-            showMailComposer()
-        }
-    }
-    
+    lazy var composer = MFMailComposeViewController()
+
     func showMailComposer() {
         guard MFMailComposeViewController.canSendMail() else {
-            Alert(title: "sad", message: nil, placeholder1: "run", placeholder2: nil, action: .save)
+            _ = Alert(title: "ops".localized,
+                  message: "you_don't_have_mail_app_on_your_phone".localized,
+                  placeholder1: nil, placeholder2: nil, action: .non)
             return
         }
-        let composer = MFMailComposeViewController()
+        //lazy var composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
         composer.setToRecipients(["use_by@gmail.com"])
         present(composer, animated: true)
@@ -77,7 +69,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(logOutButton)
         logOutButton.snp.makeConstraints {(make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).inset(UIConstants.widthToLogout)
+            make.width.equalTo(view).inset(UIConstants.widthOfLogout)
             make.centerX.equalTo(view)
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.tableToLogout)
         }
@@ -88,6 +80,22 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            _ = Alert(title: "new-name".localized,
+                      message: nil, placeholder1: "put-your-name".localized, action: .save)
+        case 1:
+            _ = Alert(title: "new-email".localized, message: nil,
+                      placeholder1: "input-your-new-email-here".localized, action: .save)
+        case 2:
+            _ = Alert(title: "new-password".localized, message: nil,
+                      placeholder1: "input-your-new-password-here",
+                      placeholder2: "confirm-your-new-password".localized, action: .save)
+        default:
+            showMailComposer()
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -96,7 +104,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "My Cell",
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSettingsCell",
                                                        for: indexPath) as? ProfileTableViewCell else {
             return UITableViewCell()//   верни пустую ячейку
         }
@@ -109,7 +117,8 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }

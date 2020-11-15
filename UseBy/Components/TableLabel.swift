@@ -12,7 +12,7 @@ final class TableLable: UILabel {
     private let theme: TableLableTheme
 
     enum TableLableTheme {
-            case normal
+        case normal
     }
 
     init(theme: TableLableTheme = .normal) {

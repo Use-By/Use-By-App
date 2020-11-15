@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     struct UIConstants {
         static let topTableView: CGFloat = 217.0
         static let heightTableView: CGFloat = 240.0
-        static let tableToLogout: CGFloat = 30
+        static let spaceBetweenTableAndLogout: CGFloat = 30
         static let marginLogoutButtom: CGFloat = 20
     }
 
@@ -29,8 +29,8 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private let array = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
-    private let userArray: [String] = {
+    private let titleOfCellArray = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
+    private let userDataArray: [String] = {
         let someModel = SomeModel(name: "Siri", email: "apple@mail.ru")
         return [someModel.name, someModel.email]
     }()
@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).inset(UIConstants.marginLogoutButtom)
             make.centerX.equalTo(view)
-            make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.tableToLogout)
+            make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.spaceBetweenTableAndLogout)
         }
     }
 }
@@ -101,7 +101,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return titleOfCellArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,8 +110,8 @@ extension ProfileViewController: UITableViewDataSource {
             return UITableViewCell()//   верни пустую ячейку
         }
         if (indexPath.row==0) || (indexPath.row==1) {
-            cell.fillCell(titleLabel: array[indexPath.row], userLabel: userArray[indexPath.row])
-        } else {cell.fillCell(titleLabel: array[indexPath.row])
+            cell.fillCell(titleLabel: titleOfCellArray[indexPath.row], userLabel: userDataArray[indexPath.row])
+        } else {cell.fillCell(titleLabel: titleOfCellArray[indexPath.row])
         }
         return cell
     }

@@ -28,31 +28,27 @@ class ProfileViewController: UIViewController {
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return tableView
     }()
-    
-    private let titleOfCellArray = ["name".localized, "email".localized, "change-password".localized, "send-feedback".localized]
+
+    private let titleOfCellArray = ["name".localized, "email".localized,
+                                    "change-password".localized, "send-feedback".localized]
     private let userDataArray: [String] = {
         let someModel = SomeModel(name: "Siri", email: "apple@mail.ru")
         return [someModel.name, someModel.email]
     }()
-    
+
     private let logOutButton = MainButton(
         text: "log-out".localized,
         theme: .pseudo
     )
 
+    private lazy var composer = MFMailComposeViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileTableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top).offset(UIConstants.topTableView)
-            make.leading.equalTo(self.view.snp.leading)
-            make.trailing.equalTo(self.view.snp.trailing)
-            make.height.equalTo(UIConstants.heightTableView)
-        }
+        configureProfileView()
         view.backgroundColor = Colors.mainBGColor
         configureLogOutButton()
     }
-
-    lazy var composer = MFMailComposeViewController()
 
     func showMailComposer() {
         guard MFMailComposeViewController.canSendMail() else {
@@ -66,6 +62,14 @@ class ProfileViewController: UIViewController {
         present(composer, animated: true)
     }
 
+    func configureProfileView() {
+        profileTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.top).offset(UIConstants.topTableView)
+            make.leading.equalTo(self.view.snp.leading)
+            make.trailing.equalTo(self.view.snp.trailing)
+            make.height.equalTo(UIConstants.heightTableView)
+        }
+    }
     func configureLogOutButton() {
         view.addSubview(logOutButton)
         logOutButton.snp.makeConstraints {(make) -> Void in

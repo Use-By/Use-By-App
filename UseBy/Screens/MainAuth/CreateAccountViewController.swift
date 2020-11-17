@@ -16,7 +16,7 @@ class CreateAccountViewController: UIViewController {
         static let createAccButtonPadding: CGFloat = 40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
-        static let stackViewOfTextFiels: CGFloat = 145
+        static let stackViewOfTextFields: CGFloat = 145
         static let stackOfFieldBottom: CGFloat = 50
     }
 
@@ -71,7 +71,7 @@ class CreateAccountViewController: UIViewController {
                 .offset(-CreateAccountViewUIConstants.alreadySignUpButtonMargin)
                 .constraint
         }
-        // Кнопка "Сreate Account"
+        // Кнопка "Create Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
@@ -102,7 +102,7 @@ class CreateAccountViewController: UIViewController {
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeStackOfFieldBottomConstraint = make.top.equalTo(createAccountLabel)
-                .offset(CreateAccountViewUIConstants.stackViewOfTextFiels).constraint
+                .offset(CreateAccountViewUIConstants.stackViewOfTextFields).constraint
         }
 
         arrangedSubviews.forEach {
@@ -110,6 +110,10 @@ class CreateAccountViewController: UIViewController {
                 make.height.equalTo(CreateAccountViewUIConstants.textFieldHeight)
             }
         }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 
     override func viewDidLayoutSubviews() {
@@ -135,7 +139,7 @@ class CreateAccountViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.composeViewBottomConstraint?.update(offset: -CreateAccountViewUIConstants.createAccButtonPadding)
             self.composeAlreadyButtomConstraint?.update(offset: -CreateAccountViewUIConstants.alreadySignUpButtonMargin)
-            self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackViewOfTextFiels)
+            self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackViewOfTextFields)
             self.view.layoutIfNeeded()
         }
     }

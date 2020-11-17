@@ -91,6 +91,10 @@ class LoginViewController: UIViewController {
         }
     }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+
     override func viewDidLayoutSubviews() {
         signUpButton.initActionThemeStyles()
     }

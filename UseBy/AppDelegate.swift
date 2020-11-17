@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
-        window!.rootViewController = AppLauncher()
+        window!.rootViewController = CreateAccountViewController()
         window!.makeKeyAndVisible()
 
         return true

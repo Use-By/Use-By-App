@@ -30,8 +30,12 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil
+        )
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()
@@ -39,14 +43,17 @@ class LoginViewController: UIViewController {
     }
 
     func configureButtons() {
-        view.addSubview(loginLabel)
-        view.addSubview(signUpButton)
+        [loginLabel, signUpButton].forEach {
+            view.addSubview($0)
+        }
+
         // Кнопка "Sign Up"
         signUpButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
             make.centerX.equalTo(view)
-            self.composeViewBottomConstraint = make.bottom.equalTo(view).offset(-LoginViewUIConstants.signUpButtonMargin).constraint
+            self.composeViewBottomConstraint = make.bottom.equalTo(view)
+                .offset(-LoginViewUIConstants.signUpButtonMargin).constraint
         }
         view.snp.makeConstraints { (make) -> Void in
             self.topConstraint = make.top.equalTo(view).constraint
@@ -55,8 +62,8 @@ class LoginViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubview = [textFieldEmail, textFieldPassword]
-        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubview)
+        let arrangedSubviews = [textFieldEmail, textFieldPassword]
+        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = LoginViewUIConstants.textFieldSpacing
 
@@ -67,7 +74,7 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-        [textFieldEmail, textFieldPassword] .forEach {
+        arrangedSubviews.forEach {
             ($0).snp.makeConstraints { (make) -> Void in
                 make.height.equalTo(LoginViewUIConstants.textFieldHeight)
             }

@@ -11,7 +11,6 @@ import SnapKit
 
 class LoginViewController: UIViewController {
     struct LoginViewUIConstants {
-        static let backgroundColor = Colors.mainBGColor
         static let mainTextMargin: CGFloat = 190
         static let signUpButtonMargin: CGFloat = -120
         static let signUpButtonPadding: CGFloat = -40
@@ -19,15 +18,15 @@ class LoginViewController: UIViewController {
         static let textFieldSpacing: CGFloat = 0
 
     }
-    var composeViewBottomConstraint: Constraint?
-    private let loginLabel = MainScreenTitle(textType: .login)
+    private var composeViewBottomConstraint: Constraint?
+    private let loginLabel = MainScreenTitle(labelType: .login)
     private let signUpButton = MainButton(
         text: "sign-up".localized,
         theme: .action
     )
-    var topConstraint: Constraint?
-    private let textFieldEmail = AuthTextField(purpose: .email)
-    private let textFieldPassword = AuthTextField(purpose: .password)
+    private var topConstraint: Constraint?
+    private let textFieldEmail = TextField(purpose: .email)
+    private let textFieldPassword = TextField(purpose: .password)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +46,7 @@ class LoginViewController: UIViewController {
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(LoginViewUIConstants.signUpButtonPadding)
             make.centerX.equalTo(view)
-            self.composeViewBottomConstraint = make.bottom.equalTo(view).offset(LoginViewUIConstants.signUpButtonMargin).constraint
+            self.composeViewBottomConstraint = make.bottom.equalTo(view).offset(-LoginViewUIConstants.signUpButtonMargin).constraint
         }
         view.snp.makeConstraints { (make) -> Void in
             self.topConstraint = make.top.equalTo(view).constraint
@@ -68,13 +67,10 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-
-        textFieldEmail.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(LoginViewUIConstants.textFieldHeight)
-        }
-
-        textFieldPassword.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(LoginViewUIConstants.textFieldHeight)
+        [textFieldEmail, textFieldPassword] .forEach {
+            ($0).snp.makeConstraints { (make) -> Void in
+                make.height.equalTo(LoginViewUIConstants.textFieldHeight)
+            }
         }
     }
 
@@ -90,26 +86,18 @@ class LoginViewController: UIViewController {
         signUpButton.initActionThemeStyles()
     }
 
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHight = keyboardSize.cgRectValue.height
+        self.composeViewBottomConstraint?.update(offset: -(keyboardHight + 10))
+        self.view.layoutIfNeeded()
         view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.3) {
-            self.composeViewBottomConstraint?.update(offset: -(keyboardHight + 10))
-            self.view.layoutIfNeeded()
-        }
        }
 
-    @objc func keyboardWillHide(notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        let keyboardHight = keyboardSize.cgRectValue.height
-        view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.3) {
+    @objc private func keyboardWillHide(notification: Notification) {
             self.composeViewBottomConstraint?.update(offset: LoginViewUIConstants.signUpButtonMargin)
             self.view.layoutIfNeeded()
-        }
       }
 
 }

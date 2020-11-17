@@ -22,7 +22,7 @@ final class MainButton: UIButton {
         case clear
     }
 
-    public static let buttonHeight = 60
+    internal static let buttonHeight = 60
     private let theme: ButtonTheme
     private var label = UILabel()
     var gradientLayer: CAGradientLayer?

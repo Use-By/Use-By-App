@@ -11,10 +11,9 @@ import SnapKit
 
 class CreateAccountViewController: UIViewController {
     struct CreateAccountViewUIConstants {
-        static let alreadySignUpButtonMargin: CGFloat = -30
+        static let alreadySignUpButtonMargin: CGFloat = 30
         static let mainTextMargin: CGFloat = 125
-        static let createAccButtonMargin: CGFloat = -34
-        static let createAccButtonPadding: CGFloat = -40
+        static let createAccButtonPadding: CGFloat = 40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
         static let stackViewOfTextFiels: CGFloat = 145
@@ -49,10 +48,12 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.mainBGColor
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil
+            self, selector: #selector(self.keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil
+            self, selector: #selector(self.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
         )
         configureButtons()
         configureMainText()
@@ -67,16 +68,16 @@ class CreateAccountViewController: UIViewController {
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
             self.composeAlreadyButtomConstraint = make.bottom.equalTo(view)
-                .offset(CreateAccountViewUIConstants.alreadySignUpButtonMargin)
+                .offset(-CreateAccountViewUIConstants.alreadySignUpButtonMargin)
                 .constraint
         }
         // Кнопка "Сreate Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).offset(CreateAccountViewUIConstants.createAccButtonPadding)
+            make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeViewBottomConstraint = make.bottom.equalTo(alreadySignUpButton)
-                .offset(CreateAccountViewUIConstants.createAccButtonPadding).constraint
+                .offset(-CreateAccountViewUIConstants.createAccButtonPadding).constraint
 
         }
     }
@@ -98,7 +99,7 @@ class CreateAccountViewController: UIViewController {
         view.addSubview(stackviewFields)
 
         stackviewFields.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(view).offset(CreateAccountViewUIConstants.createAccButtonPadding)
+            make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeStackOfFieldBottomConstraint = make.top.equalTo(createAccountLabel)
                 .offset(CreateAccountViewUIConstants.stackViewOfTextFiels).constraint
@@ -132,8 +133,8 @@ class CreateAccountViewController: UIViewController {
     @objc private func keyboardWillHide(notification: Notification) {
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3) {
-            self.composeViewBottomConstraint?.update(offset: CreateAccountViewUIConstants.createAccButtonPadding)
-            self.composeAlreadyButtomConstraint?.update(offset: CreateAccountViewUIConstants.alreadySignUpButtonMargin)
+            self.composeViewBottomConstraint?.update(offset: -CreateAccountViewUIConstants.createAccButtonPadding)
+            self.composeAlreadyButtomConstraint?.update(offset: -CreateAccountViewUIConstants.alreadySignUpButtonMargin)
             self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackViewOfTextFiels)
             self.view.layoutIfNeeded()
         }

@@ -54,13 +54,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         return
       }
-        window?.rootViewController = ProfileViewController()
+        guard let authentication = user.authentication else { return }
 
-      guard let authentication = user.authentication else { return }
-        _ = GoogleAuthProvider.credential(
-        withIDToken: authentication.idToken,
-        accessToken: authentication.accessToken
-      )
+        let credential = GoogleAuthProvider.credential(
+            withIDToken: authentication.idToken,
+            accessToken: authentication.accessToken
+        )
+
+        Auth.auth().signIn(with: credential) { [self] (_, error) in
+            if let error = error {
+                let alert = UIAlertController(
+                    title: "error".localized,
+                    message: "google-error-description".localized,
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
+
+            self.window?.rootViewController = ProfileViewController()
+        }
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

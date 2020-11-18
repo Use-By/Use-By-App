@@ -41,7 +41,6 @@ class UserModel: UserModelProtocol {
 
     func get() -> User {
         let user = Auth.auth().currentUser
-        print(user)
         guard let currentUser = user else {
             // добавить alert
             return User(name: "", email: "")

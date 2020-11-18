@@ -10,7 +10,7 @@ import UIKit
 
 enum AlertActions {
     case save
-    case non
+    case none
 }
 
 class Alert {
@@ -28,21 +28,23 @@ class Alert {
                 // saveDataFromAlert(data: Dat
             })
             alert.addAction(actionSave)
-        case .non:
+        case .none:
             alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
-
         }
 
         if placeholder1 != nil {
         alert.addTextField(configurationHandler: { textField in
                 textField.placeholder = placeholder1
+                textField.isSecureTextEntry = true
             })
         }
         if placeholder2 != nil {
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = placeholder2
+            textField.isSecureTextEntry = true
             })
         }
+
         if let app = UIApplication.shared.delegate as? AppDelegate,
            let rootViewController = app.window?.rootViewController {
                         rootViewController.present(alert, animated: true, completion: nil)

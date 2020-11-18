@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         return
       }
-        window?.rootViewController = MainScreenViewController()
+        window?.rootViewController = ProfileViewController()
 
       guard let authentication = user.authentication else { return }
         _ = GoogleAuthProvider.credential(

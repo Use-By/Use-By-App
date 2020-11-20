@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class TextField: UITextField {
-    private let purpose: TextFieldPurpose
     internal enum TextFieldPurpose {
         case password
         case name
@@ -17,13 +16,12 @@ class TextField: UITextField {
     }
 
     init(purpose: TextFieldPurpose = .name) {
-        self.purpose = purpose
         super.init(frame: .zero)
         textColor = Colors.mainTextColor
         font = Fonts.mainText
         clearButtonMode =  .whileEditing
         borderStyle = UITextField.BorderStyle.none
-        switch self.purpose {
+        switch purpose {
         case .email:
             placeholder = "email".localized
         case .name:
@@ -35,7 +33,6 @@ class TextField: UITextField {
     }
 
     required init?(code decoder: NSCoder) {
-        self.purpose = .name
         super.init(coder: decoder)
     }
 

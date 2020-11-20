@@ -12,6 +12,8 @@ import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
+    private var router: Router?
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -25,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         if let window = window {
             let mainViewController = MainAuthViewController()
-            let router = Router(rootViewController: mainViewController)
+            router = Router(rootViewController: mainViewController)
             window.rootViewController = router
             window.makeKeyAndVisible()
         }
@@ -55,17 +57,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             )
             alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
 
-            window?.rootViewController?.present(alert, animated: true, completion: nil)
+            router?.showAlert(alert: alert)
 
         return
-      }
-        window?.rootViewController = MainScreenViewController()
+        }
+        guard let authentication = user.authentication else { return }
 
-      guard let authentication = user.authentication else { return }
-        _ = GoogleAuthProvider.credential(
-        withIDToken: authentication.idToken,
-        accessToken: authentication.accessToken
-      )
+        let credential = GoogleAuthProvider.credential(
+            withIDToken: authentication.idToken,
+            accessToken: authentication.accessToken
+        )
+
+        Auth.auth().signIn(with: credential) { [self] (_, error) in
+            if error != nil {
+                let alert = UIAlertController(
+                    title: "error".localized,
+                    message: "google-error-description".localized,
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+                router?.showAlert(alert: alert)
+            }
+
+            router?.goToProfileScreen()
+        }
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

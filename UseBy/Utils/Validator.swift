@@ -29,7 +29,7 @@ func validatePassword(field: UITextField) -> ValidationError? {
     return nil
 }
 
-func validateTextField(field: UITextField, fieldType: AuthTextField.TextFieldPurpose) -> ValidationError? {
+func validateTextField(field: UITextField, fieldType: TextField.TextFieldPurpose) -> ValidationError? {
     switch fieldType {
     case .password:
         return validatePassword(field: field)
@@ -39,7 +39,7 @@ func validateTextField(field: UITextField, fieldType: AuthTextField.TextFieldPur
     }
 }
 
-func validateTextFields(fields: [AuthTextField]) -> [ValidationError] {
+func validateTextFields(fields: [TextField]) -> [ValidationError] {
     var errors: [ValidationError] = []
 
     fields.forEach { field in

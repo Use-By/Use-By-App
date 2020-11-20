@@ -15,9 +15,12 @@ class Router: UINavigationController {
         isNavigationBarHidden = true
         navigationBar.prefersLargeTitles = true
         navigationBar.tintColor = Colors.defaultIconColor
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: Fonts.headlineText]
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Fonts.mainText], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Fonts.mainText], for: .highlighted)
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedString.Key.font: Fonts.headlineText]
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.font: Fonts.mainText], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.font: Fonts.mainText], for: .highlighted)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -25,7 +28,7 @@ class Router: UINavigationController {
     }
 
     public func goToCreateAccountScreen() {
-        let createAccountVC = CreateAccViewController()
+        let createAccountVC = CreateAccountViewController()
         pushViewController(createAccountVC, animated: true)
         isNavigationBarHidden = false
     }

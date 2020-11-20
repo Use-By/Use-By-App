@@ -124,7 +124,7 @@ class LoginViewController: UIViewController {
        }
 
     @objc private func keyboardWillHide(notification: Notification) {
-            self.composeViewBottomConstraint?.update(offset: -LoginViewUIConstants.signUpButtonMargin)
+            self.composeViewBottomConstraint?.update(offset: -LoginViewUIConstants.signInButtonMargin)
             self.view.layoutIfNeeded()
       }
 

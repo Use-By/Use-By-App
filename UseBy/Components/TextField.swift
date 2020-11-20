@@ -11,7 +11,7 @@ import SnapKit
 
 class TextField: UITextField {
     private let purpose: TextFieldPurpose
-    public let field: UITextField = UITextField()
+    internal let field: UITextField = UITextField()
 
     private let textFieldHeight = 60
     private let dividerHeight = 1
@@ -73,11 +73,11 @@ class TextField: UITextField {
         super.init(coder: coder)
     }
 
-    public func validate() -> ValidationError? {
+    internal func validate() -> ValidationError? {
         return validateTextField(field: self.field, fieldType: self.purpose)
     }
 
-    public func isEmpty() -> Bool {
+    internal func isEmpty() -> Bool {
         return field.text?.isEmpty ?? true
     }
 }

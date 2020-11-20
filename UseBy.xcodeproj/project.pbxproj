@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1EF4A85D51FF02744F33AC11 /* Pods_UseBy_UseByUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */; };
-		331B96D92544E2FC008109A3 /* CreateAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96D82544E2FC008109A3 /* CreateAccViewController.swift */; };
+		331B96D92544E2FC008109A3 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96D82544E2FC008109A3 /* CreateAccountViewController.swift */; };
 		331B96E72544F056008109A3 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B96E62544F056008109A3 /* Validator.swift */; };
 		332A57D525326D850078E65B /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57C925326D3E0078E65B /* Lato-Black.ttf */; };
 		332A57D925326D880078E65B /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332A57CA25326D3E0078E65B /* Lato-Bold.ttf */; };
@@ -24,9 +24,9 @@
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
+		3361E141255890A400315095 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E140255890A400315095 /* Router.swift */; };
 		336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336711562540D3AA0042E1C7 /* AppLauncher.swift */; };
 		3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */; };
-		3361E141255890A400315095 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E140255890A400315095 /* Router.swift */; };
 		336BC6AC2532252900B7346C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AA2532252900B7346C /* .gitignore */; };
 		336BC6AD2532252900B7346C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 336BC6AB2532252900B7346C /* .swiftlint.yml */; };
 		336D6742252A4A600098259E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D6741252A4A600098259E /* AppDelegate.swift */; };
@@ -42,7 +42,6 @@
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
 		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
-		79CE46042540BC3900EAC17A /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */; };
 		79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46082540BC7F00EAC17A /* MainTextLabel.swift */; };
 		79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E021012542155C00D5F5E9 /* LoginViewController.swift */; };
 		84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */; };
@@ -73,7 +72,7 @@
 /* Begin PBXFileReference section */
 		0C2B47453E3E59076C317166 /* Pods-UseBy-UseByUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy-UseByUITests.debug.xcconfig"; path = "Target Support Files/Pods-UseBy-UseByUITests/Pods-UseBy-UseByUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B5666705EE521C4CC45F236 /* Pods-UseByTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.debug.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.debug.xcconfig"; sourceTree = "<group>"; };
-		331B96D82544E2FC008109A3 /* CreateAccViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccViewController.swift; sourceTree = "<group>"; };
+		331B96D82544E2FC008109A3 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		331B96E62544F056008109A3 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		332A57C825326D3E0078E65B /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		332A57C925326D3E0078E65B /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -91,9 +90,9 @@
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		3361E140255890A400315095 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		336711562540D3AA0042E1C7 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
-		3361E140255890A400315095 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		336BC6AA2532252900B7346C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		336BC6AB2532252900B7346C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		336D673E252A4A600098259E /* UseBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +113,6 @@
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
 		798758562541A81100B9E25A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		79CE46082540BC7F00EAC17A /* MainTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextLabel.swift; sourceTree = "<group>"; };
 		79E021012542155C00D5F5E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
-				79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -229,7 +226,7 @@
 		333869B22544D8DD002E76FD /* CreateAccount */ = {
 			isa = PBXGroup;
 			children = (
-				331B96D82544E2FC008109A3 /* CreateAccViewController.swift */,
+				331B96D82544E2FC008109A3 /* CreateAccountViewController.swift */,
 			);
 			path = CreateAccount;
 			sourceTree = "<group>";
@@ -675,10 +672,9 @@
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				798758622541BB3F00B9E25A /* Palette.swift in Sources */,
 				798758572541A81100B9E25A /* TextField.swift in Sources */,
-				331B96D92544E2FC008109A3 /* CreateAccViewController.swift in Sources */,
+				331B96D92544E2FC008109A3 /* CreateAccountViewController.swift in Sources */,
 				331B96E72544F056008109A3 /* Validator.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
-				79CE46042540BC3900EAC17A /* CreateAccountViewController.swift in Sources */,
 				3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */,
 				3361E141255890A400315095 /* Router.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
@@ -689,7 +685,7 @@
 				843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */,
-				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
+				333643F025322B2600D1A5C6,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

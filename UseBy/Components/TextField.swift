@@ -7,16 +7,17 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
-class AuthTextField: UIView {
-    public let purpose: TextFieldPurpose
+class TextField: UITextField {
+    private let purpose: TextFieldPurpose
     public let field: UITextField = UITextField()
 
     private let textFieldHeight = 60
     private let dividerHeight = 1
     private let totalHeight = 61
 
-    public enum TextFieldPurpose {
+    internal enum TextFieldPurpose {
         case password
         case name
         case email
@@ -59,10 +60,8 @@ class AuthTextField: UIView {
         switch purpose {
         case .email:
             field.placeholder = "email".localized
-            field.isSecureTextEntry = false
         case .name:
             field.placeholder = "name".localized
-            field.isSecureTextEntry = false
         case .password:
             field.placeholder = "password".localized
             field.isSecureTextEntry = true

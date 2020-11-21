@@ -27,31 +27,31 @@ class Router: UINavigationController {
         super.init(coder: aDecoder)
     }
 
-    internal func goToCreateAccountScreen() {
+    func goToCreateAccountScreen() {
         let createAccountVC = CreateAccountViewController()
         pushViewController(createAccountVC, animated: true)
         isNavigationBarHidden = false
     }
 
-    internal func goToLoginScreen() {
+    func goToLoginScreen() {
         let loginVC = LoginViewController()
         pushViewController(loginVC, animated: true)
         isNavigationBarHidden = false
     }
 
-    internal func goToMainAuthScreen() {
+    func goToMainAuthScreen() {
         let mainAuthVC = MainAuthViewController()
         pushViewController(mainAuthVC, animated: true)
         isNavigationBarHidden = true
     }
 
-    internal func goToProfileScreen() {
+    func goToProfileScreen() {
         let profileVC = ProfileViewController()
         pushViewController(profileVC, animated: true)
         isNavigationBarHidden = true
     }
 
-    internal func showAlert(alert: UIAlertController, completion: (() -> Void)? = nil) {
+    func showAlert(alert: UIAlertController, completion: (() -> Void)? = nil) {
         present(alert, animated: true, completion: completion)
     }
 }

@@ -11,13 +11,13 @@ import SnapKit
 
 class TextField: UITextField {
     private let purpose: TextFieldPurpose
-    internal let field: UITextField = UITextField()
+    let field: UITextField = UITextField()
 
     private let textFieldHeight = 60
     private let dividerHeight = 1
     private let totalHeight = 61
 
-    internal enum TextFieldPurpose {
+    enum TextFieldPurpose {
         case password
         case name
         case email
@@ -73,11 +73,11 @@ class TextField: UITextField {
         super.init(coder: coder)
     }
 
-    internal func validate() -> ValidationError? {
+    func validate() -> ValidationError? {
         return validateTextField(field: self.field, fieldType: self.purpose)
     }
 
-    internal func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return field.text?.isEmpty ?? true
     }
 }

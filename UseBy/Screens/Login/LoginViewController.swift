@@ -111,6 +111,8 @@ class LoginViewController: UIViewController {
             self.view.layoutIfNeeded()
       }
 
+    // TODO Сделать обработку нажатию signInButton как в CreateAccount
+    // (но без валидации!)
 }
 
 extension LoginViewController: UITextFieldDelegate {

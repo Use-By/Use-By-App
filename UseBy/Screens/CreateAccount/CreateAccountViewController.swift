@@ -19,6 +19,8 @@ class CreateAccountViewController: UIViewController {
         static let stackOfFieldBottom: CGFloat = 50
     }
 
+    private var userAuthModel: UserAuthModel?
+
     private var composeViewBottomConstraint: Constraint?
     private var composeAlreadyButtomConstraint: Constraint?
     private var composeStackOfFieldBottomConstraint: Constraint?
@@ -38,6 +40,7 @@ class CreateAccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userAuthModel = UserAuthModel()
 
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
@@ -165,6 +168,37 @@ class CreateAccountViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
 
             present(alert, animated: true, completion: nil)
+
+            return
+        }
+
+        // Почему-то не передаем textFieldName
+        userAuthModel?.createAccount(
+            email: textFieldEmail.field.text ?? "",
+            password: textFieldPassword.field.text ?? "",
+            completion: signUpCallback
+        )
+    }
+
+    func signUpCallback(error: UserAuthError?) {
+        if let error = error {
+            // Показываем алерт ошибки
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: getUserAuthErrorText(error: error),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+            
+            if let router = navigationController as? Router {
+                router.showAlert(alert: alert)
+            }
+
+            return
+        }
+
+        if let router = navigationController as? Router {
+            router.goToMainScreen()
         }
     }
 }

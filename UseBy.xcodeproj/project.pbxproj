@@ -39,6 +39,7 @@
 		337B9F2B253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */; };
+		33A6771825697B7F0051C39E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6771725697B7F0051C39E /* UserAuth.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
 		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
@@ -109,6 +110,7 @@
 		336D6777252A4A970098259E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		33A6771725697B7F0051C39E /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		336D6740252A4A600098259E /* UseBy */ = {
 			isa = PBXGroup;
 			children = (
+				33A6771625697B730051C39E /* Model */,
 				843690AE254B52EF00ABBEE0 /* User */,
 				332A580A2533346C0078E65B /* Utils */,
 				332A57C725326D390078E65B /* fonts */,
@@ -324,6 +327,14 @@
 				337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */,
 			);
 			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		33A6771625697B730051C39E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33A6771725697B7F0051C39E /* UserAuth.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		41437AE57F2A029025B095F4 /* Pods */ = {
@@ -682,10 +693,10 @@
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
+				33A6771825697B7F0051C39E /* UserAuth.swift in Sources */,
 				843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */,
-				333643F025322B2600D1A5C6,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

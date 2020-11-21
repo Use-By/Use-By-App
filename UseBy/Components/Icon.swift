@@ -8,22 +8,23 @@
 import Foundation
 import UIKit
 
+enum IconSize {
+    case small
+    case medium
+    case large
+}
+
+enum IconTheme {
+    case normal
+    case inversed
+    case action
+    case secondary
+    case inactive
+}
+
 class Icon {
-    public var icon: UIImage?
+    var icon: UIImage?
     private let size: IconSize
-
-    public enum IconSize {
-        case small
-        case medium
-    }
-
-    public enum IconTheme {
-        case normal
-        case inversed
-        case action
-        case secondary
-        case inactive
-    }
 
     init(name: String, size: IconSize, theme: IconTheme = IconTheme.normal) {
         icon = UIImage(named: name)
@@ -50,6 +51,26 @@ class Icon {
             return 16
         case .medium:
             return 24
+        case .large:
+            return 36
         }
+    }
+}
+
+class IconView: UIImageView {
+    init(name: String, size: IconSize, theme: IconTheme = IconTheme.normal) {
+        super.init(frame: .zero)
+        let icon = Icon(name: name, size: size, theme: theme)
+
+        self.image = icon.icon
+        self.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(icon.getSize())
+            make.width.equalTo(icon.getSize())
+        }
+        isUserInteractionEnabled = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -44,6 +44,7 @@ struct Colors {
     static let defaultIconColor = UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1.0)
     static let inversedIconColor = UIColor.white
     static let actionIconColor = UIColor(red: 255/255, green: 97/255, blue: 128/255, alpha: 1.0)
+    static let actionIconShadowColor = UIColor(red: 255/255, green: 204/255, blue: 215/255, alpha: 1.0)
     static let secondaryIconColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1.0)
     static let inactiveIconColor = UIColor(red: 130/255, green: 130/255, blue: 130/255, alpha: 1.0)
 

@@ -19,7 +19,6 @@
 		332A581525333B360078E65B /* BackgroundCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A581425333B360078E65B /* BackgroundCircle.swift */; };
 		332A581A25337ED60078E65B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 332A581925337ED60078E65B /* Podfile */; };
 		332A586E2533BEDB0078E65B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A586D2533BEDB0078E65B /* Icon.swift */; };
-		333643F025322B2600D1A5C6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
@@ -38,6 +37,11 @@
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
+		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
+		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
+		79CE46042540BC3900EAC17A /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */; };
+		79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE46082540BC7F00EAC17A /* MainTextLabel.swift */; };
+		79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E021012542155C00D5F5E9 /* LoginViewController.swift */; };
 		84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */; };
 		843690B8254C122500ABBEE0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690B7254C122500ABBEE0 /* UserData.swift */; };
 		843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843690BF254DFF5400ABBEE0 /* TableLabel.swift */; };
@@ -103,6 +107,10 @@
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
+		798758562541A81100B9E25A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		79CE46082540BC7F00EAC17A /* MainTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextLabel.swift; sourceTree = "<group>"; };
+		79E021012542155C00D5F5E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84369084254691A800ABBEE0 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		843690B7254C122500ABBEE0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		843690BF254DFF5400ABBEE0 /* TableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLabel.swift; sourceTree = "<group>"; };
@@ -195,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				333644412532637800D1A5C6 /* MainAuthViewController.swift */,
+				79CE46032540BC3900EAC17A /* CreateAccountViewController.swift */,
+				79E021012542155C00D5F5E9 /* LoginViewController.swift */,
 			);
 			path = MainAuth;
 			sourceTree = "<group>";
@@ -206,6 +216,8 @@
 				332A57E925326E450078E65B /* AppName.swift */,
 				332A581425333B360078E65B /* BackgroundCircle.swift */,
 				332A586D2533BEDB0078E65B /* Icon.swift */,
+				79CE46082540BC7F00EAC17A /* MainTextLabel.swift */,
+				798758562541A81100B9E25A /* TextField.swift */,
 				843690BF254DFF5400ABBEE0 /* TableLabel.swift */,
 				3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */,
 			);
@@ -628,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */,
 				843690C5254EC11100ABBEE0 /* ProfileAlerts.swift in Sources */,
 				843690B8254C122500ABBEE0 /* UserData.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
@@ -635,11 +648,15 @@
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,
 				84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
+				798758622541BB3F00B9E25A /* Palette.swift in Sources */,
+				798758572541A81100B9E25A /* TextField.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
+				79CE46042540BC3900EAC17A /* CreateAccountViewController.swift in Sources */,
 				3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */,
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
+				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,
 				843690C0254DFF5400ABBEE0 /* TableLabel.swift in Sources */,
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,

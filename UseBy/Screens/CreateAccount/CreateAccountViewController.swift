@@ -183,16 +183,11 @@ class CreateAccountViewController: UIViewController {
     func signUpCallback(error: UserAuthError?) {
         if let error = error {
             // Показываем алерт ошибки
-            let alert = UIAlertController(
+            Alert(
                 title: "error".localized,
                 message: getUserAuthErrorText(error: error),
-                preferredStyle: .alert
+                action: .non
             )
-            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
-            
-            if let router = navigationController as? Router {
-                router.showAlert(alert: alert)
-            }
 
             return
         }

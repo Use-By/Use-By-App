@@ -11,6 +11,7 @@
 "app-name" = "Use-by";
 "app-description" = "Срок годности под контролем!";
 "create-account" = "Создать аккаунт";
+"filters" = "Фильтры";
 "login" = "Войти";
 "create-account-google" = "Вход через Google";
 "error" = "Ошибка";

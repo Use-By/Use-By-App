@@ -42,6 +42,8 @@
 		33A67706256975420051C39E /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67705256975420051C39E /* TabBar.swift */; };
 		33A6772C2569938F0051C39E /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6772B2569938F0051C39E /* ProductsViewController.swift */; };
 		33A677382569958E0051C39E /* AddProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A677372569958E0051C39E /* AddProduct.swift */; };
+		33A6773E2569A01D0051C39E /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6773D2569A01D0051C39E /* Filters.swift */; };
+		33A677462569A0680051C39E /* FiltersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A677452569A0680051C39E /* FiltersButton.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
 		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
@@ -115,6 +117,8 @@
 		33A67705256975420051C39E /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		33A6772B2569938F0051C39E /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		33A677372569958E0051C39E /* AddProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProduct.swift; sourceTree = "<group>"; };
+		33A6773D2569A01D0051C39E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		33A677452569A0680051C39E /* FiltersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersButton.swift; sourceTree = "<group>"; };
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 		3336440825323F6C00D1A5C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				33A6773C2569A0110051C39E /* Filters */,
 				33A67736256995830051C39E /* AddProduct */,
 				33A6772A2569937D0051C39E /* Products */,
 				33A67704256975350051C39E /* TabBar */,
@@ -357,6 +362,15 @@
 				33A677372569958E0051C39E /* AddProduct.swift */,
 			);
 			path = AddProduct;
+			sourceTree = "<group>";
+		};
+		33A6773C2569A0110051C39E /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				33A6773D2569A01D0051C39E /* Filters.swift */,
+				33A677452569A0680051C39E /* FiltersButton.swift */,
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 		41437AE57F2A029025B095F4 /* Pods */ = {
@@ -698,9 +712,11 @@
 				79E021022542155C00D5F5E9 /* LoginViewController.swift in Sources */,
 				843690C5254EC11100ABBEE0 /* ProfileAlerts.swift in Sources */,
 				843690B8254C122500ABBEE0 /* UserData.swift in Sources */,
+				33A677462569A0680051C39E /* FiltersButton.swift in Sources */,
 				33A67706256975420051C39E /* TabBar.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
+				33A6773E2569A01D0051C39E /* Filters.swift in Sources */,
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,
 				84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,

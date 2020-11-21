@@ -49,6 +49,10 @@ struct Colors {
     static let inactiveIconColor = UIColor(red: 130/255, green: 130/255, blue: 130/255, alpha: 1.0)
 
     static let inputDividerColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.15)
+
+    // Цвета для фильтров
+    static let filterControlBackground = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+    static let filterHighlightColor = UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1.0)
 }
 
 struct Fonts {

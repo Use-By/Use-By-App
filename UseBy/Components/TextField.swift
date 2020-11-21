@@ -1,5 +1,5 @@
 //
-//  AuthTextField.swift
+//  TextField.swift
 //  UseBy
 //
 //  Created by Anastasiia Malaia on 22.10.2020.
@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class TextField: UITextField {
-    private let purpose: TextFieldPurpose
     let field: UITextField = UITextField()
 
     private let textFieldHeight = 60
@@ -24,7 +23,6 @@ class TextField: UITextField {
     }
 
     init(purpose: TextFieldPurpose = .name) {
-        self.purpose = purpose
         super.init(frame: .zero)
 
         configureTextField()
@@ -69,7 +67,6 @@ class TextField: UITextField {
     }
 
     required init?(coder: NSCoder) {
-        self.purpose = .name
         super.init(coder: coder)
     }
 

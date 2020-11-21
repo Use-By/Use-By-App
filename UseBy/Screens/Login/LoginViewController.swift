@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Colors.mainBGColor
+
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification, object: nil
@@ -38,7 +40,7 @@ class LoginViewController: UIViewController {
             self, selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
-        view.backgroundColor = Colors.mainBGColor
+
         configureButtons()
         configureMainText()
         configureTextFields()
@@ -57,10 +59,6 @@ class LoginViewController: UIViewController {
             self.composeViewBottomConstraint = make.bottom.equalTo(view)
                 .offset(-LoginViewUIConstants.signInButtonMargin).constraint
         }
-        view.snp.makeConstraints { (make) -> Void in
-            self.topConstraint = make.top.equalTo(view).constraint
-            make.left.equalTo(view)
-        }
 
         signInButton.isEnabled = false
     }
@@ -78,14 +76,9 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-        arrangedSubviews.forEach {
-            ($0).snp.makeConstraints { (make) -> Void in
-                make.height.equalTo(LoginViewUIConstants.textFieldHeight)
-            }
-        }
 
-        textFieldEmail.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldPassword.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldEmail.field.delegate = self
+        textFieldPassword.field.delegate = self
     }
 
     func configureMainText() {
@@ -104,16 +97,6 @@ class LoginViewController: UIViewController {
         signInButton.initActionThemeStyles()
     }
 
-    @objc
-    private func checkForEnablingMainActionButton() {
-        if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
-            signInButton.isEnabled = false
-            return
-        }
-
-        signInButton.isEnabled = true
-    }
-
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -128,4 +111,29 @@ class LoginViewController: UIViewController {
             self.view.layoutIfNeeded()
       }
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    private func checkForEnablingMainActionButton() {
+        if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            signInButton.isEnabled = false
+            return
+        }
+
+        signInButton.isEnabled = true
+    }
 }

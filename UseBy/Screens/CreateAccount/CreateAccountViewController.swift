@@ -105,9 +105,9 @@ class CreateAccountViewController: UIViewController {
                     .offset(CreateAccountViewUIConstants.stackViewOfTextFields).constraint
         }
 
-        textFieldName.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldEmail.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
-        textFieldPassword.field.addTarget(self, action: #selector(checkForEnablingMainActionButton), for: .editingChanged)
+        textFieldName.field.delegate = self
+        textFieldEmail.field.delegate = self
+        textFieldPassword.field.delegate = self
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -167,8 +167,23 @@ class CreateAccountViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
     }
+}
 
-    @objc
+extension CreateAccountViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
     private func checkForEnablingMainActionButton() {
         if textFieldName.isEmpty() || textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
             createAccountButton.isEnabled = false

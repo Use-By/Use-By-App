@@ -51,6 +51,12 @@ class Router: UINavigationController {
         isNavigationBarHidden = true
     }
 
+    func goToMainScreen() {
+        let mainScreenVC = MainScreenViewController()
+        pushViewController(mainScreenVC, animated: true)
+        isNavigationBarHidden = true
+    }
+
     func showAlert(alert: UIAlertController, completion: (() -> Void)? = nil) {
         present(alert, animated: true, completion: completion)
     }

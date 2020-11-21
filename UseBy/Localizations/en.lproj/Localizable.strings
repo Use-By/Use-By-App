@@ -36,3 +36,5 @@
 "google-error-description" = "We couldn't connect to Google, please try again later";
 "log-out" = "Log out";
 "weak-password-error" = "Password must be 6 characters or more";
+"home" = "Home";
+"profile" = "Profile";

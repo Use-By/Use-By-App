@@ -90,6 +90,9 @@ class MainAuthViewController: UIViewController {
             make.bottom.equalTo(view).offset(MainAuthViewUIConstants.alreadySignUpButtonMargin)
             make.centerX.equalTo(view)
         }
+
+        alreadySignUpButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
     }
 
     func configureBottomCircles() {
@@ -119,5 +122,19 @@ class MainAuthViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         signUpButton.initActionThemeStyles()
+    }
+
+    @objc
+    private func didTapCreateAccount() {
+        if let router = navigationController as? Router {
+            router.goToCreateAccountScreen()
+        }
+    }
+
+    @objc
+    private func didTapLoginButton() {
+        if let router = navigationController as? Router {
+            router.goToLoginScreen()
+        }
     }
 }

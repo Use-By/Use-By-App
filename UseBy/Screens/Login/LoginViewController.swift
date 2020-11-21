@@ -12,16 +12,16 @@ import SnapKit
 class LoginViewController: UIViewController {
     struct LoginViewUIConstants {
         static let mainTextMargin: CGFloat = 190
-        static let signUpButtonMargin: CGFloat = 120
-        static let signUpButtonPadding: CGFloat = 40
+        static let signInButtonMargin: CGFloat = 120
+        static let signInButtonPadding: CGFloat = 40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
     }
 
     private var composeViewBottomConstraint: Constraint?
     private let loginLabel = MainScreenTitle(labelType: .login)
-    private let signUpButton = MainButton(
-        text: "sign-up".localized,
+    private let signInButton = MainButton(
+        text: "sign-in".localized,
         theme: .action
     )
     private var topConstraint: Constraint?
@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Colors.mainBGColor
+
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification, object: nil
@@ -38,29 +40,27 @@ class LoginViewController: UIViewController {
             self, selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
-        view.backgroundColor = Colors.mainBGColor
+
         configureButtons()
         configureMainText()
         configureTextFields()
     }
 
     func configureButtons() {
-        [loginLabel, signUpButton].forEach {
+        [loginLabel, signInButton].forEach {
             view.addSubview($0)
         }
 
-        // Кнопка "Sign Up"
-        signUpButton.snp.makeConstraints { (make) -> Void in
+        // Кнопка "Sign In"
+        signInButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).offset(-LoginViewUIConstants.signUpButtonPadding)
+            make.width.equalTo(view).offset(-LoginViewUIConstants.signInButtonPadding)
             make.centerX.equalTo(view)
             self.composeViewBottomConstraint = make.bottom.equalTo(view)
-                .offset(-LoginViewUIConstants.signUpButtonMargin).constraint
+                .offset(-LoginViewUIConstants.signInButtonMargin).constraint
         }
-        view.snp.makeConstraints { (make) -> Void in
-            self.topConstraint = make.top.equalTo(view).constraint
-            make.left.equalTo(view)
-        }
+
+        signInButton.isEnabled = false
     }
 
     func configureTextFields() {
@@ -72,15 +72,13 @@ class LoginViewController: UIViewController {
         view.addSubview(stackviewFields)
 
         stackviewFields.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(view).offset(-LoginViewUIConstants.signUpButtonPadding)
+            make.width.equalTo(view).offset(-LoginViewUIConstants.signInButtonPadding)
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
         }
-        arrangedSubviews.forEach {
-            ($0).snp.makeConstraints { (make) -> Void in
-                make.height.equalTo(LoginViewUIConstants.textFieldHeight)
-            }
-        }
+
+        textFieldEmail.field.delegate = self
+        textFieldPassword.field.delegate = self
     }
 
     func configureMainText() {
@@ -96,7 +94,7 @@ class LoginViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        signUpButton.initActionThemeStyles()
+        signInButton.initActionThemeStyles()
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -109,8 +107,33 @@ class LoginViewController: UIViewController {
        }
 
     @objc private func keyboardWillHide(notification: Notification) {
-            self.composeViewBottomConstraint?.update(offset: -LoginViewUIConstants.signUpButtonMargin)
+            self.composeViewBottomConstraint?.update(offset: -LoginViewUIConstants.signInButtonMargin)
             self.view.layoutIfNeeded()
       }
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    private func checkForEnablingMainActionButton() {
+        if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            signInButton.isEnabled = false
+            return
+        }
+
+        signInButton.isEnabled = true
+    }
 }

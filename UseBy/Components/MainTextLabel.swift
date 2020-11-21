@@ -11,7 +11,7 @@ import UIKit
 final class MainScreenTitle: UILabel {
     private let screenType: ScreenType
 
-    internal enum ScreenType {
+    enum ScreenType {
         case createAccount
         case login
     }

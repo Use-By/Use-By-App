@@ -12,8 +12,10 @@
 "create-account" = "Create account";
 "login" = "Login";
 "create-account-google" = "Continue with Google";
+"error" = "Error";
+"ok" = "Ok";
 "name" = "Name";
-"sign-up" = "Sign Up";
+"sign-in" = "Sign In";
 "password" = "Password";
 "email" = "Email";
 "change-password" = "Change  password";
@@ -27,10 +29,10 @@
 "confirm-your-new-password" = "Confirm your new password";
 "cancel" = "Cancel";
 "save" = "Save";
-"ok" = "Ok";
 "ops"  = "Ops";
 "you_don't_have_mail_app_on_your_phone" = "You don't have mail app on your phone";
 "empty-screen" = "You don't have anything yet";
 "error" = "Error";
 "google-error-description" = "We couldn't connect to Google, please try again later";
 "log-out" = "Log out";
+"weak-password-error" = "Password must be 6 characters or more";

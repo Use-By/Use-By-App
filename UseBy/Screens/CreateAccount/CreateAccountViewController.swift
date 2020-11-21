@@ -4,7 +4,6 @@
 //
 //  Created by Anastasiia Malaia on 21.10.2020.
 //
-
 import Foundation
 import UIKit
 import SnapKit
@@ -21,65 +20,64 @@ class CreateAccountViewController: UIViewController {
     }
 
     private var composeViewBottomConstraint: Constraint?
-
     private var composeAlreadyButtomConstraint: Constraint?
-
     private var composeStackOfFieldBottomConstraint: Constraint?
 
     private let createAccountLabel = MainScreenTitle(labelType: .createAccount)
-
     private let createAccountButton = MainButton(
         text: "create-account".localized,
         theme: .action
     )
-
     private let alreadySignUpButton = MainButton(
         text: "already-have-account".localized,
         theme: .clear
     )
-
     private let textFieldName = TextField(purpose: .name)
-
     private let textFieldEmail = TextField(purpose: .email)
-
     private let textFieldPassword = TextField(purpose: .password)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = Colors.mainBGColor
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(self.keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification, object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(self.keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification, object: nil
-        )
         configureButtons()
         configureMainText()
         configureTextFields()
+
+        NotificationCenter.default.addObserver(
+                self, selector: #selector(self.keyboardWillShow),
+                name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+        NotificationCenter.default.addObserver(
+                self, selector: #selector(self.keyboardWillHide),
+                name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
 
     func configureButtons() {
         [createAccountLabel, alreadySignUpButton, createAccountButton].forEach {
-             view.addSubview($0)
+            view.addSubview($0)
         }
-        // Кнопка ""Already have an account?""
+
+        // Кнопка "Already have an account?"
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
             self.composeAlreadyButtomConstraint = make.bottom.equalTo(view)
-                .offset(-CreateAccountViewUIConstants.alreadySignUpButtonMargin)
-                .constraint
+                    .offset(-CreateAccountViewUIConstants.alreadySignUpButtonMargin)
+                    .constraint
         }
-        // Кнопка "Create Account"
+        alreadySignUpButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+
+        // Кнопка "Сreate Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeViewBottomConstraint = make.bottom.equalTo(alreadySignUpButton)
-                .offset(-CreateAccountViewUIConstants.createAccButtonPadding).constraint
-
+                    .offset(-CreateAccountViewUIConstants.createAccButtonPadding).constraint
         }
+        createAccountButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+        createAccountButton.isEnabled = false
     }
 
     func configureMainText() {
@@ -91,7 +89,9 @@ class CreateAccountViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubviews = [textFieldName, textFieldEmail, textFieldPassword]
+        let arrangedSubviews = [textFieldName,
+                               textFieldEmail,
+                               textFieldPassword]
         let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackviewFields.axis = .vertical
         stackviewFields.spacing = CreateAccountViewUIConstants.textFieldSpacing
@@ -102,14 +102,12 @@ class CreateAccountViewController: UIViewController {
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeStackOfFieldBottomConstraint = make.top.equalTo(createAccountLabel)
-                .offset(CreateAccountViewUIConstants.stackViewOfTextFields).constraint
+                    .offset(CreateAccountViewUIConstants.stackViewOfTextFields).constraint
         }
 
-        arrangedSubviews.forEach {
-            ($0).snp.makeConstraints { (make) -> Void in
-                make.height.equalTo(CreateAccountViewUIConstants.textFieldHeight)
-            }
-        }
+        textFieldName.field.delegate = self
+        textFieldEmail.field.delegate = self
+        textFieldPassword.field.delegate = self
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -120,7 +118,8 @@ class CreateAccountViewController: UIViewController {
         createAccountButton.initActionThemeStyles()
     }
 
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         guard let rectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         let keyboardSize = rectangle.size
@@ -142,5 +141,55 @@ class CreateAccountViewController: UIViewController {
             self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackViewOfTextFields)
             self.view.layoutIfNeeded()
         }
+    }
+
+    @objc
+    private func didTapLoginButton() {
+        if let router = navigationController as? Router {
+            router.goToLoginScreen()
+        }
+    }
+
+    @objc
+    private func didTapSignUpButton() {
+        let validationErrors = validateTextFields(fields: [textFieldName, textFieldEmail, textFieldPassword])
+
+        if validationErrors.count != 0 {
+            let errorsText = getErrorsTexts(validationErrors: validationErrors)
+
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: errorsText,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+            present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+extension CreateAccountViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        checkForEnablingMainActionButton()
+        return true
+    }
+
+    private func checkForEnablingMainActionButton() {
+        if textFieldName.isEmpty() || textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+            createAccountButton.isEnabled = false
+            return
+        }
+
+        createAccountButton.isEnabled = true
     }
 }

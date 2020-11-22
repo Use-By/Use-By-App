@@ -10,8 +10,13 @@
 "already-have-account" = "Already have an account?";
 "app-name" = "Use-by";
 "app-description" = "We help you keep your products fresh";
+"apply" = "Apply";
+"reset" = "Reset";
+"filter-by" = "Filter by";
 "create-account" = "Create account";
 "filters" = "Filters";
+"liked" = "Liked";
+"expired" = "Expired";
 "login" = "Login";
 "create-account-google" = "Continue with Google";
 "error" = "Error";

@@ -14,6 +14,8 @@ final class MainScreenTitle: UILabel {
     enum ScreenType {
         case createAccount
         case login
+        case filterBy
+        case profile
     }
 
     init(labelType: ScreenType = .createAccount) {
@@ -27,6 +29,10 @@ final class MainScreenTitle: UILabel {
             text = "create-account".localized
         case .login:
             text = "login".localized
+        case .filterBy:
+            text = "filter-by".localized
+        case .profile:
+            text = "profile".localized
         }
     }
     required init?(coder decoder: NSCoder) {

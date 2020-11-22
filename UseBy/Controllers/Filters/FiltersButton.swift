@@ -11,8 +11,9 @@ import UIKit
 class FilterButton: UIButton {
     struct UIConstants {
         static let height: CGFloat = 40
-        static let cornerRadius: CGFloat = 14
+        static let cornerRadius: CGFloat = 10
         static let iconMargin: CGFloat = 5
+        static let innerMargin: CGFloat = 10
     }
 
     init(text: String, icon: Icon? = nil) {
@@ -20,7 +21,7 @@ class FilterButton: UIButton {
 
         adjustsImageWhenHighlighted = false
         titleLabel?.text = text
-        setTitle(self.titleLabel?.text, for: .normal)
+        setTitle(text, for: .normal)
         titleLabel?.font = Fonts.mainText
         titleLabel?.textAlignment = .center
         layer.cornerRadius = UIConstants.cornerRadius
@@ -28,10 +29,24 @@ class FilterButton: UIButton {
         backgroundColor = Colors.filterControlBackground
         setTitleColor(Colors.filterHighlightColor, for: .normal)
         setTitleColor(Colors.inversedTextColor, for: .highlighted)
+        self.contentEdgeInsets = UIEdgeInsets(
+            top: UIConstants.innerMargin,
+            left: UIConstants.innerMargin,
+            bottom: UIConstants.innerMargin,
+            right: UIConstants.innerMargin
+        )
+
+        self.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(UIConstants.height)
+        }
 
         if let icon = icon {
             setImage(icon.icon, for: .normal)
-            imageEdgeInsets.right = UIConstants.iconMargin
+            let tintedImage = icon.icon?.withTintColor(Colors.inversedTextColor)
+            setImage(tintedImage, for: .highlighted)
+            titleEdgeInsets.left = UIConstants.iconMargin
+            titleEdgeInsets.right = -UIConstants.iconMargin
+            contentEdgeInsets.right += UIConstants.iconMargin
         }
     }
 
@@ -45,7 +60,6 @@ class FilterButton: UIButton {
                     self.backgroundColor = self.isHighlighted
                         ? Colors.filterHighlightColor
                         : Colors.filterControlBackground
-                    self.imageView?.tintColor = Colors.inversedIconColor
                 }, completion: nil)
         }
     }

@@ -11,12 +11,11 @@ import SnapKit
 import MessageUI
 
 class ProfileViewController: UIViewController {
-
     struct UIConstants {
-        static let topTableView: CGFloat = 217.0
+        static let topTableView: CGFloat = 100
         static let heightTableView: CGFloat = 240.0
         static let spaceBetweenTableAndLogout: CGFloat = 30
-        static let marginLogoutButtom: CGFloat = 20
+        static let pageInsetMargin: CGFloat = 20
     }
 
     lazy private var profileTableView: UITableView = {
@@ -42,6 +41,7 @@ class ProfileViewController: UIViewController {
     )
 
     private lazy var composer = MFMailComposeViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProfileView()
@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
 
     func configureProfileView() {
         profileTableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top).offset(UIConstants.topTableView)
+            make.top.equalTo(view).offset(UIConstants.topTableView)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
             make.height.equalTo(UIConstants.heightTableView)
@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(logOutButton)
         logOutButton.snp.makeConstraints {(make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(view).inset(UIConstants.marginLogoutButtom)
+            make.width.equalTo(view).inset(UIConstants.pageInsetMargin)
             make.centerX.equalTo(view)
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.spaceBetweenTableAndLogout)
         }

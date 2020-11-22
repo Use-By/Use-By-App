@@ -70,6 +70,21 @@ class IconView: UIImageView {
         isUserInteractionEnabled = true
     }
 
+    func setTheme(theme: IconTheme) {
+        switch theme {
+        case .normal:
+            image = image?.withTintColor(Colors.defaultIconColor)
+        case .inversed:
+            image = image?.withTintColor(Colors.inversedIconColor)
+        case .action:
+            image = image?.withTintColor(Colors.actionIconColor)
+        case .secondary:
+            image = image?.withTintColor(Colors.secondaryIconColor)
+        case .inactive:
+            image = image?.withTintColor(Colors.inactiveIconColor)
+        }
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

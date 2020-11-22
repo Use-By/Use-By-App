@@ -15,7 +15,6 @@ class AddProductViewController: UIViewController {
         static let closeIconMargin: CGFloat = 20
     }
 
-    private let emptyScreenLabel = UILabel()
     private let addButton = MainButton(
         text: "add".localized,
         theme: .normal

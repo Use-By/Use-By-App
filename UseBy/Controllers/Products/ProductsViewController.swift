@@ -3,7 +3,9 @@ import UIKit
 
 class ProductsViewController: UIViewController {
     struct UIConstants {
-        static let filtersOffset: CGFloat = 10
+        static let filtersOffset: CGFloat = 70
+        static let padding: CGFloat = 20
+        static let filtersHeight: CGFloat = 85
     }
 
     private let emptyScreenLabel = UILabel()
@@ -36,6 +38,9 @@ class ProductsViewController: UIViewController {
         filters.didMove(toParent: self)
         filters.view.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view).offset(UIConstants.filtersOffset)
+            make.width.equalTo(view)
+            make.left.equalTo(view).offset(UIConstants.padding)
+            make.height.equalTo(UIConstants.filtersHeight)
         }
     }
 }

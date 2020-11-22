@@ -10,9 +10,14 @@
 "already-have-account" = "Уже есть аккаунт?";
 "app-name" = "Use-by";
 "app-description" = "Срок годности под контролем!";
+"apply" = "Применить";
+"reset" = "Сбросить";
+"filter-by" = "Фильтры";
 "create-account" = "Создать аккаунт";
 "filters" = "Фильтры";
+"liked" = "Избранное";
 "login" = "Войти";
+"expired" = "Истёкшие";
 "create-account-google" = "Вход через Google";
 "error" = "Ошибка";
 "ok" = "Понятно";

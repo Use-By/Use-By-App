@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class TextField: UITextField {
+class TextField: UIView {
     private let purpose: TextFieldPurpose
     let field: UITextField = UITextField()
 

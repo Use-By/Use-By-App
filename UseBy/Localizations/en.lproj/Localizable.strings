@@ -16,6 +16,7 @@
 "create-account" = "Create account";
 "filters" = "Filters";
 "liked" = "Liked";
+"search" = "Search by name";
 "expired" = "Expired";
 "login" = "Login";
 "create-account-google" = "Continue with Google";

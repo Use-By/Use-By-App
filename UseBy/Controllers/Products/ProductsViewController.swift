@@ -4,8 +4,8 @@ import UIKit
 class ProductsViewController: UIViewController {
     struct UIConstants {
         static let filtersOffset: CGFloat = 70
-        static let padding: CGFloat = 20
-        static let filtersHeight: CGFloat = 85
+        static let padding: CGFloat = 40
+        static let filtersHeight: CGFloat = 90
     }
 
     private let emptyScreenLabel = UILabel()
@@ -38,8 +38,8 @@ class ProductsViewController: UIViewController {
         filters.didMove(toParent: self)
         filters.view.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view).offset(UIConstants.filtersOffset)
-            make.width.equalTo(view)
-            make.left.equalTo(view).offset(UIConstants.padding)
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.centerX.equalTo(view)
             make.height.equalTo(UIConstants.filtersHeight)
         }
     }

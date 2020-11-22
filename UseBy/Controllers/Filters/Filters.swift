@@ -12,13 +12,11 @@ class FiltersViewController: UIViewController {
     struct UIConstants {
         static let padding: CGFloat = 40
         static let buttonsSpacing: CGFloat = 10
+        static let filtersControlsMargin: CGFloat = 10
     }
 
     private let emptyScreenLabel = UILabel()
-    private let button = FilterButton(
-        text: "filters".localized,
-        icon: Icon(name: "FiltersIcon", size: .medium)
-    )
+    private let search = FiltersSearch()
     private let buttons = [
         FilterButton(
             text: "filters".localized,
@@ -36,7 +34,16 @@ class FiltersViewController: UIViewController {
 
         view.backgroundColor = Colors.mainBGColor
 
+        configureSearch()
         configureButtons()
+    }
+
+    func configureSearch() {
+        view.addSubview(search)
+        search.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(view)
+            make.width.equalTo(view)
+        }
     }
 
     func configureButtons() {
@@ -47,7 +54,7 @@ class FiltersViewController: UIViewController {
 
         stackviewFields.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(view)
-            make.top.equalTo(view)
+            make.top.equalTo(search.snp.bottom).offset(UIConstants.filtersControlsMargin)
         }
 
         buttons[0].addTarget(self, action: #selector(didTapFiltersButton), for: .touchUpInside)

@@ -45,6 +45,7 @@
 		33A6773E2569A01D0051C39E /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6773D2569A01D0051C39E /* Filters.swift */; };
 		33A677462569A0680051C39E /* FiltersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A677452569A0680051C39E /* FiltersButton.swift */; };
 		33A6774C256A9E220051C39E /* ChangeFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6774B256A9E220051C39E /* ChangeFilters.swift */; };
+		33A67754256ADC160051C39E /* FiltersSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67753256ADC160051C39E /* FiltersSearch.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
 		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
@@ -121,6 +122,7 @@
 		33A6773D2569A01D0051C39E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		33A677452569A0680051C39E /* FiltersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersButton.swift; sourceTree = "<group>"; };
 		33A6774B256A9E220051C39E /* ChangeFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFilters.swift; sourceTree = "<group>"; };
+		33A67753256ADC160051C39E /* FiltersSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSearch.swift; sourceTree = "<group>"; };
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
 		715C9A0D4D5CD88BA06713E2 /* Pods-UseBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseBy.release.xcconfig"; path = "Target Support Files/Pods-UseBy/Pods-UseBy.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			children = (
 				33A6773D2569A01D0051C39E /* Filters.swift */,
 				33A677452569A0680051C39E /* FiltersButton.swift */,
+				33A67753256ADC160051C39E /* FiltersSearch.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				33A6773E2569A01D0051C39E /* Filters.swift in Sources */,
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,
 				84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */,
+				33A67754256ADC160051C39E /* FiltersSearch.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				33A677382569958E0051C39E /* AddProduct.swift in Sources */,
 				798758622541BB3F00B9E25A /* Palette.swift in Sources */,

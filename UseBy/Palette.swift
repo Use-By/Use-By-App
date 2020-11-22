@@ -20,6 +20,7 @@ struct Colors {
     static let socialBGColor = UIColor(red: 66/255, green: 103/255, blue: 177/255, alpha: 1.0)
     static let secondaryActionBGColor = UIColor(red: 64/255, green: 188/255, blue: 216/255, alpha: 0.1)
     static let disabledBGColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1.0)
+    static let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.15)
 
     static func mainBGGradient() -> CAGradientLayer {
         let topColor = Colors.mainActionColor
@@ -70,4 +71,7 @@ struct Fonts {
 
     // Шрифт для имени приложения
     static let appNameText = UIFont(name: "Lato-Black", size: 32)
+
+    // Шрифт для мелких заголовков
+    static let smallHeadlineText = UIFont(name: "Lato-Bold", size: 15)
 }

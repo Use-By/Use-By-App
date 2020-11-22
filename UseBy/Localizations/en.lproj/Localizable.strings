@@ -32,6 +32,8 @@
 "new-email" = "New email";
 "new-password" = "New password";
 "put-your-name" = "Put your name";
+"products-count" = "%d products";
+"expires" = "Expires";
 "input-your-new-email-here" = "Input your new email here";
 "input-your-new-password-here" = "Input your new password here";
 "confirm-your-new-password" = "Confirm your new password";

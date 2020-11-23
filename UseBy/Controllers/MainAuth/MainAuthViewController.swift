@@ -71,7 +71,7 @@ class MainAuthViewController: UIViewController {
             make.centerX.equalTo(stackView)
             make.centerY.equalTo(stackView.snp.bottom).offset(MainAuthViewUIConstants.signupButtonMargin)
         }
-        googleButton.snp.makeConstraints { (make) -> Void in
+        googleButton.snp.makeConstraints {(make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
         }
         stackView.snp.makeConstraints {(make) -> Void in
@@ -88,7 +88,7 @@ class MainAuthViewController: UIViewController {
         }
 
         view.addSubview(alreadySignUpButton)
-        alreadySignUpButton.snp.makeConstraints { (make) -> Void in
+        alreadySignUpButton.snp.makeConstraints {(make) -> Void in
             make.bottom.equalTo(view).offset(MainAuthViewUIConstants.alreadySignUpButtonMargin)
             make.centerX.equalTo(view)
         }
@@ -141,6 +141,7 @@ class MainAuthViewController: UIViewController {
     }
 }
 
+// TODO Вынести логику входа в модель
 extension MainAuthViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         if let error = error {

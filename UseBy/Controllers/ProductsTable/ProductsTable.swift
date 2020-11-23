@@ -28,7 +28,6 @@ class ProductsTableViewController: UIViewController {
             expirationDate: Date()
         )
 
-        print(product.expirationDate)
         return [product]
     }()
 
@@ -67,7 +66,7 @@ class ProductsTableViewController: UIViewController {
 
 extension ProductsTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110.0
+        return 140.0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

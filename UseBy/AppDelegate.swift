@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = window {
             let mainViewController = MainAuthViewController()
             router = Router(rootViewController: mainViewController)
-            window.rootViewController = router
+            window.rootViewController = MainScreenViewController()
             window.makeKeyAndVisible()
         }
 

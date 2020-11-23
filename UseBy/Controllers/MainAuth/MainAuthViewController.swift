@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Firebase
 import GoogleSignIn
 
 class MainAuthViewController: UIViewController {
@@ -41,6 +42,7 @@ class MainAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
 
         view.backgroundColor = Colors.mainBGColor
@@ -136,5 +138,60 @@ class MainAuthViewController: UIViewController {
         if let router = navigationController as? Router {
             router.goToLoginScreen()
         }
+    }
+}
+
+extension MainAuthViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        if let error = error {
+            // Обработка нажатия "Cancel"
+            if (error as NSError).code == GIDSignInErrorCode.canceled.rawValue {
+                return
+            }
+
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: "google-error-description".localized,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+            if let router = navigationController as? Router {
+                router.showAlert(alert: alert)
+            }
+
+        return
+        }
+
+        guard let authentication = user.authentication else { return }
+
+        let credential = GoogleAuthProvider.credential(
+            withIDToken: authentication.idToken,
+            accessToken: authentication.accessToken
+        )
+
+        Auth.auth().signIn(with: credential) { [self] (_, error) in
+            if error != nil {
+                let alert = UIAlertController(
+                    title: "error".localized,
+                    message: "google-error-description".localized,
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+                if let router = navigationController as? Router {
+                    router.showAlert(alert: alert)
+                }
+            }
+
+            if let router = navigationController as? Router {
+                router.goToMainScreen()
+            }
+        }
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
 }

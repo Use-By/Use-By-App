@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var router: Router?
 
@@ -22,13 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
 
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance()?.delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if let window = window {
             let mainViewController = MainAuthViewController()
             router = Router(rootViewController: mainViewController)
-            window.rootViewController = MainScreenViewController()
+            window.rootViewController = router
             window.makeKeyAndVisible()
         }
 
@@ -41,51 +40,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         options: [UIApplication.OpenURLOptionsKey: Any] = [:]
     ) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
-    }
-
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        if let error = error {
-            // Обработка нажатия "Cancel"
-            if (error as NSError).code == GIDSignInErrorCode.canceled.rawValue {
-                return
-            }
-
-            let alert = UIAlertController(
-                title: "error".localized,
-                message: "google-error-description".localized,
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
-
-            router?.showAlert(alert: alert)
-
-        return
-        }
-        guard let authentication = user.authentication else { return }
-
-        let credential = GoogleAuthProvider.credential(
-            withIDToken: authentication.idToken,
-            accessToken: authentication.accessToken
-        )
-
-        Auth.auth().signIn(with: credential) { [self] (_, error) in
-            if error != nil {
-                let alert = UIAlertController(
-                    title: "error".localized,
-                    message: "google-error-description".localized,
-                    preferredStyle: .alert
-                )
-                alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
-
-                router?.showAlert(alert: alert)
-            }
-
-            router?.goToProfileScreen()
-        }
-    }
-
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
     }
 }

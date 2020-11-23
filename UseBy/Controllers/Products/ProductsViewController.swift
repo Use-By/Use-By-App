@@ -19,7 +19,7 @@ class ProductsViewController: UIViewController {
         view.backgroundColor = Colors.mainBGColor
 
         configureFilters()
-        configureTable()
+        configureEmptyScreenLabel()
     }
 
     func configureEmptyScreenLabel() {

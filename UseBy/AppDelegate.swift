@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if let window = window {
-            let mainViewController = MainAuthViewController()
+            let mainViewController = LoginViewController()
             router = Router(rootViewController: mainViewController)
             window.rootViewController = router
             window.makeKeyAndVisible()

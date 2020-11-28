@@ -36,3 +36,8 @@
 "google-error-description" = "We couldn't connect to Google, please try again later";
 "log-out" = "Log out";
 "weak-password-error" = "Password must be 6 characters or more";
+"errorEmailAlreadyInUse" = "The Email is already in use";
+"errorInvalidEmail" = "Invalid Email Address";
+"unknownError" = "An unknown error has occurred";
+"errorWrongPassword" = "Wrong password";
+"errorUserNotFound" = "User is not found";

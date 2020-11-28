@@ -34,9 +34,9 @@ class CreateAccountViewController: UIViewController {
         text: "already-have-account".localized,
         theme: .clear
     )
-    private let textFieldName = TextField(purpose: .name)
-    private let textFieldEmail = TextField(purpose: .email)
-    private let textFieldPassword = TextField(purpose: .password)
+    private let inputFieldName = TextField(purpose: .name)
+    private let inputFieldEmail = TextField(purpose: .email)
+    private let inputFieldPassword = TextField(purpose: .password)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ class CreateAccountViewController: UIViewController {
         }
         alreadySignUpButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
 
-        // Кнопка "Сreate Account"
+        // Кнопка "Create Account"
         createAccountButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
@@ -92,25 +92,25 @@ class CreateAccountViewController: UIViewController {
     }
 
     func configureTextFields() {
-        let arrangedSubviews = [textFieldName,
-                               textFieldEmail,
-                               textFieldPassword]
-        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
-        stackviewFields.axis = .vertical
-        stackviewFields.spacing = CreateAccountViewUIConstants.textFieldSpacing
+        let arrangedSubviews = [inputFieldName,
+                               inputFieldEmail,
+                               inputFieldPassword]
+        let stackViewFields = UIStackView(arrangedSubviews: arrangedSubviews)
+        stackViewFields.axis = .vertical
+        stackViewFields.spacing = CreateAccountViewUIConstants.textFieldSpacing
 
-        view.addSubview(stackviewFields)
+        view.addSubview(stackViewFields)
 
-        stackviewFields.snp.makeConstraints { (make) -> Void in
+        stackViewFields.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(view).offset(-CreateAccountViewUIConstants.createAccButtonPadding)
             make.centerX.equalTo(view)
             self.composeStackOfFieldBottomConstraint = make.top.equalTo(createAccountLabel)
                     .offset(CreateAccountViewUIConstants.stackViewOfTextFields).constraint
         }
 
-        textFieldName.field.delegate = self
-        textFieldEmail.field.delegate = self
-        textFieldPassword.field.delegate = self
+        inputFieldName.textField.delegate = self
+        inputFieldEmail.textField.delegate = self
+        inputFieldPassword.textField.delegate = self
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -149,13 +149,13 @@ class CreateAccountViewController: UIViewController {
     @objc
     private func didTapLoginButton() {
         if let router = navigationController as? Router {
-            router.goToLoginScreen()
+            router.goToMainScreen()
         }
     }
 
     @objc
     private func didTapSignUpButton() {
-        let validationErrors = validateTextFields(fields: [textFieldName, textFieldEmail, textFieldPassword])
+        let validationErrors = validateTextFields(fields: [inputFieldName, inputFieldEmail, inputFieldPassword])
 
         if validationErrors.count != 0 {
             let errorsText = getErrorsTexts(validationErrors: validationErrors)
@@ -172,29 +172,31 @@ class CreateAccountViewController: UIViewController {
             return
         }
 
-        // Почему-то не передаем textFieldName
-        userAuthModel?.createAccount(
-            email: textFieldEmail.field.text ?? "",
-            password: textFieldPassword.field.text ?? "",
-            completion: signUpCallback
-        )
-    }
-
-    func signUpCallback(error: UserAuthError?) {
-        if let error = error {
-            // Показываем алерт ошибки
-            Alert(
-                title: "error".localized,
-                message: getUserAuthErrorText(error: error),
-                action: .non
-            )
-
+        guard let email = inputFieldEmail.textField.text,
+              let password = inputFieldPassword.textField.text else {
             return
         }
+        // TODO: Почему-то не передаем textFieldName
+        userAuthModel?.createAccount(
+            email: email, password: password, completion: ({ [weak self] error in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                        if let error = error {
+                            _ = Alert(
+                                title: "error".localized,
+                                message: getUserAuthErrorText(error: error),
+                                action: .non
+                            )
 
-        if let router = navigationController as? Router {
-            router.goToMainScreen()
-        }
+                            return
+                        }
+
+                    if let router = self.navigationController as? Router {
+                            router.goToMainScreen()
+                        }
+                }
+            })
+        )
     }
 }
 
@@ -214,7 +216,7 @@ extension CreateAccountViewController: UITextFieldDelegate {
     }
 
     private func checkForEnablingMainActionButton() {
-        if textFieldName.isEmpty() || textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+        if inputFieldName.isEmpty() || inputFieldEmail.isEmpty() || inputFieldPassword.isEmpty() {
             createAccountButton.isEnabled = false
             return
         }

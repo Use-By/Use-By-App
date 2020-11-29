@@ -28,7 +28,7 @@ class ProductsTableViewController: UIViewController {
             expirationDate: Date()
         )
 
-        return [product]
+        return [product, product, product, product, product, product]
     }()
 
     private let productsCountLabel = UILabel()
@@ -43,7 +43,7 @@ class ProductsTableViewController: UIViewController {
 
     func configureProductsCountLabel() {
         view.addSubview(productsCountLabel)
-        productsCountLabel.text = String(format: "products-count".localized, productsData.count)
+        productsCountLabel.text = "products-count".pluralizeString(count: productsData.count)
         productsCountLabel.font = Fonts.mainText
         productsCountLabel.textAlignment = .center
         productsCountLabel.snp.makeConstraints {(make) -> Void in

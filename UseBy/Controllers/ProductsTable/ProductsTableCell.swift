@@ -15,8 +15,8 @@ class ExpirationDateLabel: UIView {
         addSubview(expiresLabel)
         addSubview(dateLabel)
 
-        expiresLabel.font = Fonts.mainText
-        dateLabel.font = Fonts.mainButtonText
+        expiresLabel.font = Fonts.cardText
+        dateLabel.font = Fonts.cardBoldText
         expiresLabel.text = "expires".localized
 
         expiresLabel.snp.makeConstraints { (make) -> Void in
@@ -143,7 +143,7 @@ class ProductCard: UIView {
             make.height.equalTo(self)
         }
 
-        nameLabel.font = Fonts.mainText
+        nameLabel.font = Fonts.cardText
 
         [nameLabel, expirationLabel, tagLabel].forEach {
             self.addSubview($0)

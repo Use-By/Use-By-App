@@ -60,6 +60,10 @@ struct Fonts {
     // Основной текст
     static let mainText = UIFont(name: "Lato-Regular", size: 18)
 
+    // Текст в карточках
+    static let cardText = UIFont(name: "Lato-Regular", size: 17)
+    static let cardBoldText = UIFont(name: "Lato-Bold", size: 17)
+
     // Шрифт для текста кнопок
     static let mainButtonText = UIFont(name: "Lato-Black", size: 18)
 

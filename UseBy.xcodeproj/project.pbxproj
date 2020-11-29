@@ -24,6 +24,7 @@
 		333643F52532301F00D1A5C6 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643F42532301F00D1A5C6 /* Button.swift */; };
 		333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333644412532637800D1A5C6 /* MainAuthViewController.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
+		33535F932572C66900E47452 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 33535F952572C66900E47452 /* Localizable.stringsdict */; };
 		3361E141255890A400315095 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E140255890A400315095 /* Router.swift */; };
 		336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336711562540D3AA0042E1C7 /* AppLauncher.swift */; };
 		3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */; };
@@ -100,6 +101,8 @@
 		333643F42532301F00D1A5C6 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		33535F942572C66900E47452 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		33535F992572C67100E47452 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "ru-RU"; path = "ru-RU.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		3361E140255890A400315095 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		336711562540D3AA0042E1C7 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
@@ -276,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				332A5804253333590078E65B /* Localizable.strings */,
+				33535F952572C66900E47452 /* Localizable.stringsdict */,
 			);
 			path = Localizations;
 			sourceTree = "<group>";
@@ -576,6 +580,7 @@
 				332A57E525326D8F0078E65B /* Lato-Thin.ttf in Resources */,
 				336D6778252A4A970098259E /* README.md in Resources */,
 				332A57DD25326D8A0078E65B /* Lato-Light.ttf in Resources */,
+				33535F932572C66900E47452 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,6 +836,15 @@
 				332A58092533339C0078E65B /* ru-RU */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		33535F952572C66900E47452 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33535F942572C66900E47452 /* en */,
+				33535F992572C67100E47452 /* ru-RU */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 		336D674C252A4A610098259E /* LaunchScreen.storyboard */ = {

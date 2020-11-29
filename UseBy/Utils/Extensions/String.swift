@@ -11,4 +11,8 @@ public extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
+
+    func pluralizeString(count: Int) -> String {
+        return String.localizedStringWithFormat(self.localized, count)
+    }
 }

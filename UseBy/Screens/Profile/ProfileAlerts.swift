@@ -15,34 +15,63 @@ enum AlertActions {
 
 class Alert {
     private var alert: UIAlertController
-
-    init(title: String, message: String? = nil, placeholder1: String? = nil,
-         placeholder2: String? = nil, action: AlertActions) {
-        self.alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        switch action {
-        case .save:
-            alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
-            let actionSave = UIAlertAction(title: "save".localized, style: .default, handler: { _ in
-                // save different data in different place
-                // saveDataFromAlert(data: Dat
-            })
-            alert.addAction(actionSave)
-        case .none:
-            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+    func isPasswordCorrect(passwordField: String, confirmField: String) -> Bool {
+        if passwordField == confirmField {
+            if passwordField.count >= 6 {
+                return true
+            }
         }
-
+        return false
+    }
+    init(title: String, message: String? = nil, placeholder1: String? = nil,
+         placeholder2: String? = nil, action: AlertActions, secure: Bool?=nil,
+         saveDataFromAlert:((_: String) -> Void)? = nil) {
+        self.alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if placeholder1 != nil {
         alert.addTextField(configurationHandler: { textField in
                 textField.placeholder = placeholder1
+            if secure != nil {
                 textField.isSecureTextEntry = true
+            } else {
+                textField.isSecureTextEntry = false}
             })
         }
         if placeholder2 != nil {
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = placeholder2
-            textField.isSecureTextEntry = true
+            if secure != nil {
+                textField.isSecureTextEntry = true
+            } else {
+                textField.isSecureTextEntry = false}
             })
+        }
+        switch action {
+        case .save:
+            alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
+            let actionSave = UIAlertAction(title: "save".localized, style: .default, handler: { _ in
+                guard let fields = self.alert.textFields else {
+                    _ = Alert(title: "ops".localized, message: "something_went_wrong_".localized,
+                          placeholder1: nil, placeholder2: nil, action: .none)
+                    return
+                }
+                let texts: [String] = fields.map { field in
+                    return field.text ?? ""
+                }
+                if secure != nil {
+                    if self.isPasswordCorrect(passwordField: texts[0], confirmField: texts[1]) {
+                        saveDataFromAlert?(texts[0])
+                    } else {_ = Alert(title: "ops".localized,
+                                     message:
+                                        "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match"
+                   .localized,
+                                     placeholder1: nil, placeholder2: nil, action: .none)
+                    }
+                } else {saveDataFromAlert?(texts.joined())
+                }
+            })
+            alert.addAction(actionSave)
+        case .none:
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
         }
 
         if let app = UIApplication.shared.delegate as? AppDelegate,

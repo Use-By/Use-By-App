@@ -32,3 +32,6 @@
 "ok" = "Понятно";
 "google-error-description" = "При входе в Google произошла ошибка, попробуйте позже ";
 "log-out" = "Выйти";
+"something_went_wrong_with_authorization"="";
+"something_went_wrong_with_authorization"="";
+

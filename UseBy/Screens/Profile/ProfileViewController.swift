@@ -12,10 +12,12 @@ import MessageUI
 
 class ProfileViewController: UIViewController {
     private var userModel: UserModel?
+    private var googleAuth: Bool?
+    private var user: User?
 
     struct UIConstants {
         static let topTableView: CGFloat = 217.0
-        static let heightTableView: CGFloat = 240.0
+        static var heightTableView: CGFloat = 240.0
         static let spaceBetweenTableAndLogout: CGFloat = 30
         static let marginLogoutButtom: CGFloat = 20
     }
@@ -30,8 +32,8 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
 
-    private let titleOfCellArray = ["name".localized, "email".localized,
-                                    "change-password".localized, "send-feedback".localized]
+    private var titleOfCellArray = ["name".localized, "email".localized,
+    "change-password".localized, "send-feedback".localized]
     private var userDataArray: [String]?
 
     private let logOutButton = MainButton(
@@ -45,14 +47,19 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         userModel = UserModel()
         setUserData()
-
+        self.googleAuth = user?.authWithGoogle
+        if googleAuth ?? true {
+            titleOfCellArray = ["name".localized, "email".localized,
+            "send-feedback".localized]
+            UIConstants.heightTableView = 180
+        }
         configureProfileView()
         view.backgroundColor = Colors.mainBGColor
         configureLogOutButton()
     }
 
     func setUserData() {
-        let user = userModel?.get()
+        self.user = userModel?.get()
 
         if let user = user {
             self.userDataArray = [user.name, user.email]
@@ -89,6 +96,21 @@ class ProfileViewController: UIViewController {
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.spaceBetweenTableAndLogout)
         }
     }
+    func saveName (name: String) {
+        userModel?.changeName(newName: name)
+        setUserData()
+        profileTableView.reloadData()
+    }
+    func saveEmail (email: String) {
+        userModel?.changeEmail(newEmail: email)
+        setUserData()
+        profileTableView.reloadData()
+    }
+    func savePassword (password: String) {
+        userModel?.changePassword(newPassword: password)
+        setUserData()
+        profileTableView.reloadData()
+    }
 
 }
 
@@ -100,24 +122,31 @@ extension ProfileViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             _ = Alert(title: "new-name".localized,
-                      message: nil, placeholder1: "put-your-name".localized, action: .save)
+                      message: nil, placeholder1: "put-your-name".localized, action: .save, saveDataFromAlert: saveName)
+
         case 1:
+            if !(googleAuth ?? false) {
             _ = Alert(title: "new-email".localized, message: nil,
-                      placeholder1: "input-your-new-email-here".localized, action: .save)
-        case 2:
-            _ = Alert(title: "new-password".localized, message: nil,
-                      placeholder1: "input-your-new-password-here".localized,
-                      placeholder2: "confirm-your-new-password".localized, action: .save)
+                      placeholder1: "input-your-new-email-here".localized, action: .save, saveDataFromAlert: saveEmail)}
+
+        case 2: if googleAuth ?? false {
+            showMailComposer()
+
+        } else {_ = Alert(title: "new-password".localized, message: nil,
+                         placeholder1: "input-your-new-password-here".localized,
+                         placeholder2: "confirm-your-new-password".localized, action: .save, secure: true,
+                         saveDataFromAlert: savePassword)
+        }
         default:
             showMailComposer()
+
         }
     }
 }
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleOfCellArray.count
-    }
+        return titleOfCellArray.count}
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSettingsCell",
@@ -129,8 +158,11 @@ extension ProfileViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if (indexPath.row == 0) || (indexPath.row == 1) {
+        if indexPath.row == 0 {
             cell.fillCell(titleLabel: titleOfCellArray[indexPath.row], userLabel: userDataArray[indexPath.row])
+        } else if indexPath.row == 1 {
+            cell.fillCell(titleLabel: titleOfCellArray[indexPath.row],
+                          userLabel: userDataArray[indexPath.row], googleAuth: googleAuth)
         } else {
             cell.fillCell(titleLabel: titleOfCellArray[indexPath.row])
         }

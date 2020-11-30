@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 struct User {
     var name: String
@@ -19,9 +20,13 @@ protocol UserModelProtocol {
     func changeEmail(newEmail: String)
     func changePassword(newPassword: String)
     func changeName(newName: String)
+    func singOut()
 }
 
 class UserModel: UserModelProtocol {
+    func singOut() {
+        GIDSignIn.sharedInstance()?.signOut()
+    }
     func changeEmail(newEmail: String) {
         Auth.auth().currentUser?.updateEmail(to: newEmail) { (error) in
             if error != nil {

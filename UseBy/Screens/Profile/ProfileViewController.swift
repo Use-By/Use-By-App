@@ -95,6 +95,7 @@ class ProfileViewController: UIViewController {
             make.centerX.equalTo(view)
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.spaceBetweenTableAndLogout)
         }
+        logOutButton.addTarget(self, action: #selector(didTapLogOutButton), for: .touchUpInside)
     }
     func saveName (name: String) {
         userModel?.changeName(newName: name)
@@ -110,6 +111,11 @@ class ProfileViewController: UIViewController {
         userModel?.changePassword(newPassword: password)
         setUserData()
         profileTableView.reloadData()
+    }
+    @objc
+    private func didTapLogOutButton() {
+        userModel?.singOut()
+        self.view.window?.rootViewController = MainAuthViewController()
     }
 
 }

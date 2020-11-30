@@ -24,9 +24,6 @@ class ProfileTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel?.font = Fonts.mainText
-
-        //self.accessoryType = .disclosureIndicator
-
         self.addSubview(valueLabel)//итак находимся во вью
         valueLabel.snp.makeConstraints {(make) -> Void in
             make.right.equalTo(self).offset(-UIConstants.rightMarginValueLabel)

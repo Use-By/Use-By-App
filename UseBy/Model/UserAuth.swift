@@ -14,7 +14,6 @@ protocol UserAuthModelProtocol {
 }
 
 enum UserAuthError {
-    // TODO Дополнить енам ошибками
     case emailAlreadyInUse
     case invalidEmail
     case unknownError
@@ -23,7 +22,6 @@ enum UserAuthError {
 }
 
 func getUserAuthErrorText(error: UserAuthError) -> String {
-    // TODO  Написать правильные тексты
     switch error {
     case .emailAlreadyInUse:
         return "errorEmailAlreadyInUse".localized

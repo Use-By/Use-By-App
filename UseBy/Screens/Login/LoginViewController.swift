@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
         static let stackOfFieldBottom: CGFloat = 50
     }
 
-    private var userAuthModel: UserAuthModel?
+    private var userAuthModel: UserAuthModelProtocol?
     private var composeStackOfFieldBottomConstraint: Constraint?
 
     private var composeViewBottomConstraint: Constraint?
@@ -146,7 +146,8 @@ class LoginViewController: UIViewController {
             return
         }
 
-        userAuthModel?.login(email: email, password: password, completion: ({ [weak self] error in
+        if userAuthModel != nil {
+            userAuthModel!.login(email: email, password: password, completion: ({ [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
                     if let error = error {
@@ -165,7 +166,7 @@ class LoginViewController: UIViewController {
                     }
                 }
             })
-        )
+        )}
     }
 }
 

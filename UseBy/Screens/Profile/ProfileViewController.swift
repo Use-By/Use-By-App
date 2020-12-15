@@ -11,6 +11,7 @@ import SnapKit
 import MessageUI
 
 class ProfileViewController: UIViewController {
+
     private var userModel: UserModel?
     private var googleAuth: Bool?
     private var user: User?
@@ -59,11 +60,14 @@ class ProfileViewController: UIViewController {
     }
 
     func setUserData() {
-        self.user = userModel?.get()
-
-        if let user = user {
-            self.userDataArray = [user.name, user.email]
+        guard let user = userModel?.get() else {
+            _ = Alert(title: "ops".localized,
+                  message: "something_went_wrong".localized,
+                  placeholder1: nil, placeholder2: nil, action: .none)
+            return
         }
+        self.user = user
+        self.userDataArray = [user.name, user.email]
     }
 
     func showMailComposer() {
@@ -97,27 +101,51 @@ class ProfileViewController: UIViewController {
         }
         logOutButton.addTarget(self, action: #selector(didTapLogOutButton), for: .touchUpInside)
     }
-    func saveName (name: String) {
-        userModel?.changeName(newName: name)
-        setUserData()
-        profileTableView.reloadData()
-    }
-    func saveEmail (email: String) {
-        userModel?.changeEmail(newEmail: email)
-        setUserData()
-        profileTableView.reloadData()
-    }
-    func savePassword (password: String) {
-        userModel?.changePassword(newPassword: password)
-        setUserData()
-        profileTableView.reloadData()
-    }
     @objc
     private func didTapLogOutButton() {
         userModel?.singOut()
         self.view.window?.rootViewController = MainAuthViewController()
     }
+    func saveName (name: [String]) {
+        userModel!.changeName(newName: name[0]) { [weak self] error in
+             DispatchQueue.main.async {
+                if error != nil {
+                    _ = Alert(title: "ops".localized,
+                          message: "something_went_wrong".localized,
+                          placeholder1: nil, placeholder2: nil, action: .none)
+                }
+                self?.user?.name = name[0]
+                self?.setUserData()
+                self?.profileTableView.reloadData()
+             }}
+    }
 
+    func saveEmail (email: [String]) {
+     userModel!.changeName(newName: email[0]) { [weak self] error in
+          DispatchQueue.main.async {
+             if error != nil {
+                _ = Alert(title: "ops".localized,
+                      message: "something_went_wrong".localized,
+                      placeholder1: nil, placeholder2: nil, action: .none)
+             }
+             self?.user?.email = email[0]
+             self?.setUserData()
+             self?.profileTableView.reloadData()
+          }}
+    }
+    func savePassword (password: [String]) {
+        userModel!.changePassword(newPassword: password[0]) { [weak self] error in
+             DispatchQueue.main.async {
+                if error != nil {
+                    _ = Alert(title: "ops".localized,
+                          message: "something_went_wrong".localized,
+                          placeholder1: nil, placeholder2: nil, action: .none)
+                }
+                self?.user?.email = password[0]
+                self?.setUserData()
+                self?.profileTableView.reloadData()
+             }}
+        }
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -127,25 +155,30 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            _ = Alert(title: "new-name".localized,
-                      message: nil, placeholder1: "put-your-name".localized, action: .save, saveDataFromAlert: saveName)
-
+            let newNameAlert = AlertController(title: "new-name".localized, message: nil,
+                                               placeholder1: "put-your-name".localized, changeWhat: .changeName,
+                                               saveDataFromAlert: saveName)
+            present(newNameAlert, animated: true, completion: nil)
         case 1:
             if !(googleAuth ?? false) {
-            _ = Alert(title: "new-email".localized, message: nil,
-                      placeholder1: "input-your-new-email-here".localized, action: .save, saveDataFromAlert: saveEmail)}
+                let newEmailAlert = AlertController(title: "new-email".localized, message: nil, placeholder1:
+                                                        "input-your-new-email-here".localized, changeWhat:
+                                                            .changeEmail, saveDataFromAlert: saveEmail)
+                present(newEmailAlert, animated: true, completion: nil)
+            }
 
-        case 2: if googleAuth ?? false {
-            showMailComposer()
-
-        } else {_ = Alert(title: "new-password".localized, message: nil,
-                         placeholder1: "input-your-new-password-here".localized,
-                         placeholder2: "confirm-your-new-password".localized, action: .save, secure: true,
-                         saveDataFromAlert: savePassword)
+        case 2:
+            if googleAuth ?? false {
+                showMailComposer()
+            } else {
+            let newPasswordAlert = AlertController(title: "new-password".localized, message: nil,
+                                                   placeholder1: "input-your-new-password-here".localized,
+                                                   placeholder2: "confirm-your-new-password".localized,
+                                                   changeWhat: .changePassword, saveDataFromAlert: savePassword)
+            present(newPasswordAlert, animated: true, completion: nil)
         }
         default:
             showMailComposer()
-
         }
     }
 }
@@ -157,7 +190,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSettingsCell",
                                                        for: indexPath) as? ProfileTableViewCell else {
-            return UITableViewCell() // верни пустую ячейку
+            return UITableViewCell()
         }
 
         guard let userDataArray = self.userDataArray else {

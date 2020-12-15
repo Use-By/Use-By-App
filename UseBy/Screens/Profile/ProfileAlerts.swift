@@ -15,17 +15,8 @@ enum AlertActions {
 
 class Alert {
     private var alert: UIAlertController
-    func isPasswordCorrect(passwordField: String, confirmField: String) -> Bool {
-        if passwordField == confirmField {
-            if passwordField.count >= 6 {
-                return true
-            }
-        }
-        return false
-    }
     init(title: String, message: String? = nil, placeholder1: String? = nil,
-         placeholder2: String? = nil, action: AlertActions, secure: Bool?=nil,
-         saveDataFromAlert:((_: String) -> Void)? = nil) {
+         placeholder2: String? = nil, action: AlertActions, secure: Bool?=nil) {
         self.alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if placeholder1 != nil {
         alert.addTextField(configurationHandler: { textField in
@@ -54,19 +45,8 @@ class Alert {
                           placeholder1: nil, placeholder2: nil, action: .none)
                     return
                 }
-                let texts: [String] = fields.map { field in
+                let _: [String] = fields.map { field in
                     return field.text ?? ""
-                }
-                if secure != nil {
-                    if self.isPasswordCorrect(passwordField: texts[0], confirmField: texts[1]) {
-                        saveDataFromAlert?(texts[0])
-                    } else {_ = Alert(title: "ops".localized,
-                                     message:
-                                        "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match"
-                   .localized,
-                                     placeholder1: nil, placeholder2: nil, action: .none)
-                    }
-                } else {saveDataFromAlert?(texts.joined())
                 }
             })
             alert.addAction(actionSave)

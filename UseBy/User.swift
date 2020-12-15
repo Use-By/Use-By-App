@@ -17,57 +17,43 @@ struct User {
 
 protocol UserModelProtocol {
     func get() -> User
-    func changeEmail(newEmail: String)
-    func changePassword(newPassword: String)
-    func changeName(newName: String)
+    func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void)
+    func changePassword(newPassword: String, completion: @escaping (Error?) -> Void)
+    func changeName(newName: String, completion: @escaping (Error?) -> Void)
     func singOut()
 }
 
 class UserModel: UserModelProtocol {
+
     func singOut() {
         GIDSignIn.sharedInstance()?.signOut()
     }
-    func changeEmail(newEmail: String) {
+    func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().currentUser?.updateEmail(to: newEmail) { (error) in
-            if error != nil {
-                print("err")
-                _ = Alert(title: "ops".localized,
-                      message: "something_went_wrong"
-    .localized,
-                      placeholder1: nil, placeholder2: nil, action: .none)
-            } else {
-                print("Email changed successfully")
-             }
+            if let error = error {
+                completion(error)
+            }
+            completion(nil)
         }
     }
 
-    func changePassword(newPassword: String) {
+    func changePassword(newPassword: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().currentUser?.updatePassword(to: newPassword) { (error) in
-            if error != nil {
-                print("err")
-                _ = Alert(title: "ops".localized,
-                      message: "something_went_wrong"
-    .localized,
-                      placeholder1: nil, placeholder2: nil, action: .none)
-            } else {
-                print("Password changed successfully")
-             }
+            if let error = error {
+                completion(error)
+            }
+            completion(nil)
         }
     }
 
-    func changeName(newName: String) {
+    func changeName(newName: String, completion: @escaping (Error?) -> Void) {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = newName
         changeRequest?.commitChanges { (error) in
-            if error != nil {
-                print("err")
-                _ = Alert(title: "ops".localized,
-                      message: "something_went_wrong"
-    .localized,
-                      placeholder1: nil, placeholder2: nil, action: .none)
-            } else {
-                print("Name changed successfully")
+            if let error = error {
+                completion(error)
             }
+            completion(nil)
         }
     }
 

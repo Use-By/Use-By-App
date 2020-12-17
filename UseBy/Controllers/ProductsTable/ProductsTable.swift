@@ -3,11 +3,16 @@ import UIKit
 import SnapKit
 import MessageUI
 
+protocol ProductsViewControllerDelegate: AnyObject {
+    func getData() -> [Product]
+}
+
 class ProductsTableViewController: UIViewController {
     struct UIConstants {
         static let labelToTableMargin: CGFloat = 15
     }
 
+    weak var delegate: ProductsViewControllerDelegate?
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -17,20 +22,6 @@ class ProductsTableViewController: UIViewController {
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.allowsSelection = true
         return tableView
-    }()
-
-    private let productsData: [Product] = {
-        let formatter = DateFormatter()
-
-        let product = Product(
-            id: "1",
-            name: "Chanel Les Beiges",
-            tag: "Makeup",
-            isLiked: false,
-            expirationDate: Date()
-        )
-
-        return [product, product, product, product, product, product]
     }()
 
     private let productsCountLabel = UILabel()
@@ -45,7 +36,8 @@ class ProductsTableViewController: UIViewController {
 
     func configureProductsCountLabel() {
         view.addSubview(productsCountLabel)
-        productsCountLabel.text = "products-count".pluralizeString(count: productsData.count)
+        let count = self.delegate?.getData().count ?? 0
+        productsCountLabel.text = "products-count".pluralizeString(count: count)
         productsCountLabel.font = Fonts.mainText
         productsCountLabel.textAlignment = .center
         productsCountLabel.snp.makeConstraints {(make) -> Void in
@@ -78,7 +70,7 @@ extension ProductsTableViewController: UITableViewDelegate {
 
 extension ProductsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productsData.count
+        return self.delegate?.getData().count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,8 +79,10 @@ extension ProductsTableViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.fillCell(product: productsData[indexPath.row])
-        cell.delegate = self
+        if let data = self.delegate?.getData() {
+            cell.fillCell(product: data[indexPath.row])
+            cell.delegate = self
+        }
 
         return cell
     }

@@ -12,11 +12,42 @@ class ProductsViewController: UIViewController {
     private let emptyScreenLabel = UILabel()
     private let filters = FiltersViewController()
     private let productsTableVC = ProductsTableViewController()
+    private let productModel: ProductModel = ProductModel()
+    private var data: [Product]?
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+
+        self.productsTableVC.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = Colors.mainBGColor
+
+        let loadingIndicator = UIActivityIndicatorView(
+            frame: CGRect(x: 5, y: 5, width: 5, height: 5)
+        )
+        loadingIndicator.color = Colors.defaultIconColor
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+
+        let filters = ProductFilters(searchByName: nil, isLiked: nil, isExpired: nil, tag: nil, sort: nil)
+        productModel.get(filters: filters, completion: { (products, error) in
+            if let products = products {
+                self.data = products
+                loadingIndicator.stopAnimating()
+            }
+
+            if let error = error {
+                // Something
+            }
+        })
 
         configureFilters()
         configureTable()
@@ -57,5 +88,11 @@ class ProductsViewController: UIViewController {
             make.centerX.equalTo(view)
             make.width.equalTo(view)
         }
+    }
+}
+
+extension ProductsViewController: ProductsViewControllerDelegate {
+    func getData() -> [Product] {
+        return self.data ?? []
     }
 }

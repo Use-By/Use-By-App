@@ -16,7 +16,12 @@ class LoginViewController: UIViewController {
         static let signInButtonPadding: CGFloat = 40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
+        static let stackViewOfTextFields: CGFloat = 145
+        static let stackOfFieldBottom: CGFloat = 50
     }
+
+    private var userAuthModel: UserAuthModelProtocol?
+    private var composeStackOfFieldBottomConstraint: Constraint?
 
     private var composeViewBottomConstraint: Constraint?
     private let loginLabel = MainScreenTitle(labelType: .login)
@@ -25,12 +30,16 @@ class LoginViewController: UIViewController {
         theme: .action
     )
     private var topConstraint: Constraint?
-    private let textFieldEmail = TextField(purpose: .email)
-    private let textFieldPassword = TextField(purpose: .password)
+    private let inputFieldEmail = TextField(purpose: .email)
+    private let inputFieldPassword = TextField(purpose: .password)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userAuthModel = UserAuthModel()
         view.backgroundColor = Colors.mainBGColor
+        configureButtons()
+        configureMainText()
+        configureTextFields()
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.keyboardWillShow),
@@ -41,9 +50,6 @@ class LoginViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
 
-        configureButtons()
-        configureMainText()
-        configureTextFields()
     }
 
     func configureButtons() {
@@ -59,26 +65,28 @@ class LoginViewController: UIViewController {
             self.composeViewBottomConstraint = make.bottom.equalTo(view)
                 .offset(-LoginViewUIConstants.signInButtonMargin).constraint
         }
-
+        signInButton.addTarget(self, action: #selector(didTapLogInButton), for: .touchUpInside)
         signInButton.isEnabled = false
     }
 
     func configureTextFields() {
-        let arrangedSubviews = [textFieldEmail, textFieldPassword]
-        let stackviewFields = UIStackView(arrangedSubviews: arrangedSubviews)
-        stackviewFields.axis = .vertical
-        stackviewFields.spacing = LoginViewUIConstants.textFieldSpacing
+        let arrangedSubviews = [inputFieldEmail, inputFieldPassword]
+        let stackViewFields = UIStackView(arrangedSubviews: arrangedSubviews)
+        stackViewFields.axis = .vertical
+        stackViewFields.spacing = LoginViewUIConstants.textFieldSpacing
 
-        view.addSubview(stackviewFields)
+        view.addSubview(stackViewFields)
 
-        stackviewFields.snp.makeConstraints { (make) -> Void in
+        stackViewFields.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(view).offset(-LoginViewUIConstants.signInButtonPadding)
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
+            self.composeStackOfFieldBottomConstraint = make.top.equalTo(loginLabel)
+                .offset(LoginViewUIConstants.stackViewOfTextFields).constraint
         }
 
-        textFieldEmail.field.delegate = self
-        textFieldPassword.field.delegate = self
+        inputFieldEmail.textField.delegate = self
+        inputFieldPassword.textField.delegate = self
     }
 
     func configureMainText() {
@@ -102,15 +110,64 @@ class LoginViewController: UIViewController {
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHight = keyboardSize.cgRectValue.height
         self.composeViewBottomConstraint?.update(offset: -(keyboardHight + 10))
+        self.composeStackOfFieldBottomConstraint?.update(offset: LoginViewUIConstants.stackOfFieldBottom)
         self.view.layoutIfNeeded()
         view.layoutIfNeeded()
        }
 
     @objc private func keyboardWillHide(notification: Notification) {
             self.composeViewBottomConstraint?.update(offset: -LoginViewUIConstants.signInButtonMargin)
+        self.composeStackOfFieldBottomConstraint?.update(offset: LoginViewUIConstants.stackViewOfTextFields)
             self.view.layoutIfNeeded()
       }
 
+    @objc
+    private func didTapLogInButton() {
+
+        let validationErrors = validateTextFields(fields: [inputFieldEmail, inputFieldPassword])
+
+        if validationErrors.count != 0 {
+            let errorsText = getErrorsTexts(validationErrors: validationErrors)
+
+            let alert = UIAlertController(
+                title: "error".localized,
+                message: errorsText,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+
+            present(alert, animated: true, completion: nil)
+
+            return
+        }
+
+        guard let email = inputFieldEmail.textField.text,
+              let password = inputFieldPassword.textField.text else {
+            return
+        }
+
+        if userAuthModel != nil {
+            userAuthModel!.login(email: email, password: password, completion: ({ [weak self] error in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    if let error = error {
+                        // Показываем алерт ошибки
+                        _ = Alert(
+                            title: "error".localized,
+                            message: getUserAuthErrorText(error: error),
+                            action: .non
+                        )
+
+                        return
+                    }
+
+                    if let router = self.navigationController as? Router {
+                        router.goToMainScreen()
+                    }
+                }
+            })
+        )}
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -129,7 +186,7 @@ extension LoginViewController: UITextFieldDelegate {
     }
 
     private func checkForEnablingMainActionButton() {
-        if textFieldEmail.isEmpty() || textFieldPassword.isEmpty() {
+        if inputFieldEmail.isEmpty() || inputFieldPassword.isEmpty() {
             signInButton.isEnabled = false
             return
         }

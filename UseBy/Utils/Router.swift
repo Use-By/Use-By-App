@@ -16,11 +16,11 @@ class Router: UINavigationController {
         navigationBar.prefersLargeTitles = true
         navigationBar.tintColor = Colors.defaultIconColor
         UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedString.Key.font: Fonts.headlineText]
+            [NSAttributedString.Key.font: Fonts.headlineText ?? UIFont()]
         UIBarButtonItem.appearance().setTitleTextAttributes(
-            [NSAttributedString.Key.font: Fonts.mainText], for: .normal)
+            [NSAttributedString.Key.font: Fonts.mainText ?? UIFont()], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(
-            [NSAttributedString.Key.font: Fonts.mainText], for: .highlighted)
+            [NSAttributedString.Key.font: Fonts.mainText ?? UIFont()], for: .highlighted)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,8 +52,8 @@ class Router: UINavigationController {
     }
 
     func goToMainScreen() {
-        let mainScreenVC = MainScreenViewController()
-        pushViewController(mainScreenVC, animated: true)
+        let mainVC = MainScreenViewController()
+        pushViewController(mainVC, animated: true)
         isNavigationBarHidden = true
     }
 

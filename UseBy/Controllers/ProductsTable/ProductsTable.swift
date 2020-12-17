@@ -22,6 +22,7 @@ class ProductsTableViewController: UIViewController {
         let formatter = DateFormatter()
 
         let product = Product(
+            id: "1",
             name: "Chanel Les Beiges",
             tag: "Makeup",
             isLiked: false,
@@ -71,6 +72,7 @@ extension ProductsTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Отображать модалку изменения продукта
+        print("cell select")
     }
 }
 

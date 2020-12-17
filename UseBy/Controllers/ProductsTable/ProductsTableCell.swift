@@ -93,8 +93,8 @@ class ProductPhoto: UIView {
         }
     }
 
-    func setPhoto() {
-
+    func setPhoto(photoUrl: String) {
+        // TODO @n-svoykina фетч картинки по урлу
     }
 
     func setEmptyPhotoIcon() {
@@ -113,6 +113,7 @@ class ProductPhoto: UIView {
 class ProductCard: UIView {
     struct UIConstants {
         static let padding: CGFloat = 10
+        static let sidePadding: CGFloat = 5
         static let cornerRadius: CGFloat = 10
         static let controlsSpacing: CGFloat = 20
         static let imageWidth: CGFloat = 125
@@ -124,7 +125,8 @@ class ProductCard: UIView {
     private var deleteIcon = IconView(name: "DeleteIcon", size: .medium, theme: .secondary)
     private var likeIcon = IconView(name: "LikeLineIcon", size: .medium, theme: .action)
     private let productPhoto = ProductPhoto()
-
+    private var product: Product?
+    
     init() {
         super.init(frame: .zero)
 
@@ -150,17 +152,17 @@ class ProductCard: UIView {
         }
 
         nameLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.padding / 2)
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
             make.top.equalTo(self).offset(UIConstants.padding)
         }
 
         expirationLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.padding / 2)
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
             make.top.equalTo(nameLabel.snp.bottom).offset(UIConstants.controlsSpacing)
         }
 
         tagLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.padding / 2)
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
             make.bottom.equalTo(self).offset(-UIConstants.padding)
         }
 
@@ -168,16 +170,20 @@ class ProductCard: UIView {
         addSubview(likeIcon)
 
         deleteIcon.snp.makeConstraints {(make) -> Void in
-            make.right.equalTo(self).offset(-UIConstants.padding / 2)
+            make.right.equalTo(self).offset(-UIConstants.sidePadding)
             make.bottom.equalTo(self).offset(-UIConstants.padding)
         }
         likeIcon.snp.makeConstraints {(make) -> Void in
-            make.right.equalTo(self).offset(-UIConstants.padding / 2)
+            make.right.equalTo(self).offset(-UIConstants.sidePadding)
             make.top.equalTo(self).offset(UIConstants.padding)
         }
+
+        deleteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapDeleteButton)))
+        likeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLikeButton)))
     }
 
     func fillCard(product: Product) {
+        self.product = product
         nameLabel.text = product.name
 
         if let tag = product.tag {
@@ -188,13 +194,25 @@ class ProductCard: UIView {
         dateFormatter.dateFormat = "dd.MM.yyyy"
         expirationLabel.setDate(date: dateFormatter.string(from: product.expirationDate))
 
-        if product.photoUrl == nil {
+        if let photoUrl = product.photoUrl {
+            productPhoto.setPhoto(photoUrl: photoUrl)
+        } else {
             productPhoto.setEmptyPhotoIcon()
         }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc
+    func didTapLikeButton() {
+        print("Like tap")
+    }
+
+    @objc
+    func didTapDeleteButton() {
+        print("Delete tap")
     }
 }
 

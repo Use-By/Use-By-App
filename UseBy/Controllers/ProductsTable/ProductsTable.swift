@@ -15,6 +15,7 @@ class ProductsTableViewController: UIViewController {
         self.view.addSubview(tableView)
         tableView.register(ProductsTableCell.self, forCellReuseIdentifier: "ProductsTableCell")
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.allowsSelection = true
         return tableView
     }()
 
@@ -97,8 +98,12 @@ extension ProductsTableViewController: ProductsTableCellDelegate {
     func didTapDeleteButton() {
         print("didTapDeleteButton")
     }
-    
+
     func didTapLikeButton() {
         print("didTapLikeButton")
+    }
+
+    func didTapCardInfo() {
+        print("didTapCardInfo")
     }
 }

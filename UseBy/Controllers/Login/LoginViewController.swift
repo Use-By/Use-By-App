@@ -33,9 +33,17 @@ class LoginViewController: UIViewController {
     private let inputFieldEmail = TextField(purpose: .email)
     private let inputFieldPassword = TextField(purpose: .password)
 
+    init(userAuthModel: UserAuthModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.userAuthModel = userAuthModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        userAuthModel = UserAuthModel()
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()

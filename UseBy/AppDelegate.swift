@@ -12,7 +12,6 @@ import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    private var router: Router?
 
     func application(
         _ application: UIApplication,
@@ -25,9 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if let window = window {
-            let mainViewController = LoginViewController()
-            router = Router(rootViewController: mainViewController)
-            window.rootViewController = MainScreenViewController()
+            let mainViewController = AppLauncher()
+            window.rootViewController = Router(rootViewController: mainViewController)
             window.makeKeyAndVisible()
         }
 

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 import MessageUI
-import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     struct UIConstants {
@@ -79,14 +78,6 @@ class ProfileViewController: UIViewController {
             make.centerX.equalTo(view)
             make.top.equalTo(profileTableView.snp.bottom).offset(UIConstants.spaceBetweenTableAndLogout)
         }
-        logOutButton.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
-    }
-
-    @objc
-    func didTapLogoutButton() {
-        GIDSignIn.sharedInstance()?.signOut()
-        let mainViewController = MainAuthViewController()
-        self.view.window?.rootViewController = Router(rootViewController: mainViewController)
     }
 }
 

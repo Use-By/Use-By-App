@@ -38,6 +38,16 @@ class MainAuthViewController: UIViewController {
         frame: CGRect(x: 0, y: 0, width: 0, height: 0),
         circleColor: Colors.secondaryActionBGColor
     )
+    private var userAuthModel: UserAuthModel?
+
+    init(userAuthModel: UserAuthModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.userAuthModel = userAuthModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,7 +151,6 @@ class MainAuthViewController: UIViewController {
     }
 }
 
-// TODO Вынести логику входа в модель
 extension MainAuthViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         if let error = error {
@@ -161,7 +170,7 @@ extension MainAuthViewController: GIDSignInDelegate {
                 router.showAlert(alert: alert)
             }
 
-        return
+            return
         }
 
         guard let authentication = user.authentication else { return }
@@ -171,24 +180,26 @@ extension MainAuthViewController: GIDSignInDelegate {
             accessToken: authentication.accessToken
         )
 
-        Auth.auth().signIn(with: credential) { [self] (_, error) in
-            if error != nil {
+        userAuthModel?.loginWithCredential(credential: credential, completion: { (error) in
+            if let error = error {
                 let alert = UIAlertController(
                     title: "error".localized,
-                    message: "google-error-description".localized,
+                    message: getUserAuthErrorText(error: error),
                     preferredStyle: .alert
                 )
                 alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
 
-                if let router = navigationController as? Router {
+                if let router = self.navigationController as? Router {
                     router.showAlert(alert: alert)
                 }
+
+                return
             }
 
-            if let router = navigationController as? Router {
+            if let router = self.navigationController as? Router {
                 router.goToMainScreen()
             }
-        }
+        })
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

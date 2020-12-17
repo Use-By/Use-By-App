@@ -16,9 +16,13 @@ class AppLauncher: UIViewController {
         // Экран загрузки - повторяем launch screen
 
         if GIDSignIn.sharedInstance()?.currentUser != nil {
-            view.window!.rootViewController = MainScreenViewController()
+            if let router = navigationController as? Router {
+                router.goToMainScreen()
+            }
         } else {
-            view.window!.rootViewController = MainAuthViewController()
+            if let router = navigationController as? Router {
+                router.goToMainAuthScreen()
+            }
         }
     }
 }

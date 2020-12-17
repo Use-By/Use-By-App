@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 protocol UserAuthModelProtocol {
     func createAccount(email: String, password: String, completion: @escaping (UserAuthError?) -> Void)
@@ -19,6 +20,7 @@ enum UserAuthError {
     case unknownError
     case wrongPassword
     case userNotFound
+    case googleSignInError
 }
 
 func getUserAuthErrorText(error: UserAuthError) -> String {
@@ -37,11 +39,13 @@ func getUserAuthErrorText(error: UserAuthError) -> String {
 
     case .userNotFound:
         return "errorUserNotFound".localized
+
+    case .googleSignInError:
+        return "google-error-description".localized
     }
 }
 
 class UserAuthModel: UserAuthModelProtocol {
-
     func createAccount(email: String, password: String, completion: @escaping (UserAuthError?) -> Void) {
         // TODO Нужно при создании выставлять name для пользователя
 
@@ -90,25 +94,23 @@ class UserAuthModel: UserAuthModelProtocol {
                     return
                 }
             }
-        completion(nil)
 
-//            if let error = error as? AuthErrorCode {
-//                switch error {
-//                case .wrongPassword:
-//                    completion(UserAuthError.wrongPassword)
-//
-//                case .userNotFound:
-//                    completion(UserAuthError.userNotFound)
-//
-//                case .invalidEmail:
-//                    completion(UserAuthError.invalidEmail)
-//
-//                default :
-//                    completion(UserAuthError.unknownError)
-//
-//                }
-//                completion(nil)
-//            }
+            completion(nil)
         }
+    }
+
+    func loginWithCredential(credential: AuthCredential, completion: @escaping (UserAuthError?) -> Void) {
+        Auth.auth().signIn(with: credential) { [self] (_, error) in
+            if error != nil {
+                completion(UserAuthError.googleSignInError)
+            }
+
+            completion(nil)
+        }
+    }
+
+    func logout(completion: @escaping () -> Void) {
+        GIDSignIn.sharedInstance()?.signOut()
+        completion()
     }
 }

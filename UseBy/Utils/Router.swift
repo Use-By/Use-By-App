@@ -28,19 +28,22 @@ class Router: UINavigationController {
     }
 
     func goToCreateAccountScreen() {
-        let createAccountVC = CreateAccountViewController()
+        let userAuthModel = UserAuthModel()
+        let createAccountVC = CreateAccountViewController(userAuthModel: userAuthModel)
         pushViewController(createAccountVC, animated: true)
         isNavigationBarHidden = false
     }
 
     func goToLoginScreen() {
-        let loginVC = LoginViewController()
+        let userAuthModel = UserAuthModel()
+        let loginVC = LoginViewController(userAuthModel: userAuthModel)
         pushViewController(loginVC, animated: true)
         isNavigationBarHidden = false
     }
 
     func goToMainAuthScreen() {
-        let mainAuthVC = MainAuthViewController()
+        let userAuthModel = UserAuthModel()
+        let mainAuthVC = MainAuthViewController(userAuthModel: userAuthModel)
         pushViewController(mainAuthVC, animated: true)
         isNavigationBarHidden = true
     }

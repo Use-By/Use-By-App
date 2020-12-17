@@ -72,7 +72,6 @@ extension ProductsTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Отображать модалку изменения продукта
-        print("cell select")
     }
 }
 

@@ -87,7 +87,18 @@ extension ProductsTableViewController: UITableViewDataSource {
         }
 
         cell.fillCell(product: productsData[indexPath.row])
+        cell.delegate = self
 
         return cell
+    }
+}
+
+extension ProductsTableViewController: ProductsTableCellDelegate {
+    func didTapDeleteButton() {
+        print("didTapDeleteButton")
+    }
+    
+    func didTapLikeButton() {
+        print("didTapLikeButton")
     }
 }

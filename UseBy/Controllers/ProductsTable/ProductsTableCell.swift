@@ -1,6 +1,11 @@
 import Foundation
 import UIKit
 
+protocol ProductsTableCellDelegate: AnyObject {
+    func didTapDeleteButton()
+    func didTapLikeButton()
+}
+
 class ExpirationDateLabel: UIView {
     struct UIConstants {
         static let buttonsOffset: CGFloat = 5
@@ -126,7 +131,8 @@ class ProductCard: UIView {
     private var likeIcon = IconView(name: "LikeLineIcon", size: .medium, theme: .action)
     private let productPhoto = ProductPhoto()
     private var product: Product?
-    
+    weak var delegate: ProductsTableCellDelegate?
+
     init() {
         super.init(frame: .zero)
 
@@ -207,16 +213,16 @@ class ProductCard: UIView {
 
     @objc
     func didTapLikeButton() {
-        print("Like tap")
+        self.delegate?.didTapLikeButton()
     }
 
     @objc
     func didTapDeleteButton() {
-        print("Delete tap")
+        self.delegate?.didTapDeleteButton()
     }
 }
 
-class ProductsTableCell: UITableViewCell {
+class ProductsTableCell: UITableViewCell, ProductsTableCellDelegate {
     struct UIConstants {
         static let padding: CGFloat = 20
         static let cornerRadius: CGFloat = 10
@@ -224,6 +230,7 @@ class ProductsTableCell: UITableViewCell {
     }
 
     private var card = ProductCard()
+    weak var delegate: ProductsTableCellDelegate?
 
     func fillCell(product: Product) {
         card.fillCard(product: product)
@@ -239,9 +246,20 @@ class ProductsTableCell: UITableViewCell {
             make.center.equalTo(self)
             make.height.equalTo(self).offset(-UIConstants.padding)
         }
+        
+        card.delegate = self
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func didTapDeleteButton() {
+        self.delegate?.didTapDeleteButton()
+    }
+    
+    func didTapLikeButton() {
+        self.delegate?.didTapLikeButton()
+    }
 }
+

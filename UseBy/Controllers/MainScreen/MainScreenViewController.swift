@@ -1,10 +1,3 @@
-//
-//  MainScreenViewController.swift
-//  UseBy
-//
-//  Created by Nadezda Svoykina on 10/17/20.
-//
-
 import Foundation
 import UIKit
 

@@ -1,10 +1,3 @@
-//
-//  AddProduct.swift
-//  UseBy
-//
-//  Created by Nadezda Svoykina on 11/21/20.
-//
-
 import Foundation
 import UIKit
 

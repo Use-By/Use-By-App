@@ -58,10 +58,22 @@ class FiltersViewController: UIViewController {
         }
 
         buttons[0].addTarget(self, action: #selector(didTapFiltersButton), for: .touchUpInside)
+        buttons[1].addTarget(self, action: #selector(didTapLikedButton), for: .touchUpInside)
+        buttons[2].addTarget(self, action: #selector(didTapExpiredButton), for: .touchUpInside)
     }
 
     @objc
     func didTapFiltersButton() {
         present(ChangeFiltersViewController(), animated: true, completion: nil)
+    }
+
+    @objc
+    func didTapLikedButton() {
+        // TODO рефетч данных таблицы с сортировкой по лайкам
+    }
+
+    @objc
+    func didTapExpiredButton() {
+        // TODO рефетч данных таблицы с сортировкой по expired
     }
 }

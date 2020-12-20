@@ -30,7 +30,7 @@
 		33438AEE258FB400006E4215 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33438AED258FB400006E4215 /* StrokeAnimation.swift */; };
 		33438AFB258FB4A2006E4215 /* StrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33438AFA258FB4A2006E4215 /* StrokeColorAnimation.swift */; };
 		33438B04258FD7FA006E4215 /* EditProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33438B03258FD7FA006E4215 /* EditProduct.swift */; };
-		33438B0A258FD865006E4215 /* ProductPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33438B09258FD865006E4215 /* ProductPageViewController.swift */; };
+		33438B0A258FD865006E4215 /* ProductPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33438B09258FD865006E4215 /* ProductPage.swift */; };
 		33467E442534F67900184A93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467E432534F67900184A93 /* UILabel.swift */; };
 		33535F932572C66900E47452 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 33535F952572C66900E47452 /* Localizable.stringsdict */; };
 		3361E141255890A400315095 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E140255890A400315095 /* Router.swift */; };
@@ -116,7 +116,7 @@
 		33438AED258FB400006E4215 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		33438AFA258FB4A2006E4215 /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StrokeColorAnimation.swift; path = "/Users/n-svoykina/Documents/Use-By-App/UseBy/Utils/Animations/StrokeColorAnimation.swift"; sourceTree = "<absolute>"; };
 		33438B03258FD7FA006E4215 /* EditProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProduct.swift; sourceTree = "<group>"; };
-		33438B09258FD865006E4215 /* ProductPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPageViewController.swift; sourceTree = "<group>"; };
+		33438B09258FD865006E4215 /* ProductPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPage.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		33535F942572C66900E47452 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		33535F992572C67100E47452 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "ru-RU"; path = "ru-RU.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -240,7 +240,6 @@
 		3336440825323F6C00D1A5C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				33438B08258FD850006E4215 /* ProductPage */,
 				33438B02258FD7E1006E4215 /* EditProduct */,
 				33A67758256AE4520051C39E /* ProductsTable */,
 				33A6774A256A9E150051C39E /* ChangeFilters */,
@@ -301,7 +300,7 @@
 		33438B08258FD850006E4215 /* ProductPage */ = {
 			isa = PBXGroup;
 			children = (
-				33438B09258FD865006E4215 /* ProductPageViewController.swift */,
+				33438B09258FD865006E4215 /* ProductPage.swift */,
 			);
 			path = ProductPage;
 			sourceTree = "<group>";
@@ -309,6 +308,7 @@
 		336BC69E253221AE00B7346C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				33438B08258FD850006E4215 /* ProductPage */,
 				843690C4254EC11100ABBEE0 /* Alert.swift */,
 				333643F42532301F00D1A5C6 /* Button.swift */,
 				332A57E925326E450078E65B /* AppName.swift */,
@@ -821,7 +821,7 @@
 				33A67769256AE4BF0051C39E /* Product.swift in Sources */,
 				33A67706256975420051C39E /* TabBar.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
-				33438B0A258FD865006E4215 /* ProductPageViewController.swift in Sources */,
+				33438B0A258FD865006E4215 /* ProductPage.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
 				33A6773E2569A01D0051C39E /* Filters.swift in Sources */,
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,

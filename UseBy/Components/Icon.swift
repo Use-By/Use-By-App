@@ -89,3 +89,20 @@ class IconView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class IconButton: UIButton {
+    init(name: String, size: IconSize, theme: IconTheme = IconTheme.normal) {
+        super.init(frame: .zero)
+        let icon = Icon(name: name, size: size, theme: theme)
+
+        adjustsImageWhenHighlighted = false
+        adjustsImageWhenDisabled = false
+        isUserInteractionEnabled = true
+
+        setImage(icon.icon, for: .normal)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

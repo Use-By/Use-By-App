@@ -1,11 +1,11 @@
 import Foundation
 import UIKit
 
-class AddProductViewController: UIViewController, ProductPageViewDelegate {
+class EditProductViewController: UIViewController, ProductPageViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let productView = ProductPageView(addButtonText: "add".localized)
+        let productView = ProductPageView(addButtonText: "save".localized)
         productView.delegate = self
 
         view.addSubview(productView)

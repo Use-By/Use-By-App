@@ -90,8 +90,8 @@ class ProductCard: UIView {
         static let sidePadding: CGFloat = 5
     }
 
-    private var deleteIcon = IconView(name: "DeleteIcon", size: .medium, theme: .secondary)
-    private var likeIcon = IconView(name: "LikeLineIcon", size: .medium, theme: .action)
+    private var deleteIcon = IconButton(name: "DeleteIcon", size: .medium, theme: .secondary)
+    private var likeIcon = IconButton(name: "LikeLineIcon", size: .medium, theme: .action)
     private let productInfo = ProductInfo()
     private var product: Product?
     weak var delegate: ProductsTableCellDelegate?
@@ -115,12 +115,13 @@ class ProductCard: UIView {
             make.right.equalTo(self).offset(-UIConstants.sidePadding)
             make.bottom.equalTo(self).offset(-UIConstants.padding)
         }
-        deleteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapDeleteButton)))
+        deleteIcon.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+
         likeIcon.snp.makeConstraints {(make) -> Void in
             make.right.equalTo(self).offset(-UIConstants.sidePadding)
             make.top.equalTo(self).offset(UIConstants.padding)
         }
-        likeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLikeButton)))
+        likeIcon.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
 
         addSubview(productInfo)
         productInfo.snp.makeConstraints {(make) -> Void in

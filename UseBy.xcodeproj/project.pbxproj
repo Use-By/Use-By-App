@@ -47,8 +47,7 @@
 		337B9F2A253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2B253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
-		337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */; };
-		33A67706256975420051C39E /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67705256975420051C39E /* TabBar.swift */; };
+		33A67706256975420051C39E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67705256975420051C39E /* MainScreenViewController.swift */; };
 		33A6771825697B7F0051C39E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6771725697B7F0051C39E /* UserAuth.swift */; };
 		33A6772C2569938F0051C39E /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6772B2569938F0051C39E /* ProductsViewController.swift */; };
 		33A677382569958E0051C39E /* AddProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A677372569958E0051C39E /* AddProduct.swift */; };
@@ -138,8 +137,7 @@
 		336D6765252A4A610098259E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		336D6777252A4A970098259E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
-		33A67705256975420051C39E /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		33A67705256975420051C39E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		33A6771725697B7F0051C39E /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		33A6772B2569938F0051C39E /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		33A677372569958E0051C39E /* AddProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProduct.swift; sourceTree = "<group>"; };
@@ -247,9 +245,8 @@
 				33A6773C2569A0110051C39E /* Filters */,
 				33A67736256995830051C39E /* AddProduct */,
 				33A6772A2569937D0051C39E /* Products */,
-				33A67704256975350051C39E /* TabBar */,
+				33A67704256975350051C39E /* MainScreenViewController */,
 				845DDECB2545621E00E1C549 /* Profile */,
-				337B9F75253B7D86006A5EFB /* MainScreen */,
 				333869B22544D8DD002E76FD /* CreateAccount */,
 				333869B12544D8D4002E76FD /* Login */,
 				3336440925323F7500D1A5C6 /* MainAuth */,
@@ -397,20 +394,12 @@
 			path = UseByUITests;
 			sourceTree = "<group>";
 		};
-		337B9F75253B7D86006A5EFB /* MainScreen */ = {
+		33A67704256975350051C39E /* MainScreenViewController */ = {
 			isa = PBXGroup;
 			children = (
-				337B9F76253B7DA0006A5EFB /* MainScreenViewController.swift */,
+				33A67705256975420051C39E /* MainScreenViewController.swift */,
 			);
-			path = MainScreen;
-			sourceTree = "<group>";
-		};
-		33A67704256975350051C39E /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				33A67705256975420051C39E /* TabBar.swift */,
-			);
-			path = TabBar;
+			path = MainScreenViewController;
 			sourceTree = "<group>";
 		};
 		33A6771625697B730051C39E /* Model */ = {
@@ -819,7 +808,7 @@
 				3320C4642574042C00C9E806 /* TagLabel.swift in Sources */,
 				33A677462569A0680051C39E /* FiltersButton.swift in Sources */,
 				33A67769256AE4BF0051C39E /* Product.swift in Sources */,
-				33A67706256975420051C39E /* TabBar.swift in Sources */,
+				33A67706256975420051C39E /* MainScreenViewController.swift in Sources */,
 				332A57EA25326E450078E65B /* AppName.swift in Sources */,
 				33438B0A258FD865006E4215 /* ProductPage.swift in Sources */,
 				333643F52532301F00D1A5C6 /* Button.swift in Sources */,
@@ -844,7 +833,6 @@
 				332A581525333B360078E65B /* BackgroundCircle.swift in Sources */,
 				33438B04258FD7FA006E4215 /* EditProduct.swift in Sources */,
 				3320C45F2574040B00C9E806 /* ExpirationDateLabel.swift in Sources */,
-				337B9F77253B7DA0006A5EFB /* MainScreenViewController.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
 				33A6775A256AE4600051C39E /* ProductsTable.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,

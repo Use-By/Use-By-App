@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class TabBar: UITabBarController {
+class MainScreenViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.tintColor = Colors.mainActionColor

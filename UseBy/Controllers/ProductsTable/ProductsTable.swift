@@ -73,7 +73,10 @@ extension ProductsTableViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(EditProductViewController(), animated: true, completion: nil)
+        if let data = self.delegate?.getData() {
+            let product = data[indexPath.row]
+            present(EditProductViewController(product: product), animated: true, completion: nil)
+        }
     }
 }
 

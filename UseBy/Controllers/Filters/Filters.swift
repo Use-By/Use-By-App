@@ -1,14 +1,11 @@
-//
-//  Filters.swift
-//  UseBy
-//
-//  Created by Nadezda Svoykina on 11/21/20.
-//
-
 import Foundation
 import UIKit
 
-class FiltersViewController: UIViewController {
+protocol FiltersViewControllerDelegate: AnyObject {
+    func applyFilters(filters: ProductFilters)
+}
+
+class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelegate {
     struct UIConstants {
         static let padding: CGFloat = 40
         static let buttonsSpacing: CGFloat = 10
@@ -28,6 +25,17 @@ class FiltersViewController: UIViewController {
         ),
         FilterButton(text: "expired".localized)
     ]
+    private var filters: ProductFilters
+    weak var delegate: FiltersViewControllerDelegate?
+
+    init(filters: ProductFilters) {
+        self.filters = filters
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,16 +72,24 @@ class FiltersViewController: UIViewController {
 
     @objc
     func didTapFiltersButton() {
-        present(ChangeFiltersViewController(), animated: true, completion: nil)
+        let changeFiltersVC = ChangeFiltersViewController(filters: filters)
+        changeFiltersVC.delegate = self
+        present(changeFiltersVC, animated: true, completion: nil)
     }
 
     @objc
     func didTapLikedButton() {
-        // TODO рефетч данных таблицы с сортировкой по лайкам
+        filters.isLiked = !(filters.isLiked ?? false)
+        self.delegate?.applyFilters(filters: filters)
     }
 
     @objc
     func didTapExpiredButton() {
-        // TODO рефетч данных таблицы с сортировкой по expired
+        filters.isExpired = !(filters.isExpired ?? false)
+        self.delegate?.applyFilters(filters: filters)
+    }
+
+    func applyFilters(filters: ProductFilters) {
+        self.delegate?.applyFilters(filters: filters)
     }
 }

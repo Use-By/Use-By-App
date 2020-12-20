@@ -240,6 +240,7 @@
 		3336440825323F6C00D1A5C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				33438B08258FD850006E4215 /* ProductPage */,
 				33438B02258FD7E1006E4215 /* EditProduct */,
 				33A67758256AE4520051C39E /* ProductsTable */,
 				33A6774A256A9E150051C39E /* ChangeFilters */,
@@ -308,7 +309,6 @@
 		336BC69E253221AE00B7346C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				33438B08258FD850006E4215 /* ProductPage */,
 				843690C4254EC11100ABBEE0 /* Alert.swift */,
 				333643F42532301F00D1A5C6 /* Button.swift */,
 				332A57E925326E450078E65B /* AppName.swift */,

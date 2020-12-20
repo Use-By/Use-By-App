@@ -2,6 +2,18 @@ import Foundation
 import UIKit
 
 class EditProductViewController: UIViewController, ProductPageViewDelegate {
+    private let productModel: ProductModel = ProductModel()
+    private var product: Product
+
+    init(product: Product) {
+        self.product = product
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +30,9 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
 
     @objc
     func didTapAddButton() {
-        dismiss(animated: true, completion: nil)
+        productModel.update(data: product, completion: {(_, _) in
+            self.dismiss(animated: true, completion: nil)
+        })
     }
 
     @objc

@@ -10,15 +10,25 @@ class ProductsViewController: UIViewController {
     }
 
     private let emptyScreenLabel = UILabel()
-    private let filters = FiltersViewController()
+    private let loader: Loader = {
+        let loader = Loader(lineWidth: 5)
+        loader.translatesAutoresizingMaskIntoConstraints = false
+
+        return loader
+    }()
+
+    private var filters = ProductFilters(searchByName: nil, isLiked: false, isExpired: false, tag: nil, sort: nil)
+    private let filtersVC: FiltersViewController
     private let productsTableVC = ProductsTableViewController()
     private let productModel: ProductModel = ProductModel()
     private var data: [Product]?
 
     init() {
+        filtersVC = FiltersViewController(filters: self.filters)
         super.init(nibName: nil, bundle: nil)
 
-        self.productsTableVC.delegate = self
+        filtersVC.delegate = self
+        productsTableVC.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -29,9 +39,6 @@ class ProductsViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = Colors.mainBGColor
-
-        let loader = Loader(lineWidth: 5)
-        loader.translatesAutoresizingMaskIntoConstraints = false
         loader.isAnimating = true
 
         view.addSubview(loader)
@@ -44,11 +51,14 @@ class ProductsViewController: UIViewController {
         configureFilters()
         configureTable()
 
-        let filters = ProductFilters(searchByName: nil, isLiked: nil, isExpired: nil, tag: nil, sort: nil)
+        loadProducts()
+    }
+
+    func loadProducts() {
         productModel.get(filters: filters, completion: { (products, error) in
             if let products = products {
                 self.data = products
-                loader.isHidden = true
+                self.loader.isHidden = true
                 self.productsTableVC.reloadTable()
                 self.productsTableVC.view.isHidden = false
             }
@@ -72,10 +82,10 @@ class ProductsViewController: UIViewController {
     }
 
     func configureFilters() {
-        view.addSubview(filters.view)
-        addChild(filters)
-        filters.didMove(toParent: self)
-        filters.view.snp.makeConstraints { (make) -> Void in
+        view.addSubview(filtersVC.view)
+        addChild(filtersVC)
+        filtersVC.didMove(toParent: self)
+        filtersVC.view.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view).offset(UIConstants.filtersOffset)
             make.width.equalTo(view).offset(-UIConstants.padding)
             make.centerX.equalTo(view)
@@ -89,7 +99,7 @@ class ProductsViewController: UIViewController {
         productsTableVC.didMove(toParent: self)
 
         productsTableVC.view.snp.makeConstraints {(make) -> Void in
-            make.top.equalTo(filters.view.snp.bottom).offset(UIConstants.controlsMargin)
+            make.top.equalTo(filtersVC.view.snp.bottom).offset(UIConstants.controlsMargin)
             make.bottom.equalTo(view)
             make.centerX.equalTo(view)
             make.width.equalTo(view)
@@ -102,5 +112,12 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController: ProductsViewControllerDelegate {
     func getData() -> [Product] {
         return self.data ?? []
+    }
+}
+
+extension ProductsViewController: FiltersViewControllerDelegate {
+    func applyFilters(filters: ProductFilters) {
+        self.filters = filters
+        loadProducts()
     }
 }

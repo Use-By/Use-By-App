@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+protocol ChangeFiltersViewControllerDelegate: AnyObject {
+    func applyFilters(filters: ProductFilters)
+}
+
 class ChangeFiltersViewController: UIViewController {
     struct UIConstants {
         static let buttonsSpacing: CGFloat = 20
@@ -22,6 +26,17 @@ class ChangeFiltersViewController: UIViewController {
         name: "CloseIcon",
         size: .large
     )
+    private var filters: ProductFilters
+    weak var delegate: ChangeFiltersViewControllerDelegate?
+
+    init(filters: ProductFilters) {
+        self.filters = filters
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,11 +83,15 @@ class ChangeFiltersViewController: UIViewController {
 
     @objc
     func didTapResetButton() {
+        self.delegate?.applyFilters(
+            filters: ProductFilters(searchByName: nil, isLiked: false, isExpired: false, tag: nil, sort: nil)
+        )
         dismiss(animated: true, completion: nil)
     }
 
     @objc
     func didTapApplyButton() {
+        self.delegate?.applyFilters(filters: filters)
         dismiss(animated: true, completion: nil)
     }
 

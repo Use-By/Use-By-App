@@ -13,8 +13,8 @@ struct ProductToCreate {
     var name: String
     var tag: String?
     var openedDate: Date
-    var afterOpenening: Date
-    var useByDate: Date
+    var afterOpenening: Date?
+    var useByDate: Date?
     var photo: Data?
 }
 
@@ -25,8 +25,8 @@ enum SortDirection {
 
 struct ProductFilters {
     var searchByName: String?
-    var isLiked: Bool?
-    var isExpired: Bool?
+    var isLiked: Bool
+    var isExpired: Bool
     var tag: String?
     var sort: SortDirection?
 }
@@ -72,7 +72,7 @@ class ProductModel: ProductModelProtocol {
             name: data.name,
             tag: data.tag,
             isLiked: false,
-            expirationDate: data.useByDate
+            expirationDate: Date()
         )
 
         completion(product, nil)

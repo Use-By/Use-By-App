@@ -15,7 +15,7 @@ class ProductsTableViewController: UIViewController {
     }
 
     weak var delegate: ProductsViewControllerDelegate?
-    
+
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self

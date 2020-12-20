@@ -5,6 +5,8 @@ import MessageUI
 
 protocol ProductsViewControllerDelegate: AnyObject {
     func getData() -> [Product]
+    func didTapDeleteButton(id: String)
+    func didTapLikeButton(id: String)
 }
 
 class ProductsTableViewController: UIViewController {
@@ -13,6 +15,7 @@ class ProductsTableViewController: UIViewController {
     }
 
     weak var delegate: ProductsViewControllerDelegate?
+    
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -101,15 +104,11 @@ extension ProductsTableViewController: UITableViewDataSource {
 }
 
 extension ProductsTableViewController: ProductsTableCellDelegate {
-    func didTapDeleteButton() {
-        print("didTapDeleteButton")
+    func didTapDeleteButton(id: String) {
+        self.delegate?.didTapDeleteButton(id: id)
     }
 
-    func didTapLikeButton() {
-        print("didTapLikeButton")
-    }
-
-    func didTapCardInfo() {
-        print("didTapCardInfo")
+    func didTapLikeButton(id: String) {
+        self.delegate?.didTapLikeButton(id: id)
     }
 }

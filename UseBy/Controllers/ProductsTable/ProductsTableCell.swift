@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 protocol ProductsTableCellDelegate: AnyObject {
-    func didTapDeleteButton()
-    func didTapLikeButton()
+    func didTapDeleteButton(id: String)
+    func didTapLikeButton(id: String)
 }
 
 class ProductCard: UIView {
@@ -111,13 +111,13 @@ class ProductCard: UIView {
     }
 
     @objc
-    func didTapLikeButton() {
-        self.delegate?.didTapLikeButton()
+    func didTapLikeButton(id: String) {
+        self.delegate?.didTapLikeButton(id: id)
     }
 
     @objc
-    func didTapDeleteButton() {
-        self.delegate?.didTapDeleteButton()
+    func didTapDeleteButton(id: String) {
+        self.delegate?.didTapDeleteButton(id: id)
     }
 }
 
@@ -155,11 +155,11 @@ class ProductsTableCell: UITableViewCell, ProductsTableCellDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func didTapDeleteButton() {
-        self.delegate?.didTapDeleteButton()
+    func didTapDeleteButton(id: String) {
+        self.delegate?.didTapDeleteButton(id: id)
     }
 
-    func didTapLikeButton() {
-        self.delegate?.didTapLikeButton()
+    func didTapLikeButton(id: String) {
+        self.delegate?.didTapLikeButton(id: id)
     }
 }

@@ -110,6 +110,18 @@ class ProductsViewController: UIViewController {
 }
 
 extension ProductsViewController: ProductsViewControllerDelegate {
+    func didTapDeleteButton(id: String) {
+        productModel.delete(id: id, completion: {(error) in
+            self.loadProducts()
+        })
+    }
+    
+    func didTapLikeButton(id: String) {
+        productModel.like(id: id, completion: {(error) in
+            self.loadProducts()
+        })
+    }
+    
     func getData() -> [Product] {
         return self.data ?? []
     }

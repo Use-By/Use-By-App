@@ -30,27 +30,33 @@ class ProductsViewController: UIViewController {
 
         view.backgroundColor = Colors.mainBGColor
 
-        let loadingIndicator = UIActivityIndicatorView(
-            frame: CGRect(x: 5, y: 5, width: 5, height: 5)
-        )
-        loadingIndicator.color = Colors.defaultIconColor
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating()
+        let loader = Loader(lineWidth: 5)
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        loader.isAnimating = true
+
+        view.addSubview(loader)
+        loader.snp.makeConstraints {(make) in
+            make.center.equalTo(self.view)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
+
+        configureFilters()
+        configureTable()
 
         let filters = ProductFilters(searchByName: nil, isLiked: nil, isExpired: nil, tag: nil, sort: nil)
         productModel.get(filters: filters, completion: { (products, error) in
             if let products = products {
                 self.data = products
-                loadingIndicator.stopAnimating()
+                loader.isHidden = true
+                self.productsTableVC.reloadTable()
+                self.productsTableVC.view.isHidden = false
             }
 
             if let error = error {
                 // Something
             }
         })
-
-        configureFilters()
-        configureTable()
     }
 
     func configureEmptyScreenLabel() {
@@ -88,6 +94,8 @@ class ProductsViewController: UIViewController {
             make.centerX.equalTo(view)
             make.width.equalTo(view)
         }
+
+        productsTableVC.view.isHidden = true
     }
 }
 

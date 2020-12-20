@@ -36,6 +36,20 @@ class ProductsTableViewController: UIViewController {
 
     func configureProductsCountLabel() {
         view.addSubview(productsCountLabel)
+        setCountLabel()
+    }
+
+    func configureTable() {
+        tableView.separatorStyle = .none
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(productsCountLabel.snp.bottom).offset(UIConstants.labelToTableMargin)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
+        }
+    }
+
+    func setCountLabel() {
         let count = self.delegate?.getData().count ?? 0
         productsCountLabel.text = "products-count".pluralizeString(count: count)
         productsCountLabel.font = Fonts.mainText
@@ -47,14 +61,9 @@ class ProductsTableViewController: UIViewController {
         }
     }
 
-    func configureTable() {
-        tableView.separatorStyle = .none
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(productsCountLabel.snp.bottom).offset(UIConstants.labelToTableMargin)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
-        }
+    func reloadTable() {
+        self.tableView.reloadData()
+        setCountLabel()
     }
 }
 

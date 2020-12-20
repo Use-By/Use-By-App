@@ -1,10 +1,3 @@
-//
-//  Product.swift
-//  UseBy
-//
-//  Created by Nadezda Svoykina on 11/22/20.
-//
-
 import Foundation
 
 struct Product {
@@ -52,8 +45,6 @@ protocol ProductModelProtocol {
 
 class ProductModel: ProductModelProtocol {
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
-        let formatter = DateFormatter()
-
         let product = Product(
             id: "1",
             name: "Chanel Les Beiges",
@@ -62,7 +53,9 @@ class ProductModel: ProductModelProtocol {
             expirationDate: Date()
         )
 
-        completion([product, product, product, product, product, product], nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            completion([product, product, product, product, product, product], nil)
+        }
     }
 
     func delete(id: String, completion: @escaping (ProductError?) -> Void) {

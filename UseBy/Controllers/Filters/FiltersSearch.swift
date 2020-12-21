@@ -5,7 +5,7 @@ class FiltersSearch: UISearchBar {
     struct UIConstants {
         static let height: CGFloat = 35
     }
-    
+
     init() {
         super.init(frame: .zero)
 

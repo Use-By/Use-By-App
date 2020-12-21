@@ -245,7 +245,7 @@
 				33A6773C2569A0110051C39E /* Filters */,
 				33A67736256995830051C39E /* AddProduct */,
 				33A6772A2569937D0051C39E /* Products */,
-				33A67704256975350051C39E /* MainScreenViewController */,
+				33A67704256975350051C39E /* MainScreen */,
 				845DDECB2545621E00E1C549 /* Profile */,
 				333869B22544D8DD002E76FD /* CreateAccount */,
 				333869B12544D8D4002E76FD /* Login */,
@@ -394,12 +394,12 @@
 			path = UseByUITests;
 			sourceTree = "<group>";
 		};
-		33A67704256975350051C39E /* MainScreenViewController */ = {
+		33A67704256975350051C39E /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				33A67705256975420051C39E /* MainScreenViewController.swift */,
 			);
-			path = MainScreenViewController;
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		33A6771625697B730051C39E /* Model */ = {

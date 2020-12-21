@@ -4,6 +4,7 @@ import UIKit
 class ProductPhoto: UIView {
     struct UIConstants {
         static let width: CGFloat = 125
+        static let emptyPhotoWidth: CGFloat = 55
     }
     private var imageView = UIImageView()
 
@@ -23,8 +24,8 @@ class ProductPhoto: UIView {
     func setEmptyPhotoIcon() {
         imageView.image = UIImage(named: "PhotoIcon")
         imageView.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(55)
-            make.width.equalTo(55)
+            make.height.equalTo(UIConstants.emptyPhotoWidth)
+            make.width.equalTo(UIConstants.emptyPhotoWidth)
         }
     }
 

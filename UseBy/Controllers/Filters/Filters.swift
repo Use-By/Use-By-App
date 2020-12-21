@@ -12,7 +12,6 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         static let filtersControlsMargin: CGFloat = 10
     }
 
-    private let emptyScreenLabel = UILabel()
     private let search = FiltersSearch()
     private let buttons = [
         FilterButton(

@@ -6,90 +6,53 @@ protocol ProductsTableCellDelegate: AnyObject {
     func didTapLikeButton(id: String)
 }
 
-class ProductCard: UIView {
+class ProductCardShadow: UIView {
     struct UIConstants {
-        static let padding: CGFloat = 10
+        static let shadowRadius: CGFloat = 5
         static let cornerRadius: CGFloat = 10
-        static let sidePadding: CGFloat = 5
-        static let controlsSpacing: CGFloat = 20
-        static let imageWidth: CGFloat = 125
+        static let shadowOpacity: Float = 1.0
     }
-
-    private var deleteIcon = IconButton(name: "DeleteIcon", size: .medium, theme: .secondary)
-    private var likeIcon = IconButton(name: "LikeLineIcon", size: .medium, theme: .action)
-    private let nameLabel = UILabel()
-    private let expirationLabel = ExpirationDateLabel()
-    private let tagLabel = TagLabel()
-    private let productPhoto = ProductPhoto()
-
-    private var product: Product?
-    weak var delegate: ProductsTableCellDelegate?
 
     init() {
         super.init(frame: .zero)
 
         backgroundColor = Colors.mainBGColor
         layer.cornerRadius = UIConstants.cornerRadius
-        layer.shadowOpacity = 1.0
+        layer.shadowOpacity = UIConstants.shadowOpacity
         layer.masksToBounds = false
         layer.shadowColor = Colors.shadowColor.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        layer.shadowRadius = 5
-        isUserInteractionEnabled = true
-
-        addSubview(deleteIcon)
-        addSubview(likeIcon)
-
-        deleteIcon.snp.makeConstraints {(make) -> Void in
-            make.right.equalTo(self).offset(-UIConstants.sidePadding)
-            make.bottom.equalTo(self).offset(-UIConstants.padding)
-        }
-        deleteIcon.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
-
-        likeIcon.snp.makeConstraints {(make) -> Void in
-            make.right.equalTo(self).offset(-UIConstants.sidePadding)
-            make.top.equalTo(self).offset(UIConstants.padding)
-        }
-        likeIcon.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
-
-        configurePhoto()
-        configureLabels()
+        layer.shadowRadius = UIConstants.shadowRadius
     }
 
-    func configurePhoto() {
-        addSubview(productPhoto)
-        productPhoto.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(self)
-            make.width.equalTo(UIConstants.imageWidth)
-            make.height.equalTo(self)
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class ProductsTableCell: UITableViewCell {
+    struct UIConstants {
+        static let padding: CGFloat = 20
+        static let cornerRadius: CGFloat = 10
+        static let cardPadding: CGFloat = 40
+        static let sidePadding: CGFloat = 5
+        static let controlsSpacing: CGFloat = 20
+        static let imageWidth: CGFloat = 145
     }
 
-    func configureLabels() {
-        nameLabel.font = Fonts.cardText
-        [nameLabel, expirationLabel, tagLabel].forEach {
-            self.addSubview($0)
-        }
+    private var deleteIcon = IconButton(name: "DeleteIcon", size: .medium, theme: .secondary)
+    private var likeIcon = IconButton(name: "LikeLineIcon", size: .medium, theme: .action)
+    private let expirationLabel = ExpirationDateLabel()
+    private let tagLabel = TagLabel()
+    private let productPhoto = ProductPhoto()
+    private let cardShadow = ProductCardShadow()
 
-        nameLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
-            make.top.equalTo(self).offset(UIConstants.padding)
-        }
+    weak var delegate: ProductsTableCellDelegate?
+    private var product: Product?
 
-        expirationLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
-            make.top.equalTo(nameLabel.snp.bottom).offset(UIConstants.controlsSpacing)
-        }
-
-        tagLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
-            make.bottom.equalTo(self).offset(-UIConstants.padding)
-        }
-    }
-
-    func fillCard(product: Product) {
+    func fillCell(product: Product) {
         self.product = product
-        nameLabel.text = product.name
+        textLabel?.text = product.name
 
         if let tag = product.tag {
             tagLabel.setText(text: tag)
@@ -97,42 +60,14 @@ class ProductCard: UIView {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
+        detailTextLabel?.text = dateFormatter.string(from: product.expirationDate)
         expirationLabel.setDate(date: dateFormatter.string(from: product.expirationDate))
 
         if let photoUrl = product.photoUrl {
-            productPhoto.setPhoto(photoUrl: photoUrl)
+             productPhoto.setPhoto(photoUrl: photoUrl)
         } else {
             productPhoto.setEmptyPhotoIcon()
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    @objc
-    func didTapLikeButton(id: String) {
-        self.delegate?.didTapLikeButton(id: id)
-    }
-
-    @objc
-    func didTapDeleteButton(id: String) {
-        self.delegate?.didTapDeleteButton(id: id)
-    }
-}
-
-class ProductsTableCell: UITableViewCell, ProductsTableCellDelegate {
-    struct UIConstants {
-        static let padding: CGFloat = 20
-        static let cornerRadius: CGFloat = 10
-        static let cardPadding: CGFloat = 40
-    }
-
-    private var card = ProductCard()
-    weak var delegate: ProductsTableCellDelegate?
-
-    func fillCell(product: Product) {
-        card.fillCard(product: product)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -141,25 +76,62 @@ class ProductsTableCell: UITableViewCell, ProductsTableCellDelegate {
         isUserInteractionEnabled = true
         selectionStyle = .none
 
-        contentView.addSubview(card)
-        card.snp.makeConstraints {(make) -> Void in
+        contentView.addSubview(cardShadow)
+        cardShadow.snp.makeConstraints {(make) -> Void in
             make.width.equalTo(self).offset(-UIConstants.cardPadding)
             make.center.equalTo(self)
             make.height.equalTo(self).offset(-UIConstants.padding)
         }
 
-        card.delegate = self
+        configurePhoto()
+        configureLabels()
+    }
+
+    func configurePhoto() {
+        addSubview(productPhoto)
+        productPhoto.snp.makeConstraints {(make) -> Void in
+            make.left.equalTo(self).offset(UIConstants.controlsSpacing)
+            make.width.equalTo(UIConstants.imageWidth)
+            make.top.equalTo(self).offset(UIConstants.padding/2)
+            make.bottom.equalTo(self).offset(-UIConstants.padding/2)
+        }
+    }
+
+    func configureLabels() {
+        guard let textLabel = textLabel else {
+            return
+        }
+
+        textLabel.font = Fonts.cardText
+        textLabel.snp.makeConstraints {(make) -> Void in
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
+            make.top.equalTo(self).offset(UIConstants.padding)
+        }
+
+        addSubview(expirationLabel)
+        expirationLabel.snp.makeConstraints {(make) -> Void in
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
+            make.top.equalTo(textLabel.snp.bottom).offset(UIConstants.controlsSpacing)
+        }
+
+        addSubview(tagLabel)
+        tagLabel.snp.makeConstraints {(make) -> Void in
+            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
+            make.bottom.equalTo(self).offset(-UIConstants.padding)
+        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func didTapDeleteButton(id: String) {
-        self.delegate?.didTapDeleteButton(id: id)
-    }
-
+    @objc
     func didTapLikeButton(id: String) {
         self.delegate?.didTapLikeButton(id: id)
+    }
+
+    @objc
+    func didTapDeleteButton(id: String) {
+        self.delegate?.didTapDeleteButton(id: id)
     }
 }

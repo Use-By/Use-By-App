@@ -1,35 +1,26 @@
 import Foundation
 import UIKit
 
-class FiltersSearch: UIView {
+class FiltersSearch: UISearchBar {
     struct UIConstants {
         static let height: CGFloat = 35
-        static let cornerRadius: CGFloat = 10
-        static let padding: CGFloat = 20
     }
-
-    let field: UITextField = UITextField()
-
+    
     init() {
         super.init(frame: .zero)
 
-        backgroundColor = Colors.filterControlBackground
-        layer.cornerRadius = UIConstants.cornerRadius
-        addSubview(field)
+        searchBarStyle = .minimal
+        placeholder = "search".localized
+        searchTextField.font = Fonts.mainText
+        searchTextField.textColor = Colors.secondaryTextColor
 
         self.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(UIConstants.height)
         }
 
-        field.textColor = Colors.secondaryTextColor
-        field.font = Fonts.mainText
-        field.clearButtonMode =  .whileEditing
-        field.borderStyle = .none
-        field.placeholder = "search".localized
-
-        field.snp.makeConstraints { (make) -> Void in
+        searchTextField.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(UIConstants.height)
-            make.width.equalTo(self).offset(-UIConstants.padding)
+            make.width.equalTo(self)
             make.centerX.equalTo(self)
         }
     }

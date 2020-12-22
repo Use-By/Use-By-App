@@ -24,10 +24,14 @@ protocol UserModelProtocol {
 }
 
 class UserModel: UserModelProtocol {
-
     func singOut() {
-        GIDSignIn.sharedInstance()?.signOut()
+        do {
+          try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+          return
+        }
     }
+
     func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().currentUser?.updateEmail(to: newEmail) { (error) in
             if let error = error {
@@ -59,14 +63,19 @@ class UserModel: UserModelProtocol {
 
     func get() -> User {
         let user = Auth.auth().currentUser
+
         guard let currentUser = user else {
-            _ = Alert(title: "ops".localized,
-                  message: "something_went_wrong_with_authorization"
-.localized,
+            Alert(title: "ops".localized,
+                  message: "something_went_wrong_with_authorization".localized,
                   placeholder1: nil, placeholder2: nil, action: .none)
+
             return User(name: "", email: "", authWithGoogle: false)
         }
+        
+        if GIDSignIn.sharedInstance()?.currentUser != nil {
+            return User(name: currentUser.displayName ?? "", email: currentUser.email ?? "", authWithGoogle: true)
+        }
 
-        return User(name: currentUser.displayName ?? "", email: currentUser.email ?? "", authWithGoogle: true)
+        return User(name: currentUser.displayName ?? "", email: currentUser.email ?? "", authWithGoogle: false)
     }
 }

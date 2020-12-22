@@ -72,10 +72,10 @@ class AlertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
-        self.present(alertChange, animated: true, completion: nil)
+        self.present(alertChange, animated: false, completion: nil)
     }
    override func viewDidAppear(_ animated: Bool) {
-        self.present(alertChange, animated: true, completion: nil)
+        self.present(alertChange, animated: false, completion: nil)
     }
 
     required init?(coder: NSCoder) {

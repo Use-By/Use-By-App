@@ -140,9 +140,9 @@ class ProductModel: ProductModelProtocol {
         }
     }
 
-    private func getApiDataFromProduct(product: ProductInfo) -> [String : Any] {
+    private func getApiDataFromProduct(product: ProductInfo) -> [String: Any] {
         // TODO добавить про картинку
-        
+
         return [
             "name": product.name,
             "liked": product.isLiked,
@@ -152,7 +152,7 @@ class ProductModel: ProductModelProtocol {
             "opened": product.openedDate
         ]
     }
-    
+
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void) {
         let productsDB = Firestore.firestore().collection("products")
         let documentRef = productsDB.document()
@@ -161,7 +161,7 @@ class ProductModel: ProductModelProtocol {
             if error != nil {
                 completion(nil, .unknownError)
             }
-            
+
             let product = Product(
                 id: documentRef.documentID,
                 name: data.name,
@@ -174,7 +174,7 @@ class ProductModel: ProductModelProtocol {
                 afterOpenening: data.afterOpenening,
                 useByDate: data.useByDate
             )
-            
+
             completion(product, nil)
         }
     }

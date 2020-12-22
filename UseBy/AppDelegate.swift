@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if let window = window {
-            let mainViewController = MainScreenViewController()
+            let mainViewController = AppLauncher()
             window.rootViewController = Router(rootViewController: mainViewController)
             window.makeKeyAndVisible()
         }

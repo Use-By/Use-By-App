@@ -13,8 +13,6 @@ class AppLauncher: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // Экран загрузки - повторяем launch screen
-
         if GIDSignIn.sharedInstance()?.currentUser != nil {
             if let router = navigationController as? Router {
                 router.goToMainScreen()

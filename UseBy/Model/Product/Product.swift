@@ -1,4 +1,5 @@
 import Foundation
+import Firebase
 
 struct Product {
     var id: String
@@ -33,6 +34,7 @@ struct ProductFilters {
 
 enum ProductError {
     case unknownError
+    case fetchProductsError
 }
 
 protocol ProductModelProtocol {
@@ -44,17 +46,66 @@ protocol ProductModelProtocol {
 }
 
 class ProductModel: ProductModelProtocol {
-    func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
-        let product = Product(
-            id: "1",
-            name: "Chanel Les Beiges",
-            tag: "Makeup",
-            isLiked: false,
-            expirationDate: Date()
-        )
+    private func getUserID() -> String? {
+        guard let currentUser = Auth.auth().currentUser else {
+            return nil
+        }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            completion([product, product, product, product, product, product], nil)
+        return currentUser.uid
+    }
+
+    private func getExpirationDate(useByDate: Date?, afterOpeningDate: Date?) -> Date {
+        if let useByDate = useByDate, let afterOpeningDate = afterOpeningDate {
+            return useByDate < afterOpeningDate ? useByDate : afterOpeningDate
+        }
+
+        if let useByDate = useByDate {
+            return useByDate
+        }
+
+        if let afterOpeningDate = afterOpeningDate {
+            return afterOpeningDate
+        }
+
+        return Date()
+    }
+
+    func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
+        let productsDB = Firestore.firestore().collection("products")
+
+        guard let userID = self.getUserID() else {
+            return
+        }
+
+        productsDB.whereField("userID", isEqualTo: userID).getDocuments { (snapshot, error) in
+            if error != nil {
+                completion(nil, .fetchProductsError)
+                return
+            }
+
+            let documents = snapshot?.documents ?? []
+            let products: [Product] = documents.map {
+                let data = $0.data()
+                let documentID = $0.documentID
+                let name = data["name"] as? String ?? ""
+                let tag = data["tag"] as? String
+                let isLiked = data["liked"] as? Bool ?? false
+                let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
+                let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
+
+                let product: Product = Product(
+                    id: documentID,
+                    name: name,
+                    photoUrl: nil,
+                    tag: tag,
+                    isLiked: isLiked,
+                    expirationDate: self.getExpirationDate(useByDate: useByDate, afterOpeningDate: afterOpeningDate)
+                )
+
+                return product
+            }
+
+            completion(products, nil)
         }
     }
 

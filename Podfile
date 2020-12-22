@@ -14,6 +14,9 @@ target 'UseBy' do
   # Api
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
   target 'UseByTests' do
     inherit! :search_paths

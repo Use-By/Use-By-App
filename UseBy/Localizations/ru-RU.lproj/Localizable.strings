@@ -10,8 +10,10 @@
 "app-name" = "Use-by";
 "app-description" = "Срок годности под контролем!";
 "create-account" = "Создать аккаунт";
+"login" = "Войти";
 "create-account-google" = "Вход через Google";
-"name" ="Имя";
+"error" = "Ошибка";
+"ok" = "Понятно";
 "email" = "Почта";
 "change-password" = "Сменить пароль";
 "send-feedback" = "Отправить отзыв & помочь нам улучшиться";
@@ -24,14 +26,21 @@
 "confirm-your-new-password" = "Подтвердите свой новый пароль";
 "cancel" = "Отменить";
 "save" = "Сохранить";
-"ok" = "Ок";
-"ops"  = "Упс";
+"ops" = "Упс";
 "you_don't_have_mail_app_on_your_phone" = "на вашем телефоне нет приложения почты";
 "empty-screen" = "Пока что ничего нет";
-"error" = "Ошибка";
-"ok" = "Понятно";
 "google-error-description" = "При входе в Google произошла ошибка, попробуйте позже ";
 "log-out" = "Выйти";
+"name" = "Имя";
+"password" = "Пароль";
+"sign-in" = "Войти";
+"weak-password-error" = "Длина пароля должна быть больше 6 символов";
+"sign-up" = "Зарегистрироваться";
+"errorEmailAlreadyInUse" = "Пользователь с такой электронной почтой уже существует";
+"errorInvalidEmail" = "Неверный адрес электронной почты";
+"unknownError" = "Произошла непредвиденная ошибка, попробуйте позже";
+"errorWrongPassword" = "Неверный пароль";
+"errorUserNotFound" = "Пользователь не найден";
 "something_went_wrong_with_authorization"="";
 "something_went_wrong_with_authorization"="";
 

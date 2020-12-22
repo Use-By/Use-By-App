@@ -12,6 +12,7 @@ import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
+    private var router: Router?
 
     func application(
         _ application: UIApplication,
@@ -23,8 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
-        window!.rootViewController = AppLauncher()
-        window!.makeKeyAndVisible()
+
+        if let window = window {
+            let mainViewController = LoginViewController()
+            router = Router(rootViewController: mainViewController)
+            window.rootViewController = router
+            window.makeKeyAndVisible()
+        }
 
         return true
     }
@@ -51,10 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             )
             alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
 
-            window?.rootViewController?.present(alert, animated: true, completion: nil)
+            router?.showAlert(alert: alert)
 
         return
-      }
+        }
         guard let authentication = user.authentication else { return }
 
         let credential = GoogleAuthProvider.credential(
@@ -63,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         )
 
         Auth.auth().signIn(with: credential) { [self] (_, error) in
-            if let error = error {
+            if error != nil {
                 let alert = UIAlertController(
                     title: "error".localized,
                     message: "google-error-description".localized,
@@ -71,10 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 )
                 alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
 
-                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+                router?.showAlert(alert: alert)
             }
 
-            self.window?.rootViewController = ProfileViewController()
+            router?.goToProfileScreen()
         }
     }
 

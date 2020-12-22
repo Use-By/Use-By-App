@@ -22,7 +22,7 @@ final class MainButton: UIButton {
         case clear
     }
 
-    public static let buttonHeight = 60
+    static let buttonHeight = 60
     private let theme: ButtonTheme
     private var label = UILabel()
     var gradientLayer: CAGradientLayer?
@@ -43,6 +43,12 @@ final class MainButton: UIButton {
         didSet {
             if !isEnabled {
                 backgroundColor = Colors.disabledBGColor
+                if self.gradientLayer != nil {
+                    layer.sublayers?.remove(at: 0)
+                    gradientLayer = nil
+                }
+            } else {
+                setThemeStyles()
             }
         }
     }
@@ -58,6 +64,7 @@ final class MainButton: UIButton {
         titleLabel?.font = Fonts.mainButtonText
         titleLabel?.textAlignment = .center
         layer.cornerRadius = MainButtonUIConstants.cornerRadius
+        setTitleColor(Colors.inversedTextColor, for: .disabled)
 
         setThemeStyles()
 
@@ -81,10 +88,13 @@ final class MainButton: UIButton {
         case .action:
             titleLabel?.textColor = Colors.inversedTextColor
             setTitleColor(Colors.inversedTextColor, for: .normal)
-            let gradientLayer = Colors.mainBGGradient()
-            gradientLayer.cornerRadius = MainButtonUIConstants.cornerRadius
-            self.gradientLayer = gradientLayer
-            layer.insertSublayer(gradientLayer, at: 0)
+
+            if self.gradientLayer == nil {
+                let gradientLayer = Colors.mainBGGradient()
+                gradientLayer.cornerRadius = MainButtonUIConstants.cornerRadius
+                self.gradientLayer = gradientLayer
+                layer.insertSublayer(gradientLayer, at: 0)
+            }
         case .social:
             titleLabel?.textColor = Colors.inversedTextColor
             setTitleColor(Colors.inversedTextColor, for: .normal)

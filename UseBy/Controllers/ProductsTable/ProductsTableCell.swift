@@ -36,6 +36,7 @@ class ProductsTableCell: UITableViewCell {
         static let cornerRadius: CGFloat = 10
         static let cardPadding: CGFloat = 40
         static let sidePadding: CGFloat = 5
+        static let iconPadding: CGFloat = 25
         static let controlsSpacing: CGFloat = 20
         static let imageWidth: CGFloat = 145
     }
@@ -85,6 +86,23 @@ class ProductsTableCell: UITableViewCell {
 
         configurePhoto()
         configureLabels()
+        configureIcons()
+    }
+
+    func configureIcons() {
+        addSubview(likeIcon)
+        likeIcon.snp.makeConstraints {(make) -> Void in
+                    make.right.equalTo(self).offset(-UIConstants.iconPadding)
+                    make.top.equalTo(self).offset(UIConstants.padding)
+        }
+        likeIcon.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
+
+        addSubview(deleteIcon)
+        deleteIcon.snp.makeConstraints {(make) -> Void in
+                    make.right.equalTo(self).offset(-UIConstants.iconPadding)
+                    make.bottom.equalTo(self).offset(-UIConstants.padding)
+        }
+        deleteIcon.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
     }
 
     func configurePhoto() {

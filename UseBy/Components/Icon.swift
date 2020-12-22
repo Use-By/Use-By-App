@@ -100,6 +100,16 @@ class IconButton: UIButton {
         isUserInteractionEnabled = true
 
         setImage(icon.icon, for: .normal)
+
+        self.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(icon.getSize())
+            make.width.equalTo(icon.getSize())
+        }
+
+        imageView?.snp.makeConstraints {(make) -> Void in
+            make.height.equalTo(icon.getSize())
+            make.width.equalTo(icon.getSize())
+        }
     }
 
     required init?(coder: NSCoder) {

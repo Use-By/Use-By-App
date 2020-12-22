@@ -60,6 +60,19 @@ protocol ProductModelProtocol {
 }
 
 class ProductModel: ProductModelProtocol {
+    private func getApiDataFromProduct(product: ProductInfo) -> [String: Any] {
+        // TODO добавить про картинку
+
+        return [
+            "name": product.name,
+            "liked": product.isLiked,
+            "tag": product.tag,
+            "after-opening": product.afterOpenening,
+            "use-by": product.useByDate,
+            "opened": product.openedDate
+        ]
+    }
+
     private func getUserID() -> String? {
         guard let currentUser = Auth.auth().currentUser else {
             return nil
@@ -67,15 +80,19 @@ class ProductModel: ProductModelProtocol {
 
         return currentUser.uid
     }
-
+    
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
-        let productsDB = Firestore.firestore().collection("products")
+        var productsRef = Firestore.firestore().collection("products")
 
         guard let userID = self.getUserID() else {
             return
         }
 
-        productsDB.whereField("userID", isEqualTo: userID).getDocuments { (snapshot, error) in
+        // TODO сортировка?
+
+        productsRef
+            .whereField("userID", isEqualTo: userID)
+            .getDocuments { (snapshot, error) in
             if error != nil {
                 completion(nil, .fetchProductsError)
                 return
@@ -90,6 +107,7 @@ class ProductModel: ProductModelProtocol {
                 let isLiked = data["liked"] as? Bool ?? false
                 let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
                 let openedDate = (data["opened"] as? Timestamp)?.dateValue()
+                let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue() ?? Date()
                 let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
 
                 let product: Product = Product(
@@ -99,7 +117,7 @@ class ProductModel: ProductModelProtocol {
                     photoUrl: nil,
                     tag: tag,
                     isLiked: isLiked,
-                    expirationDate: getExpirationDate(useByDate: useByDate, afterOpeningDate: afterOpeningDate),
+                    expirationDate: expirationDate,
                     openedDate: openedDate,
                     afterOpenening: afterOpeningDate,
                     useByDate: useByDate
@@ -138,19 +156,6 @@ class ProductModel: ProductModelProtocol {
 
             completion(nil)
         }
-    }
-
-    private func getApiDataFromProduct(product: ProductInfo) -> [String: Any] {
-        // TODO добавить про картинку
-
-        return [
-            "name": product.name,
-            "liked": product.isLiked,
-            "tag": product.tag,
-            "after-opening": product.afterOpenening,
-            "use-by": product.useByDate,
-            "opened": product.openedDate
-        ]
     }
 
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void) {

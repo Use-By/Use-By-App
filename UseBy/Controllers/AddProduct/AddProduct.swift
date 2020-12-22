@@ -9,7 +9,7 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         openedDate: Date(),
         afterOpenening: nil,
         useByDate: nil,
-        photo: nil
+        photo: nil, isLiked: false
     )
 
     override func viewDidLoad() {

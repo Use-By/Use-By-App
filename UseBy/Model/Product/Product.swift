@@ -1,22 +1,35 @@
 import Foundation
 import Firebase
 
-struct Product {
+protocol ProductInfo {
+    var name: String { get }
+    var tag: String? { get }
+    var openedDate: Date? { get }
+    var afterOpenening: Date? { get }
+    var useByDate: Date? { get }
+    var isLiked: Bool { get }
+}
+
+struct Product: ProductInfo {
     var id: String
     var name: String
     var photoUrl: String?
     var tag: String?
     var isLiked: Bool
     var expirationDate: Date
+    var openedDate: Date?
+    var afterOpenening: Date?
+    var useByDate: Date?
 }
 
-struct ProductToCreate {
+struct ProductToCreate: ProductInfo {
     var name: String
     var tag: String?
-    var openedDate: Date
+    var openedDate: Date?
     var afterOpenening: Date?
     var useByDate: Date?
     var photo: Data?
+    var isLiked: Bool
 }
 
 enum SortDirection {
@@ -35,6 +48,7 @@ struct ProductFilters {
 enum ProductError {
     case unknownError
     case fetchProductsError
+    case deleteError
 }
 
 protocol ProductModelProtocol {
@@ -52,22 +66,6 @@ class ProductModel: ProductModelProtocol {
         }
 
         return currentUser.uid
-    }
-
-    private func getExpirationDate(useByDate: Date?, afterOpeningDate: Date?) -> Date {
-        if let useByDate = useByDate, let afterOpeningDate = afterOpeningDate {
-            return useByDate < afterOpeningDate ? useByDate : afterOpeningDate
-        }
-
-        if let useByDate = useByDate {
-            return useByDate
-        }
-
-        if let afterOpeningDate = afterOpeningDate {
-            return afterOpeningDate
-        }
-
-        return Date()
     }
 
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
@@ -91,15 +89,20 @@ class ProductModel: ProductModelProtocol {
                 let tag = data["tag"] as? String
                 let isLiked = data["liked"] as? Bool ?? false
                 let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
+                let openedDate = (data["opened"] as? Timestamp)?.dateValue()
                 let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
 
                 let product: Product = Product(
                     id: documentID,
                     name: name,
+                    // TODO
                     photoUrl: nil,
                     tag: tag,
                     isLiked: isLiked,
-                    expirationDate: self.getExpirationDate(useByDate: useByDate, afterOpeningDate: afterOpeningDate)
+                    expirationDate: getExpirationDate(useByDate: useByDate, afterOpeningDate: afterOpeningDate),
+                    openedDate: openedDate,
+                    afterOpenening: afterOpeningDate,
+                    useByDate: useByDate
                 )
 
                 return product
@@ -110,26 +113,85 @@ class ProductModel: ProductModelProtocol {
     }
 
     func delete(id: String, completion: @escaping (ProductError?) -> Void) {
-        completion(nil)
+        let productsDB = Firestore.firestore().collection("products")
+
+        productsDB.document(id).delete { (error) in
+            if error != nil {
+                completion(.deleteError)
+
+                return
+            }
+
+            completion(nil)
+        }
     }
 
     func like(id: String, completion: @escaping (ProductError?) -> Void) {
-        completion(nil)
+        let productsDB = Firestore.firestore().collection("products")
+
+        productsDB.document(id).setData([ "liked": true ], merge: true) { (error) in
+            if error != nil {
+                completion(.unknownError)
+
+                return
+            }
+
+            completion(nil)
+        }
     }
 
+    private func getApiDataFromProduct(product: ProductInfo) -> [String : Any] {
+        // TODO добавить про картинку
+        
+        return [
+            "name": product.name,
+            "liked": product.isLiked,
+            "tag": product.tag,
+            "after-opening": product.afterOpenening,
+            "use-by": product.useByDate,
+            "opened": product.openedDate
+        ]
+    }
+    
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void) {
-        let product = Product(
-            id: "1",
-            name: data.name,
-            tag: data.tag,
-            isLiked: false,
-            expirationDate: Date()
-        )
+        let productsDB = Firestore.firestore().collection("products")
+        let documentRef = productsDB.document()
 
-        completion(product, nil)
+        documentRef.setData(getApiDataFromProduct(product: data)) { (error) in
+            if error != nil {
+                completion(nil, .unknownError)
+            }
+            
+            let product = Product(
+                id: documentRef.documentID,
+                name: data.name,
+                // TODO
+                photoUrl: nil,
+                tag: data.tag,
+                isLiked: false,
+                expirationDate: getExpirationDate(useByDate: data.useByDate, afterOpeningDate: data.afterOpenening),
+                openedDate: data.openedDate,
+                afterOpenening: data.afterOpenening,
+                useByDate: data.useByDate
+            )
+            
+            completion(product, nil)
+        }
     }
 
     func update(data: Product, completion: @escaping (Product?, ProductError?) -> Void) {
-        completion(data, nil)
+        let productsDB = Firestore.firestore().collection("products")
+
+        productsDB
+            .document(data.id)
+            .updateData(getApiDataFromProduct(product: data)) { (error) in
+            if error != nil {
+                completion(nil, .unknownError)
+
+                return
+            }
+
+            completion(data, nil)
+        }
     }
 }

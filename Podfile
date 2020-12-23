@@ -17,6 +17,7 @@ target 'UseBy' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Storage'
 
   target 'UseByTests' do
     inherit! :search_paths

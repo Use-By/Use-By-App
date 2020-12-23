@@ -153,7 +153,6 @@ class ProductModel: ProductModelProtocol {
         productsDB.document(id).setData([ "liked": liked ], merge: true) { (error) in
             if error != nil {
                 completion(.unknownError)
-
                 return
             }
 
@@ -168,6 +167,7 @@ class ProductModel: ProductModelProtocol {
         documentRef.setData(getApiDataFromProduct(product: data)) { (error) in
             if error != nil {
                 completion(nil, .unknownError)
+                return
             }
 
             let product = Product(
@@ -195,10 +195,82 @@ class ProductModel: ProductModelProtocol {
             .updateData(getApiDataFromProduct(product: data)) { (error) in
             if error != nil {
                 completion(nil, .unknownError)
-
                 return
             }
 
+            completion(data, nil)
+        }
+    }
+    
+    func uploadPhoto(photo: Data, completion: @escaping (String?, ProductError?) -> Void){
+        guard let userID = self.getUserID() else {
+            completion(nil, .unknownError)
+            return
+        }
+        let imageUUID = UUID().uuidString
+        let imageRef = Storage.storage().reference()
+            .child("photos")
+            .child(userID)
+            .child(imageUUID)
+        
+        imageRef.putData(photo, metadata: nil) { (metadata, error) in
+            if error != nil, metadata == nil {
+                completion(nil, .unknownError)
+                return
+            }
+            
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                  completion(nil, .unknownError)
+                  return
+                }
+                
+                completion(downloadURL.absoluteString, nil)
+            }
+        }
+    }
+    
+    func downloadPhotos(completion: @escaping (URL?, ProductError?) -> Void){
+        guard let userID = self.getUserID() else {
+            completion(nil, .unknownError)
+            return
+        }
+        let storage = Storage.storage()
+        let imagesRef = storage.reference()
+            .child("photos")
+            .child(userID)
+        
+        imagesRef.listAll { (result, error) in
+            if error != nil {
+                completion(nil, .unknownError)
+                return
+            }
+            
+            for item in result.items {
+              // The items under storageReference.
+            }
+          }
+    }
+    
+    func downloadPhoto(url: String, completion: @escaping (Data?, ProductError?) -> Void){
+        guard let userID = self.getUserID() else {
+            completion(nil, .unknownError)
+            return
+        }
+        let storage = Storage.storage()
+        let imageRef = storage.reference(forURL: url)
+        
+        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                completion(nil, .unknownError)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil, .unknownError)
+                return
+            }
+            
             completion(data, nil)
         }
     }

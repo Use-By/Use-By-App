@@ -8,6 +8,7 @@ protocol ProductInfo {
     var afterOpenening: Date? { get }
     var useByDate: Date? { get }
     var isLiked: Bool { get }
+    var expirationDate: Date? { get }
 }
 
 struct Product: ProductInfo {
@@ -16,7 +17,7 @@ struct Product: ProductInfo {
     var photoUrl: String?
     var tag: String?
     var isLiked: Bool
-    var expirationDate: Date
+    var expirationDate: Date?
     var openedDate: Date?
     var afterOpenening: Date?
     var useByDate: Date?
@@ -30,6 +31,7 @@ struct ProductToCreate: ProductInfo {
     var useByDate: Date?
     var photo: Data?
     var isLiked: Bool
+    var expirationDate: Date?
 }
 
 enum SortDirection {
@@ -54,7 +56,7 @@ enum ProductError {
 protocol ProductModelProtocol {
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void)
     func delete(id: String, completion: @escaping (ProductError?) -> Void)
-    func like(id: String, completion: @escaping (ProductError?) -> Void)
+    func like(id: String, liked: Bool, completion: @escaping (ProductError?) -> Void)
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void)
     func update(data: Product, completion: @escaping (Product?, ProductError?) -> Void)
 }
@@ -69,7 +71,8 @@ class ProductModel: ProductModelProtocol {
             "tag": product.tag,
             "after-opening": product.afterOpenening,
             "use-by": product.useByDate,
-            "opened": product.openedDate
+            "opened": product.openedDate,
+            "expiration-date": product.expirationDate
         ]
     }
 
@@ -80,7 +83,7 @@ class ProductModel: ProductModelProtocol {
 
         return currentUser.uid
     }
-    
+
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
         var productsRef = Firestore.firestore().collection("products")
 
@@ -144,10 +147,10 @@ class ProductModel: ProductModelProtocol {
         }
     }
 
-    func like(id: String, completion: @escaping (ProductError?) -> Void) {
+    func like(id: String, liked: Bool, completion: @escaping (ProductError?) -> Void) {
         let productsDB = Firestore.firestore().collection("products")
 
-        productsDB.document(id).setData([ "liked": true ], merge: true) { (error) in
+        productsDB.document(id).setData([ "liked": liked ], merge: true) { (error) in
             if error != nil {
                 completion(.unknownError)
 
@@ -174,7 +177,7 @@ class ProductModel: ProductModelProtocol {
                 photoUrl: nil,
                 tag: data.tag,
                 isLiked: false,
-                expirationDate: getExpirationDate(useByDate: data.useByDate, afterOpeningDate: data.afterOpenening),
+                expirationDate: data.expirationDate,
                 openedDate: data.openedDate,
                 afterOpenening: data.afterOpenening,
                 useByDate: data.useByDate

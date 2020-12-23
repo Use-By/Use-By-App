@@ -52,3 +52,6 @@
 "errorUserNotFound" = "User is not found";
 "home" = "Home";
 "profile" = "Profile";
+"delete-warning" = "You sure you want to delete this?";
+"yes" = "Yes";
+"no" = "No";

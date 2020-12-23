@@ -3,7 +3,7 @@ import UIKit
 
 protocol ProductsTableCellDelegate: AnyObject {
     func didTapDeleteButton(id: String)
-    func didTapLikeButton(id: String)
+    func didTapLikeButton(id: String, liked: Bool)
 }
 
 class ProductCardShadow: UIView {
@@ -51,6 +51,14 @@ class ProductsTableCell: UITableViewCell {
     weak var delegate: ProductsTableCellDelegate?
     private var product: Product?
 
+    func setLikeIcon(isLiked: Bool) {
+        if isLiked {
+            likeIcon.setNewIcon(name: "LikeIcon", size: .medium, theme: .action)
+        } else {
+            likeIcon.setNewIcon(name: "LikeLineIcon", size: .medium, theme: .action)
+        }
+    }
+
     func fillCell(product: Product) {
         self.product = product
         textLabel?.text = product.name
@@ -61,14 +69,18 @@ class ProductsTableCell: UITableViewCell {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        detailTextLabel?.text = dateFormatter.string(from: product.expirationDate)
-        expirationLabel.setDate(date: dateFormatter.string(from: product.expirationDate))
+
+        if let expirationDate = product.expirationDate {
+            expirationLabel.setDate(date: dateFormatter.string(from: expirationDate))
+        }
 
         if let photoUrl = product.photoUrl {
              productPhoto.setPhoto(photoUrl: photoUrl)
         } else {
             productPhoto.setEmptyPhotoIcon()
         }
+
+        setLikeIcon(isLiked: product.isLiked)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -144,12 +156,13 @@ class ProductsTableCell: UITableViewCell {
     }
 
     @objc
-    func didTapLikeButton(id: String) {
-        self.delegate?.didTapLikeButton(id: id)
+    func didTapLikeButton() {
+        self.delegate?.didTapLikeButton(id: self.product?.id ?? "",
+                                        liked: !(self.product?.isLiked ?? false))
     }
 
     @objc
-    func didTapDeleteButton(id: String) {
-        self.delegate?.didTapDeleteButton(id: id)
+    func didTapDeleteButton() {
+        self.delegate?.didTapDeleteButton(id: self.product?.id ?? "")
     }
 }

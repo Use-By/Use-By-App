@@ -6,7 +6,7 @@ import MessageUI
 protocol ProductsViewControllerDelegate: AnyObject {
     func getData() -> [Product]
     func didTapDeleteButton(id: String)
-    func didTapLikeButton(id: String)
+    func didTapLikeButton(id: String, liked: Bool)
 }
 
 class ProductsTableViewController: UIViewController {
@@ -108,7 +108,7 @@ extension ProductsTableViewController: ProductsTableCellDelegate {
         self.delegate?.didTapDeleteButton(id: id)
     }
 
-    func didTapLikeButton(id: String) {
-        self.delegate?.didTapLikeButton(id: id)
+    func didTapLikeButton(id: String, liked: Bool) {
+        self.delegate?.didTapLikeButton(id: id, liked: liked)
     }
 }

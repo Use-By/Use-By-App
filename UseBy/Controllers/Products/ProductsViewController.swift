@@ -111,13 +111,22 @@ class ProductsViewController: UIViewController {
 
 extension ProductsViewController: ProductsViewControllerDelegate {
     func didTapDeleteButton(id: String) {
-        productModel.delete(id: id, completion: {(_) in
-            self.loadProducts()
-        })
+        let alert = UIAlertController(
+            title: "delete-warning".localized, message: nil,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "yes".localized, style: .default, handler: {(_) in
+            self.productModel.delete(id: id, completion: {(_) in
+                self.loadProducts()
+            })
+        }))
+        alert.addAction(UIAlertAction(title: "no".localized, style: .cancel, handler: nil))
+
+        present(alert, animated: true, completion: nil)
     }
 
-    func didTapLikeButton(id: String) {
-        productModel.like(id: id, completion: {(_) in
+    func didTapLikeButton(id: String, liked: Bool) {
+        productModel.like(id: id, liked: liked, completion: {(_) in
             self.loadProducts()
         })
     }

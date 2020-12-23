@@ -115,4 +115,10 @@ class IconButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setNewIcon(name: String, size: IconSize, theme: IconTheme = IconTheme.normal) {
+        let icon = Icon(name: name, size: size, theme: theme)
+
+        setImage(icon.icon, for: .normal)
+    }
 }

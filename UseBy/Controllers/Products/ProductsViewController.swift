@@ -50,6 +50,7 @@ class ProductsViewController: UIViewController {
 
         configureFilters()
         configureTable()
+        configureEmptyScreenLabel()
 
         loadProducts()
     }
@@ -59,8 +60,15 @@ class ProductsViewController: UIViewController {
             if let products = products {
                 self.data = products
                 self.loader.isHidden = true
-                self.productsTableVC.reloadTable()
-                self.productsTableVC.view.isHidden = false
+
+                if products.count != 0 {
+                    self.productsTableVC.reloadTable()
+                    self.productsTableVC.view.isHidden = false
+                    self.emptyScreenLabel.isHidden = true
+                } else {
+                    self.productsTableVC.view.isHidden = true
+                    self.emptyScreenLabel.isHidden = false
+                }
             }
 
             if let error = error {
@@ -79,6 +87,7 @@ class ProductsViewController: UIViewController {
             make.center.equalTo(view)
             make.width.equalTo(view)
         }
+        emptyScreenLabel.isHidden = true
     }
 
     func configureFilters() {

@@ -65,6 +65,9 @@ class ProductsTableCell: UITableViewCell {
 
         if let tag = product.tag {
             tagLabel.setText(text: tag)
+            tagLabel.isHidden = false
+        } else {
+            tagLabel.isHidden = true
         }
 
         let dateFormatter = DateFormatter()

@@ -20,8 +20,10 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         let productView = ProductPageView(addButtonText: "add".localized)
         productView.delegate = self
 
-        view.addSubview(productView)
-        productView.snp.makeConstraints {(make) in
+        addChild(productView)
+        productView.didMove(toParent: self)
+        view.addSubview(productView.view)
+        productView.view.snp.makeConstraints {(make) in
             make.center.equalTo(self.view)
             make.height.equalTo(self.view)
             make.width.equalTo(self.view)

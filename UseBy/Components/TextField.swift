@@ -21,6 +21,7 @@ class TextField: UIView {
         case password
         case name
         case email
+        case tag
     }
 
     init(purpose: TextFieldPurpose = .name) {
@@ -65,6 +66,8 @@ class TextField: UIView {
         case .password:
             textField.placeholder = "password".localized
             textField.isSecureTextEntry = true
+        case .tag:
+            textField.placeholder = "tag".localized
         }
     }
 

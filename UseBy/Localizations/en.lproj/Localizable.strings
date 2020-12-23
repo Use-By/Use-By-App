@@ -55,3 +55,12 @@
 "delete-warning" = "You sure you want to delete this?";
 "yes" = "Yes";
 "no" = "No";
+"tag" = "Tag";
+"opened" = "Opened";
+"after-opening" = "After opening";
+"use-by" = "Use by";
+"today" = "Today";
+"select-date" = "Select date";
+"day" = "day";
+"month" = "month";
+"year" = "year";

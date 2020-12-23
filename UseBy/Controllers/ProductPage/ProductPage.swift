@@ -6,11 +6,15 @@ protocol ProductPageViewDelegate: AnyObject {
     func didTapCloseIcon()
 }
 
-class ProductPageView: UIView {
+class ProductPageView: UIViewController {
     struct UIConstants {
-        static let buttonPadding: CGFloat = 40
         static let buttonBottomMargin: CGFloat = 40
         static let closeIconMargin: CGFloat = 20
+        static let formsSpacing: CGFloat = 0
+        static let padding: CGFloat = 40
+        static let formsMargin: CGFloat = 10
+        static let photoHeight: CGFloat = 200
+        static let cornerRadius: CGFloat = 14
     }
 
     private let addButton: MainButton
@@ -20,40 +24,86 @@ class ProductPageView: UIView {
     )
     weak var delegate: ProductPageViewDelegate?
 
+    private let photo = UIImageView()
+    private let nameField = TextField(purpose: .name)
+    private let openedField = ValuePickerForm(name: "opened".localized)
+    private let afterOpeningField = ValuePickerForm(name: "after-opening".localized)
+    private let useByField = ValuePickerForm(name: "use-by".localized)
+    private let tagField = TextField(purpose: .tag)
+
     init(addButtonText: String) {
         addButton = MainButton(
             text: addButtonText,
             theme: .normal
         )
 
-        super.init(frame: .zero)
-
-        backgroundColor = Colors.mainBGColor
-
-        configureAddButton()
-        configureCloseIcon()
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        view.backgroundColor = Colors.mainBGColor
+
+        configureAddButton()
+        configureCloseIcon()
+        configureForms()
+    }
+
+    func configurePhoto() {
+        view.addSubview(photo)
+        photo.snp.makeConstraints {(make) in
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.height.equalTo(UIConstants.photoHeight)
+        }
+        photo.layer.cornerRadius = UIConstants.cornerRadius
+    }
+
+    func configureForms() {
+        [openedField, afterOpeningField, useByField].forEach {
+            self.addChild($0)
+            $0.didMove(toParent: self)
+        }
+
+        guard let openedFieldView = openedField.view,
+              let afterOpeningFieldView = afterOpeningField.view,
+              let useByFieldView = useByField.view else {
+            return
+        }
+
+        let arrangedSubviews = [nameField, openedFieldView, afterOpeningFieldView, useByFieldView, tagField]
+        let stackViewFields = UIStackView(arrangedSubviews: arrangedSubviews)
+        stackViewFields.axis = .vertical
+        stackViewFields.spacing = UIConstants.formsSpacing
+
+        view.addSubview(stackViewFields)
+        stackViewFields.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.centerX.equalTo(view)
+            make.top.equalTo(closeIcon.snp.bottom).offset(UIConstants.formsMargin)
+        }
+
+        openedField.setValue(value: "Today")
+    }
+
     func configureAddButton() {
-        addSubview(addButton)
+        view.addSubview(addButton)
         addButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(MainButton.buttonHeight)
-            make.width.equalTo(self).offset(-UIConstants.buttonPadding)
-            make.centerX.equalTo(self)
-            make.bottom.equalTo(self).offset(-UIConstants.buttonBottomMargin)
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(view).offset(-UIConstants.buttonBottomMargin)
         }
         addButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
     }
 
     func configureCloseIcon() {
-        addSubview(closeIcon)
+        view.addSubview(closeIcon)
         closeIcon.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self).offset(UIConstants.closeIconMargin)
-            make.right.equalTo(self).offset(-UIConstants.closeIconMargin)
+            make.top.equalTo(view).offset(UIConstants.closeIconMargin)
+            make.right.equalTo(view).offset(-UIConstants.closeIconMargin)
         }
         closeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCloseIcon)))
     }

@@ -1,10 +1,12 @@
 import Foundation
 import UIKit
+import Kingfisher
 
 class ProductPhoto: UIView {
     struct UIConstants {
         static let width: CGFloat = 125
         static let emptyPhotoWidth: CGFloat = 55
+        static let cornerRadius: CGFloat = 10
     }
     private var imageView = UIImageView()
 
@@ -14,11 +16,18 @@ class ProductPhoto: UIView {
         addSubview(imageView)
         imageView.snp.makeConstraints { (make) -> Void in
             make.center.equalTo(self)
+            make.height.equalTo(self)
+            make.width.equalTo(self)
         }
+        clipsToBounds = true
     }
 
     func setPhoto(photoUrl: String) {
-        // TODO: получение картинки из урла
+        guard let url = URL(string: photoUrl) else {
+            return
+        }
+        imageView.kf.setImage(with: url)
+        imageView.contentMode = .scaleAspectFill
     }
 
     func setEmptyPhotoIcon() {
@@ -29,7 +38,23 @@ class ProductPhoto: UIView {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        roundCorners(corners: [.topLeft, .bottomLeft], radius: UIConstants.cornerRadius)
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
     }
 }

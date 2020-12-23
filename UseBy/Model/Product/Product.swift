@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import FirebaseStorage
 
 protocol ProductInfo {
     var name: String { get }
@@ -112,12 +113,12 @@ class ProductModel: ProductModelProtocol {
                 let openedDate = (data["opened"] as? Timestamp)?.dateValue()
                 let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue() ?? Date()
                 let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
+                let photoURL = data["photo-url"] as? String
 
                 let product: Product = Product(
                     id: documentID,
                     name: name,
-                    // TODO
-                    photoUrl: nil,
+                    photoUrl: photoURL,
                     tag: tag,
                     isLiked: isLiked,
                     expirationDate: expirationDate,
@@ -201,8 +202,8 @@ class ProductModel: ProductModelProtocol {
             completion(data, nil)
         }
     }
-    
-    func uploadPhoto(photo: Data, completion: @escaping (String?, ProductError?) -> Void){
+
+    func uploadPhoto(photo: Data, completion: @escaping (String?, ProductError?) -> Void) {
         guard let userID = self.getUserID() else {
             completion(nil, .unknownError)
             return
@@ -212,25 +213,25 @@ class ProductModel: ProductModelProtocol {
             .child("photos")
             .child(userID)
             .child(imageUUID)
-        
+
         imageRef.putData(photo, metadata: nil) { (metadata, error) in
             if error != nil, metadata == nil {
                 completion(nil, .unknownError)
                 return
             }
-            
-            imageRef.downloadURL { (url, error) in
+
+            imageRef.downloadURL { (url, _) in
                 guard let downloadURL = url else {
                   completion(nil, .unknownError)
                   return
                 }
-                
+
                 completion(downloadURL.absoluteString, nil)
             }
         }
     }
-    
-    func downloadPhotos(completion: @escaping (URL?, ProductError?) -> Void){
+
+    func downloadPhotos(completion: @escaping (URL?, ProductError?) -> Void) {
         guard let userID = self.getUserID() else {
             completion(nil, .unknownError)
             return
@@ -239,38 +240,38 @@ class ProductModel: ProductModelProtocol {
         let imagesRef = storage.reference()
             .child("photos")
             .child(userID)
-        
+
         imagesRef.listAll { (result, error) in
             if error != nil {
                 completion(nil, .unknownError)
                 return
             }
-            
+
             for item in result.items {
               // The items under storageReference.
             }
           }
     }
-    
-    func downloadPhoto(url: String, completion: @escaping (Data?, ProductError?) -> Void){
+
+    func downloadPhoto(url: String, completion: @escaping (Data?, ProductError?) -> Void) {
         guard let userID = self.getUserID() else {
             completion(nil, .unknownError)
             return
         }
         let storage = Storage.storage()
         let imageRef = storage.reference(forURL: url)
-        
+
         imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if error != nil {
                 completion(nil, .unknownError)
                 return
             }
-            
+
             guard let data = data else {
                 completion(nil, .unknownError)
                 return
             }
-            
+
             completion(data, nil)
         }
     }

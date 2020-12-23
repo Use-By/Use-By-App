@@ -15,13 +15,13 @@ protocol ProductInfo {
 struct Product: ProductInfo {
     var id: String
     var name: String
-    var photoUrl: String?
     var tag: String?
     var isLiked: Bool
     var expirationDate: Date?
     var openedDate: Date?
     var afterOpenening: Date?
     var useByDate: Date?
+    var photoUrl: String?
 }
 
 struct ProductToCreate: ProductInfo {
@@ -118,13 +118,13 @@ class ProductModel: ProductModelProtocol {
                 let product: Product = Product(
                     id: documentID,
                     name: name,
-                    photoUrl: photoURL,
                     tag: tag,
                     isLiked: isLiked,
                     expirationDate: expirationDate,
                     openedDate: openedDate,
                     afterOpenening: afterOpeningDate,
-                    useByDate: useByDate
+                    useByDate: useByDate,
+                    photoUrl: photoURL
                 )
 
                 return product
@@ -174,14 +174,14 @@ class ProductModel: ProductModelProtocol {
             let product = Product(
                 id: documentRef.documentID,
                 name: data.name,
-                // TODO
-                photoUrl: nil,
                 tag: data.tag,
                 isLiked: false,
                 expirationDate: data.expirationDate,
                 openedDate: data.openedDate,
                 afterOpenening: data.afterOpenening,
-                useByDate: data.useByDate
+                useByDate: data.useByDate,
+                // TODO
+                photoUrl: nil
             )
 
             completion(product, nil)

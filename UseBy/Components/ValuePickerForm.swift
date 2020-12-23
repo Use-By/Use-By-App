@@ -74,9 +74,31 @@ class ValuePickerForm: UIViewController {
         }
     }
 
-    func setValue(value: String?) {
+    func setValue(value: Date?) {
         if let value = value {
-            valueLabel.text = value
+            let calendar = Calendar.current
+
+            if calendar.isDateInToday(value) {
+                valueLabel.text = "today".localized
+
+                return
+            }
+
+            if calendar.isDateInTomorrow(value) {
+                valueLabel.text = "tomorrow".localized
+
+                return
+            }
+
+            if calendar.isDateInYesterday(value) {
+                valueLabel.text = "yesterday".localized
+
+                return
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            valueLabel.text = dateFormatter.string(from: value)
         } else {
             valueLabel.text = valuePlaceholder
         }

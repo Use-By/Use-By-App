@@ -20,6 +20,7 @@ class ProductPhoto: UIView {
             make.width.equalTo(self)
         }
         clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
     }
 
     func setPhoto(photoUrl: String) {
@@ -27,7 +28,6 @@ class ProductPhoto: UIView {
             return
         }
         imageView.kf.setImage(with: url)
-        imageView.contentMode = .scaleAspectFill
     }
 
     func setEmptyPhotoIcon() {

@@ -60,7 +60,10 @@
 "after-opening" = "After opening";
 "use-by" = "Use by";
 "today" = "Today";
-"select-date" = "Select date";
+"tomorrow" = "Tomorrow";
+"yesterday" = "Yesterday";
+"select" = "Select";
 "day" = "day";
 "month" = "month";
 "year" = "year";
+"add-photo" = "Add photo";

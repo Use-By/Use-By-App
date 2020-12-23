@@ -60,7 +60,9 @@
 "after-opening" = "После открытия";
 "use-by" = "Годен до";
 "today" = "Сегодня";
-"select-date" = "Выбрать дату";
+"tomorrow" = "Завтра";
+"yesterday" = "Вчера";
+"select" = "Выбрать";
 "day" = "день";
 "month" = "месяц";
 "year" = "год";

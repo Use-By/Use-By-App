@@ -28,6 +28,8 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
             make.height.equalTo(self.view)
             make.width.equalTo(self.view)
         }
+
+        productView.fillData(with: data.photo, product: data)
     }
 
     @objc

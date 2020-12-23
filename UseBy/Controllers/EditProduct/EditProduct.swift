@@ -28,7 +28,7 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
             make.height.equalTo(self.view)
             make.width.equalTo(self.view)
         }
-        
+
         productView.fillData(with: product.photoUrl, product: product)
     }
 

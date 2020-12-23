@@ -34,7 +34,17 @@ class ExpirationDateLabel: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setDate(date: String) {
-        dateLabel.text = date
+    func setDate(date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+
+        dateLabel.text = dateFormatter.string(from: date)
+
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: date).day
+        if let days = days, days <= 7 {
+            dateLabel.textColor = Colors.mainActionColor
+        } else {
+            dateLabel.textColor = Colors.mainTextColor
+        }
     }
 }

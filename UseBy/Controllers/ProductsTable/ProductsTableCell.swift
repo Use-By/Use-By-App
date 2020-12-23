@@ -70,11 +70,8 @@ class ProductsTableCell: UITableViewCell {
             tagLabel.isHidden = true
         }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-
         if let expirationDate = product.expirationDate {
-            expirationLabel.setDate(date: dateFormatter.string(from: expirationDate))
+            expirationLabel.setDate(date: expirationDate)
         }
 
         if let photoUrl = product.photoUrl {

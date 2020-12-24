@@ -115,7 +115,7 @@ class ProductModel: ProductModelProtocol {
                 let isLiked = data["liked"] as? Bool ?? false
                 let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
                 let openedDate = (data["opened"] as? Timestamp)?.dateValue()
-                let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue() ?? Date()
+                let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue()
                 let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
                 let photoURL = data["photo-url"] as? String
 

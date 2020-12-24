@@ -39,7 +39,7 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
 
     @objc
     func didTapAddButton() {
-        productModel.create(data: data, completion: { (_, error) in
+        productModel.create(data: data, completion: { (_, _) in
             self.dismiss(animated: true, completion: nil)
             self.delegate?.didCreatedProduct()
         })

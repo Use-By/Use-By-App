@@ -7,11 +7,13 @@ class ProductsViewController: UIViewController {
         static let padding: CGFloat = 40
         static let filtersHeight: CGFloat = 90
         static let controlsMargin: CGFloat = 10
+        static let loaderLineWidth: CGFloat = 5
+        static let loaderHeight: CGFloat = 50
     }
 
     private let emptyScreenLabel = UILabel()
     private let loader: Loader = {
-        let loader = Loader(lineWidth: 5)
+        let loader = Loader(lineWidth: UIConstants.loaderLineWidth)
         loader.translatesAutoresizingMaskIntoConstraints = false
 
         return loader
@@ -44,8 +46,8 @@ class ProductsViewController: UIViewController {
         view.addSubview(loader)
         loader.snp.makeConstraints {(make) in
             make.center.equalTo(self.view)
-            make.width.equalTo(50)
-            make.height.equalTo(50)
+            make.width.equalTo(UIConstants.loaderHeight)
+            make.height.equalTo(UIConstants.loaderHeight)
         }
 
         configureFilters()
@@ -56,10 +58,12 @@ class ProductsViewController: UIViewController {
     }
 
     func loadProducts() {
+        productsTableVC.setLoader(isHidden: false)
         productModel.get(filters: filters, completion: { (products, error) in
             if let products = products {
                 self.data = products
                 self.loader.isHidden = true
+                self.productsTableVC.setLoader(isHidden: true)
 
                 if products.count != 0 {
                     self.productsTableVC.reloadTable()

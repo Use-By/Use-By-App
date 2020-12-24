@@ -11,6 +11,9 @@ protocol ProductsViewControllerDelegate: AnyObject {
 
 class ProductsTableViewController: UIViewController {
     struct UIConstants {
+        static let loaderHeight: CGFloat = 20
+        static let loaderMargin: CGFloat = 10
+        static let loaderLineWidth: CGFloat = 3
         static let labelToTableMargin: CGFloat = 15
     }
 
@@ -28,18 +31,38 @@ class ProductsTableViewController: UIViewController {
     }()
 
     private let productsCountLabel = UILabel()
+    private let loader: Loader = {
+        let loader = Loader(lineWidth: UIConstants.loaderLineWidth)
+        loader.translatesAutoresizingMaskIntoConstraints = false
+
+        return loader
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.mainBGColor
 
         configureProductsCountLabel()
+        configureLoader()
         configureTable()
     }
 
     func configureProductsCountLabel() {
         view.addSubview(productsCountLabel)
         setCountLabel()
+    }
+
+    func configureLoader() {
+        view.addSubview(loader)
+        loader.isAnimating = true
+        loader.isHidden = true
+
+        loader.snp.makeConstraints {(make) in
+            make.left.equalTo(productsCountLabel.snp.right).offset(UIConstants.loaderMargin)
+            make.width.equalTo(UIConstants.loaderHeight)
+            make.height.equalTo(UIConstants.loaderHeight)
+            make.top.equalTo(view)
+        }
     }
 
     func configureTable() {
@@ -58,7 +81,6 @@ class ProductsTableViewController: UIViewController {
         productsCountLabel.font = Fonts.mainText
         productsCountLabel.textAlignment = .center
         productsCountLabel.snp.makeConstraints {(make) -> Void in
-            make.width.equalTo(view)
             make.centerX.equalTo(view)
             make.top.equalTo(view)
         }
@@ -67,6 +89,10 @@ class ProductsTableViewController: UIViewController {
     func reloadTable() {
         self.tableView.reloadData()
         setCountLabel()
+    }
+
+    func setLoader(isHidden: Bool) {
+        loader.isHidden = isHidden
     }
 }
 

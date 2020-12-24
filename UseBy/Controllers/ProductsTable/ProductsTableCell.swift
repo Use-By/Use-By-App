@@ -71,7 +71,10 @@ class ProductsTableCell: UITableViewCell {
         }
 
         if let expirationDate = product.expirationDate {
+            expirationLabel.isHidden = false
             expirationLabel.setDate(date: expirationDate)
+        } else {
+            expirationLabel.isHidden = true
         }
 
         if let photoUrl = product.photoUrl {

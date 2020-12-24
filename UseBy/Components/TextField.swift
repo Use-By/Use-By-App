@@ -17,8 +17,8 @@ class TextField: UIView {
     private let dividerHeight = 1
     private let totalHeight = 61
 
-    enum TextFieldPurpose {
-        case password
+    enum TextFieldPurpose: Int {
+        case password = 0
         case name
         case email
         case tag
@@ -57,6 +57,7 @@ class TextField: UIView {
         textField.font = Fonts.mainText
         textField.clearButtonMode =  .whileEditing
         textField.borderStyle = .none
+        textField.tag = purpose.rawValue
 
         switch purpose {
         case .email:

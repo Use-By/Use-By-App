@@ -10,6 +10,7 @@ protocol ProductInfo {
     var useByDate: Date? { get }
     var isLiked: Bool { get }
     var expirationDate: Date? { get }
+    var photoUrl: String? { get }
 }
 
 struct Product: ProductInfo {
@@ -25,6 +26,7 @@ struct Product: ProductInfo {
 }
 
 struct ProductToCreate: ProductInfo {
+    var photoUrl: String?
     var name: String
     var tag: String?
     var openedDate: Date?
@@ -63,7 +65,7 @@ protocol ProductModelProtocol {
 }
 
 class ProductModel: ProductModelProtocol {
-    private func getApiDataFromProduct(product: ProductInfo) -> [String: Any] {
+    private func getApiDataFromProduct(product: ProductInfo, userID: String) -> [String: Any] {
         // TODO добавить про картинку
 
         return [
@@ -73,7 +75,9 @@ class ProductModel: ProductModelProtocol {
             "after-opening": product.afterOpenening,
             "use-by": product.useByDate,
             "opened": product.openedDate,
-            "expiration-date": product.expirationDate
+            "expiration-date": product.expirationDate,
+            "userID": userID,
+            "photo-url": product.photoUrl
         ]
     }
 
@@ -86,7 +90,7 @@ class ProductModel: ProductModelProtocol {
     }
 
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void) {
-        var productsRef = Firestore.firestore().collection("products")
+        let productsRef = Firestore.firestore().collection("products")
 
         guard let userID = self.getUserID() else {
             return
@@ -162,38 +166,72 @@ class ProductModel: ProductModelProtocol {
     }
 
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void) {
+        guard let userID = self.getUserID() else {
+            return
+        }
         let productsDB = Firestore.firestore().collection("products")
         let documentRef = productsDB.document()
 
-        documentRef.setData(getApiDataFromProduct(product: data)) { (error) in
+        if let photo = data.photo {
+            uploadPhoto(photo: photo, completion: { (url, error) in
+                if error != nil {
+                    completion(nil, .unknownError)
+                    return
+                }
+
+                self.setProductDocumentData(product: data, photoURL: url, completion: completion)
+            })
+
+            return
+        }
+
+        self.setProductDocumentData(product: data, photoURL: nil, completion: completion)
+
+    }
+
+    private func mapCreatedProductFromApi(data: ProductToCreate, documentID: String, photoURL: String?) -> Product {
+        return Product(
+            id: documentID,
+            name: data.name,
+            tag: data.tag,
+            isLiked: false,
+            expirationDate: data.expirationDate,
+            openedDate: data.openedDate,
+            afterOpenening: data.afterOpenening,
+            useByDate: data.useByDate,
+            photoUrl: photoURL
+        )
+    }
+
+    private func setProductDocumentData(product: ProductToCreate, photoURL: String?, completion: @escaping (Product?, ProductError?) -> Void) {
+        guard let userID = self.getUserID() else {
+            return
+        }
+        let productsDB = Firestore.firestore().collection("products")
+        let documentRef = productsDB.document()
+
+        documentRef.setData(self.getApiDataFromProduct(product: product, userID: userID)) { (error) in
             if error != nil {
                 completion(nil, .unknownError)
                 return
             }
 
-            let product = Product(
-                id: documentRef.documentID,
-                name: data.name,
-                tag: data.tag,
-                isLiked: false,
-                expirationDate: data.expirationDate,
-                openedDate: data.openedDate,
-                afterOpenening: data.afterOpenening,
-                useByDate: data.useByDate,
-                // TODO
-                photoUrl: nil
+            completion(
+                self.mapCreatedProductFromApi(data: product, documentID: documentRef.documentID, photoURL: photoURL),
+                nil
             )
-
-            completion(product, nil)
         }
     }
 
     func update(data: Product, completion: @escaping (Product?, ProductError?) -> Void) {
+        guard let userID = self.getUserID() else {
+            return
+        }
         let productsDB = Firestore.firestore().collection("products")
 
         productsDB
             .document(data.id)
-            .updateData(getApiDataFromProduct(product: data)) { (error) in
+            .updateData(getApiDataFromProduct(product: data, userID: userID)) { (error) in
             if error != nil {
                 completion(nil, .unknownError)
                 return

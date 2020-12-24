@@ -1,6 +1,6 @@
 import Foundation
 
-func getExpirationDate(useByDate: Date?, afterOpeningDate: Date?) -> Date {
+func getExpirationDate(useByDate: Date?, afterOpeningDate: Date?) -> Date? {
     if let useByDate = useByDate, let afterOpeningDate = afterOpeningDate {
         return useByDate < afterOpeningDate ? useByDate : afterOpeningDate
     }
@@ -13,5 +13,5 @@ func getExpirationDate(useByDate: Date?, afterOpeningDate: Date?) -> Date {
         return afterOpeningDate
     }
 
-    return Date()
+    return nil
 }

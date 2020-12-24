@@ -4,6 +4,8 @@ import UIKit
 protocol ProductPageViewDelegate: AnyObject {
     func didTapAddButton()
     func didTapCloseIcon()
+    func nameChanged(value: String)
+    func tagChanged(value: String)
 }
 
 class ProductPageView: UIViewController {
@@ -77,6 +79,10 @@ class ProductPageView: UIViewController {
             return
         }
 
+        [nameField, tagField].forEach {
+            $0.textField.delegate = self
+        }
+
         let arrangedSubviews = [nameField, openedFieldView, afterOpeningFieldView, useByFieldView, tagField]
         let stackViewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackViewFields.axis = .vertical
@@ -148,6 +154,21 @@ class ProductPageView: UIViewController {
 
         if let tag = product.tag {
             tagField.textField.insertText(tag)
+        }
+    }
+}
+
+extension ProductPageView: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField.tag {
+        case TextField.TextFieldPurpose.name.rawValue:
+            self.delegate?.nameChanged(value: textField.text ?? "")
+
+        case TextField.TextFieldPurpose.tag.rawValue:
+            self.delegate?.tagChanged(value: textField.text ?? "")
+
+        default:
+            break
         }
     }
 }

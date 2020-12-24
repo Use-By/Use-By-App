@@ -28,11 +28,17 @@ class ProductPhoto: UIView {
             return
         }
         imageView.kf.setImage(with: url)
+        imageView.snp.remakeConstraints { (make) -> Void in
+            make.center.equalTo(self)
+            make.height.equalTo(self)
+            make.width.equalTo(self)
+        }
     }
 
     func setEmptyPhotoIcon() {
         imageView.image = UIImage(named: "PhotoIcon")
-        imageView.snp.makeConstraints { (make) -> Void in
+        imageView.snp.remakeConstraints { (make) -> Void in
+            make.center.equalTo(self)
             make.height.equalTo(UIConstants.emptyPhotoWidth)
             make.width.equalTo(UIConstants.emptyPhotoWidth)
         }

@@ -124,12 +124,12 @@ extension ProductsViewController: ProductsViewControllerDelegate {
             title: "delete-warning".localized, message: nil,
             preferredStyle: .alert
         )
+        alert.addAction(UIAlertAction(title: "no".localized, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "yes".localized, style: .default, handler: {(_) in
             self.productModel.delete(id: id, completion: {(_) in
                 self.loadProducts()
             })
         }))
-        alert.addAction(UIAlertAction(title: "no".localized, style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
     }

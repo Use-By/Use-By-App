@@ -3,13 +3,17 @@ import UIKit
 import SnapKit
 
 class MainScreenViewController: UITabBarController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.tintColor = Colors.mainActionColor
-
+    private let productsVC = { () -> Router in
         let productsVC = Router(rootViewController: ProductsViewController())
         productsVC.tabBarItem.title = "home".localized
         productsVC.tabBarItem.image = UIImage(named: "HomeIcon")
+
+        return productsVC
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.tintColor = Colors.mainActionColor
 
         let profileVC = ProfileViewController()
         profileVC.tabBarItem.title = "profile".localized
@@ -43,5 +47,16 @@ class MainScreenViewController: UITabBarController {
     func didTapAddButton() {
         let addProductVC = AddProductViewController()
         present(addProductVC, animated: true, completion: nil)
+        addProductVC.delegate = self
+    }
+}
+
+extension MainScreenViewController: AddProductPageViewDelegate {
+    func didCreatedProduct() {
+        guard let productsVC = productsVC.topViewController as? ProductsViewController else {
+            return
+        }
+
+        productsVC.loadProducts()
     }
 }

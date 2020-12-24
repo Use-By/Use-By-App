@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+protocol AddProductPageViewDelegate: AnyObject {
+    func didCreatedProduct()
+}
+
 class AddProductViewController: UIViewController, ProductPageViewDelegate {
     private let productModel: ProductModel = ProductModel()
     private var data: ProductToCreate = ProductToCreate(
@@ -11,8 +15,9 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         useByDate: nil,
         photo: nil,
         isLiked: false,
-        expirationDate: Date()
+        expirationDate: nil
     )
+    weak var delegate: AddProductPageViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +39,22 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
 
     @objc
     func didTapAddButton() {
-        productModel.create(data: data, completion: { (_, _) in
+        productModel.create(data: data, completion: { (_, error) in
             self.dismiss(animated: true, completion: nil)
+            self.delegate?.didCreatedProduct()
         })
     }
 
     @objc
     func didTapCloseIcon() {
         dismiss(animated: true, completion: nil)
+    }
+
+    func nameChanged(value: String) {
+        data.name = value
+    }
+
+    func tagChanged(value: String) {
+        data.tag = value
     }
 }

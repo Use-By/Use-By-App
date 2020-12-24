@@ -43,4 +43,12 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
     func didTapCloseIcon() {
         dismiss(animated: true, completion: nil)
     }
+
+    func nameChanged(value: String) {
+        product.name = value
+    }
+
+    func tagChanged(value: String) {
+        product.tag = value
+    }
 }

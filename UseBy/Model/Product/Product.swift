@@ -231,36 +231,11 @@ class ProductModel: ProductModelProtocol {
         }
     }
 
-    func downloadPhotos(completion: @escaping (URL?, ProductError?) -> Void) {
-        guard let userID = self.getUserID() else {
-            completion(nil, .unknownError)
-            return
-        }
-        let storage = Storage.storage()
-        let imagesRef = storage.reference()
-            .child("photos")
-            .child(userID)
-
-        imagesRef.listAll { (result, error) in
-            if error != nil {
-                completion(nil, .unknownError)
-                return
-            }
-
-            for item in result.items {
-              // The items under storageReference.
-            }
-          }
-    }
-
     func downloadPhoto(url: String, completion: @escaping (Data?, ProductError?) -> Void) {
-        guard let userID = self.getUserID() else {
-            completion(nil, .unknownError)
-            return
-        }
         let storage = Storage.storage()
         let imageRef = storage.reference(forURL: url)
 
+        // TODO max size?
         imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if error != nil {
                 completion(nil, .unknownError)

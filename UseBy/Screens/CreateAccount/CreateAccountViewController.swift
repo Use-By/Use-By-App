@@ -185,7 +185,7 @@ class CreateAccountViewController: UIViewController {
                             _ = Alert(
                                 title: "error".localized,
                                 message: getUserAuthErrorText(error: error),
-                                action: .non
+                                action: .none
                             )
 
                             return

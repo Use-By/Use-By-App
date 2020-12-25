@@ -34,7 +34,7 @@ class AlertController: UIViewController {
             let text = self.getTextFromInput()
             saveDataFromAlert?(text)
             self.dismiss(animated: true, completion: nil)
-            })
+        })
         actionSave.isEnabled = false
         self.alertChange.addAction(actionSave)
         let actionCancel = UIAlertAction(title: "cancel".localized, style: .cancel, handler: {_ in
@@ -72,9 +72,8 @@ class AlertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
-        self.present(alertChange, animated: false, completion: nil)
     }
-   override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.present(alertChange, animated: false, completion: nil)
     }
 
@@ -84,24 +83,29 @@ class AlertController: UIViewController {
 
 }
 extension UIAlertController {
+    func setColorMessage(color: UIColor) {
+        guard let message = self.message else { return }
+        let attributeString = NSMutableAttributedString(string: message)
 
-    /*func lableIfNotValid() {
-        let label = UILabel(frame: CGRect(x: 0, y: 40, width: 270, height: 18))
-        label.textAlignment = .center
-        label.textColor = .red
-        label.isHidden = true
-        label.text = "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match".localized
-        view.addSubview(label) // dont show on the screen
-        label.isHidden = false
-    }*/
-    func isValidEmail(_ email: String) -> Bool {
-        return email.count > 0 && NSPredicate(format: "self matches %@",
-                                              "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,64}").evaluate(with: email)
+        attributeString.addAttributes([NSAttributedString.Key.foregroundColor: color],
+                                      range: NSRange(location: 0, length: message.utf8.count))
+        self.setValue(attributeString, forKey: "attributedMessage")
     }
 
-    func isValidPassword(_ password: String, _ confirmPassword: String) -> Bool {
-        return password.count >= 6 && password == confirmPassword
+    func messageIfNotValid(validemail: Bool?, validepassword: Bool?) {
+        if validepassword == false {
+            message = "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match".localized
+        } else if validepassword == true {
+            message = nil
+        }
+        if validemail == false {
+            message = "invalid_email".localized
+        } else if validemail == true {
+            message = nil
+        }
+        setColorMessage(color: UIColor.red)
     }
+
     @objc func textDidChange() {
         var alertTextFieldNotEmpty = false
         if textFields?[0].text?.count != nil {
@@ -113,14 +117,19 @@ extension UIAlertController {
 
     @objc func textDidChangeInPassword() {
         if let password = textFields?[0].text,
-            let confirmPassword = textFields?[1].text,
-            let action = actions.first {
+           let confirmPassword = textFields?[1].text,
+           let action = actions.first {
+            messageIfNotValid(validemail: nil, validepassword:
+
+                                isValidPassword(password, confirmPassword) )
             action.isEnabled = isValidPassword(password, confirmPassword)
         }
     }
     @objc func textDidChangeInEmail() {
+        setColorMessage(color: UIColor.red)
         if let email = textFields?[0].text,
            let action = actions.first {
+            messageIfNotValid(validemail: isValidEmail(email), validepassword: nil)
             action.isEnabled = isValidEmail(email)
         }
     }

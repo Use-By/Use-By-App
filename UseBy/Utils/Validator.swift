@@ -54,3 +54,11 @@ func validateTextFields(fields: [TextField]) -> [ValidationError] {
 func getErrorsTexts(validationErrors: [ValidationError]) -> String {
     return validationErrors.map { $0.text }.joined(separator: "\n")
 }
+func isValidEmail(_ email: String) -> Bool {
+    email.count > 0 && NSPredicate(format: "self matches %@",
+                                   "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,64}").evaluate(with: email)
+}
+
+func isValidPassword(_ password: String, _ confirmPassword: String) -> Bool {
+    return password.count >= 6 && password == confirmPassword
+}

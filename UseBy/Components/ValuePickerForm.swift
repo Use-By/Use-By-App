@@ -1,7 +1,113 @@
 import Foundation
 import UIKit
 
-class ValuePickerForm: UIViewController {
+protocol ValuePickerFormDelegate: AnyObject {
+    func getData() -> [String]
+    func applyData(value: String?)
+}
+
+class DateValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    struct UIConstants {
+        static let padding: CGFloat = 10
+        static let dividerHeight: CGFloat = 1
+        static let height: CGFloat = 300
+        static let pickerHeight: CGFloat = 250
+    }
+
+    private let picker = UIPickerView()
+    private let toolbar = UIToolbar(frame: .zero)
+
+    private var value: String?
+    weak var delegate: ValuePickerFormDelegate?
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let data = delegate?.getData() {
+            return data.count
+        }
+
+        return 0
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        value = delegate?.getData()[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if let data = delegate?.getData() {
+            return data[row]
+        }
+
+        return ""
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = Colors.mainBGColor
+        view.snp.makeConstraints { (make) in
+            make.height.equalTo(UIConstants.height)
+
+        }
+
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(picker)
+        picker.snp.makeConstraints {(make) in
+            make.center.equalTo(view)
+            make.width.equalTo(view)
+            make.height.equalTo(UIConstants.pickerHeight)
+        }
+        picker.delegate = self
+
+        view.addSubview(toolbar)
+        toolbar.snp.makeConstraints {(make) in
+            make.top.equalTo(view)
+            make.width.equalTo(view)
+        }
+        toolbar.tintColor = Colors.secondaryTextColor
+        let applyButton = UIBarButtonItem(
+            title: "apply".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapApplyButton)
+        )
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(
+            title: "cancel".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancelIcon)
+        )
+
+        toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
+    }
+
+    @objc
+    func didTapApplyButton() {
+        dismiss(animated: true, completion: nil)
+        delegate?.applyData(value: value)
+    }
+
+    @objc
+    func didTapCancelIcon() {
+        dismiss(animated: true, completion: nil)
+        delegate?.applyData(value: nil)
+    }
+
+}
+
+class DateValuePickerForm: UIViewController, ValuePickerFormDelegate {
+    func getData() -> [String] {
+        return ["Today", "Yesterday"]
+    }
+
+    func applyData(value: String?) {
+        return
+    }
+
     struct UIConstants {
         static let height: CGFloat = 60
         static let dividerHeight: CGFloat = 1
@@ -39,6 +145,9 @@ class ValuePickerForm: UIViewController {
         configureNameLabel()
         configureValueLabel()
         configureDivider()
+
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapEdit)))
     }
 
     func configureNameLabel() {
@@ -102,5 +211,12 @@ class ValuePickerForm: UIViewController {
         } else {
             valueLabel.text = valuePlaceholder
         }
+    }
+
+    @objc
+    func didTapEdit() {
+        let picker = DateValuePickerFormModal()
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
     }
 }

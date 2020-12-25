@@ -29,9 +29,9 @@ class ProductPageView: UIViewController {
 
     private let photo = ProductPagePhoto()
     private let nameField = TextField(purpose: .name)
-    private let openedField = ValuePickerForm(name: "opened".localized)
-    private let afterOpeningField = ValuePickerForm(name: "after-opening".localized, placeholder: "select".localized)
-    private let useByField = ValuePickerForm(name: "use-by".localized, placeholder: "select".localized)
+    private let openedField = DateValuePickerForm(name: "opened".localized)
+    private let afterOpeningField = DateValuePickerForm(name: "after-opening".localized, placeholder: "select".localized)
+    private let useByField = DateValuePickerForm(name: "use-by".localized, placeholder: "select".localized)
     private let tagField = TextField(purpose: .tag)
 
     init(addButtonText: String) {

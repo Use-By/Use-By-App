@@ -32,23 +32,20 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
         productView.fillData(with: product.photoUrl, product: product)
     }
 
-    @objc
-    func didTapAddButton() {
+    func didTapAddButton(value: ProductToCreate) {
+        product.afterOpenening = value.afterOpenening
+        product.expirationDate = value.expirationDate
+        product.name = value.name
+        product.openedDate = value.openedDate
+        product.tag = value.tag
+        product.useByDate = value.useByDate
+
         productModel.update(data: product, completion: {(_, _) in
             self.dismiss(animated: true, completion: nil)
         })
     }
 
-    @objc
     func didTapCloseIcon() {
         dismiss(animated: true, completion: nil)
-    }
-
-    func nameChanged(value: String) {
-        product.name = value
-    }
-
-    func tagChanged(value: String) {
-        product.tag = value
     }
 }

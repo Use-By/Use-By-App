@@ -37,9 +37,8 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         productView.fillData(with: data.photo, product: data)
     }
 
-    @objc
-    func didTapAddButton() {
-        productModel.create(data: data, completion: { (_, _) in
+    func didTapAddButton(value: ProductToCreate) {
+        productModel.create(data: value, completion: { (_, _) in
             self.dismiss(animated: true, completion: nil)
             self.delegate?.didCreatedProduct()
         })
@@ -48,13 +47,5 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
     @objc
     func didTapCloseIcon() {
         dismiss(animated: true, completion: nil)
-    }
-
-    func nameChanged(value: String) {
-        data.name = value
-    }
-
-    func tagChanged(value: String) {
-        data.tag = value
     }
 }

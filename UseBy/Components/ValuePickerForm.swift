@@ -6,7 +6,15 @@ protocol ValuePickerFormDelegate: AnyObject {
     func applyData(value: String?)
 }
 
-class DateValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+protocol DateValuePickerFormDelegate: AnyObject {
+    func valuePickerApplied(_ valuePicker: DateValuePickerForm, value: Date?)
+}
+
+protocol DateValuePickerFormModalDelegate: AnyObject {
+    func valuePickerApplied(value: Date?)
+}
+
+class ValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     struct UIConstants {
         static let padding: CGFloat = 10
         static let dividerHeight: CGFloat = 1
@@ -15,7 +23,28 @@ class DateValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPick
     }
 
     private let picker = UIPickerView()
-    private let toolbar = UIToolbar(frame: .zero)
+    private let toolbar = { () -> UIToolbar in
+        let toolbar = UIToolbar(frame: .zero)
+        toolbar.tintColor = Colors.secondaryTextColor
+
+        let applyButton = UIBarButtonItem(
+            title: "apply".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapApplyButton)
+        )
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(
+            title: "cancel".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancelIcon)
+        )
+
+        toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
+
+        return toolbar
+    }()
 
     private var value: String?
     weak var delegate: ValuePickerFormDelegate?
@@ -48,10 +77,6 @@ class DateValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPick
         super.viewDidLoad()
 
         view.backgroundColor = Colors.mainBGColor
-        view.snp.makeConstraints { (make) in
-            make.height.equalTo(UIConstants.height)
-
-        }
 
         picker.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(picker)
@@ -99,15 +124,96 @@ class DateValuePickerFormModal: UIViewController, UIPickerViewDataSource, UIPick
 
 }
 
-class DateValuePickerForm: UIViewController, ValuePickerFormDelegate {
-    func getData() -> [String] {
-        return ["Today", "Yesterday"]
+class DateValuePickerFormModal: UIViewController {
+    struct UIConstants {
+        static let padding: CGFloat = 10
+        static let dividerHeight: CGFloat = 1
+        static let height: CGFloat = 300
+        static let pickerHeight: CGFloat = 250
     }
 
-    func applyData(value: String?) {
-        return
+    private let picker = { () -> UIDatePicker in
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
+
+        return picker
+    }()
+    private let toolbar = { () -> UIToolbar in
+        let toolbar = UIToolbar(frame: .zero)
+        toolbar.tintColor = Colors.secondaryTextColor
+
+        let applyButton = UIBarButtonItem(
+            title: "apply".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapApplyButton)
+        )
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(
+            title: "cancel".localized,
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancelIcon)
+        )
+
+        toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
+
+        return toolbar
+    }()
+    private var date: Date?
+
+    weak var delegate: DateValuePickerFormModalDelegate?
+
+    init(date: Date?) {
+        self.date = date
+        super.init(nibName: nil, bundle: nil)
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = Colors.mainBGColor
+
+        view.addSubview(picker)
+        picker.snp.makeConstraints {(make) in
+            make.center.equalTo(view)
+            make.width.equalTo(view)
+            make.height.equalTo(UIConstants.pickerHeight)
+        }
+
+        if let date = date {
+            picker.setDate(date, animated: true)
+        }
+
+        view.addSubview(toolbar)
+        toolbar.snp.makeConstraints {(make) in
+            make.top.equalTo(view)
+            make.width.equalTo(view)
+        }
+    }
+
+    @objc
+    func didTapApplyButton() {
+        dismiss(animated: true, completion: nil)
+        delegate?.valuePickerApplied(value: picker.date)
+    }
+
+    @objc
+    func didTapCancelIcon() {
+        dismiss(animated: true, completion: nil)
+        delegate?.valuePickerApplied(value: nil)
+    }
+}
+
+class DateValuePickerForm: UIViewController, DateValuePickerFormModalDelegate {
     struct UIConstants {
         static let height: CGFloat = 60
         static let dividerHeight: CGFloat = 1
@@ -118,6 +224,9 @@ class DateValuePickerForm: UIViewController, ValuePickerFormDelegate {
     let valueLabel = UILabel()
     let arrowIcon = IconView(name: "RightArrow", size: .small, theme: .secondary)
     var valuePlaceholder: String = ""
+    var tag: Int = 0
+    var value: Date?
+    weak var delegate: DateValuePickerFormDelegate?
 
     init(name: String, placeholder: String = "") {
         super.init(nibName: nil, bundle: nil)
@@ -184,6 +293,7 @@ class DateValuePickerForm: UIViewController, ValuePickerFormDelegate {
     }
 
     func setValue(value: Date?) {
+        self.value = value
         if let value = value {
             let calendar = Calendar.current
 
@@ -215,8 +325,13 @@ class DateValuePickerForm: UIViewController, ValuePickerFormDelegate {
 
     @objc
     func didTapEdit() {
-        let picker = DateValuePickerFormModal()
+        let picker = DateValuePickerFormModal(date: value)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
+    }
+
+    func valuePickerApplied(value: Date?) {
+        delegate?.valuePickerApplied(self, value: value)
+        setValue(value: value)
     }
 }

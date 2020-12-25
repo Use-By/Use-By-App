@@ -2,10 +2,14 @@ import Foundation
 import UIKit
 
 protocol ProductPageViewDelegate: AnyObject {
-    func didTapAddButton()
+    func didTapAddButton(value: ProductToCreate)
     func didTapCloseIcon()
-    func nameChanged(value: String)
-    func tagChanged(value: String)
+}
+
+enum ProductPageValue: Int {
+    case opened = 0
+    case afterOpening
+    case useBy
 }
 
 class ProductPageView: UIViewController {
@@ -29,10 +33,44 @@ class ProductPageView: UIViewController {
 
     private let photo = ProductPagePhoto()
     private let nameField = TextField(purpose: .name)
-    private let openedField = DateValuePickerForm(name: "opened".localized)
-    private let afterOpeningField = DateValuePickerForm(name: "after-opening".localized, placeholder: "select".localized)
-    private let useByField = DateValuePickerForm(name: "use-by".localized, placeholder: "select".localized)
+    private let openedField: DateValuePickerForm = {
+        let field = DateValuePickerForm(
+            name: "opened".localized
+        )
+        field.tag = ProductPageValue.opened.rawValue
+
+        return field
+    }()
+    private let afterOpeningField: DateValuePickerForm = {
+        let field = DateValuePickerForm(
+            name: "after-opening".localized,
+            placeholder: "select".localized
+        )
+        field.tag = ProductPageValue.afterOpening.rawValue
+
+        return field
+    }()
+    private let useByField: DateValuePickerForm = {
+        let field = DateValuePickerForm(
+            name: "use-by".localized,
+            placeholder: "select".localized
+        )
+        field.tag = ProductPageValue.useBy.rawValue
+
+        return field
+    }()
     private let tagField = TextField(purpose: .tag)
+    private var product = ProductToCreate(
+        photoUrl: nil,
+        name: "",
+        tag: nil,
+        openedDate: nil,
+        afterOpenening: nil,
+        useByDate: nil,
+        photo: nil,
+        isLiked: false,
+        expirationDate: nil
+    )
 
     init(addButtonText: String) {
         addButton = MainButton(
@@ -118,7 +156,7 @@ class ProductPageView: UIViewController {
 
     @objc
     func didTapAddButton() {
-        self.delegate?.didTapAddButton()
+        self.delegate?.didTapAddButton(value: product)
     }
 
     @objc
@@ -147,6 +185,12 @@ class ProductPageView: UIViewController {
     }
 
     private func setData(product: ProductInfo) {
+        self.product.name = product.name
+        self.product.openedDate = product.openedDate
+        self.product.afterOpenening = product.afterOpenening
+        self.product.useByDate = product.useByDate
+        self.product.tag = product.tag
+
         openedField.setValue(value: product.openedDate)
         afterOpeningField.setValue(value: product.afterOpenening)
         useByField.setValue(value: product.useByDate)
@@ -162,10 +206,28 @@ extension ProductPageView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
         case TextField.TextFieldPurpose.name.rawValue:
-            self.delegate?.nameChanged(value: textField.text ?? "")
+            product.name = textField.text ?? ""
 
         case TextField.TextFieldPurpose.tag.rawValue:
-            self.delegate?.tagChanged(value: textField.text ?? "")
+            product.tag = textField.text ?? ""
+
+        default:
+            break
+        }
+    }
+}
+
+extension ProductPageView: DateValuePickerFormDelegate {
+    func valuePickerApplied(_ valuePicker: DateValuePickerForm, value: Date?) {
+        switch valuePicker.tag {
+        case ProductPageValue.opened.rawValue:
+            product.openedDate = value
+
+        case ProductPageValue.useBy.rawValue:
+            product.useByDate = value
+
+        case ProductPageValue.afterOpening.rawValue:
+            product.afterOpenening = value
 
         default:
             break

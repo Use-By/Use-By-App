@@ -15,8 +15,7 @@ class ChangeFiltersViewController: UIViewController {
         static let padding: CGFloat = 40
     }
 
-    private let titleLabel = MainScreenTitle(labelType: .filterBy)
-    private let orderTitleLabel = MainScreenTitle(labelType: .orderBy)
+    private let titleLabel = MainScreenTitle(labelType: .orderBy)
     private let applyButton = MainButton(
         text: "apply".localized,
         theme: .normal
@@ -58,11 +57,6 @@ class ChangeFiltersViewController: UIViewController {
     }
 
     func configureOrderFields() {
-        view.addSubview(orderTitleLabel)
-        orderTitleLabel.snp.makeConstraints {(make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(UIConstants.fieldsSpacing)
-            make.left.equalTo(view).offset(UIConstants.titleMargin)
-        }
         orderFields.forEach {
             view.addSubview($0)
         }
@@ -70,7 +64,7 @@ class ChangeFiltersViewController: UIViewController {
         orderFields[0].snp.makeConstraints { (make) in
             make.width.equalTo(view).offset(-UIConstants.padding)
             make.centerX.equalTo(view)
-            make.top.equalTo(orderTitleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom)
         }
 
         orderFields[1].snp.makeConstraints { (make) in
@@ -78,6 +72,9 @@ class ChangeFiltersViewController: UIViewController {
             make.centerX.equalTo(view)
             make.top.equalTo(orderFields[0].snp.bottom)
         }
+
+        orderFields[0].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapDescSort)))
+        orderFields[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAscSort)))
 
         setOrderValue()
     }
@@ -149,5 +146,17 @@ class ChangeFiltersViewController: UIViewController {
     @objc
     func didTapCloseIcon() {
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc
+    func didTapDescSort() {
+        filters.sort = .desc
+        setOrderValue()
+    }
+
+    @objc
+    func didTapAscSort() {
+        filters.sort = .asc
+        setOrderValue()
     }
 }

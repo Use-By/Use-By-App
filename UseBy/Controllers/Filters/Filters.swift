@@ -80,15 +80,24 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
     func didTapLikedButton() {
         filters.isLiked = !(filters.isLiked ?? false)
         self.delegate?.applyFilters(filters: filters)
+        buttons[1].isActive = !buttons[1].isActive
     }
 
     @objc
     func didTapExpiredButton() {
         filters.isExpired = !(filters.isExpired ?? false)
         self.delegate?.applyFilters(filters: filters)
+        buttons[2].isActive = !buttons[2].isActive
     }
 
     func applyFilters(filters: ProductFilters) {
+        self.filters = filters
         self.delegate?.applyFilters(filters: filters)
+
+        if filters.sort != nil {
+            buttons[0].isActive = true
+        } else {
+            buttons[0].isActive = false
+        }
     }
 }

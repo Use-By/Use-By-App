@@ -27,6 +27,7 @@ class ValueFieldWithCheckbox: UIView {
 
         nameLabel.text = name
 
+        isUserInteractionEnabled = true
         self.snp.makeConstraints { (make) in
             make.height.equalTo(UIConstants.height)
         }

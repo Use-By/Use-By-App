@@ -9,7 +9,10 @@ class FilterButton: UIButton {
         static let innerMargin: CGFloat = 10
     }
 
+    var icon: Icon?
+
     init(text: String, icon: Icon? = nil) {
+        self.icon = icon
         super.init(frame: .zero)
 
         adjustsImageWhenHighlighted = false
@@ -45,6 +48,10 @@ class FilterButton: UIButton {
 
     override var isHighlighted: Bool {
         didSet {
+            if isActive {
+                return
+            }
+
             UIView.animate(
                 withDuration: 0.2,
                 delay: 0,
@@ -54,6 +61,27 @@ class FilterButton: UIButton {
                         ? Colors.filterHighlightColor
                         : Colors.filterControlBackground
                 }, completion: nil)
+        }
+    }
+
+    var isActive: Bool = false {
+        didSet {
+            if isActive {
+                self.backgroundColor = Colors.filterHighlightColor
+                setTitleColor(Colors.inversedTextColor, for: .normal)
+
+                if let icon = self.icon {
+                    let tintedImage = icon.icon?.withTintColor(Colors.inversedTextColor)
+                    setImage(tintedImage, for: .normal)
+                }
+            } else {
+                self.backgroundColor = Colors.filterControlBackground
+                setTitleColor(Colors.filterHighlightColor, for: .normal)
+
+                if let icon = self.icon {
+                    setImage(icon.icon, for: .normal)
+                }
+            }
         }
     }
 

@@ -1,15 +1,15 @@
 import Foundation
 import UIKit
 
-protocol ValuePickerFieldModalDelegate: AnyObject {
-    func valuePickerApplied(value: String?)
+protocol DateValuePickerFieldDelegate: AnyObject {
+    func valuePickerApplied(_ valuePicker: DateValuePickerField, value: Date?)
 }
 
-protocol ValuePickerFieldDelegate: AnyObject {
-    func valuePickerApplied(_ valuePicker: ValuePickerField, value: String?)
+protocol DateValuePickerFieldModalDelegate: AnyObject {
+    func valuePickerApplied(value: Date?)
 }
 
-class ValuePickerFieldModal: UIViewController {
+class DateValuePickerFieldModal: UIViewController {
     struct UIConstants {
         static let padding: CGFloat = 10
         static let dividerHeight: CGFloat = 1
@@ -17,7 +17,16 @@ class ValuePickerFieldModal: UIViewController {
         static let pickerHeight: CGFloat = 250
     }
 
-    private let picker = UIPickerView()
+    private let picker = { () -> UIDatePicker in
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
+
+        return picker
+    }()
     private let toolbar = { () -> UIToolbar in
         let toolbar = UIToolbar(frame: .zero)
         toolbar.tintColor = Colors.secondaryTextColor
@@ -40,14 +49,12 @@ class ValuePickerFieldModal: UIViewController {
 
         return toolbar
     }()
+    private var dateValue: Date?
 
-    private var value: String?
-    weak var pickerDelegate: UIPickerViewDelegate?
-    weak var dataSource: UIPickerViewDataSource?
-    weak var delegate: ValuePickerFieldModalDelegate?
+    weak var delegate: DateValuePickerFieldModalDelegate?
 
-    init(value: String?) {
-        self.value = value
+    init(date: Date?) {
+        self.dateValue = date
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -60,43 +67,28 @@ class ValuePickerFieldModal: UIViewController {
 
         view.backgroundColor = Colors.mainBGColor
 
-        picker.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(picker)
         picker.snp.makeConstraints {(make) in
             make.center.equalTo(view)
             make.width.equalTo(view)
             make.height.equalTo(UIConstants.pickerHeight)
         }
-        picker.delegate = self.pickerDelegate
-        picker.dataSource = self.dataSource
+
+        if let date = dateValue {
+            picker.setDate(date, animated: true)
+        }
 
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints {(make) in
             make.top.equalTo(view)
             make.width.equalTo(view)
         }
-        toolbar.tintColor = Colors.secondaryTextColor
-        let applyButton = UIBarButtonItem(
-            title: "apply".localized,
-            style: .plain,
-            target: self,
-            action: #selector(didTapApplyButton)
-        )
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(
-            title: "cancel".localized,
-            style: .plain,
-            target: self,
-            action: #selector(didTapCancelIcon)
-        )
-
-        toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
     }
 
     @objc
     func didTapApplyButton() {
         dismiss(animated: true, completion: nil)
-        delegate?.valuePickerApplied(value: value)
+        delegate?.valuePickerApplied(value: picker.date)
     }
 
     @objc
@@ -106,7 +98,7 @@ class ValuePickerFieldModal: UIViewController {
     }
 }
 
-class ValuePickerField: UIViewController, ValuePickerFieldModalDelegate {
+class DateValuePickerField: UIViewController, DateValuePickerFieldModalDelegate {
     struct UIConstants {
         static let height: CGFloat = 60
         static let dividerHeight: CGFloat = 1
@@ -116,8 +108,8 @@ class ValuePickerField: UIViewController, ValuePickerFieldModalDelegate {
     let valueField: ValueField
     var valuePlaceholder: String = ""
     var tag: Int = 0
-    var formValue: String?
-    weak var delegate: ValuePickerFieldDelegate?
+    var formValue: Date?
+    weak var delegate: DateValuePickerFieldDelegate?
 
     init(name: String, placeholder: String = "") {
         valueField = ValueField(name: name)
@@ -147,10 +139,32 @@ class ValuePickerField: UIViewController, ValuePickerFieldModalDelegate {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapEdit)))
     }
 
-    func setValue(value: String?) {
+    func setValue(value: Date?) {
         self.formValue = value
         if let value = value {
-            valueField.valueLabel.text = value
+            let calendar = Calendar.current
+
+            if calendar.isDateInToday(value) {
+                valueField.valueLabel.text = "today".localized
+
+                return
+            }
+
+            if calendar.isDateInTomorrow(value) {
+                valueField.valueLabel.text = "tomorrow".localized
+
+                return
+            }
+
+            if calendar.isDateInYesterday(value) {
+                valueField.valueLabel.text = "yesterday".localized
+
+                return
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            valueField.valueLabel.text = dateFormatter.string(from: value)
         } else {
             valueField.valueLabel.text = valuePlaceholder
         }
@@ -158,12 +172,12 @@ class ValuePickerField: UIViewController, ValuePickerFieldModalDelegate {
 
     @objc
     func didTapEdit() {
-        let picker = ValuePickerFieldModal(value: formValue)
+        let picker = DateValuePickerFieldModal(date: formValue)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
 
-    func valuePickerApplied(value: String?) {
+    func valuePickerApplied(value: Date?) {
         delegate?.valuePickerApplied(self, value: value)
         setValue(value: value)
     }

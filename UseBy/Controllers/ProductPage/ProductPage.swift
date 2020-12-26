@@ -33,16 +33,16 @@ class ProductPageView: UIViewController {
 
     private let photo = ProductPagePhoto()
     private let nameField = TextField(purpose: .name)
-    private let openedField: DateValuePickerForm = {
-        let field = DateValuePickerForm(
+    private let openedField: DateValuePickerField = {
+        let field = DateValuePickerField(
             name: "opened".localized
         )
         field.tag = ProductPageValue.opened.rawValue
 
         return field
     }()
-    private let afterOpeningField: DateValuePickerForm = {
-        let field = DateValuePickerForm(
+    private let afterOpeningField: DateValuePickerField = {
+        let field = DateValuePickerField(
             name: "after-opening".localized,
             placeholder: "select".localized
         )
@@ -50,8 +50,8 @@ class ProductPageView: UIViewController {
 
         return field
     }()
-    private let useByField: DateValuePickerForm = {
-        let field = DateValuePickerForm(
+    private let useByField: DateValuePickerField = {
+        let field = DateValuePickerField(
             name: "use-by".localized,
             placeholder: "select".localized
         )
@@ -217,8 +217,8 @@ extension ProductPageView: UITextFieldDelegate {
     }
 }
 
-extension ProductPageView: DateValuePickerFormDelegate {
-    func valuePickerApplied(_ valuePicker: DateValuePickerForm, value: Date?) {
+extension ProductPageView: DateValuePickerFieldDelegate {
+    func valuePickerApplied(_ valuePicker: DateValuePickerField, value: Date?) {
         switch valuePicker.tag {
         case ProductPageValue.opened.rawValue:
             product.openedDate = value

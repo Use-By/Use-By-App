@@ -47,6 +47,8 @@
 		337B9F2A253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2B253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
+		338033992597A17700180CFA /* ValuePickerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338033982597A17700180CFA /* ValuePickerField.swift */; };
+		3380339E2597A46300180CFA /* ValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380339D2597A46300180CFA /* ValueField.swift */; };
 		3389E2C125927ED200346D6D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389E2C025927ED200346D6D /* Date.swift */; };
 		33A67706256975420051C39E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67705256975420051C39E /* MainScreenViewController.swift */; };
 		33A6771825697B7F0051C39E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6771725697B7F0051C39E /* UserAuth.swift */; };
@@ -59,7 +61,7 @@
 		33A6775A256AE4600051C39E /* ProductsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67759256AE4600051C39E /* ProductsTable.swift */; };
 		33A67762256AE4690051C39E /* ProductsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67761256AE4690051C39E /* ProductsTableCell.swift */; };
 		33A67769256AE4BF0051C39E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67768256AE4BF0051C39E /* Product.swift */; };
-		33E68B3F2593B72D00A5D640 /* ValuePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E68B3E2593B72D00A5D640 /* ValuePickerForm.swift */; };
+		33E68B3F2593B72D00A5D640 /* DateValuePickerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E68B3E2593B72D00A5D640 /* DateValuePickerField.swift */; };
 		33E68B682593F4C800A5D640 /* ProductPagePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E68B672593F4C800A5D640 /* ProductPagePhoto.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
@@ -140,6 +142,8 @@
 		336D6765252A4A610098259E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		336D6777252A4A970098259E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		338033982597A17700180CFA /* ValuePickerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerField.swift; sourceTree = "<group>"; };
+		3380339D2597A46300180CFA /* ValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueField.swift; sourceTree = "<group>"; };
 		3389E2C025927ED200346D6D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		33A67705256975420051C39E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		33A6771725697B7F0051C39E /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
@@ -152,7 +156,7 @@
 		33A67759256AE4600051C39E /* ProductsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTable.swift; sourceTree = "<group>"; };
 		33A67761256AE4690051C39E /* ProductsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableCell.swift; sourceTree = "<group>"; };
 		33A67768256AE4BF0051C39E /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		33E68B3E2593B72D00A5D640 /* ValuePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerForm.swift; sourceTree = "<group>"; };
+		33E68B3E2593B72D00A5D640 /* DateValuePickerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValuePickerField.swift; sourceTree = "<group>"; };
 		33E68B672593F4C800A5D640 /* ProductPagePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPagePhoto.swift; sourceTree = "<group>"; };
 		3663B3FC3AF658345ACE911E /* Pods_UseBy_UseByUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UseBy_UseByUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C351037CF73F767FE187D89 /* Pods-UseByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UseByTests.release.xcconfig"; path = "Target Support Files/Pods-UseByTests/Pods-UseByTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -324,7 +328,9 @@
 				843690BF254DFF5400ABBEE0 /* TableLabel.swift */,
 				3367115B2540DAD40042E1C7 /* GoogleSignInButton.swift */,
 				33438AE7258E40C5006E4215 /* Loader.swift */,
-				33E68B3E2593B72D00A5D640 /* ValuePickerForm.swift */,
+				33E68B3E2593B72D00A5D640 /* DateValuePickerField.swift */,
+				338033982597A17700180CFA /* ValuePickerField.swift */,
+				3380339D2597A46300180CFA /* ValueField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				33A6773E2569A01D0051C39E /* Filters.swift in Sources */,
 				845DDEBC2544DAD800E1C549 /* ProfileViewController.swift in Sources */,
 				84369085254691A800ABBEE0 /* ProfileTableViewCell.swift in Sources */,
+				3380339E2597A46300180CFA /* ValueField.swift in Sources */,
 				33A67754256ADC160051C39E /* FiltersSearch.swift in Sources */,
 				333644422532637800D1A5C6 /* MainAuthViewController.swift in Sources */,
 				33A677382569958E0051C39E /* AddProduct.swift in Sources */,
@@ -832,7 +839,7 @@
 				798758572541A81100B9E25A /* TextField.swift in Sources */,
 				331B96D92544E2FC008109A3 /* CreateAccountViewController.swift in Sources */,
 				331B96E72544F056008109A3 /* Validator.swift in Sources */,
-				33E68B3F2593B72D00A5D640 /* ValuePickerForm.swift in Sources */,
+				33E68B3F2593B72D00A5D640 /* DateValuePickerField.swift in Sources */,
 				33467E442534F67900184A93 /* UILabel.swift in Sources */,
 				3367115C2540DAD40042E1C7 /* GoogleSignInButton.swift in Sources */,
 				33A6772C2569938F0051C39E /* ProductsViewController.swift in Sources */,
@@ -845,6 +852,7 @@
 				3320C45F2574040B00C9E806 /* ExpirationDateLabel.swift in Sources */,
 				33E68B682593F4C800A5D640 /* ProductPagePhoto.swift in Sources */,
 				336D6742252A4A600098259E /* AppDelegate.swift in Sources */,
+				338033992597A17700180CFA /* ValuePickerField.swift in Sources */,
 				33A6775A256AE4600051C39E /* ProductsTable.swift in Sources */,
 				79CE46092540BC7F00EAC17A /* MainTextLabel.swift in Sources */,
 				332A580D253334900078E65B /* String.swift in Sources */,

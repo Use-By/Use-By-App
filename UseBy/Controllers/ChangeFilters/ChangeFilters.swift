@@ -11,9 +11,12 @@ class ChangeFiltersViewController: UIViewController {
         static let buttonBottomMargin: CGFloat = 40
         static let buttonPadding: CGFloat = 20
         static let titleMargin: CGFloat = 20
+        static let fieldsSpacing: CGFloat = 10
+        static let padding: CGFloat = 40
     }
 
     private let titleLabel = MainScreenTitle(labelType: .filterBy)
+    private let orderTitleLabel = MainScreenTitle(labelType: .orderBy)
     private let applyButton = MainButton(
         text: "apply".localized,
         theme: .normal
@@ -26,6 +29,11 @@ class ChangeFiltersViewController: UIViewController {
         name: "CloseIcon",
         size: .large
     )
+    private let orderFields = [
+        ValueFieldWithCheckbox(name: "expiry-desc".localized),
+        ValueFieldWithCheckbox(name: "expiry-asc".localized)
+    ]
+
     private var filters: ProductFilters
     weak var delegate: ChangeFiltersViewControllerDelegate?
 
@@ -44,7 +52,57 @@ class ChangeFiltersViewController: UIViewController {
         view.backgroundColor = Colors.mainBGColor
 
         configureButtons()
-        configureTitle()
+        configureCloseIcon()
+        configureFilterFields()
+        configureOrderFields()
+    }
+
+    func configureOrderFields() {
+        view.addSubview(orderTitleLabel)
+        orderTitleLabel.snp.makeConstraints {(make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(UIConstants.fieldsSpacing)
+            make.left.equalTo(view).offset(UIConstants.titleMargin)
+        }
+        orderFields.forEach {
+            view.addSubview($0)
+        }
+
+        orderFields[0].snp.makeConstraints { (make) in
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.centerX.equalTo(view)
+            make.top.equalTo(orderTitleLabel.snp.bottom)
+        }
+
+        orderFields[1].snp.makeConstraints { (make) in
+            make.width.equalTo(view).offset(-UIConstants.padding)
+            make.centerX.equalTo(view)
+            make.top.equalTo(orderFields[0].snp.bottom)
+        }
+
+        setOrderValue()
+    }
+
+    func setOrderValue() {
+        switch filters.sort {
+        case .asc:
+            orderFields[0].isChecked = false
+            orderFields[1].isChecked = true
+        case .desc:
+            orderFields[0].isChecked = true
+            orderFields[1].isChecked = false
+        default:
+            orderFields[0].isChecked = false
+            orderFields[1].isChecked = false
+        }
+    }
+
+    func configureCloseIcon() {
+        view.addSubview(closeIcon)
+        closeIcon.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(view).offset(UIConstants.titleMargin)
+            make.right.equalTo(view).offset(-UIConstants.titleMargin)
+        }
+        closeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCloseIcon)))
     }
 
     func configureButtons() {
@@ -66,14 +124,7 @@ class ChangeFiltersViewController: UIViewController {
         applyButton.addTarget(self, action: #selector(didTapApplyButton), for: .touchUpInside)
     }
 
-    func configureTitle() {
-        view.addSubview(closeIcon)
-        closeIcon.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(view).offset(UIConstants.titleMargin)
-            make.right.equalTo(view).offset(-UIConstants.titleMargin)
-        }
-        closeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCloseIcon)))
-
+    func configureFilterFields() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view).offset(UIConstants.titleMargin)

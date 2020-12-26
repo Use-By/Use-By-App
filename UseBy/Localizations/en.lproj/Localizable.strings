@@ -13,6 +13,9 @@
 "apply" = "Apply";
 "reset" = "Reset";
 "filter-by" = "Filter by";
+"order-by" = "Sort by";
+"expiry-asc" = "Expiry date (ascending)";
+"expiry-desc" = "Expiry date (descending)";
 "create-account" = "Create account";
 "filters" = "Filters";
 "liked" = "Liked";

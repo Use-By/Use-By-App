@@ -16,6 +16,7 @@ final class MainScreenTitle: UILabel {
         case login
         case filterBy
         case profile
+        case orderBy
     }
 
     init(labelType: ScreenType = .createAccount) {
@@ -33,6 +34,8 @@ final class MainScreenTitle: UILabel {
             text = "filter-by".localized
         case .profile:
             text = "profile".localized
+        case .orderBy:
+            text = "order-by".localized
         }
     }
     required init?(coder decoder: NSCoder) {

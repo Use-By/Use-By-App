@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol ProductPageViewDelegate: AnyObject {
-    func didTapAddButton(value: ProductToCreate)
+    func didTapAddButton(value: ProductPageInfo)
     func didTapCloseIcon()
 }
 
@@ -10,6 +10,16 @@ enum ProductPageValue: Int {
     case opened = 0
     case afterOpening
     case useBy
+}
+
+struct ProductPageInfo {
+    var photoUrl: String?
+    var name: String
+    var tag: String?
+    var openedDate: Date?
+    var afterOpenening: Date?
+    var useByDate: Date?
+    var photo: Data?
 }
 
 class ProductPageView: UIViewController {
@@ -60,17 +70,6 @@ class ProductPageView: UIViewController {
         return field
     }()
     private let tagField = TextField(purpose: .tag)
-    private var product = ProductToCreate(
-        photoUrl: nil,
-        name: "",
-        tag: nil,
-        openedDate: nil,
-        afterOpenening: nil,
-        useByDate: nil,
-        photo: nil,
-        isLiked: false,
-        expirationDate: nil
-    )
 
     init(addButtonText: String) {
         addButton = MainButton(
@@ -117,10 +116,6 @@ class ProductPageView: UIViewController {
             return
         }
 
-        [nameField, tagField].forEach {
-            $0.textField.delegate = self
-        }
-
         let arrangedSubviews = [nameField, openedFieldView, afterOpeningFieldView, useByFieldView, tagField]
         let stackViewFields = UIStackView(arrangedSubviews: arrangedSubviews)
         stackViewFields.axis = .vertical
@@ -156,6 +151,15 @@ class ProductPageView: UIViewController {
 
     @objc
     func didTapAddButton() {
+        let product = ProductPageInfo(
+            photoUrl: nil,
+            name: nameField.textField.text ?? "",
+            tag: tagField.textField.text,
+            openedDate: openedField.formValue,
+            afterOpenening: afterOpeningField.formValue,
+            useByDate: useByField.formValue,
+            photo: nil
+        )
         self.delegate?.didTapAddButton(value: product)
     }
 
@@ -185,52 +189,13 @@ class ProductPageView: UIViewController {
     }
 
     private func setData(product: ProductInfo) {
-        self.product.name = product.name
-        self.product.openedDate = product.openedDate
-        self.product.afterOpenening = product.afterOpenening
-        self.product.useByDate = product.useByDate
-        self.product.tag = product.tag
-
         openedField.setValue(value: product.openedDate)
         afterOpeningField.setValue(value: product.afterOpenening)
         useByField.setValue(value: product.useByDate)
-        nameField.textField.insertText(product.name)
+        nameField.textField.text = product.name
 
         if let tag = product.tag {
-            tagField.textField.insertText(tag)
-        }
-    }
-}
-
-extension ProductPageView: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        switch textField.tag {
-        case TextField.TextFieldPurpose.name.rawValue:
-            product.name = textField.text ?? ""
-
-        case TextField.TextFieldPurpose.tag.rawValue:
-            product.tag = textField.text ?? ""
-
-        default:
-            break
-        }
-    }
-}
-
-extension ProductPageView: DateValuePickerFieldDelegate {
-    func valuePickerApplied(_ valuePicker: DateValuePickerField, value: Date?) {
-        switch valuePicker.tag {
-        case ProductPageValue.opened.rawValue:
-            product.openedDate = value
-
-        case ProductPageValue.useBy.rawValue:
-            product.useByDate = value
-
-        case ProductPageValue.afterOpening.rawValue:
-            product.afterOpenening = value
-
-        default:
-            break
+            tagField.textField.text = tag
         }
     }
 }

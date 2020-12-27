@@ -109,7 +109,6 @@ class DateValuePickerField: UIViewController, DateValuePickerFieldModalDelegate 
     var valuePlaceholder: String = ""
     var tag: Int = 0
     var formValue: Date?
-    weak var delegate: DateValuePickerFieldDelegate?
 
     init(name: String, placeholder: String = "") {
         valueField = ValueField(name: name)
@@ -178,7 +177,6 @@ class DateValuePickerField: UIViewController, DateValuePickerFieldModalDelegate 
     }
 
     func valuePickerApplied(value: Date?) {
-        delegate?.valuePickerApplied(self, value: value)
         setValue(value: value)
     }
 }

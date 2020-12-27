@@ -32,13 +32,14 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
         productView.fillData(with: product.photoUrl, product: product)
     }
 
-    func didTapAddButton(value: ProductToCreate) {
+    func didTapAddButton(value: ProductPageInfo) {
         product.afterOpenening = value.afterOpenening
-        product.expirationDate = value.expirationDate
+        product.expirationDate = getExpirationDate(useByDate: value.useByDate, afterOpeningDate: value.afterOpenening)
         product.name = value.name
         product.openedDate = value.openedDate
         product.tag = value.tag
         product.useByDate = value.useByDate
+        // TODO photo
 
         productModel.update(data: product, completion: {(_, _) in
             self.dismiss(animated: true, completion: nil)

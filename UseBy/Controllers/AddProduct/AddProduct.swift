@@ -37,8 +37,17 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         productView.fillData(with: data.photo, product: data)
     }
 
-    func didTapAddButton(value: ProductToCreate) {
-        productModel.create(data: value, completion: { (_, _) in
+    func didTapAddButton(value: ProductPageInfo) {
+        data.name = value.name
+        data.tag = value.tag
+        data.openedDate = value.openedDate
+        data.afterOpenening = value.afterOpenening
+        data.useByDate = value.useByDate
+        // TODO 
+        data.photo = value.photo
+        data.expirationDate = getExpirationDate(useByDate: value.useByDate, afterOpeningDate: value.afterOpenening)
+        
+        productModel.create(data: data, completion: { (_, _) in
             self.dismiss(animated: true, completion: nil)
             self.delegate?.didCreatedProduct()
         })

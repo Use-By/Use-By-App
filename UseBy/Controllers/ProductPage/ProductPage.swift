@@ -102,6 +102,7 @@ class ProductPageView: UIViewController {
             make.top.equalTo(closeIcon.snp.bottom).offset(UIConstants.topMargin)
         }
         photo.layer.cornerRadius = UIConstants.cornerRadius
+        photo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapEditImage)))
     }
 
     func configureForms() {
@@ -197,5 +198,29 @@ class ProductPageView: UIViewController {
         if let tag = product.tag {
             tagField.textField.text = tag
         }
+    }
+
+    @objc
+    func didTapEditImage() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true, completion: nil)
+    }
+}
+
+extension ProductPageView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        if let image = info[.editedImage] as? UIImage {
+            photo.setPhoto(with: image)
+        }
+
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

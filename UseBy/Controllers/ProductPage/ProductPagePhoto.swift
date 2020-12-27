@@ -35,6 +35,7 @@ class ProductPagePhoto: UIView {
 
         clipsToBounds = true
         layer.cornerRadius = UIConstants.cornerRadius
+        isUserInteractionEnabled = true
     }
 
     func setPhoto(with url: String) {
@@ -52,6 +53,16 @@ class ProductPagePhoto: UIView {
 
     func setPhoto(with data: Data) {
         imageView.image = UIImage(data: data)
+        emptyLabel.isHidden = true
+        imageView.snp.remakeConstraints { (make) -> Void in
+            make.center.equalTo(self)
+            make.height.equalTo(self)
+            make.width.equalTo(self)
+        }
+    }
+
+    func setPhoto(with image: UIImage) {
+        imageView.image = image
         emptyLabel.isHidden = true
         imageView.snp.remakeConstraints { (make) -> Void in
             make.center.equalTo(self)

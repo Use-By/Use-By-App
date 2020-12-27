@@ -46,6 +46,7 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
     }
 
     func configureSearch() {
+        search.delegate = self
         view.addSubview(search)
         search.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view)
@@ -99,5 +100,13 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         } else {
             buttons[0].isActive = false
         }
+    }
+}
+
+extension FiltersViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        filters.searchByName = searchText
+        delegate?.applyFilters(filters: filters)
     }
 }

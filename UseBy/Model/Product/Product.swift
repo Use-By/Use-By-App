@@ -94,42 +94,63 @@ class ProductModel: ProductModelProtocol {
             return
         }
 
-        // TODO сортировка?
+        var productsWithFilter = productsRef.whereField("userID", isEqualTo: userID)
 
-        productsRef
-            .whereField("userID", isEqualTo: userID)
+        if let searchByName = filters.searchByName, filters.searchByName != "" {
+            productsWithFilter = productsWithFilter
+                .whereField("name", isGreaterThanOrEqualTo: searchByName)
+                .whereField("name", isLessThanOrEqualTo: searchByName + "\\uf8ff")
+        }
+
+        if filters.isLiked {
+            productsWithFilter = productsWithFilter
+                .whereField("liked", isEqualTo: true)
+        }
+
+        if filters.isExpired {
+            productsWithFilter = productsWithFilter
+                .whereField("expiration-date", isLessThanOrEqualTo: Date())
+        }
+
+        if let sort = filters.sort {
+            productsWithFilter = productsWithFilter
+                .order(by: "expiration-date", descending: sort == .desc)
+        }
+
+        productsWithFilter
             .getDocuments { (snapshot, error) in
-            if error != nil {
-                completion(nil, .fetchProductsError)
-                return
-            }
+                print(error)
+                if error != nil {
+                    completion(nil, .fetchProductsError)
+                    return
+                }
 
-            let documents = snapshot?.documents ?? []
-            let products: [Product] = documents.map {
-                let data = $0.data()
-                let documentID = $0.documentID
-                let name = data["name"] as? String ?? ""
-                let tag = data["tag"] as? String
-                let isLiked = data["liked"] as? Bool ?? false
-                let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
-                let openedDate = (data["opened"] as? Timestamp)?.dateValue()
-                let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue()
-                let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
-                let photoURL = data["photo-url"] as? String
+                let documents = snapshot?.documents ?? []
+                let products: [Product] = documents.map {
+                    let data = $0.data()
+                    let documentID = $0.documentID
+                    let name = data["name"] as? String ?? ""
+                    let tag = data["tag"] as? String
+                    let isLiked = data["liked"] as? Bool ?? false
+                    let useByDate = (data["use-by"] as? Timestamp)?.dateValue()
+                    let openedDate = (data["opened"] as? Timestamp)?.dateValue()
+                    let expirationDate = (data["expiration-date"] as? Timestamp)?.dateValue()
+                    let afterOpeningDate = (data["after-opening"] as? Timestamp)?.dateValue()
+                    let photoURL = data["photo-url"] as? String
 
-                let product: Product = Product(
-                    id: documentID,
-                    name: name,
-                    tag: tag,
-                    isLiked: isLiked,
-                    expirationDate: expirationDate,
-                    openedDate: openedDate,
-                    afterOpenening: afterOpeningDate,
-                    useByDate: useByDate,
-                    photoUrl: photoURL
-                )
+                    let product: Product = Product(
+                        id: documentID,
+                        name: name,
+                        tag: tag,
+                        isLiked: isLiked,
+                        expirationDate: expirationDate,
+                        openedDate: openedDate,
+                        afterOpenening: afterOpeningDate,
+                        useByDate: useByDate,
+                        photoUrl: photoURL
+                    )
 
-                return product
+                    return product
             }
 
             completion(products, nil)

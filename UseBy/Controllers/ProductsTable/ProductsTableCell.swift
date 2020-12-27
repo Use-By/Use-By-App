@@ -100,8 +100,8 @@ class ProductsTableCell: UITableViewCell {
         }
 
         configurePhoto()
-        configureLabels()
         configureIcons()
+        configureLabels()
     }
 
     func configureIcons() {
@@ -139,7 +139,10 @@ class ProductsTableCell: UITableViewCell {
         textLabel.snp.makeConstraints {(make) -> Void in
             make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
             make.top.equalTo(self).offset(UIConstants.padding)
+            make.right.equalTo(likeIcon.snp.left)
         }
+        textLabel.numberOfLines = 1
+        textLabel.lineBreakMode = .byTruncatingTail
 
         addSubview(expirationLabel)
         expirationLabel.snp.makeConstraints {(make) -> Void in

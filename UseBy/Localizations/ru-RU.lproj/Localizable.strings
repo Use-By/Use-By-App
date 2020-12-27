@@ -70,3 +70,6 @@
 "month" = "месяц";
 "year" = "год";
 "apply" = "Готово";
+"choose-image" = "Выберите изобажение";
+"from-gallery" = "Галерея";
+"take-photo" = "Камера";

@@ -71,3 +71,6 @@
 "year" = "year";
 "add-photo" = "Add photo";
 "apply" = "Apply";
+"choose-image" = "Choose image";
+"from-gallery" = "Gallery";
+"take-photo" = "Take a photo";

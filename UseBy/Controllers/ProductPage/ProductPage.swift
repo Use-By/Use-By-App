@@ -204,10 +204,53 @@ class ProductPageView: UIViewController {
 
     @objc
     func didTapEditImage() {
+        let alert = UIAlertController(
+            title: "choose-image".localized,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: "from-gallery".localized,
+                style: .default,
+                handler: {
+                    _ in {
+                        self.showImagePicker(sourceType: .photoLibrary)
+                    }()
+                }
+            )
+        )
+
+        if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: "take-photo".localized,
+                    style: .default,
+                    handler: {
+                        _ in {
+                            self.showImagePicker(sourceType: .camera)
+                        }()
+                    }
+                )
+            )
+        }
+
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler: nil))
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         let imageVC = UIImagePickerController()
-        imageVC.sourceType = .photoLibrary
+        imageVC.sourceType = sourceType
         imageVC.delegate = self
         imageVC.allowsEditing = true
+
+        if sourceType == UIImagePickerController.SourceType.camera {
+            imageVC.cameraCaptureMode = .photo
+        }
+
         present(imageVC, animated: true, completion: nil)
     }
 }

@@ -100,7 +100,7 @@ class UserAuthModel: UserAuthModelProtocol {
     }
 
     func loginWithCredential(credential: AuthCredential, completion: @escaping (UserAuthError?) -> Void) {
-        Auth.auth().signIn(with: credential) { [self] (_, error) in
+        Auth.auth().signIn(with: credential) { (_, error) in
             if error != nil {
                 completion(UserAuthError.googleSignInError)
             }
@@ -110,6 +110,7 @@ class UserAuthModel: UserAuthModelProtocol {
     }
 
     func logout(completion: @escaping () -> Void) {
+        // TODO logout для пользователя с почтой и паролем
         GIDSignIn.sharedInstance()?.signOut()
         completion()
     }

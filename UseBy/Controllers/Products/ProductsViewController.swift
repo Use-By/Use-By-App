@@ -76,7 +76,7 @@ class ProductsViewController: UIViewController {
             }
 
             if let error = error {
-                // Something
+                // TODO error
             }
         })
     }

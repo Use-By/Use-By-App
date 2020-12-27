@@ -66,8 +66,6 @@ protocol ProductModelProtocol {
 
 class ProductModel: ProductModelProtocol {
     private func getApiDataFromProduct(product: ProductInfo, userID: String) -> [String: Any] {
-        // TODO добавить про картинку
-
         return [
             "name": product.name,
             "liked": product.isLiked,
@@ -166,12 +164,6 @@ class ProductModel: ProductModelProtocol {
     }
 
     func create(data: ProductToCreate, completion: @escaping (Product?, ProductError?) -> Void) {
-        guard let userID = self.getUserID() else {
-            return
-        }
-        let productsDB = Firestore.firestore().collection("products")
-        let documentRef = productsDB.document()
-
         if let photo = data.photo {
             uploadPhoto(photo: photo, completion: { (url, error) in
                 if error != nil {
@@ -186,7 +178,6 @@ class ProductModel: ProductModelProtocol {
         }
 
         self.setProductDocumentData(product: data, photoURL: nil, completion: completion)
-
     }
 
     private func mapCreatedProductFromApi(data: ProductToCreate, documentID: String, photoURL: String?) -> Product {
@@ -203,7 +194,11 @@ class ProductModel: ProductModelProtocol {
         )
     }
 
-    private func setProductDocumentData(product: ProductToCreate, photoURL: String?, completion: @escaping (Product?, ProductError?) -> Void) {
+    private func setProductDocumentData(
+        product: ProductToCreate,
+        photoURL: String?,
+        completion: @escaping (Product?, ProductError?) -> Void
+    ) {
         guard let userID = self.getUserID() else {
             return
         }
@@ -273,7 +268,6 @@ class ProductModel: ProductModelProtocol {
         let storage = Storage.storage()
         let imageRef = storage.reference(forURL: url)
 
-        // TODO max size?
         imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if error != nil {
                 completion(nil, .unknownError)

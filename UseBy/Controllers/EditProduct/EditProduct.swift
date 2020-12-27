@@ -39,7 +39,21 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
         product.openedDate = value.openedDate
         product.tag = value.tag
         product.useByDate = value.useByDate
-        // TODO photo
+
+        if value.photoUrl == nil, let photo = value.photo {
+            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, _) in
+                guard let photoUrl = photoUrl else {
+                    return
+                }
+
+                self.product.photoUrl = photoUrl
+                self.productModel.update(data: self.product, completion: {(_, _) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+            })
+
+            return
+        }
 
         productModel.update(data: product, completion: {(_, _) in
             self.dismiss(animated: true, completion: nil)

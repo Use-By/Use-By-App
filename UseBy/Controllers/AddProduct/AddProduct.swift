@@ -43,9 +43,24 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         data.openedDate = value.openedDate
         data.afterOpenening = value.afterOpenening
         data.useByDate = value.useByDate
-        // TODO 
         data.photo = value.photo
         data.expirationDate = getExpirationDate(useByDate: value.useByDate, afterOpeningDate: value.afterOpenening)
+
+        if let photo = value.photo {
+            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, _) in
+                guard let photoUrl = photoUrl else {
+                    return
+                }
+
+                self.data.photoUrl = photoUrl
+                self.productModel.create(data: self.data, completion: { (_, _) in
+                    self.dismiss(animated: true, completion: nil)
+                    self.delegate?.didCreatedProduct()
+                })
+            })
+
+            return
+        }
 
         productModel.create(data: data, completion: { (_, _) in
             self.dismiss(animated: true, completion: nil)

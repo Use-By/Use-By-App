@@ -70,6 +70,7 @@ class ProductPageView: UIViewController {
         return field
     }()
     private let tagField = TextField(purpose: .tag)
+    private var photoUrl: String?
 
     init(addButtonText: String) {
         addButton = MainButton(
@@ -153,13 +154,13 @@ class ProductPageView: UIViewController {
     @objc
     func didTapAddButton() {
         let product = ProductPageInfo(
-            photoUrl: nil,
+            photoUrl: photoUrl,
             name: nameField.textField.text ?? "",
             tag: tagField.textField.text,
             openedDate: openedField.formValue,
             afterOpenening: afterOpeningField.formValue,
             useByDate: useByField.formValue,
-            photo: nil
+            photo: photo.imageView.image?.pngData()
         )
         self.delegate?.didTapAddButton(value: product)
     }
@@ -174,6 +175,7 @@ class ProductPageView: UIViewController {
 
         if let photoUrl = photoUrl {
             photo.setPhoto(with: photoUrl)
+            self.photoUrl = photoUrl
         } else {
             photo.setEmptyPhotoIcon()
         }
@@ -202,19 +204,23 @@ class ProductPageView: UIViewController {
 
     @objc
     func didTapEditImage() {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc, animated: true, completion: nil)
+        let imageVC = UIImagePickerController()
+        imageVC.sourceType = .photoLibrary
+        imageVC.delegate = self
+        imageVC.allowsEditing = true
+        present(imageVC, animated: true, completion: nil)
     }
 }
 
 extension ProductPageView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
 
         if let image = info[.editedImage] as? UIImage {
             photo.setPhoto(with: image)
+            photoUrl = nil
         }
 
         picker.dismiss(animated: true, completion: nil)

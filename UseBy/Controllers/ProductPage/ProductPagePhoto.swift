@@ -9,7 +9,7 @@ class ProductPagePhoto: UIView {
         static let cornerRadius: CGFloat = 14
         static let labelMargin: CGFloat = 10
     }
-    private var imageView = UIImageView()
+    var imageView = UIImageView()
     private var emptyLabel = UILabel()
 
     init() {

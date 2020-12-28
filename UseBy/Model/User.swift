@@ -71,7 +71,7 @@ class UserModel: UserModelProtocol {
 
             return User(name: "", email: "", authWithGoogle: false)
         }
-        
+
         if GIDSignIn.sharedInstance()?.currentUser != nil {
             return User(name: currentUser.displayName ?? "", email: currentUser.email ?? "", authWithGoogle: true)
         }

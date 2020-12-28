@@ -48,6 +48,7 @@
 		337B9F2A253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2B253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
 		337B9F2C253B7CBB006A5EFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */; };
+		3389E25F25925B6B00346D6D /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389E25E25925B6B00346D6D /* AlertController.swift */; };
 		33A67706256975420051C39E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67705256975420051C39E /* MainScreenViewController.swift */; };
 		33A6771825697B7F0051C39E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6771725697B7F0051C39E /* UserAuth.swift */; };
 		33A6772C2569938F0051C39E /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6772B2569938F0051C39E /* ProductsViewController.swift */; };
@@ -59,7 +60,6 @@
 		33A6775A256AE4600051C39E /* ProductsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67759256AE4600051C39E /* ProductsTable.swift */; };
 		33A67762256AE4690051C39E /* ProductsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67761256AE4690051C39E /* ProductsTableCell.swift */; };
 		33A67769256AE4BF0051C39E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A67768256AE4BF0051C39E /* Product.swift */; };
-		3389E25F25925B6B00346D6D /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389E25E25925B6B00346D6D /* AlertController.swift */; };
 		3A24CB57739C00138DF155A1 /* Pods_UseBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DCC0D1DE34DC0C7081C3F0 /* Pods_UseBy.framework */; };
 		798758572541A81100B9E25A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798758562541A81100B9E25A /* TextField.swift */; };
 		798758622541BB3F00B9E25A /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333643EF25322B2600D1A5C6 /* Palette.swift */; };
@@ -115,7 +115,7 @@
 		333644412532637800D1A5C6 /* MainAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAuthViewController.swift; sourceTree = "<group>"; };
 		33438AE7258E40C5006E4215 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		33438AED258FB400006E4215 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
-		33438AFA258FB4A2006E4215 /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StrokeColorAnimation.swift; path = "/Users/n-svoykina/Documents/Use-By-App/UseBy/Utils/Animations/StrokeColorAnimation.swift"; sourceTree = "<absolute>"; };
+		33438AFA258FB4A2006E4215 /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StrokeColorAnimation.swift; path = "StrokeColorAnimation.swift"; sourceTree = "<group>"; };
 		33438B03258FD7FA006E4215 /* EditProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProduct.swift; sourceTree = "<group>"; };
 		33438B09258FD865006E4215 /* ProductPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPage.swift; sourceTree = "<group>"; };
 		33467E432534F67900184A93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -140,9 +140,9 @@
 		336D6777252A4A970098259E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		33780617256593DD00AB0174 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		337B9F29253B7CBB006A5EFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3389E25E25925B6B00346D6D /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		33A67705256975420051C39E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		33A6771725697B7F0051C39E /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
-		3389E25E25925B6B00346D6D /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		33A6772B2569938F0051C39E /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		33A677372569958E0051C39E /* AddProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProduct.swift; sourceTree = "<group>"; };
 		33A6773D2569A01D0051C39E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
@@ -372,7 +372,6 @@
 				336BC6B12532256700B7346C /* Localizations */,
 				336BC69E253221AE00B7346C /* Components */,
 				336D6741252A4A600098259E /* AppDelegate.swift */,
-				337806162565939A00AB0174 /* Model */,
 				336D674C252A4A610098259E /* LaunchScreen.storyboard */,
 				336D674F252A4A610098259E /* Info.plist */,
 				333643EF25322B2600D1A5C6 /* Palette.swift */,
@@ -399,14 +398,6 @@
 			path = UseByUITests;
 			sourceTree = "<group>";
 		};
-		337806162565939A00AB0174 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				33780617256593DD00AB0174 /* User.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		33A67704256975350051C39E /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +409,7 @@
 		33A6771625697B730051C39E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33780617256593DD00AB0174 /* User.swift */,
 				33A67767256AE4B50051C39E /* Product */,
 				33A6771725697B7F0051C39E /* UserAuth.swift */,
 			);
@@ -858,7 +850,6 @@
 				332A586E2533BEDB0078E65B /* Icon.swift in Sources */,
 				336711572540D3AA0042E1C7 /* AppLauncher.swift in Sources */,
 				33780618256593DD00AB0174 /* User.swift in Sources */,
-				333643F025322B2600D1A5C6 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

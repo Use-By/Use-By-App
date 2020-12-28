@@ -108,10 +108,4 @@ class UserAuthModel: UserAuthModelProtocol {
             completion(nil)
         }
     }
-
-    func logout(completion: @escaping () -> Void) {
-        // TODO logout для пользователя с почтой и паролем
-        GIDSignIn.sharedInstance()?.signOut()
-        completion()
-    }
 }

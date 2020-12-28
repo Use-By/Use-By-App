@@ -80,4 +80,5 @@
 "invalid_email" = "Invalid email";
 "not-selected" = "Not selected";
 "not-opened" = "Not opened yet";
-
+"delete-product-error" = "We couldn't delete product, please try again later";
+"fetch-product-error" = "We couldn't fetch your products, please try again later";

@@ -131,7 +131,6 @@ class LoginViewController: UIViewController {
 
     @objc
     private func didTapLogInButton() {
-
         let validationErrors = validateTextFields(fields: [inputFieldEmail, inputFieldPassword])
 
         if validationErrors.count != 0 {

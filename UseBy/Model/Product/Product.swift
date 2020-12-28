@@ -56,6 +56,19 @@ enum ProductError {
     case deleteError
 }
 
+func getProductErrorText(error: ProductError) -> String {
+    switch error {
+    case .fetchProductsError:
+        return "fetch-product-error".localized
+        
+    case .unknownError:
+        return "unknownError".localized
+
+    case .deleteError:
+        return "delete-product-error".localized
+    }
+}
+
 protocol ProductModelProtocol {
     func get(filters: ProductFilters, completion: @escaping ([Product]?, ProductError?) -> Void)
     func delete(id: String, completion: @escaping (ProductError?) -> Void)

@@ -48,8 +48,12 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
 
         if let photo = value.photo {
             productModel.uploadPhoto(photo: photo, completion: {(photoUrl, error) in
-                if error != nil {
-                    // TODO error handling
+                if let error = error {
+                    _ = Alert(
+                        title: "error".localized,
+                        message: getProductErrorText(error: error),
+                        action: .none
+                    )
 
                     self.productView.stopLoading()
 
@@ -57,7 +61,11 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
                 }
 
                 guard let photoUrl = photoUrl else {
-                    // TODO error handling
+                    _ = Alert(
+                        title: "error".localized,
+                        message: getProductErrorText(error: .unknownError),
+                        action: .none
+                    )
 
                     self.productView.stopLoading()
 
@@ -65,7 +73,16 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
                 }
 
                 self.data.photoUrl = photoUrl
-                self.productModel.create(data: self.data, completion: { (_, _) in
+                self.productModel.create(data: self.data, completion: { (_, error) in
+                    if let error = error {
+                        _ = Alert(
+                            title: "error".localized,
+                            message: getProductErrorText(error: error),
+                            action: .none
+                        )
+                        return
+                    }
+                    
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didCreatedProduct()
                 })
@@ -75,8 +92,12 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         }
 
         productModel.create(data: data, completion: { (_, error) in
-            if error != nil {
-                // TODO error handling
+            if let error = error {
+                _ = Alert(
+                    title: "error".localized,
+                    message: getProductErrorText(error: error),
+                    action: .none
+                )
 
                 self.productView.stopLoading()
 

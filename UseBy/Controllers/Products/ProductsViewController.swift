@@ -76,7 +76,11 @@ class ProductsViewController: UIViewController {
             }
 
             if let error = error {
-                // TODO error
+                _ = Alert(
+                    title: "error".localized,
+                    message: getProductErrorText(error: error),
+                    action: .none
+                )
             }
         })
     }
@@ -139,7 +143,17 @@ extension ProductsViewController: ProductsViewControllerDelegate {
     }
 
     func didTapLikeButton(id: String, liked: Bool) {
-        productModel.like(id: id, liked: liked, completion: {(_) in
+        productModel.like(id: id, liked: liked, completion: {(error) in
+            if let error = error {
+                _ = Alert(
+                    title: "error".localized,
+                    message: getProductErrorText(error: error),
+                    action: .none
+                )
+                
+                return
+            }
+            
             self.loadProducts()
         })
     }

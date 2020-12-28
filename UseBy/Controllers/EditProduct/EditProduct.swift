@@ -48,16 +48,24 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
 
         if value.photoUrl == nil, let photo = value.photo {
             productModel.uploadPhoto(photo: photo, completion: {(photoUrl, error) in
-                if error != nil {
-                    // TODO error handling
-
+                if let error = error {
+                    _ = Alert(
+                        title: "error".localized,
+                        message: getProductErrorText(error: error),
+                        action: .none
+                    )
+                    
                     self.productView.stopLoading()
 
                     return
                 }
 
                 guard let photoUrl = photoUrl else {
-                    // TODO error handling
+                    _ = Alert(
+                        title: "error".localized,
+                        message: getProductErrorText(error: .unknownError),
+                        action: .none
+                    )
 
                     self.productView.stopLoading()
 
@@ -65,7 +73,16 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
                 }
 
                 self.product.photoUrl = photoUrl
-                self.productModel.update(data: self.product, completion: {(_, _) in
+                self.productModel.update(data: self.product, completion: {(_, error) in
+                    if let error = error {
+                        _ = Alert(
+                            title: "error".localized,
+                            message: getProductErrorText(error: error),
+                            action: .none
+                        )
+                        return
+                    }
+                    
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didEditedProduct()
                 })
@@ -75,8 +92,12 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
         }
 
         productModel.update(data: product, completion: {(_, error) in
-            if error != nil {
-                // TODO error handling
+            if let error = error {
+                _ = Alert(
+                    title: "error".localized,
+                    message: getProductErrorText(error: error),
+                    action: .none
+                )
 
                 self.productView.stopLoading()
 

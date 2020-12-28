@@ -4,10 +4,10 @@
       "color" : {
         "color-space" : "srgb",
         "components" : {
-          "alpha" : "0.120",
-          "blue" : "128",
-          "green" : "118",
-          "red" : "118"
+          "alpha" : "0.150",
+          "blue" : "0",
+          "green" : "0",
+          "red" : "0"
         }
       },
       "idiom" : "universal"
@@ -21,7 +21,7 @@
       ],
       "color" : {
         "platform" : "ios",
-        "reference" : "systemGray6Color"
+        "reference" : "separatorColor"
       },
       "idiom" : "universal"
     }

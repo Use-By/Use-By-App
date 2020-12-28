@@ -60,3 +60,13 @@ extension MainScreenViewController: AddProductPageViewDelegate {
         productsVC.loadProducts()
     }
 }
+
+extension MainScreenViewController: EditProductPageViewDelegate {
+    func didEditedProduct() {
+        guard let productsVC = productsVC.topViewController as? ProductsViewController else {
+            return
+        }
+
+        productsVC.loadProducts()
+    }
+}

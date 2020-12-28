@@ -1,9 +1,14 @@
 import Foundation
 import UIKit
 
+protocol EditProductPageViewDelegate: AnyObject {
+    func didEditedProduct()
+}
+
 class EditProductViewController: UIViewController, ProductPageViewDelegate {
     private let productModel: ProductModel = ProductModel()
     private var product: Product
+    weak var delegate: EditProductPageViewDelegate?
 
     init(product: Product) {
         self.product = product
@@ -49,6 +54,7 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
                 self.product.photoUrl = photoUrl
                 self.productModel.update(data: self.product, completion: {(_, _) in
                     self.dismiss(animated: true, completion: nil)
+                    self.delegate?.didEditedProduct()
                 })
             })
 
@@ -57,6 +63,7 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
 
         productModel.update(data: product, completion: {(_, _) in
             self.dismiss(animated: true, completion: nil)
+            self.delegate?.didEditedProduct()
         })
     }
 

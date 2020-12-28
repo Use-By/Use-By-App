@@ -18,11 +18,13 @@ class LoginViewController: UIViewController {
         static let textFieldSpacing: CGFloat = 0
         static let stackViewOfTextFields: CGFloat = 145
         static let stackOfFieldBottom: CGFloat = 50
+        static let logoBottom: CGFloat = -50
     }
-
     private var userAuthModel: UserAuthModelProtocol?
     private var composeStackOfFieldBottomConstraint: Constraint?
+    private var logoImageView: UIImageView!
 
+    private let createLogo = UIImage(named: "Logo White Theme")
     private var composeViewBottomConstraint: Constraint?
     private let loginLabel = MainScreenTitle(labelType: .login)
     private let signInButton = MainButton(
@@ -48,6 +50,7 @@ class LoginViewController: UIViewController {
         configureButtons()
         configureMainText()
         configureTextFields()
+        configureLogoImage()
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.keyboardWillShow),
@@ -75,6 +78,16 @@ class LoginViewController: UIViewController {
         }
         signInButton.addTarget(self, action: #selector(didTapLogInButton), for: .touchUpInside)
         signInButton.isEnabled = false
+    }
+
+    func configureLogoImage() {
+        logoImageView = UIImageView(image: createLogo)
+        view.addSubview(logoImageView)
+        logoImageView.clipsToBounds = true
+        logoImageView.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(loginLabel).offset(LoginViewUIConstants.logoBottom)
+        }
     }
 
     func configureTextFields() {

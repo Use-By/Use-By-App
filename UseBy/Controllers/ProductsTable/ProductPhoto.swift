@@ -9,6 +9,7 @@ class ProductPhoto: UIView {
         static let cornerRadius: CGFloat = 10
     }
     private var imageView = UIImageView()
+    private var emptyImageView = UIImageView()
 
     init() {
         super.init(frame: .zero)
@@ -21,27 +22,33 @@ class ProductPhoto: UIView {
         }
         clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+
+        addSubview(emptyImageView)
+        emptyImageView.snp.makeConstraints {(make) in
+            make.center.equalTo(self)
+            make.height.equalTo(UIConstants.emptyPhotoWidth)
+            make.width.equalTo(UIConstants.emptyPhotoWidth)
+        }
     }
 
     func setPhoto(photoUrl: String) {
         guard let url = URL(string: photoUrl) else {
             return
         }
+
         imageView.kf.setImage(with: url)
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(self)
-            make.width.equalTo(self)
-        }
+        imageView.isHidden = false
+        emptyImageView.isHidden = true
     }
 
     func setEmptyPhotoIcon() {
-        imageView.image = UIImage(named: "PhotoIcon")
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(UIConstants.emptyPhotoWidth)
-            make.width.equalTo(UIConstants.emptyPhotoWidth)
+        if emptyImageView.image == nil {
+            emptyImageView.image = UIImage(named: "PhotoIcon")
         }
+
+        imageView.image = nil
+        imageView.isHidden = true
+        emptyImageView.isHidden = false
     }
 
     override func layoutSubviews() {

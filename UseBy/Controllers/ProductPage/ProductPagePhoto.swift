@@ -10,6 +10,7 @@ class ProductPagePhoto: UIView {
         static let labelMargin: CGFloat = 10
     }
     var imageView = UIImageView()
+    private var emptyImageView = UIImageView()
     private var emptyLabel = UILabel()
 
     init() {
@@ -23,10 +24,17 @@ class ProductPagePhoto: UIView {
         }
         imageView.contentMode = .scaleAspectFill
 
+        addSubview(emptyImageView)
+        emptyImageView.snp.makeConstraints {(make) in
+            make.center.equalTo(self)
+            make.height.equalTo(UIConstants.emptyPhotoWidth)
+            make.width.equalTo(UIConstants.emptyPhotoWidth)
+        }
+
         addSubview(emptyLabel)
         emptyLabel.snp.makeConstraints {(make) in
-            make.top.equalTo(imageView.snp.bottom).offset(UIConstants.labelMargin)
-            make.centerX.equalTo(imageView)
+            make.top.equalTo(emptyImageView.snp.bottom).offset(UIConstants.labelMargin)
+            make.centerX.equalTo(self)
         }
         emptyLabel.font = Fonts.largeTitleText
         emptyLabel.textColor = Colors.mainActionColor
@@ -44,40 +52,31 @@ class ProductPagePhoto: UIView {
         }
         imageView.kf.setImage(with: url)
         emptyLabel.isHidden = true
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(self)
-            make.width.equalTo(self)
-        }
+        emptyImageView.isHidden = true
+        imageView.isHidden = false
     }
 
     func setPhoto(with data: Data) {
         imageView.image = UIImage(data: data)
         emptyLabel.isHidden = true
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(self)
-            make.width.equalTo(self)
-        }
+        emptyImageView.isHidden = true
+        imageView.isHidden = false
     }
 
     func setPhoto(with image: UIImage) {
         imageView.image = image
         emptyLabel.isHidden = true
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(self)
-            make.width.equalTo(self)
-        }
+        emptyImageView.isHidden = true
+        imageView.isHidden = false
     }
 
     func setEmptyPhotoIcon() {
-        imageView.image = UIImage(named: "AddPhoto")
-        imageView.snp.remakeConstraints { (make) -> Void in
-            make.center.equalTo(self)
-            make.height.equalTo(UIConstants.emptyPhotoWidth)
-            make.width.equalTo(UIConstants.emptyPhotoWidth)
+        if emptyImageView.image == nil {
+            emptyImageView.image = UIImage(named: "AddPhoto")
         }
+        emptyImageView.isHidden = false
+        imageView.image = nil
+        imageView.isHidden = true
         emptyLabel.isHidden = false
     }
 

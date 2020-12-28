@@ -113,6 +113,7 @@ class ProductModel: ProductModelProtocol {
             productsWithFilter = productsWithFilter
                 .whereField("name", isGreaterThanOrEqualTo: searchByName)
                 .whereField("name", isLessThanOrEqualTo: searchByName + "\\uf8ff")
+                .order(by: "name")
         }
 
         if filters.isLiked {
@@ -135,6 +136,7 @@ class ProductModel: ProductModelProtocol {
                 print(error)
                 if error != nil {
                     completion(nil, .fetchProductsError)
+                    print(error)
                     return
                 }
 

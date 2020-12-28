@@ -237,7 +237,7 @@ class ProductPageView: UIViewController {
             )
         )
 
-        if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(
                 UIAlertAction(
                     title: "take-photo".localized,
@@ -275,8 +275,10 @@ extension ProductPageView: UIImagePickerControllerDelegate & UINavigationControl
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-
         if let image = info[.editedImage] as? UIImage {
+            photo.setPhoto(with: image)
+            photoUrl = nil
+        } else if let image = info[.originalImage] as? UIImage {
             photo.setPhoto(with: image)
             photoUrl = nil
         }

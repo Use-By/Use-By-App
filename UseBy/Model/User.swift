@@ -20,11 +20,11 @@ protocol UserModelProtocol {
     func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void)
     func changePassword(newPassword: String, completion: @escaping (Error?) -> Void)
     func changeName(newName: String, completion: @escaping (Error?) -> Void)
-    func singOut()
+    func signOut()
 }
 
 class UserModel: UserModelProtocol {
-    func singOut() {
+    func signOut() {
         do {
           try Auth.auth().signOut()
         } catch let signOutError as NSError {

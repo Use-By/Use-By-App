@@ -100,11 +100,16 @@ class ProfileViewController: UIViewController {
         }
         logOutButton.addTarget(self, action: #selector(didTapLogOutButton), for: .touchUpInside)
     }
+
     @objc
     private func didTapLogOutButton() {
-        userModel?.singOut()
-        self.view.window?.rootViewController = MainAuthViewController()
+        userModel?.signOut()
+
+        if let router = self.navigationController as? Router {
+            router.goToMainAuthScreen()
+        }
     }
+
     func saveName (name: [String]) {
         userModel!.changeName(newName: name[0]) { [weak self] error in
              DispatchQueue.main.async {
@@ -120,18 +125,20 @@ class ProfileViewController: UIViewController {
     }
 
     func saveEmail (email: [String]) {
-     userModel!.changeName(newName: email[0]) { [weak self] error in
-          DispatchQueue.main.async {
-             if error != nil {
-                _ = Alert(title: "ops".localized,
-                      message: "something_went_wrong".localized,
-                      placeholder1: nil, placeholder2: nil, action: .none)
+        userModel!.changeName(newName: email[0]) { [weak self] error in
+             DispatchQueue.main.async {
+                if error != nil {
+                   _ = Alert(title: "ops".localized,
+                         message: "something_went_wrong".localized,
+                         placeholder1: nil, placeholder2: nil, action: .none)
+                }
+                self?.user?.email = email[0]
+                self?.setUserData()
+                self?.profileTableView.reloadData()
              }
-             self?.user?.email = email[0]
-             self?.setUserData()
-             self?.profileTableView.reloadData()
-          }}
+        }
     }
+
     func savePassword (password: [String]) {
         userModel!.changePassword(newPassword: password[0]) { [weak self] error in
              DispatchQueue.main.async {
@@ -143,8 +150,9 @@ class ProfileViewController: UIViewController {
                 self?.user?.email = password[0]
                 self?.setUserData()
                 self?.profileTableView.reloadData()
-             }}
+             }
         }
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -184,7 +192,8 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleOfCellArray.count}
+        return titleOfCellArray.count
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSettingsCell",

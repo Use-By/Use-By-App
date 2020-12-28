@@ -54,7 +54,7 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
                         message: getProductErrorText(error: error),
                         action: .none
                     )
-                    
+
                     self.productView.stopLoading()
 
                     return
@@ -82,7 +82,7 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
                         )
                         return
                     }
-                    
+
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didEditedProduct()
                 })

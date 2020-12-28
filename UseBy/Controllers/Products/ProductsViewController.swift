@@ -150,10 +150,10 @@ extension ProductsViewController: ProductsViewControllerDelegate {
                     message: getProductErrorText(error: error),
                     action: .none
                 )
-                
+
                 return
             }
-            
+
             self.loadProducts()
         })
     }

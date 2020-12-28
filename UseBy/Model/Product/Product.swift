@@ -60,7 +60,7 @@ func getProductErrorText(error: ProductError) -> String {
     switch error {
     case .fetchProductsError:
         return "fetch-product-error".localized
-        
+
     case .unknownError:
         return "unknownError".localized
 

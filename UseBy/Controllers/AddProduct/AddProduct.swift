@@ -82,7 +82,7 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
                         )
                         return
                     }
-                    
+
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didCreatedProduct()
                 })

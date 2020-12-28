@@ -7,6 +7,7 @@ protocol AddProductPageViewDelegate: AnyObject {
 
 class AddProductViewController: UIViewController, ProductPageViewDelegate {
     private let productModel: ProductModel = ProductModel()
+    private let productView = ProductPageView(addButtonText: "add".localized)
     private var data: ProductToCreate = ProductToCreate(
         name: "",
         tag: nil,
@@ -22,7 +23,6 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let productView = ProductPageView(addButtonText: "add".localized)
         productView.delegate = self
 
         addChild(productView)
@@ -47,8 +47,20 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
         data.expirationDate = getExpirationDate(useByDate: value.useByDate, afterOpeningDate: value.afterOpenening)
 
         if let photo = value.photo {
-            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, _) in
+            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, error) in
+                if error != nil {
+                    // TODO error handling
+
+                    self.productView.stopLoading()
+
+                    return
+                }
+
                 guard let photoUrl = photoUrl else {
+                    // TODO error handling
+
+                    self.productView.stopLoading()
+
                     return
                 }
 
@@ -62,7 +74,15 @@ class AddProductViewController: UIViewController, ProductPageViewDelegate {
             return
         }
 
-        productModel.create(data: data, completion: { (_, _) in
+        productModel.create(data: data, completion: { (_, error) in
+            if error != nil {
+                // TODO error handling
+
+                self.productView.stopLoading()
+
+                return
+            }
+
             self.dismiss(animated: true, completion: nil)
             self.delegate?.didCreatedProduct()
         })

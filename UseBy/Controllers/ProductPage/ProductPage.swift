@@ -161,6 +161,7 @@ class ProductPageView: UIViewController {
 
     @objc
     func didTapAddButton() {
+        addButton.isLoading = true
         let product = ProductPageInfo(
             photoUrl: photoUrl,
             name: trimString(str: nameField.textField.text) ?? "",
@@ -171,6 +172,10 @@ class ProductPageView: UIViewController {
             photo: photo.imageView.image?.pngData()
         )
         self.delegate?.didTapAddButton(value: product)
+    }
+
+    func stopLoading() {
+        addButton.isLoading = false
     }
 
     @objc

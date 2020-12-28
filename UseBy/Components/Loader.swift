@@ -17,13 +17,17 @@ class LoaderShapeLayer: CAShapeLayer {
 }
 
 class Loader: UIView {
-    private let colors: [UIColor] = [Colors.mainActionColor, Colors.secondaryActionColor]
+    private let colors: [UIColor]
     private let lineWidth: CGFloat
     private lazy var shapeLayer: LoaderShapeLayer = {
         return LoaderShapeLayer(strokeColor: colors.first!, lineWidth: lineWidth)
     }()
 
-    init(lineWidth: CGFloat) {
+    init(
+        lineWidth: CGFloat,
+        colors: [UIColor] = [Colors.mainActionColor, Colors.secondaryActionColor]
+    ) {
+        self.colors = colors
         self.lineWidth = lineWidth
 
         super.init(frame: .zero)

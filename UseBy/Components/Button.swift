@@ -12,6 +12,9 @@ final class MainButton: UIButton {
     struct MainButtonUIConstants {
         static let iconMargin: CGFloat = 10
         static let cornerRadius: CGFloat = 14
+        static let loaderHeight: CGFloat = 20
+        static let loaderMargin: CGFloat = 10
+        static let loaderLineWidth: CGFloat = 3
     }
 
     public enum ButtonTheme {
@@ -25,6 +28,14 @@ final class MainButton: UIButton {
     static let buttonHeight = 60
     private let theme: ButtonTheme
     private var label = UILabel()
+    private let loader: Loader = {
+        let loader = Loader(
+            lineWidth: MainButtonUIConstants.loaderLineWidth, colors: [Colors.mainBGColor]
+        )
+        loader.translatesAutoresizingMaskIntoConstraints = false
+
+        return loader
+    }()
     var gradientLayer: CAGradientLayer?
 
     override var isHighlighted: Bool {
@@ -53,6 +64,18 @@ final class MainButton: UIButton {
         }
     }
 
+    var isLoading: Bool = false {
+        didSet {
+            if isLoading {
+                loader.isHidden = false
+                loader.isAnimating = true
+            } else {
+                loader.isHidden = true
+                loader.isAnimating = false
+            }
+        }
+    }
+
     init(text: String, theme: ButtonTheme = ButtonTheme.normal, icon: Icon? = nil) {
         self.theme = theme
         super.init(frame: .zero)
@@ -72,11 +95,30 @@ final class MainButton: UIButton {
             setImage(icon.icon, for: .normal)
             imageEdgeInsets.right = MainButtonUIConstants.iconMargin
         }
+
+        configureLoader()
     }
 
     required init?(coder decoder: NSCoder) {
         self.theme = .normal
         super.init(coder: decoder)
+    }
+
+    func configureLoader() {
+        addSubview(loader)
+        loader.isAnimating = true
+        loader.isHidden = true
+
+        guard let titleLabel = titleLabel else {
+            return
+        }
+
+        loader.snp.makeConstraints {(make) in
+            make.left.equalTo(titleLabel.snp.right).offset(MainButtonUIConstants.loaderMargin)
+            make.width.equalTo(MainButtonUIConstants.loaderHeight)
+            make.height.equalTo(MainButtonUIConstants.loaderHeight)
+            make.centerY.equalTo(self)
+        }
     }
 
     private func setThemeStyles() {

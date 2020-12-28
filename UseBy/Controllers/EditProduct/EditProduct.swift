@@ -8,6 +8,8 @@ protocol EditProductPageViewDelegate: AnyObject {
 class EditProductViewController: UIViewController, ProductPageViewDelegate {
     private let productModel: ProductModel = ProductModel()
     private var product: Product
+    private let productView = ProductPageView(addButtonText: "save".localized)
+
     weak var delegate: EditProductPageViewDelegate?
 
     init(product: Product) {
@@ -22,7 +24,6 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let productView = ProductPageView(addButtonText: "save".localized)
         productView.delegate = self
 
         addChild(productView)
@@ -46,8 +47,20 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
         product.useByDate = value.useByDate
 
         if value.photoUrl == nil, let photo = value.photo {
-            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, _) in
+            productModel.uploadPhoto(photo: photo, completion: {(photoUrl, error) in
+                if error != nil {
+                    // TODO error handling
+
+                    self.productView.stopLoading()
+
+                    return
+                }
+
                 guard let photoUrl = photoUrl else {
+                    // TODO error handling
+
+                    self.productView.stopLoading()
+
                     return
                 }
 
@@ -61,7 +74,15 @@ class EditProductViewController: UIViewController, ProductPageViewDelegate {
             return
         }
 
-        productModel.update(data: product, completion: {(_, _) in
+        productModel.update(data: product, completion: {(_, error) in
+            if error != nil {
+                // TODO error handling
+
+                self.productView.stopLoading()
+
+                return
+            }
+
             self.dismiss(animated: true, completion: nil)
             self.delegate?.didEditedProduct()
         })

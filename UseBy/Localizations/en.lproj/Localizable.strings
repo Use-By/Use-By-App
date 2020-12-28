@@ -78,3 +78,6 @@
 "something_went_wrong"="Something went wrong";
 "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match" = "Your password is shorter than 6 characters or your passwords don't match";
 "invalid_email" = "Invalid email";
+"not-selected" = "Not selected";
+"not-opened" = "Not opened yet";
+

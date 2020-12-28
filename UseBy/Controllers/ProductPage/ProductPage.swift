@@ -45,7 +45,9 @@ class ProductPageView: UIViewController {
     private let nameField = TextField(purpose: .name)
     private let openedField: DateValuePickerField = {
         let field = DateValuePickerField(
-            name: "opened".localized
+            name: "opened".localized,
+            placeholder: "not-opened".localized,
+            notSelectedName: "not-opened".localized
         )
         field.tag = ProductPageValue.opened.rawValue
 

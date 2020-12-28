@@ -11,20 +11,28 @@ import SnapKit
 class CreateAccountViewController: UIViewController {
     struct CreateAccountViewUIConstants {
         static let alreadySignUpButtonMargin: CGFloat = 30
-        static let mainTextMargin: CGFloat = 125
+        static let mainTextMargin: CGFloat = 190
+        static let logoHeightWeight: CGFloat = 100
         static let createAccButtonPadding: CGFloat = 40
         static let textFieldHeight: CGFloat = 60
         static let textFieldSpacing: CGFloat = 0
         static let stackViewOfTextFields: CGFloat = 145
         static let stackOfFieldBottom: CGFloat = 50
+        static let logoBottom: CGFloat = -50
+        static let resizeLogo: CGFloat = 1.2
     }
 
     private var userAuthModel: UserAuthModel?
-
+    private var composeMainTextConstraint: Constraint?
     private var composeViewBottomConstraint: Constraint?
-    private var composeAlreadyButtomConstraint: Constraint?
+    private var composeAlreadyBottomConstraint: Constraint?
     private var composeStackOfFieldBottomConstraint: Constraint?
+    private var composeLogoBottomConstraint: Constraint?
+    private var composeLogoHeight: Constraint?
+    private var composeLogoWidth: Constraint?
+    private var logoImageView: UIImageView!
 
+    private let createLogo = UIImage(named: "Logo White Theme")
     private let createAccountLabel = MainScreenTitle(labelType: .createAccount)
     private let createAccountButton = MainButton(
         text: "create-account".localized,
@@ -45,6 +53,7 @@ class CreateAccountViewController: UIViewController {
         view.backgroundColor = Colors.mainBGColor
         configureButtons()
         configureMainText()
+        configureLogoImage()
         configureTextFields()
 
         NotificationCenter.default.addObserver(
@@ -65,7 +74,7 @@ class CreateAccountViewController: UIViewController {
         // Кнопка "Already have an account?"
         alreadySignUpButton.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
-            self.composeAlreadyButtomConstraint = make.bottom.equalTo(view)
+            self.composeAlreadyBottomConstraint = make.bottom.equalTo(view)
                     .offset(-CreateAccountViewUIConstants.alreadySignUpButtonMargin)
                     .constraint
         }
@@ -83,11 +92,25 @@ class CreateAccountViewController: UIViewController {
         createAccountButton.isEnabled = false
     }
 
+    func configureLogoImage() {
+        logoImageView = UIImageView(image: createLogo)
+        view.addSubview(logoImageView)
+        logoImageView.clipsToBounds = true
+        logoImageView.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalTo(view)
+            self.composeLogoHeight = make.height.equalTo(CreateAccountViewUIConstants.logoHeightWeight).constraint
+            self.composeLogoWidth = make.width.equalTo(CreateAccountViewUIConstants.logoHeightWeight).constraint
+            self.composeLogoBottomConstraint = make.bottom.equalTo(createAccountLabel)
+                    .offset(CreateAccountViewUIConstants.logoBottom).constraint
+        }
+    }
+
     func configureMainText() {
         createAccountLabel.textAlignment = .center
         createAccountLabel.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
-            make.top.equalTo(view).offset(CreateAccountViewUIConstants.mainTextMargin)
+            self.composeMainTextConstraint = make.top.equalTo(view)
+                    .offset(CreateAccountViewUIConstants.mainTextMargin).constraint
         }
     }
 
@@ -130,8 +153,13 @@ class CreateAccountViewController: UIViewController {
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3) {
             self.composeViewBottomConstraint?.update(offset: -(MainButton.buttonHeight - 20))
-            self.composeAlreadyButtomConstraint?.update(offset: -(keyboardHeight + 5))
-            self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackOfFieldBottom)
+            self.composeAlreadyBottomConstraint?.update(offset: -(keyboardHeight + 5))
+            self.composeMainTextConstraint?.update(offset: (CreateAccountViewUIConstants.mainTextMargin - 50) )
+            self.composeStackOfFieldBottomConstraint?.update(offset: (CreateAccountViewUIConstants.stackOfFieldBottom
+                    - 12))
+            self.composeLogoBottomConstraint?.update(offset: CreateAccountViewUIConstants.logoBottom/1.5)
+            self.composeLogoHeight?.update(offset: (CreateAccountViewUIConstants.logoHeightWeight/CreateAccountViewUIConstants.resizeLogo))
+            self.composeLogoWidth?.update(offset: (CreateAccountViewUIConstants.logoHeightWeight/CreateAccountViewUIConstants.resizeLogo))
             self.view.layoutIfNeeded()
         }
     }
@@ -140,8 +168,12 @@ class CreateAccountViewController: UIViewController {
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3) {
             self.composeViewBottomConstraint?.update(offset: -CreateAccountViewUIConstants.createAccButtonPadding)
-            self.composeAlreadyButtomConstraint?.update(offset: -CreateAccountViewUIConstants.alreadySignUpButtonMargin)
+            self.composeAlreadyBottomConstraint?.update(offset: -CreateAccountViewUIConstants.alreadySignUpButtonMargin)
             self.composeStackOfFieldBottomConstraint?.update(offset: CreateAccountViewUIConstants.stackViewOfTextFields)
+            self.composeMainTextConstraint?.update(offset: CreateAccountViewUIConstants.mainTextMargin)
+            self.composeLogoBottomConstraint?.update(offset: CreateAccountViewUIConstants.logoBottom)
+            self.composeLogoHeight?.update(offset: CreateAccountViewUIConstants.logoHeightWeight)
+            self.composeLogoWidth?.update(offset: CreateAccountViewUIConstants.logoHeightWeight)
             self.view.layoutIfNeeded()
         }
     }

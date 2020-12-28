@@ -44,6 +44,7 @@ class ProductsTableCell: UITableViewCell {
     private var deleteIcon = IconButton(name: "DeleteIcon", size: .medium, theme: .secondary)
     private var likeIcon = IconButton(name: "LikeLineIcon", size: .medium, theme: .action)
     private let expirationLabel = ExpirationDateLabel()
+    private let nameLabel = UILabel()
     private let tagLabel = TagLabel()
     private let productPhoto = ProductPhoto()
     private let cardShadow = ProductCardShadow()
@@ -61,7 +62,7 @@ class ProductsTableCell: UITableViewCell {
 
     func fillCell(product: Product) {
         self.product = product
-        textLabel?.text = product.name
+        nameLabel.text = product.name
 
         if let tag = product.tag, tag.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
             tagLabel.setText(text: tag)
@@ -131,28 +132,27 @@ class ProductsTableCell: UITableViewCell {
     }
 
     func configureLabels() {
-        guard let textLabel = textLabel else {
-            return
-        }
+        let leftMargin = UIConstants.imageWidth + UIConstants.sidePadding + UIConstants.controlsSpacing
 
-        textLabel.font = Fonts.cardText
-        textLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
+        addSubview(nameLabel)
+        nameLabel.font = Fonts.cardText
+        nameLabel.snp.makeConstraints {(make) -> Void in
+            make.left.equalTo(leftMargin)
             make.top.equalTo(self).offset(UIConstants.padding)
             make.right.equalTo(likeIcon.snp.left)
         }
-        textLabel.numberOfLines = 1
-        textLabel.lineBreakMode = .byTruncatingTail
+        nameLabel.numberOfLines = 1
+        nameLabel.lineBreakMode = .byTruncatingTail
 
         addSubview(expirationLabel)
         expirationLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
-            make.top.equalTo(textLabel.snp.bottom).offset(UIConstants.controlsSpacing)
+            make.left.equalTo(leftMargin)
+            make.top.equalTo(nameLabel.snp.bottom).offset(UIConstants.controlsSpacing)
         }
 
         addSubview(tagLabel)
         tagLabel.snp.makeConstraints {(make) -> Void in
-            make.left.equalTo(productPhoto.snp.right).offset(UIConstants.sidePadding)
+            make.left.equalTo(leftMargin)
             make.bottom.equalTo(self).offset(-UIConstants.padding)
         }
     }

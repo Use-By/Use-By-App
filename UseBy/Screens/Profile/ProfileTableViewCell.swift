@@ -13,17 +13,18 @@ class ProfileTableViewCell: UITableViewCell {
     }
     private var valueLabel = TableLable()
 
-    func fillCell(titleLabel: String, userLabel: String? = nil) {
+    func fillCell(titleLabel: String, userLabel: String? = nil, googleAuth: Bool?=nil) {
         self.textLabel?.text = titleLabel
         self.valueLabel.text = userLabel
+        if googleAuth != true {
+            self.accessoryType = .disclosureIndicator}
+
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel?.font = Fonts.mainText
-        self.accessoryType = .disclosureIndicator
-
-        self.addSubview(valueLabel)//итак находимся во вью
+        self.addSubview(valueLabel)
         valueLabel.snp.makeConstraints {(make) -> Void in
             make.right.equalTo(self).offset(-UIConstants.rightMarginValueLabel)
             make.centerY.equalTo(self)

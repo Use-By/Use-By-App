@@ -133,10 +133,8 @@ class ProductModel: ProductModelProtocol {
 
         productsWithFilter
             .getDocuments { (snapshot, error) in
-                print(error)
                 if error != nil {
                     completion(nil, .fetchProductsError)
-                    print(error)
                     return
                 }
 

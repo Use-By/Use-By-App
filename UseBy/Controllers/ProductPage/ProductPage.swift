@@ -151,12 +151,20 @@ class ProductPageView: UIViewController {
         closeIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCloseIcon)))
     }
 
+    func trimString(str: String?) -> String? {
+        guard let str = str else {
+            return nil
+        }
+
+        return str.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     @objc
     func didTapAddButton() {
         let product = ProductPageInfo(
             photoUrl: photoUrl,
-            name: nameField.textField.text ?? "",
-            tag: tagField.textField.text,
+            name: trimString(str: nameField.textField.text) ?? "",
+            tag: trimString(str: tagField.textField.text),
             openedDate: openedField.formValue,
             afterOpenening: afterOpeningField.formValue,
             useByDate: useByField.formValue,

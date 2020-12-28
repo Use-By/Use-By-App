@@ -63,7 +63,7 @@ class ProductsTableCell: UITableViewCell {
         self.product = product
         textLabel?.text = product.name
 
-        if let tag = product.tag {
+        if let tag = product.tag, tag.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
             tagLabel.setText(text: tag)
             tagLabel.isHidden = false
         } else {

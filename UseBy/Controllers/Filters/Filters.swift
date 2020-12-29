@@ -122,4 +122,9 @@ extension FiltersViewController: UISearchBarDelegate {
         filters.searchByName = searchText
         delegate?.applyFilters(filters: filters)
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
 }

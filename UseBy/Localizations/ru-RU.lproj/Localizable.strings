@@ -41,7 +41,8 @@
 "save" = "Сохранить";
 "ops" = "Упс";
 "you_don't_have_mail_app_on_your_phone" = "на вашем телефоне нет приложения почты";
-"empty-screen" = "Пока что ничего нет";
+"empty-screen" = "Пора добавить новый продукт!";
+"filters-empty" = "Мы ничего не нашли";
 "google-error-description" = "При входе в Google произошла ошибка, попробуйте позже ";
 "log-out" = "Выйти";
 "name" = "Имя";

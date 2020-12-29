@@ -15,8 +15,11 @@ class ValuePickerFieldModal: UIViewController {
         static let dividerHeight: CGFloat = 1
         static let height: CGFloat = 300
         static let pickerHeight: CGFloat = 250
+        static let fieldsPadding: CGFloat = 40
     }
 
+    private let notSelected: ValueFieldWithCheckbox
+    private let valueSelected: ValueFieldWithCheckbox
     private let picker = UIPickerView()
     private let toolbar = { () -> UIToolbar in
         let toolbar = UIToolbar(frame: .zero)
@@ -46,7 +49,9 @@ class ValuePickerFieldModal: UIViewController {
     weak var dataSource: UIPickerViewDataSource?
     weak var delegate: ValuePickerFieldModalDelegate?
 
-    init(value: String?) {
+    init(value: String?, notSelectedName: String = "not-selected".localized, valueFieldName: String = "select".localized) {
+        self.notSelected = ValueFieldWithCheckbox(name: notSelectedName)
+        self.valueSelected = ValueFieldWithCheckbox(name: valueFieldName)
         self.value = value
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,16 +64,6 @@ class ValuePickerFieldModal: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = Colors.mainBGColor
-
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(picker)
-        picker.snp.makeConstraints {(make) in
-            make.center.equalTo(view)
-            make.width.equalTo(view)
-            make.height.equalTo(UIConstants.pickerHeight)
-        }
-        picker.delegate = self.pickerDelegate
-        picker.dataSource = self.dataSource
 
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints {(make) in
@@ -93,6 +88,58 @@ class ValuePickerFieldModal: UIViewController {
         toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
     }
 
+    func configureFields() {
+        view.addSubview(notSelected)
+        notSelected.snp.makeConstraints { (make) in
+            make.top.equalTo(toolbar.snp.bottom).offset(UIConstants.padding)
+            make.width.equalTo(view).offset(-UIConstants.fieldsPadding)
+            make.centerX.equalTo(view)
+        }
+
+        view.addSubview(valueSelected)
+        valueSelected.snp.makeConstraints { (make) in
+            make.top.equalTo(notSelected.snp.bottom)
+            make.width.equalTo(view).offset(-UIConstants.fieldsPadding)
+            make.centerX.equalTo(view)
+        }
+
+        notSelected.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNotSelectField)))
+        valueSelected.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSelectField)))
+
+        setFieldsValue(value: value)
+    }
+
+    func configurePicker() {
+        view.addSubview(picker)
+        picker.snp.makeConstraints {(make) in
+            make.top.equalTo(valueSelected.snp.bottom).offset(UIConstants.padding)
+            make.centerX.equalTo(view)
+            make.width.equalTo(view)
+            make.height.equalTo(UIConstants.pickerHeight)
+        }
+
+//        if let date = dateValue {
+//            picker.setDate(date, animated: true)
+//        }
+
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.delegate = self.pickerDelegate
+        picker.dataSource = self.dataSource
+    }
+
+    func setFieldsValue(value: Any?) {
+        switch value {
+        case nil:
+            notSelected.isChecked = true
+            valueSelected.isChecked = false
+            picker.isHidden = true
+        default:
+            notSelected.isChecked = false
+            valueSelected.isChecked = true
+            picker.isHidden = false
+        }
+    }
+
     @objc
     func didTapApplyButton() {
         dismiss(animated: true, completion: nil)
@@ -101,6 +148,17 @@ class ValuePickerFieldModal: UIViewController {
 
     @objc
     func didTapCancelIcon() {
+        dismiss(animated: true, completion: nil)
+        delegate?.valuePickerApplied(value: nil)
+    }
+
+    @objc
+    func didTapSelectField() {
+        setFieldsValue(value: value)
+    }
+
+    @objc
+    func didTapNotSelectField() {
         dismiss(animated: true, completion: nil)
         delegate?.valuePickerApplied(value: nil)
     }
@@ -114,13 +172,17 @@ class ValuePickerField: UIViewController, ValuePickerFieldModalDelegate {
     }
 
     let valueField: ValueField
+    let valueFieldName: String
     var valuePlaceholder: String = ""
+    let notSelectedName: String
     var tag: Int = 0
     var formValue: String?
     weak var delegate: ValuePickerFieldDelegate?
 
     init(name: String, placeholder: String = "") {
         valueField = ValueField(name: name)
+        valueFieldName = name
+        notSelectedName = ""
         super.init(nibName: nil, bundle: nil)
         valuePlaceholder = placeholder
     }

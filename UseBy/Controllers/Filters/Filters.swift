@@ -118,7 +118,6 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
 
 extension FiltersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         filters.searchByName = searchText
         delegate?.applyFilters(filters: filters)
     }

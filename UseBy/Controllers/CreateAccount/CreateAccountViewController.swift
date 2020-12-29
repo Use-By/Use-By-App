@@ -189,7 +189,7 @@ class CreateAccountViewController: UIViewController {
     @objc
     private func didTapLoginButton() {
         if let router = navigationController as? Router {
-            router.goToMainScreen()
+            router.goToLoginScreen()
         }
     }
 

@@ -9,7 +9,7 @@ class ProductsViewController: UIViewController {
         static let controlsMargin: CGFloat = 10
         static let loaderLineWidth: CGFloat = 5
         static let loaderHeight: CGFloat = 50
-        static let arrowBottomOffset: CGFloat = 90
+        static let arrowBottomOffset: CGFloat = 100
     }
 
     private let emptyScreen = FirstScreenView()
@@ -200,6 +200,11 @@ extension ProductsViewController: ProductsViewControllerDelegate {
 
     func getData() -> [Product] {
         return self.data ?? []
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        filtersVC.view.endEditing(true)
     }
 }
 

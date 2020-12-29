@@ -12,6 +12,7 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         static let filtersControlsMargin: CGFloat = 10
     }
 
+    private let scrollView = UIScrollView()
     private let search = FiltersSearch()
     private let buttons = [
         FilterButton(
@@ -58,11 +59,23 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         let stackviewFields = UIStackView(arrangedSubviews: buttons)
         stackviewFields.axis = .horizontal
         stackviewFields.spacing = UIConstants.buttonsSpacing
-        view.addSubview(stackviewFields)
+        stackviewFields.translatesAutoresizingMaskIntoConstraints = false
 
-        stackviewFields.snp.makeConstraints { (make) -> Void in
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {(make) in
             make.left.equalTo(view)
+            make.right.equalTo(view)
             make.top.equalTo(search.snp.bottom).offset(UIConstants.filtersControlsMargin)
+            make.height.equalTo(40)
+        }
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.addSubview(stackviewFields)
+        stackviewFields.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(scrollView)
+            make.right.equalTo(scrollView)
+            make.top.equalTo(scrollView)
+            make.bottom.equalTo(scrollView)
         }
 
         buttons[0].addTarget(self, action: #selector(didTapFiltersButton), for: .touchUpInside)

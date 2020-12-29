@@ -161,7 +161,7 @@ class ProductsViewController: UIViewController {
                 } else {
                     self.productsTableVC.view.isHidden = true
 
-                    if self.hasFilters(), !self.emptyScreen.isHidden {
+                    if self.hasFilters(), self.emptyScreen.isHidden {
                         self.nothingFoundLabel.isHidden = false
                     } else {
                         self.emptyScreen.isHidden = false

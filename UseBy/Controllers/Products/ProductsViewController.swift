@@ -209,6 +209,19 @@ extension ProductsViewController: ProductsViewControllerDelegate {
 }
 
 extension ProductsViewController: FiltersViewControllerDelegate {
+    func didTapShare() {
+        guard let data = self.data else {
+            return
+        }
+
+        let shareText = data.map { (element) in
+            return element.name
+        }.joined(separator: "\n")
+
+        let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+        present(vc, animated: true)
+    }
+
     func applyFilters(filters: ProductFilters) {
         self.filters = filters
         loadProducts()

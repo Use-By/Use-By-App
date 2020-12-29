@@ -84,3 +84,4 @@
 "delete-product-error" = "We couldn't delete product, please try again later";
 "fetch-product-error" = "We couldn't fetch your products, please try again later";
 "no-match-passwords-error" = "Your passwords don't match";
+"share" = "Send";

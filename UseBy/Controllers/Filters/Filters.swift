@@ -3,6 +3,7 @@ import UIKit
 
 protocol FiltersViewControllerDelegate: AnyObject {
     func applyFilters(filters: ProductFilters)
+    func didTapShare()
 }
 
 class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelegate {
@@ -23,7 +24,11 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
             text: "liked".localized,
             icon: Icon(name: "LikeIcon", size: .medium)
         ),
-        FilterButton(text: "expired".localized)
+        FilterButton(text: "expired".localized),
+        FilterButton(
+            text: "share".localized,
+            icon: Icon(name: "ShareIcon", size: .medium)
+        )
     ]
     private var filters: ProductFilters
     weak var delegate: FiltersViewControllerDelegate?
@@ -81,6 +86,7 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         buttons[0].addTarget(self, action: #selector(didTapFiltersButton), for: .touchUpInside)
         buttons[1].addTarget(self, action: #selector(didTapLikedButton), for: .touchUpInside)
         buttons[2].addTarget(self, action: #selector(didTapExpiredButton), for: .touchUpInside)
+        buttons[3].addTarget(self, action: #selector(didTapShareButton), for: .touchUpInside)
     }
 
     @objc
@@ -113,6 +119,11 @@ class FiltersViewController: UIViewController, ChangeFiltersViewControllerDelega
         } else {
             buttons[0].isActive = false
         }
+    }
+
+    @objc
+    func didTapShareButton() {
+        delegate?.didTapShare()
     }
 }
 

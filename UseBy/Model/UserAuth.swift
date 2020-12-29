@@ -58,7 +58,7 @@ class UserAuthModel: UserAuthModelProtocol {
                     completion(UserAuthError.invalidEmail)
                     return
                 }
-                
+
                 completion(UserAuthError.unknownError)
 
                 return

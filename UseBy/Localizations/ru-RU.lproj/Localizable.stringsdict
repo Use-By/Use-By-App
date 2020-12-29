@@ -69,8 +69,8 @@
 	<key>products-count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@products-count@</string>
-		<key>products-count</key>
+		<string>%#@products_count@</string>
+		<key>products_count</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>

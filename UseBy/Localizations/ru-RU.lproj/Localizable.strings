@@ -25,6 +25,7 @@
 "create-account-google" = "Вход через Google";
 "error" = "Ошибка";
 "ok" = "Понятно";
+"expires" = "Истекает";
 "email" = "Почта";
 "change-password" = "Сменить пароль";
 "send-feedback" = "Написать отзыв";

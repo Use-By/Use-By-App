@@ -98,7 +98,7 @@ extension UIAlertController {
         self.setValue(attributeString, forKey: "attributedMessage")
     }
 
-    func messageIfNotValid(error: PasswordError) {
+    func messageIfNotValid(error: PasswordError?) {
         switch error {
         case .lengthError:
             message = "weak-password-error".localized
@@ -108,7 +108,9 @@ extension UIAlertController {
             message = nil
         }
 
-        setColorMessage(color: UIColor.red)
+        if let error = error {
+            setColorMessage(color: UIColor.red)
+        }
     }
 
     @objc func textDidChange() {
@@ -128,9 +130,7 @@ extension UIAlertController {
         let action = actions.first
         let validationError = validatePasswords(password, confirmPassword)
 
-        if let error = validationError {
-            messageIfNotValid(error: error)
-        }
+        messageIfNotValid(error: validationError)
 
         action?.isEnabled = validationError == nil
     }

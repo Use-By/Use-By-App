@@ -49,6 +49,7 @@ class DateValuePickerFieldModal: UIViewController {
         )
 
         toolbar.setItems([cancelButton, flexSpace, applyButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
 
         return toolbar
     }()

@@ -57,11 +57,11 @@ class UserAuthModel: UserAuthModelProtocol {
                 if (error as NSError).code == AuthErrorCode.invalidEmail.rawValue {
                     completion(UserAuthError.invalidEmail)
                     return
-                } else {
-                    completion(UserAuthError.unknownError)
-
-                    return
                 }
+                
+                completion(UserAuthError.unknownError)
+
+                return
             }
 
             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()

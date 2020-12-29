@@ -216,9 +216,10 @@ class CreateAccountViewController: UIViewController {
               let password = inputFieldPassword.textField.text else {
             return
         }
-        // TODO: Почему-то не передаем textFieldName
+        let name = inputFieldName.textField.text ?? ""
+
         userAuthModel?.createAccount(
-            email: email, password: password, completion: ({ [weak self] error in
+            email: email, password: password, name: name, completion: ({ [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
                         if let error = error {

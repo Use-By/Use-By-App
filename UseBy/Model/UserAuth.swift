@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 
 protocol UserAuthModelProtocol {
-    func createAccount(email: String, password: String, completion: @escaping (UserAuthError?) -> Void)
+    func createAccount(email: String, password: String, name: String, completion: @escaping (UserAuthError?) -> Void)
     func login(email: String, password: String, completion: @escaping (UserAuthError?) -> Void)
 }
 
@@ -46,9 +46,7 @@ func getUserAuthErrorText(error: UserAuthError) -> String {
 }
 
 class UserAuthModel: UserAuthModelProtocol {
-    func createAccount(email: String, password: String, completion: @escaping (UserAuthError?) -> Void) {
-        // TODO Нужно при создании выставлять name для пользователя
-
+    func createAccount(email: String, password: String, name: String, completion: @escaping (UserAuthError?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if let error = error {
                 if (error as NSError).code == AuthErrorCode.emailAlreadyInUse.rawValue {
@@ -59,15 +57,24 @@ class UserAuthModel: UserAuthModelProtocol {
                 if (error as NSError).code == AuthErrorCode.invalidEmail.rawValue {
                     completion(UserAuthError.invalidEmail)
                     return
-
                 } else {
                     completion(UserAuthError.unknownError)
 
                     return
                 }
-
             }
-            completion(nil)
+
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = name
+            changeRequest?.commitChanges { (error) in
+                if error != nil {
+                    completion(UserAuthError.unknownError)
+
+                    return
+                }
+
+                completion(nil)
+            }
         }
     }
 

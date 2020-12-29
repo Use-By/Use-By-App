@@ -17,10 +17,29 @@ struct User {
 
 protocol UserModelProtocol {
     func get() -> User
-    func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void)
-    func changePassword(newPassword: String, completion: @escaping (Error?) -> Void)
-    func changeName(newName: String, completion: @escaping (Error?) -> Void)
+    func changeEmail(newEmail: String, completion: @escaping (UserError?) -> Void)
+    func changePassword(newPassword: String, completion: @escaping (UserError?) -> Void)
+    func changeName(newName: String, completion: @escaping (UserError?) -> Void)
     func signOut()
+}
+
+enum UserError {
+    case emailAlreadyInUse
+    case invalidEmail
+    case unknownError
+}
+
+func getUserErrorText(error: UserError) -> String {
+    switch error {
+    case .emailAlreadyInUse:
+        return "errorEmailAlreadyInUse".localized
+
+    case .invalidEmail:
+        return "errorInvalidEmail".localized
+
+    case .unknownError:
+        return "unknownError".localized
+    }
 }
 
 class UserModel: UserModelProtocol {
@@ -32,31 +51,48 @@ class UserModel: UserModelProtocol {
         }
     }
 
-    func changeEmail(newEmail: String, completion: @escaping (Error?) -> Void) {
+    func changeEmail(newEmail: String, completion: @escaping (UserError?) -> Void) {
         Auth.auth().currentUser?.updateEmail(to: newEmail) { (error) in
             if let error = error {
-                completion(error)
+                if (error as NSError).code == AuthErrorCode.emailAlreadyInUse.rawValue {
+                    completion(.emailAlreadyInUse)
+
+                    return
+                }
+
+                if (error as NSError).code == AuthErrorCode.invalidEmail.rawValue {
+                    completion(.invalidEmail)
+
+                    return
+
+                }
+
+                completion(.unknownError)
+
+                return
             }
             completion(nil)
         }
     }
 
-    func changePassword(newPassword: String, completion: @escaping (Error?) -> Void) {
+    func changePassword(newPassword: String, completion: @escaping (UserError?) -> Void) {
         Auth.auth().currentUser?.updatePassword(to: newPassword) { (error) in
             if let error = error {
-                completion(error)
+                completion(.unknownError)
             }
+
             completion(nil)
         }
     }
 
-    func changeName(newName: String, completion: @escaping (Error?) -> Void) {
+    func changeName(newName: String, completion: @escaping (UserError?) -> Void) {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = newName
         changeRequest?.commitChanges { (error) in
             if let error = error {
-                completion(error)
+                completion(.unknownError)
             }
+
             completion(nil)
         }
     }

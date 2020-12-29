@@ -76,7 +76,6 @@
 "from-gallery" = "Галерея";
 "take-photo" = "Камера";
 "something_went_wrong_with_authorization"="";
-"something_went_wrong_with_authorization"="";
 "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match" = "Ваш пароль короче 6 символов или ваши пароли не совпадают";
 "invalid_email" = "Некорректный пароль";
 "not-selected" = "Не указано";
@@ -84,3 +83,4 @@
 "delete-product-error" = "Удалить не вышло, пожалуйста попробуйте ещё раз позже";
 "fetch-product-error" = "Загрузить продукты не получилось, пожалуйста попробуйте ещё раз позже";
 "add-photo" = "Добавить";
+"no-match-passwords-error" = "Пароли не совпадают";

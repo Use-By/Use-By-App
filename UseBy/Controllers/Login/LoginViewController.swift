@@ -167,9 +167,12 @@ class LoginViewController: UIViewController {
         }
 
         if userAuthModel != nil {
+            signInButton.isLoading = true
+
             userAuthModel!.login(email: email, password: password, completion: ({ [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
+                    self.signInButton.isLoading = false
                     if let error = error {
                         // Показываем алерт ошибки
                         _ = Alert(

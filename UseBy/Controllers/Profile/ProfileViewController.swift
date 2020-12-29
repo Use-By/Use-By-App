@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
         userModel = UserModel()
         setUserData()
         self.googleAuth = user?.authWithGoogle
-        if googleAuth ?? true {
+        if googleAuth ?? false {
             titleOfCellArray = ["name".localized, "email".localized,
             "send-feedback".localized]
             UIConstants.heightTableView = 180
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
     func setUserData() {
         guard let user = userModel?.get() else {
             _ = Alert(title: "ops".localized,
-                  message: "something_went_wrong".localized,
+                      message: getUserErrorText(error: .unknownError),
                   placeholder1: nil, placeholder2: nil, action: .none)
             return
         }
@@ -110,27 +110,46 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    func saveName (name: [String]) {
-        userModel!.changeName(newName: name[0]) { [weak self] error in
+    func saveName(name: [String]) {
+        guard let userModel = userModel else {
+            _ = Alert(title: "ops".localized,
+                      message: getUserErrorText(error: .unknownError),
+                  placeholder1: nil, placeholder2: nil, action: .none)
+            return
+        }
+
+        userModel.changeName(newName: name[0]) { [weak self] error in
              DispatchQueue.main.async {
-                if error != nil {
-                    _ = Alert(title: "ops".localized,
-                          message: "something_went_wrong".localized,
-                          placeholder1: nil, placeholder2: nil, action: .none)
+                if let error = error {
+                    _ = Alert(
+                        title: "ops".localized,
+                        message: getUserErrorText(error: error),
+                        placeholder1: nil, placeholder2: nil, action: .none
+                    )
+                    return
                 }
                 self?.user?.name = name[0]
                 self?.setUserData()
                 self?.profileTableView.reloadData()
-             }}
+             }
+        }
     }
 
     func saveEmail (email: [String]) {
-        userModel!.changeName(newName: email[0]) { [weak self] error in
+        guard let userModel = userModel else {
+            _ = Alert(title: "ops".localized,
+                      message: getUserErrorText(error: .unknownError),
+                  placeholder1: nil, placeholder2: nil, action: .none)
+            return
+        }
+
+        userModel.changeEmail(newEmail: email[0]) { [weak self] error in
              DispatchQueue.main.async {
-                if error != nil {
+                if let error = error {
                    _ = Alert(title: "ops".localized,
-                         message: "something_went_wrong".localized,
+                             message: getUserErrorText(error: error),
                          placeholder1: nil, placeholder2: nil, action: .none)
+                    return
                 }
                 self?.user?.email = email[0]
                 self?.setUserData()
@@ -139,13 +158,21 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    func savePassword (password: [String]) {
-        userModel!.changePassword(newPassword: password[0]) { [weak self] error in
+    func savePassword(password: [String]) {
+        guard let userModel = userModel else {
+            _ = Alert(title: "ops".localized,
+                      message: getUserErrorText(error: .unknownError),
+                  placeholder1: nil, placeholder2: nil, action: .none)
+            return
+        }
+
+        userModel.changePassword(newPassword: password[0]) { [weak self] error in
              DispatchQueue.main.async {
-                if error != nil {
+                if let error = error {
                     _ = Alert(title: "ops".localized,
-                          message: "something_went_wrong".localized,
+                              message: getUserErrorText(error: error),
                           placeholder1: nil, placeholder2: nil, action: .none)
+                    return
                 }
                 self?.user?.email = password[0]
                 self?.setUserData()
@@ -159,12 +186,17 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let newNameAlert = AlertController(title: "new-name".localized, message: nil,
-                                               placeholder1: "put-your-name".localized, changeWhat: .changeName,
-                                               saveDataFromAlert: saveName)
+            let newNameAlert = AlertController(
+                title: "new-name".localized,
+                message: nil,
+                placeholder1: "put-your-name".localized,
+                changeWhat: .changeName,
+                saveDataFromAlert: saveName
+            )
             present(newNameAlert, animated: true, completion: nil)
         case 1:
             if !(googleAuth ?? false) {

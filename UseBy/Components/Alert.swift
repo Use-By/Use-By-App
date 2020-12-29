@@ -41,7 +41,7 @@ class Alert {
             alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
             let actionSave = UIAlertAction(title: "save".localized, style: .default, handler: { _ in
                 guard let fields = self.alert.textFields else {
-                    _ = Alert(title: "ops".localized, message: "something_went_wrong_".localized,
+                    _ = Alert(title: "ops".localized, message: getUserErrorText(error: .unknownError),
                           placeholder1: nil, placeholder2: nil, action: .none)
                     return
                 }

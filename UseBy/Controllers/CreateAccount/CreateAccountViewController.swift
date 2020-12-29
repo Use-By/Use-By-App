@@ -217,11 +217,13 @@ class CreateAccountViewController: UIViewController {
             return
         }
         let name = inputFieldName.textField.text ?? ""
+        createAccountButton.isLoading = true
 
         userAuthModel?.createAccount(
             email: email, password: password, name: name, completion: ({ [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
+                    self.createAccountButton.isLoading = false
                         if let error = error {
                             _ = Alert(
                                 title: "error".localized,
@@ -233,8 +235,8 @@ class CreateAccountViewController: UIViewController {
                         }
 
                     if let router = self.navigationController as? Router {
-                            router.goToMainScreen()
-                        }
+                        router.goToMainScreen()
+                    }
                 }
             })
         )

@@ -29,7 +29,9 @@ class AlertController: UIViewController {
          placeholder2: String? = nil, secure: Bool?=nil,
          changeWhat: AlertControllerChange, saveDataFromAlert: (( _: [String]) -> Void)? = nil) {
         super.init(nibName: nil, bundle: nil)
+
         self.alertChange = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
         let actionSave = UIAlertAction(title: "save".localized, style: .default, handler: { (_) -> Void in
             let text = self.getTextFromInput()
             saveDataFromAlert?(text)
@@ -46,7 +48,7 @@ class AlertController: UIViewController {
             self.alertChange.addTextField {
                 $0.placeholder = placeholder1
                 $0.addTarget(self.alertChange, action: #selector
-                                (self.alertChange.textDidChangeInEmail), for: .editingChanged)
+                                (self.alertChange.textDidChange), for: .editingChanged)
             }
         case .changeName:
             self.alertChange.addTextField {
@@ -60,6 +62,7 @@ class AlertController: UIViewController {
                 $0.addTarget(self.alertChange, action: #selector
                                 (self.alertChange.textDidChangeInPassword), for: .editingChanged)
             }
+
             self.alertChange.addTextField {
                 $0.placeholder = placeholder2
                 $0.isSecureTextEntry = true
@@ -73,6 +76,7 @@ class AlertController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
     }
+
     override func viewDidAppear(_ animated: Bool) {
         self.present(alertChange, animated: false, completion: nil)
     }
@@ -82,56 +86,52 @@ class AlertController: UIViewController {
     }
 
 }
+
 extension UIAlertController {
     func setColorMessage(color: UIColor) {
         guard let message = self.message else { return }
-        let attributeString = NSMutableAttributedString(string: message)
+        let attributeString = NSMutableAttributedString(
+            string: message,
+            attributes: [NSAttributedString.Key.foregroundColor: color]
+        )
 
-        attributeString.addAttributes([NSAttributedString.Key.foregroundColor: color],
-                                      range: NSRange(location: 0, length: message.utf8.count))
         self.setValue(attributeString, forKey: "attributedMessage")
     }
 
-    func messageIfNotValid(validemail: Bool?, validepassword: Bool?) {
-        if validepassword == false {
-            message = "your_password_is_shorter_than_6_characters_or_your_passwords_don't_match".localized
-        } else if validepassword == true {
+    func messageIfNotValid(error: PasswordError) {
+        switch error {
+        case .lengthError:
+            message = "weak-password-error".localized
+        case .noMatchPasswords:
+            message = "no-match-passwords-error".localized
+        default:
             message = nil
         }
-        if validemail == false {
-            message = "invalid_email".localized
-        } else if validemail == true {
-            message = nil
-        }
+
         setColorMessage(color: UIColor.red)
     }
 
     @objc func textDidChange() {
         var alertTextFieldNotEmpty = false
+
         if textFields?[0].text?.count != nil {
             alertTextFieldNotEmpty = true
         }
+
         let action = actions.first
         action?.isEnabled = alertTextFieldNotEmpty
     }
 
     @objc func textDidChangeInPassword() {
-        if let password = textFields?[0].text,
-           let confirmPassword = textFields?[1].text,
-           let action = actions.first {
-            messageIfNotValid(validemail: nil, validepassword:
+        let password = textFields?[0].text
+        let confirmPassword = textFields?[1].text
+        let action = actions.first
+        let validationError = validatePasswords(password, confirmPassword)
 
-                                isValidPassword(password, confirmPassword) )
-            action.isEnabled = isValidPassword(password, confirmPassword)
+        if let error = validationError {
+            messageIfNotValid(error: error)
         }
-    }
-    @objc func textDidChangeInEmail() {
-        setColorMessage(color: UIColor.red)
-        if let email = textFields?[0].text,
-           let action = actions.first {
-            messageIfNotValid(validemail: isValidEmail(email), validepassword: nil)
-            action.isEnabled = isValidEmail(email)
-        }
-    }
 
+        action?.isEnabled = validationError == nil
+    }
 }
